@@ -281,7 +281,7 @@ table.vitamins tbody td:first-child {
   text-align: left;
   padding-left: 20px;
   font-weight: 700;
-  background: rgba(109, 176, 231, 0.35);
+  background: #03545a81;
   transition: backgrounf 0.6s;
 }
 
