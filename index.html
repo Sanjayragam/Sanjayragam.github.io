@@ -284,16 +284,16 @@ Your browser does not support the audio element.
             var r = getRandomInt(min, max);
             var vel = getRandomInt(3, 10);
             var clicked = false;
-            var colour = "#033e4298";
+            var colour = "#046c74bb";
             switch (i){
                 case 1:
-                    colour = "#033e4298";
+                    colour = "#046d7481";
                     break;
                 case 2:
-                    colour = "#033e4298";
+                    colour = "#046d7481";
                     break;
                 case 3:
-                    colour = "#033e4298";
+                    colour = "#046d7481";
                     break;
             }
             var isAlive = true;
@@ -342,7 +342,7 @@ Your browser does not support the audio element.
                         particleCount--;
                     }
                     circles[i][6] = false;
-                    if (circles[i][5] == "#033e4298"){
+                    if (circles[i][5] == "#046d7481"){
                         pinkBubbleSound.play(0);
                     } else if (i % 4 === 0){
                         pinkBubbleSound.play(0);
@@ -423,29 +423,29 @@ Your browser does not support the audio element.
             var posY = event.clientY - rect.top;
             for(var i = 0; i<circles.length; i++ ){
                 if (Math.sqrt((posX-circles[i][0])*(posX-circles[i][0]) + (posY-circles[i][1])*(posY-circles[i][1])) < circles[i][2]){
-                    circles[i][5] = "#033e4298";
+                    circles[i][5] = "#046d7481";
                     switch (i){
                         case 1:
-                            circles[i][5] = "#033e4298";
+                            circles[i][5] = "#046d7481";
                             break;
                         case 2:
-                            circles[i][5] = "#033e4298";
+                            circles[i][5] = "#046d7481";
                             break;
                         case 3:
-                            circles[i][5] = "#033e4298";
+                            circles[i][5] = "#046d7481";
                             break;
                     }
                 } else {
-                    circles[i][5] = "#033e4298";
+                    circles[i][5] = "#046d7481";
                     switch (i){
                         case 1:
-                            circles[i][5] = "#033e4298";
+                            circles[i][5] = "#046d7481";
                             break;
                         case 2:
-                            circles[i][5] = "#033e4298";
+                            circles[i][5] = "#046d7481";
                             break;
                         case 3:
-                            circles[i][5] = "#033e4298";
+                            circles[i][5] = "#046d7481";
                             break;
                     }
                 }

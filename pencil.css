@@ -10,7 +10,7 @@ body {
   min-height: 450px;
   height: 100vh;
   margin: 0;
-  background-color: #01555b;
+  background-color: #046d7481;
   color: #fff;
   background: url(hello.jpeg) no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -18,7 +18,7 @@ body {
   -o-background-size: cover;
   background-size: cover;
   color: #42360398;
-  color: rgba(2, 41, 28, 0.445);
+  color: rgba(38, 41, 2, 0.952);
   background-repeat: no-repeat;
   font-family: "Open Sans", sans-serif;
 }
@@ -96,7 +96,7 @@ table {
   table-layout: fixed;
 }
 .tbl-header {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 0, 0, 0.555);
 }
 .tbl-content {
   height: 300px;
