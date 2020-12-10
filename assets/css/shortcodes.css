@@ -332,15 +332,31 @@
 
 /* Parallax
 -------------------------------------------------------------- */
-.parallax { width: 100%; background-attachment: fixed; background-position: 50% 0; background-repeat: repeat;}
-.parallax-1 { background-image: url('../img/slider/three.jpg');  }
-.parallax-2 { background-image: url('../img/parallax/parallax-2.jpg') ; }
-.parallax-3 { background-image: url('../img/parallax/parallax-3.jpg');  }
-.parallax-4 { background-image: url('../img/parallax/parallax-4.jpg') ; }
+.parallax { width: 100%; background-attachment: fixed; background-position: 50% 0; background-repeat: repeat;
+
+
+
+	content: " ";
+	position: absolute;
+
+	
+	
+	background-size: 100%;
+	
+	z-index: -1;
+	
+
+
+
+}
+.parallax-1 { background-image: url('../img/imagebox/geci3.jpg');  
+
+}
+
 
 .parallax-overlay { position: relative; z-index: 1; }
 .parallax-overlay .bg-parallax-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-.parallax-overlay .bg-parallax-overlay.overlay-black { background-color: rgba(40,42,48,0.8); }
+.parallax-overlay .bg-parallax-overlay.overlay-black { background-color: rgba(0, 0, 0, 0.8); }
 .parallax-overlay .bg-parallax-overlay.overlay-black.style2 { background-color: rgba(0,0,0,0.7); }
 .parallax-overlay .bg-parallax-overlay.overlay-black.style3 { background-color: rgba(0,0,0,0.8); }
 
