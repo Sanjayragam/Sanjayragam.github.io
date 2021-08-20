@@ -2,137 +2,70 @@
     --p-color-Bright-Red: hsl(12, 88%, 59%);
     --p-Dark-Blue: #242d52;
   }
-  .bg-top-z {
-    z-index: -1;
-    width: 436px;
-    height: 970px;
-    background-color: #fff0ec;
-    border-radius: 272px;
-    transform: rotate(45deg);
-    top: -50%;
-    right: 0;
-  }
-  nav {
-    margin-top: 1%;
-  }
-  .nav-item .nav-link,
-  .nav-item .nav-link:link,
-  .nav-item .nav-link:visited {
-    font-family: "Be Vietnam";
-    color: var(--p-Dark-Blue);
-    margin-right: 32px;
-    font-size: 13px;
-    font-weight: 500;
-  }
-  .nav-item .nav-link:hover,
-  .nav-item .nav-link:active {
-    opacity: 50%;
-    color: var(--p-Dark-Blue);
-  }
-  .ham-clicked {
-    background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.0001) 0.33%,
-      rgba(0, 0, 0, 0.599049) 99.79%
-    );
-    height: 100vh;
-    left: 0px;
-    top: 0px;
-  }
-  .btn-get-started {
-    background: #f3603c;
-    box-shadow: 0px 15px 15px -10px #ff9f8e;
-    border-radius: 22px;
-    border: none;
-    color: white;
-    padding: 12px 32px;
-    font-weight: 700;
-    font-size: 13px;
-    width: 137px;
-    height: 44px;
-  }
-  .btn-get-started:hover {
-    opacity: 50%;
-  }
-  .bi-list {
-    color: black;
-  }
-  div .f-1 {
-    margin-top: 5%;
-  }
+ 
+
   .li {
     font-weight: bold;
     font-size: 16px;
     color: #ffffff;
-    background-color: #f3603c;
+    background-color: #1da003;
     border-radius: 39px;
     padding: 6px 15px;
   }
-  .cOA {
-    width: 100%;
-    max-height: 25em;
-    background-color: #f3603c;
-    color: #ffffff;
-  }
-  .footer {
-    width: 100%;
-    height: auto;
-    background-color: #1d1e25;
-    color: #ffffff;
-  }
-  #btnSec4 {
-    background: #ffffff;
-    box-shadow: 0px 15px 15px -10px #db5943;
-    color: #f3603c;
-    font-size: 13px;
-    width: 137px;
-    height: 44px;
-    border-radius: 22px;
-    border: none;
-  }
-  #btnSec4:hover {
-    opacity: 0.5;
-  }
-  .footer-links ul {
-    list-style: none;
-    text-decoration: none;
-  }
-  .footer-links ul li .f-a-links {
-    text-decoration: none;
-    color: #ffffff;
-  }
-  .footer-links ul li .f-a-links:hover {
-    color: #f3603c;
-  }
-  .social-icons a {
-    color: #ffffff;
-  }
-  .social-icons a:hover {
-    color: #f3603c;
-  }
-  #inpEmail {
-    border-radius: 20px;
-    width: 250px;
-    height: 44px;
-    line-height: 0px;
-    text-indent: 15px;
-  }
-  .inpBtnGo {
-    width: 80px;
-    height: 44px;
-    border-radius: 20px;
-    border: none;
-    background: #f3603c;
-    color: #ffffff;
-    font-weight: 700;
-  }
-  .news-letter textarea:focus,
-  input:focus {
-    outline: none;
-  }
-  @media (max-width: 960px) {
-    .nav-item .nav-link {
-      background-color: #ffffff;
-      text-align: center;
+.cust
+{
+    padding: 0%;
+}
+
+.my-card {
+  display: flex;
+  padding: 20px;
+ align-items: center;
+ justify-content: center;
+}
+
+
+
+  @media only screen and (max-width: 999px) {
+    .my-card {
+        display: block;
+      
     }
   }
+
+
+  .no{
+
+    padding-bottom: 20px;
+  }
+
+  @media(min-width: 900px)
+  {
+  .col-2
+  {
+  display:none;
+  }
+  }
+
+
+  @media (max-width: 900px) {
+    .no {
+      display: none;
+    }
+  }
+
+  .standard-btn-coloured {
+    text-decoration:none;
+    background:#2b2b2b;
+    border: 2px solid #505050;
+    padding:7px 20px 7px 20px;
+    border-radius:30px;
+    color:#FFFFFF;
+    margin:5px;
+  }
+
+
+
+
+
+  
