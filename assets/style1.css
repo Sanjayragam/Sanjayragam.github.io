@@ -1,0 +1,335 @@
+body {
+  display: flex;
+  flex-flow: space-between;
+  height: 100vh;
+  font-family: monospace;
+  margin: 0;
+  color: #727272;
+  line-height: 1.53em;
+  font-size: 0.9rem;
+  background-color: rgb(88, 24, 24);;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: montserrat
+  font-weight: 300;
+  margin-top: 3rem;
+  color: #ececec;
+  font-size: 2rem;
+}
+
+main {
+  flex: 3 3 100%;
+  overflow: auto;
+  padding: 2rem 3rem;
+}
+
+nav {
+  flex: 1 1 100px;
+  background-color: #1d1d1d;
+  min-width: 170px;
+  paddings: 1rem;
+  overflow-y: auto;
+}
+
+h1,
+h2,
+p {
+  max-width: 700px;
+}
+
+a {
+  color: #5a5a5a;
+  text-decoration: none;
+}
+
+.active {
+  color: #5a5a5a;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding-left: 1.25rem;
+}
+
+ul li::before {
+  content: "\2022";
+  color: #eeeeff;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@500&display=swap');
+ *, :after, :before {
+	 box-sizing: inherit;
+}
+ body {
+	 background: #141414;
+	 
+}
+
+/*command line*/
+ .cv-code {
+	 content-visibility: auto;
+	 border-radius: 0.5rem;
+	 overflow: hidden;
+	 background: #1f1e1e;
+	 width: 500px;
+	 max-width: 95%;
+	
+}
+ .cv-code-header {
+	 display: flex;
+	 align-items: center;
+	 background: #393d3e;
+	 color: #eee;
+	 text-align: center;
+	 padding: 5px 10px;
+	 border-radius: 0.5rem 0.5rem 0 0;
+	 position: relative;
+	 font-family: "JetBrains Mono", monospace;
+}
+ .cv-code-buttons {
+	 margin-right: 1rem;
+	 display: flex;
+	 gap: 6px;
+}
+ .cv-code-buttons .fake-button[data-close] {
+	 width: 0.7rem;
+	 height: 0.7rem;
+	 border-radius: 50%;
+	 background: #f77669;
+}
+ .cv-code-buttons .fake-button[data-minify] {
+	 width: 0.7rem;
+	 height: 0.7rem;
+	 border-radius: 50%;
+	 background: #ffcb6b;
+}
+ .cv-code-buttons .fake-button[data-expand] {
+	 width: 0.7rem;
+	 height: 0.7rem;
+	 border-radius: 50%;
+	 background: #c3e88d;
+}
+ .cv-code-title {
+	 margin: 0 auto;
+	 display: block;
+}
+ .cv-code .content {
+	 color: white;
+	 padding: 1rem;
+	 font-family: 'Encode Sans Expanded', sans-serif;
+	 font-size: 0.8rem;
+}
+ .cv-code .content .instruction {
+	 display: block;
+	 padding: 0 0 7px 0;
+}
+ .cv-code .content .user {
+	 color: #6db928;
+}
+ .cv-code .content .path, .cv-code .content .command {
+	 color: #6fa5cd;
+}
+ 
+
+
+@media (max-width: 900px) {
+  .mob {
+    display: none;
+  }
+}
+
+
+.standard-btn-coloured {
+  text-decoration:none;
+  background:#00acec;
+  border: 2px solid #00ACEC;
+  padding:10px 20px 10px 20px;
+  border-radius:2px;
+  color:#FFFFFF;
+  margin:5px;
+}
+
+.head{
+  background-color: #3a3a3a;
+  height: 100px;
+}
+
+
+
+
+
+
+
+
+.my-card {
+  display: flex;
+  padding: 0px;
+ 
+}
+
+
+
+  @media only screen and (max-width: 999px) {
+    .my-card {
+        display: block;
+        
+    
+      
+    }
+  }
+
+  @media screen and (min-width: 999px) {
+    .mobu {
+    
+    padding-right: 50px;
+    padding-top: 40px;
+    
+    
+    }
+}
+
+
+
+.header-page
+{
+    font-size: 50px;
+    line-height: 1.2;
+    color: #696a6b;
+    padding-top: 0px;
+  }
+
+
+  .cont{
+    color: #696a6b;
+  }
+
+  .hr1{
+    background-color: #3a3a3a;
+    height: 2px;
+  }
+
+
+
+  .responsive {
+    width: 50%;
+    height: auto;
+  }
+
+
+
+  .gallery {
+    width: 330px;
+    margin: 0;
+    padding: 0;
+  }
+  .comic-content {width:600px;}
+  .social-content {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      padding-top: 100%;
+      cursor: pointer;
+      overflow: hidden;
+  }
+  .comic-content .col-12:nth-child(n+4) {
+      display: none;
+  }
+  .social-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: scale(1);
+      transition: .4s;
+  }
+  .gallery li { 
+    display: none;
+    float: left;
+    list-style: none;
+    margin-right: 10px;
+  }
+  .more, .less {
+    background-color: #000;
+    clear: both;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    margin-top: 6px;
+    padding: 6px 0;
+    text-align: center;
+    text-transform: uppercase;
+    width: 320px;
+  }
+
+
+
+
+  
+ 
+pre {
+	background: rgba(0, 0, 0, 0.9);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	padding: 10px;
+	font-size: 16px;
+	color: #ffffff;
+	border-radius: 2px;
+	word-wrap: normal;
+	overflow: auto;
+	overflow-y: hidden
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

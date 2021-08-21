@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>page1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://fonts.googleapis.com/css?family=Rubik:400,700|Rubik+Mono+One&display=swap" rel="stylesheet"><link rel="stylesheet" href="./style1.css">
+<link href="https://fonts.googleapis.com/css?family=Rubik:400,700|Rubik+Mono+One&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style1.css">
 
 </head>
 <body>
@@ -13,13 +13,49 @@
   <nav id="toc" class="mob">
   </nav>
   <main>
-    <h1>section title</h1>
-    <p>
-      Live life at your own pace as you garden, fish, decorate, hunt for bugs and fossils, get to know the animal residents, and more. The time of day and seasons match real life, so something is happening on your island whether you’re there or not.
-    </p>
-    <p>Oh--just watch out for those shifty racoons.</p>
-    <h2>title1</h2>
-    <p>New Horizons has all sorts of tools that you can use to your disposal!</p>
+
+    <div class="col my-card" >
+      <a href="assets/img/square full.png"><img class="mobu" src="assets/img/square full.png" width="200px"></a>
+      <div>
+      
+          <div class="row" style="padding-right: 1rem;">
+              <div class="col">
+                   <p class="header-page">
+                     CTF writeups<br>MuONAM CTF 2021<br>
+                    </p>
+                    <div class="m-3" >
+                      <ul class="list-unstyled d-inline">
+                          <li class="d-inline-block"><i class="fas fa-user"></i> 0xar11</li>
+                          <li class="d-inline-block"><i class="fas fa-calendar-week"></i> 21 August 2021</li>
+                          <li class="d-inline-block"><i class="fas fa-folder"> </i> Web</li>
+                      </ul>
+                  </div>
+                     
+                <p><br></p>
+              </div>
+          </div>
+      </div>
+      
+    </div>
+    <div>
+      <p class="cont">
+        Hey, I am SpyD3r(TarunkantG) and In this blog I will be discussing all the 5 web challenges that I made for InCTFi 2019 and a lot of SQLi and bypassing disable_functions tricks.
+      </p>
+    </div>
+    <div class="hr1">
+     
+    </div>
+
+    <h1>Hints</h1>
+    <div >
+      
+      This challenge was next version of last year’s GoSQL, you can take look at the writeup here.This time, this challenge wasn’t that hard because you knew what to do and how to go forward in the challenge, So only thing you need to do exploit SQLi(2 times)+SSRF+bypass disable_functions and finally you need to get RCE. Before reading this writeup I suggest you to read last year writeup first.
+    <!--<p>
+      This challenge was next version of last year’s GoSQL, you can take look at the writeup here.This time, this challenge wasn’t that hard because you knew what to do and how to go forward in the challenge, So only thing you need to do exploit SQLi(2 times)+SSRF+bypass disable_functions and finally you need to get RCE. Before reading this writeup I suggest you to read last year writeup first.
+    </p>-->
+    </div>
+    <h2>Code</h2>
+    
 
     <div class="cv-code">
       <div class="cv-code-header">
@@ -32,43 +68,37 @@
       </div>
       <div class="content">
         <div class="instruction">
-             <span class="user"><p></p>#include<stdio.h>
-              #include<conio.h><br>
+             <span class="user">
+               <div>
+                openssl rsa -pubin -inform PEM -text -noout < mykey.pub
+
+               </div>
                
-              char* encode(char* str) <br>
-              &nbsp;{<br>
-                &nbsp;&nbsp; int i = 0;<br>
-               
-                &nbsp;&nbsp; while (str[i] != '\0') {<br>
-                  &nbsp;&nbsp;str[i] = str[i] - 30;  // Subtract 30 From Charcter<br>
-                  &nbsp;&nbsp; i++;<br>
-                 }<br>
-                 return (str);<br>
-              }<br>
-               
-              void main() {<br>
-               
-                 char *str;<br>
-               
-                 printf("\nEnter the String to be Encode : ");<br>
-                 gets(str);<br>
-               
-                 str = encode(str);<br>
-                 printf("\nEncoded String : %s", str);<br>
-               
-                 getch();<br>
-              }</p></span>: <span class="path">~</span>
+             </span>
         </div>
       
       </div>
     </div>
-    <h3>title2</h3>
-    <p>This tool's versatility knows no bounds! Hole digging, rock smacking, tree uprooting goodness!</p>
-    <a class="imu" href="img1.jpg"><img src="img1.jpg" width="600px"></a>
-    <h3>title3</h3>
-    <p>Catch some bugs--if you are into that kind of thing.</p>
-    <h3>title4</h3>
-    <p>Make presents fall from the sky! Just watch out for the river!</p>
+    <h3>Snips</h3>
+    
+    <!--<a href="assets/img/img1.jpg"><img class="responsive-img" src="assets/img/img1.jpg" width="600px"></a>-->
+    <img src="assets/img/img1.jpg" alt="Nature" class="responsive" width="10" >
+    <div>
+      <br>
+
+      This challenge was next version of last year’s GoSQL, you can take look at the writeup here. This time, this challenge wasn’t that hard because you knew what to do and how to go forward in the challenge,
+    </div>
+
+    
+
+
+    <h3>Coded</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The final element.
+    </code></pre></div></div>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
+    </code></pre></div></div>
+    <!--<p>Make presents fall from the sky! Just watch out for the river!</p>
     <h3>title5</h3>
     <p>After all that shovel work its nice to take a load of, craft a nice coconut juice, and fish.</p>
     <h3>title6</h3>
@@ -95,11 +125,11 @@
     <h3>title7</h3>
     <p>Those flowers won't crossbreed themselves.</p>
     <h3>title8</h3>
-    <p>Those flowers won't crossbreed themselves.</p>
+    <p>Those flowers won't crossbreed themselves.</p>-->
   </main>
 </body>
 <!-- partial -->
-  <script  src="./script.js"></script>
+  <script  src="assets/script.js"></script>
 
 </body>
 </html>
