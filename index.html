@@ -20,21 +20,34 @@
     </head>
 
    <body>
+    
+
+  
+
 
     <!-- ---------------LAnding PAge ---------- -->
     <div class="land">
         <div class="d-flex ">
-            <div class=" w-25 ">
-                <div class="m-1 p-1 type w-75 ">
-                    <ul>
-                        <li>Challenges</li>
-                        <li>WalkThrough</li>
-                        <li>Github</li>
-                    </ul>
+            <div class=" w-25">
+                <div class=" p-1 type ">
+                    <div id="mySidenav" class="sidenav">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                        <a href="#">Home</a>
+                        <a href="#">Writeups</a>
+                        <a href="#">Github</a>
+                        <a href="#">Contact</a>
+                      </div>
+                    <div class="hambur" onclick="openNav()">&#9776; </div>
+                    <script>
+                        function openNav() {
+                          document.getElementById("mySidenav").style.width = "250px";
+                        }
+                        
+                        function closeNav() {
+                          document.getElementById("mySidenav").style.width = "0";
+                        }
+                        </script>
                 </div>
-                <!-- <div class="b">
-                     <img src="assets/img/glitch_4-o.gif"> 
-                </div> -->
             
             </div>
 
@@ -52,7 +65,7 @@
 
             <div class=" w-25 ">
                 <div class="m-3 p-1 type mhide ">
-                    <div class=" p-2  w-75 text-right ml-auto dashed type mob-rt ">
+                    <div class=" p-2  w-50 text-right ml-auto  type mob-rt dashed-b ">
                         <ul class="list-unstyled">
                             <li id="day"> </li>
                             <li>STATUS <i class="fas fa-globe-asia"></i>   :  Active</li>
@@ -69,8 +82,10 @@
     </div>
       <!-- landing end -->
 
+    <!-- ------------------Write -uPS-------------------- -->
 
-      <div class="container text-white-50" >
+
+    <div class="container text-white-50" >
         <div class="text-center text-white-50  hero-title p-3 m-1 py-5">
             <span class=" blink">$: </span>
             Challenges
@@ -100,10 +115,10 @@
                             </div>
                         </div>
                         <img src="assets/img/img1.jpg" width="200px" class="p-3">                        
-                        <a href="page1.html"><button class="btn btn-outline-light px-3 d-block">Read More</button></a>
+                        <a href="page1.html"><button class="btn btn-outline-light  px-3 d-block">Read More</button></a>
                     </div>
                 </div>
-<!-- box 2 -->
+        <!-- box 2 -->
                 <div class="row">
                     <div class="col-2">
                         <span class="li">2</span>
@@ -131,7 +146,7 @@
                         <a href="page1.html"><button class="btn btn-outline-light px-3 d-block">Read More</button></a>
                     </div>
                 </div>
-<!-- box 3 -->
+        <!-- box 3 -->
                 <div class="row">
                     <div class="col-2">
                         <span class="li">3</span>
@@ -156,16 +171,20 @@
                             </div>
                         </div>
                         <img src="assets/img/img1.jpg" width="200px" class="p-3">                        
-                        <a href="2.html"><button class="btn btn-outline-light px-3 d-block">Read More</button></a>
+                        <a href="page1.html"><button class="btn btn-outline-light px-3 d-block">Read More</button></a>
                     </div>
                 </div>
                 
-                
-            
-        </div>
-        <!-- section 3 -->
+    </div>
 
-        
+    <!-- ---------------------ABOUT US------------------- -->
+
+
+    <div class="conab">
+        <div class="text-center text-black-50  hero-title p-3 m-1 py-5">
+            <span class=" blink">$:</span>About US
+        </div>
+
     </div>
 
 

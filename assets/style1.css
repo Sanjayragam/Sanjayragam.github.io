@@ -32,15 +32,17 @@ h6 {
 main {
   flex: 3 3 100%;
   overflow: auto;
-  padding: 2rem 3rem;
+  padding: 2rem 2rem;
 }
 
 nav {
   flex: 1 1 100px;
-  background-color: #1d1d1d;
-  min-width: 170px;
-  paddings: 1rem;
+  background-color: #181717;
+  min-width: 150px;
+  padding-left: 1rem;
+  padding-top: 1rem;
   overflow-y: auto;
+  
 }
 
 h1,
@@ -222,6 +224,8 @@ ul li::before {
     .my-card {
         display: block;
         padding-top: 50px;
+
+   
         
     
       
@@ -232,10 +236,19 @@ ul li::before {
     .mobu {
     
     padding-right: 50px;
-    padding-top: 40px;
-    
+    padding-top: 55px;
     
     }
+}
+
+@media only screen and (min-width: 768px) {
+  
+  .mainee {
+    padding: 5rem 5rem;
+    padding-bottom: 0rem;
+  }
+  
+
 }
 
 
@@ -250,11 +263,7 @@ ul li::before {
     word-spacing: 5px;
   }
 
-  @media (max-width: 900px) {
-    .header-page {
-      font-size: 26px;
-    }
-
+  
 
   .cont{
     color: #696a6b;
@@ -341,6 +350,60 @@ pre {
 
 
 
+.footer{
+  margin-top: 5rem;
+  
+  padding:10px 0px;
+  font-family: 'Play', sans-serif;
+  text-align:center;
+  }
+  
+  .footer .row{
+  width:100%;
+  margin:1% 0%;
+  padding:0.6% 0%;
+  color:gray;
+  font-size:0.8em;
+  }
+  
+  .footer .row a{
+  text-decoration:none;
+  color:gray;
+  transition:0.5s;
+  }
+  
+  .footer .row a:hover{
+  color:#fff;
+  }
+  
+  .footer .row ul{
+  width:100%;
+  }
+  
+  .footer .row ul li{
+  display:inline-block;
+  margin:0px 30px;
+  }
+  
+  .footer .row a i{
+  font-size:2em;
+  margin:0% 1%;
+  }
+  
+  @media (max-width:720px){
+  .footer{
+  
+  padding:5%;
+  }
+  .footer .row ul li{
+  display:block;
+  margin:10px 0px;
+  text-align:left;
+  }
+  .footer .row a i{
+  margin:0% 3%;
+  }
+  }
 
 
 
