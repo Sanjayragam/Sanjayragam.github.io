@@ -2,12 +2,18 @@ body {
   display: flex;
   flex-flow: space-between;
   height: 100vh;
-  font-family: monospace;
-  margin: 0;
+  /*font-family: monospace;*/
+  font-family:monospace ;
   color: #727272;
   line-height: 1.53em;
   font-size: 0.9rem;
-  background-color: rgb(88, 24, 24);;
+  background-color: rgb(88, 24, 24);
+  text-align: justify;
+  text-justify: inter-word;
+  word-spacing: 0.1px;
+  
+
+
 }
 
 h1,
@@ -202,6 +208,11 @@ ul li::before {
 .my-card {
   display: flex;
   padding: 0px;
+  background-color: #181717;
+  padding-left: 50px;
+  padding-top: 10px;
+  border-radius: 50px;
+  box-shadow: -1px 2px 26px 9px rgba(0,0,0,0.1);
  
 }
 
@@ -210,6 +221,7 @@ ul li::before {
   @media only screen and (max-width: 999px) {
     .my-card {
         display: block;
+        padding-top: 50px;
         
     
       
@@ -232,13 +244,21 @@ ul li::before {
 {
     font-size: 50px;
     line-height: 1.2;
-    color: #696a6b;
+    color: #474747;
     padding-top: 0px;
+    font-family: montserrat;
+    word-spacing: 5px;
   }
+
+  @media (max-width: 900px) {
+    .header-page {
+      font-size: 26px;
+    }
 
 
   .cont{
     color: #696a6b;
+    padding-top: 50px;
   }
 
   .hr1{
