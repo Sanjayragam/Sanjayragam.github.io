@@ -11,7 +11,7 @@
    cursor: url('https://www.pixelliongroup.com/img/cursor.png'), auto;
 }
 body{
-    font-family: 'Roboto Mono'; background-color: rgb(58, 58, 58); scroll-behavior: smooth;
+    font-family: 'Roboto Mono'; background-color: rgb(27, 25, 25); scroll-behavior: smooth;
 }
 a{    text-decoration: none;color:#9c9c9c;  }
 a:hover{cursor: pointer;text-decoration: none;color:#9c9c9c;}
@@ -274,6 +274,7 @@ a:hover{cursor: pointer;text-decoration: none;color:#9c9c9c;}
   top: 0;
   left: 0;
   padding : 0 0.5em;
+  padding-top: 0.5em;
   color: #000000;
   font-size:40px;
   cursor: pointer;
@@ -316,4 +317,23 @@ a:hover{cursor: pointer;text-decoration: none;color:#9c9c9c;}
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+
+
+@media screen and (min-width: 800px) {
+  .rb{
+    margin-left: 200px;
+  }
+}
+
+
+@media screen and (min-width: 800px) {
+  .row{
+    background-color: #161616;
+}
+
+
+.bg{
+  background-image: url("assets/img/square full.png");
 }
