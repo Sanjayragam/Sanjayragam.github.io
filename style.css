@@ -32,16 +32,7 @@ a:hover {
     margin-top: 50px;
 }
 
-.title1{
-  
-    height: auto;
-    margin-top: 50px;
-}
 
-
-@media only screen and (min-width: 900px) {
-    .titlemob{display:none;}
-    }
 
 
 
@@ -56,7 +47,8 @@ a:hover {
      
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 900px) 
+{
     .content {
         margin-bottom: 50px;
         font-size: small;
@@ -71,14 +63,25 @@ a:hover {
         padding: 15px;
     }
     .title{
-       display: none;
-       margin-top: 2rem;
-    }
-    .titlemob{
+      
         width: 90%;
-        margin-top: 5rem;
-        margin-bottom: 1.5rem;
-     }
+        margin-bottom: 0px;
+    }
+    .logos{
+        display: block;
+    }
+    .bar
+    {
+        display: none;
+    }
+
+    .caption{
+
+        letter-spacing: 0.1rem;
+        font-size: 0.9rem;
+    }
+   
+
   }
 
 
@@ -140,4 +143,82 @@ button.button
     width: 150px;
   }
 
+
+  .logos{
+    width: 100%px;
+   
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: aquamarine;
+  }
   
+  @media only screen and (max-width: 1000px) {
+    .logos{
+        display: block;
+    }
+
+  }
+.logo{
+     margin-right: 2re;
+}
+
+
+
+.bar{
+    width: 90%;
+    height: auto;
+    margin-top: 50px;
+}
+
+.logo-title
+{
+   font-size: 20px;
+   font-weight: 700;
+   margin-top: 2rem;
+}
+
+.bar-vertical{
+
+    width: 90%;
+    height: auto;
+    margin-top: 50px;
+}
+
+
+@media only screen and (min-width: 900px) {
+    .bar-vertical{
+        display: none;
+    }
+    .caption{
+        letter-spacing: 0.5rem;
+    }
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    padding-left: 1.3em;
+  }
+  li:before {
+    content: "\f00c"; /* FontAwesome Unicode */
+    font-family: FontAwesome;
+    display: inline-block;
+    margin-left: -1.3em; /* same as padding-left set on li */
+    width: 1.3em; /* same as padding-left set on li */
+  }
+
+
+  .contact{
+    
+      
+      margin-left: 6rem;
+  }
+
+  .contact-content{
+
+    text-align: left;
+   
+}
