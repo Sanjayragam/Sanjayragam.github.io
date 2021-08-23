@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif !important;
+    
+}
+
+body {
+   
+    background: url(back-01.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+   }
+
+a:hover {
+    text-decoration: none;
+}
+
+
+.responsive {
+
+    width: 60%;
+    height: auto;
+
+}
+.title{
+    width: 60%;
+    height: auto;
+    margin-top: 50px;
+}
+
+.title1{
+  
+    height: auto;
+    margin-top: 50px;
+}
+
+
+@media only screen and (min-width: 900px) {
+    .titlemob{display:none;}
+    }
+
+
+
+.titu{
+    background-image: image("title.png");
+
+}
+
+.content{
+    
+    
+     
+}
+
+@media only screen and (max-width: 900px) {
+    .content {
+        margin-bottom: 50px;
+        font-size: small;
+        text-align: justify;
+        text-justify:newspaper;
+        padding: 30px;
+    }
+    .box{
+      margin-bottom: 20px;
+    }
+    body{
+        padding: 30px;
+    }
+    .title{
+       display: none;
+       margin-top: 2rem;
+    }
+    .titlemob{
+        width: 90%;
+        margin-top: 5rem;
+     }
+  }
+
+
+
+
+  .box{
+      border-radius: 30px;
+      background-color: aqua;
+  }
+  
+
+  .border {
+    
+    border: 3px solid transparent;
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(101deg, #78e4ff, #ff48fa);
+    
+}
+
+
+button.button 
+{
+    border-radius: 100rem;
+    padding: 1rem;
+    font-family: raleway;
+    font-size: 1rem;
+    padding: .5rem 3rem;
+    
+   
+    border: solid 3px transparent;
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(101deg, #78e4ff, #ff48fa);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    box-shadow: 2px 1000px 1px #fff inset;
+  }
+  
+  button.button:hover {
+    box-shadow: none;
+    color: white;
+  }
+
+  .but{
+    border-radius: 100rem;
+   
+    font-family: raleway;
+    font-size: 1rem;
+    padding: 0.5rem 2rem ;
+    width: 120px;
+    margin-right: 50px;
+    height: 40px;
+    border: solid 3px transparent;
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(101deg, #78e4ff, #48bcff);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    background-color: ;
+    box-shadow: 2px 1000px 1px rgb(245, 244, 244) inset;
+  }
+
+  .but2{
+    width: 150px;
+  }
+
+  
