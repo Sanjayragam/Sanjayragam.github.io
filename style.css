@@ -30,6 +30,7 @@ a:hover {
     width: 60%;
     height: auto;
     margin-top: 50px;
+    margin-bottom: 30px;
 }
 
 
@@ -38,6 +39,7 @@ a:hover {
 
 .titu{
     background-image: image("title.png");
+    background-color: rgb(255, 255, 255);
 
 }
 
@@ -58,6 +60,7 @@ a:hover {
     }
     .box{
       margin-bottom: 20px;
+      
     }
     body{
         padding: 15px;
@@ -100,7 +103,7 @@ a:hover {
 
   .box{
       border-radius: 30px;
-      background-color: aqua;
+     
   }
   
 
@@ -112,33 +115,13 @@ a:hover {
 }
 
 
-button.button 
-{
-    border-radius: 100rem;
-    padding: 1rem;
-    font-family: raleway;
-    font-size: 1rem;
-    padding: .5rem 3rem;
-    
-   
-    border: solid 3px transparent;
-    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(101deg, #78e4ff, #ff48fa);
-    background-origin: border-box;
-    background-clip: content-box, border-box;
-    box-shadow: 2px 1000px 1px #fff inset;
-  }
-  
-  button.button:hover {
-    box-shadow: none;
-    color: white;
-  }
+
 
   .but{
-    border-radius: 100rem;
-   
+    border-radius: 5rem;
     font-family: raleway;
     font-size: 1rem;
-    padding: 0.5rem 2rem ;
+    padding: 5px 15px 3px;
     width: 120px;
     margin-right: 50px;
     height: 40px;
@@ -148,12 +131,30 @@ button.button
     background-clip: content-box, border-box;
     background-color: ;
     box-shadow: 2px 1000px 1px rgb(245, 244, 244) inset;
+    margin-left: 3rem;
   }
 
   .but2{
-    width: 150px;
+    width: 120px;
   }
-
+.but1
+{
+    margin-left: 3rem;
+    background-color: #ff48fa;
+    border-radius: 5rem;
+    font-family: raleway;
+    font-size: 1rem;
+    padding: 5px 30px 3px;
+    width: 120px;
+    margin-right: 50px;
+    height: 40px;
+    border: solid 3px transparent;
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(101deg, #78e4ff, #48bcff);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    background-color: ;
+    box-shadow: 2px 1000px 1px rgb(245, 244, 244) inset;
+}
 
   .logos{
     width: 100%px;
@@ -278,4 +279,20 @@ button.button
    line-height: 3rem;
 }
 
-    
+
+.button-container
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-secondary
+{
+    line-height: 1.3;
+    padding: 8px 3px;
+}
+.first
+{
+    background-color: #48bcff;
+
+}
