@@ -234,6 +234,12 @@ button.button
           display: block;
         
       }
+      .responsive {
+
+        width: 90%;
+        
+    
+    }
     }
 
     .left
