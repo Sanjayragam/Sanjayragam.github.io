@@ -60,6 +60,8 @@ a:hover {
     }
     .box{
       margin-bottom: 20px;
+      background-color: rgb(255, 255, 255);
+      border: ;
       
     }
     body{
@@ -103,6 +105,9 @@ a:hover {
 
   .box{
       border-radius: 30px;
+      border: solid 3.1px transparent;
+      border-color: rgb(240, 238, 238);
+      
      
   }
   
@@ -125,13 +130,14 @@ a:hover {
     width: 120px;
     margin-right: 50px;
     height: 40px;
-    border: solid 3px transparent;
+    border: solid 3.1px transparent;
     background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(101deg, #78e4ff, #48bcff);
     background-origin: border-box;
     background-clip: content-box, border-box;
     background-color: ;
     box-shadow: 2px 1000px 1px rgb(245, 244, 244) inset;
     margin-left: 3rem;
+    background-color: bisque;
   }
 
   .but2{
@@ -148,7 +154,7 @@ a:hover {
     width: 120px;
     margin-right: 50px;
     height: 40px;
-    border: solid 3px transparent;
+    border: solid 3.1px transparent;
     background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(101deg, #78e4ff, #48bcff);
     background-origin: border-box;
     background-clip: content-box, border-box;
@@ -295,4 +301,12 @@ a:hover {
 {
     background-color: #48bcff;
 
+}
+
+
+.box{
+    
+    border-color: rgb(240, 238, 238);
+    
+   
 }
