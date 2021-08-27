@@ -24,6 +24,33 @@
     }
   }
   </script>
+
+  <script>
+
+    //http://demo.bonefishcode.com/space/demo/video/
+//https://codepen.io/fershopls/pen/GovZmV
+//http://www.awwwards.com/sites/steven-mengin-portfolio
+//https://codepen.io/eehayman/pen/qdGZJr
+$(document).ready(function() {
+			$('#fullpage').fullpage({
+				anchors: ['firstPage', 'secondPage', '3rdPage'],
+				sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
+				navigation: true,
+				navigationPosition: 'right',
+				navigationTooltips: ['Page 1', 'Page 2', 'Page 3'],
+        scrollingSpeed: 900,
+        //easing: 'easeInElastic',
+        //easingcss3: 'ease',
+        //verticalCentered: true,
+        //resize: false,
+        
+        //Custom selectors
+        //sectionSelector: '.section',
+        //slideSelector: '.slide',
+        scrollOverflow: true
+			});
+		});
+  </script>
  <style> 
 
   #panel {
@@ -33,7 +60,7 @@
 </head>
 <body>
 <!-- partial:index.partial.html -->
-<div style="" id="loadingDiv">
+<!--<div style="" id="loadingDiv">
     <div class="loading loader">
       <div class="loading-text">
         <span class="loading-text-words">H</span>
@@ -44,22 +71,134 @@
       
       </div>
     </div>
-</div>
-<div id="panel" class="">
+</div>-->
+    <div id="panel" class="slide">
+      <nav>
+        <span id="brand">
+          <a href=""><img src="sign.png" width="20%"></a>
+        </span>
+  
+        <ul id="menu">
+ 
+          <li><a href="">me<span>.</span></a></li>
+          <li><a href="">works<span>.</span></a></li>
+          <li><a href="#footer">connect<span>.</span></a></li>
+        </ul>
+  
+      
+  
+      </nav>
 
-  <nav class="navbar">
-    <a href="#" class="navbar__link">Work</a>
-    <a href="#" class="navbar__link">About</a>
-    <a href="#" class="navbar__link">Contact</a>
-  </nav>
+     
+      <div class="fullpage">
 
-  <header class="hero">
-    <h1 class="hero__title">Marta Syrko</h1>
-    <div class="hero__cover">
-      <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/c2cc1796246361.5ea9e12a2ddea.jpg" srcset="https://mir-s3-cdn-cf.behance.net/project_modules/disp/c2cc1796246361.5ea9e12a2ddea.jpg 600w,https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c2cc1796246361.5ea9e12a2ddea.jpg 1200w,https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/c2cc1796246361.5ea9e12a2ddea.jpg 1400w,https://mir-s3-cdn-cf.behance.net/project_modules/fs/c2cc1796246361.5ea9e12a2ddea.jpg 1920w,https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/c2cc1796246361.5ea9e12a2ddea.jpg 2800w," sizes="(max-width: 2800px) 100vw, 2800px">
+       
+          <div class="section" id="section0" >
+            <div class="intro">
+              <div class="title-logo">
+                Logo
+              </div>
+              <p>Logo designs</p>
+            </div>
+          </div>
+
+          <div class="section" id="section1">
+              
+            <div class="intro">
+              <div class="title-logo">
+                UI
+              </div>
+              <p>
+                <p>UI Designing</p>
+              </p>
+          </div>
+        </div>
+        
+          <div class="section" id="section2">
+              
+              <div class="intro">
+                <div class="title-logo">
+                  art
+                </div>
+                <p>
+                  <p>others</p>
+                </p>
+            </div>
+          </div>
+
+          <div class="section" id="section2">
+              
+            <div class="intro">
+              <div class="title-logo">
+                art
+              </div>
+              <p>
+                <p>Posters</p>
+              </p>
+          </div>
+        </div>
+
+        
+        
+         
+      </div>
+
+
+  
+      <div class="footer" id="footer">
+        <div class="container">
+          <br><br>
+  
+          <div class="collab">
+            <div class="row">
+              <div class="col-lg-12">
+                <p class="wow fadeInUp">Got an interesting project? I can help you.</p>
+              </div>
+            </div>
+          </div>
+  
+          <br>
+  
+          <div class="hr">
+            <div class="row"></div>
+          </div>
+  
+          <br><br>
+  
+          <div class="info">
+            <div class="row">
+              <div class="col-lg-4" id="personal">
+                <p class="wow fadeInUp">connect with me</p>
+                <h4 class="wow fadeInUp" data-wow-delay="0.2s">ig @__sanjay_.__</h4>
+                <br><br>
+              </div>
+  
+              <div class="col-lg-4" id="media">
+                <p class="wow fadeInUp" data-wow-delay="0s">follow me</p>
+  
+                <ul>
+                  <li id="fb" class="wow fadeInUp" data-wow-delay="0.4s">dr</li>
+                  <li id="fb" class="wow fadeInUp" data-wow-delay="0.4s">px</li>
+                  <li id="ig" class="wow fadeInUp" data-wow-delay="0.6s">ig</li>
+                  <li id="tw" class="wow fadeInUp" data-wow-delay="0.8s">ln</li>
+                  <li id="yt" class="wow fadeInUp" data-wow-delay="1s">be</li>
+                </ul>
+  
+                <br><br>
+              </div>
+  
+              <div class="col-lg-4" id="address">
+                <p class="wow fadeInUp" data-wow-delay="0s">say hello</p>
+                <h4 class="wow fadeInUp" data-wow-delay="0.2s">sanjayragam@gmail.com</h4>
+                <br><br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
     </div>
-  </header>
-</div>
 <section id="myDIV" >
   <div class="title">I AM<BR>SANJAY P V</div>
   <div class="subtitle">Graphic Designer</div>
