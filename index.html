@@ -6,30 +6,67 @@
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="./style.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script> 
+ $(document).ready(function(){
+   $("#flip").click(function(){
+     $("#panel").slideDown("slow");
+   });
+ });
+ </script>
+ <script>
+  function myFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+  </script>
+ <style> 
 
+  #panel {
+    display: none;
+  }
+  </style>
 </head>
 <body>
 <!-- partial:index.partial.html -->
 <div style="" id="loadingDiv">
     <div class="loading loader">
       <div class="loading-text">
+        <span class="loading-text-words">H</span>
+        <span class="loading-text-words">E</span>
+        <span class="loading-text-words">L</span>
         <span class="loading-text-words">L</span>
         <span class="loading-text-words">O</span>
-        <span class="loading-text-words">A</span>
-        <span class="loading-text-words">D</span>
-        <span class="loading-text-words">I</span>
-        <span class="loading-text-words">N</span>
-        <span class="loading-text-words">G</span>
+      
       </div>
     </div>
 </div>
+<div id="panel" class="">
 
-<section>
-  <div class="title">SANJAY P V</div>
+  <nav class="navbar">
+    <a href="#" class="navbar__link">Work</a>
+    <a href="#" class="navbar__link">About</a>
+    <a href="#" class="navbar__link">Contact</a>
+  </nav>
+
+  <header class="hero">
+    <h1 class="hero__title">Marta Syrko</h1>
+    <div class="hero__cover">
+      <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/c2cc1796246361.5ea9e12a2ddea.jpg" srcset="https://mir-s3-cdn-cf.behance.net/project_modules/disp/c2cc1796246361.5ea9e12a2ddea.jpg 600w,https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c2cc1796246361.5ea9e12a2ddea.jpg 1200w,https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/c2cc1796246361.5ea9e12a2ddea.jpg 1400w,https://mir-s3-cdn-cf.behance.net/project_modules/fs/c2cc1796246361.5ea9e12a2ddea.jpg 1920w,https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/c2cc1796246361.5ea9e12a2ddea.jpg 2800w," sizes="(max-width: 2800px) 100vw, 2800px">
+    </div>
+  </header>
+</div>
+<section id="myDIV" >
+  <div class="title">I AM<BR>SANJAY P V</div>
   <div class="subtitle">Graphic Designer</div>
   <div class="button-down">
     <div>
-      <i class="fas fa-angle-down"></i>
+      <i class="fas fa-angle-down" id="flip" onclick="myFunction()"></i>
+   
     </div>
   </div>
 </section>

@@ -96,13 +96,13 @@ section.sectionblue{
 .title{
   font-weight: 800;
   color: transparent;
-  font-size:120px;
-  background: url("Untitled-124.jpg") repeat;
+  font-size:170px;
+  background: url("dev1.jpg") repeat;
   background-position: 40% 50%;
   -webkit-background-clip: text;
   position:relative;
   text-align:center;
-  line-height:90px;
+  line-height:150px;
   letter-spacing: -8px;
   text-transform:uppercase;
   font-family: 'Raleway', sans-serif;
@@ -120,7 +120,7 @@ section.sectionblue{
 
 .button-down{
   position:absolute;
-  bottom: 30px;
+  bottom: 100px;
   display:flex;
   justify-content:center;
   width:100%;
@@ -216,4 +216,85 @@ section.sectionblue{
 
 @keyframes fadeIn{
     from{opacity:0} to{opacity:1}
+}
+
+
+.slide
+{
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+}
+
+.container {
+  max-width: 1280px;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Lato', sans-serif;
+  padding: 0.5em 1em;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  
+  &__link {
+    color: $colorThemeDark;
+    padding: 0.75em 1em;
+    text-decoration: none;
+  }
+}
+
+.hero {
+  background: $colorThemeLight;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(4em, 20vh) min-content 3em auto 3em;
+  min-height: 100vh;
+  
+  &__title {
+    grid-row: 2 / 4;
+    grid-column: 1 / 2;
+    align-self: flex-end;
+    color: $colorThemeDark;
+    font-family: 'Gilda Display', serif;
+    font-size: clamp(24px, 10vw, 14vw);
+    font-weight: normal;
+    margin: 0;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+  
+  &__cover {
+    grid-row: 3 / 5;
+    grid-column: 1 / 2;
+    justify-self: flex-end;
+    display: block;
+    
+    img {
+      width: 90vw;
+      max-width: 860px;
+      height: auto;
+      min-height: 50vh;
+      object-fit: cover;
+      object-position: top;
+    }
+  }
 }
