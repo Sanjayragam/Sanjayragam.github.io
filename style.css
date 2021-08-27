@@ -1,139 +1,219 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,800,900|Roboto:400,900);
 
-* {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
+body{
+  margin:0; 
+  color:black;
+  position:relative;
+  color:#394053;
 }
 
 .header {
-  min-height: 100vh;
-  width: 100%;
-  background: #000;
-  color: #fff;
-  position: relative;
+  position:fixed;
+  width:100%;
+  z-index:10;
+  transition: all .3s;
+  background-color:#394053;
+  height:0;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  color:white;
 }
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 1;
+.header.active{
+  height:100vh;
 }
 
-.logo {
-  text-decoration: none;
-  color: #fff;
+.header h1{
+    text-align: center;
+    cursor: pointer;
+    font-family: Roboto;
+    text-transform: uppercase;
+    font-size: 40px;
+    margin:0;
+    transition: all .3s;
+    font-weight:900;
+}
+
+.header h1:hover{
+    margin-left: -5px;
+    filter: drop-shadow(0.25em 0.15em 0.015em rgba(0,0,0, 0.7));
+}
+#menu.button {
+  float:right;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:10px;
+  margin:20px;
   font-size: 30px;
-  font-weight: bold;
-  padding-top: 10px;
-  padding-left: 10%;
+  cursor:pointer;
+  position:fixed;
+  z-index:25;
+  right:0;
 }
 
-.nav-links {
-  text-align: right;
-  background: #ff1616;
-  padding: 10px 30px;
-  border-bottom-left-radius: 18px;
+#menu.button  i {
+  margin-top:-23px;
+  transition: all .6s;
 }
 
-.nav-links ul li {
-  list-style: none;
+#menu.button  i:first-child{
+  margin-top:0px;
+}
+
+#menu.button.active i{
+  transform: rotate(40deg) skewX(0deg);
+  margin-top:-30px;
+  color:white;
+}
+
+#menu.button.active i:first-child{
+  transform: rotate(-40deg) skewX(0deg);
+  margin-top:0px;
+}
+
+section {
+  width:100%;
+  height: 100vh;
+  margin:0;
+  display: flex;
+  align-item:center;
+  justify-content:center;
+  flex-direction:column;
+  position:relative;
+}
+
+section.sectionpink{
+  background-color: pink;
+}
+
+section.sectionblue{
+  background-color: lightblue;
+}
+
+.title{
+  font-weight: 800;
+  color: transparent;
+  font-size:120px;
+  background: url("https://images.unsplash.com/photo-1551734413-5943d61e002a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80") repeat;
+  background-position: 40% 50%;
+  -webkit-background-clip: text;
+  position:relative;
+  text-align:center;
+  line-height:90px;
+  letter-spacing: -8px;
+  text-transform:uppercase;
+  font-family: 'Raleway', sans-serif;
+  animation: 1.5s ease-out 0s 1 fadeIn;
+}
+.subtitle{
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  padding-top:10px;
+  text-transform:uppercase;
+  font-family: 'Raleway', sans-serif;
+  animation: 2.5s ease-out 0s 1 fadeIn;
+}
+
+.button-down{
+  position:absolute;
+  bottom: 30px;
+  display:flex;
+  justify-content:center;
+  width:100%;
+  font-size:25px;
+}
+
+.button-down div {
+  cursor:pointer;
+  padding:5px;
+  border-radius:50%;
+  
+}
+
+
+@media screen and (max-width: 800px){
+  .title{
+    font-size: 80px;
+    line-height: 60px;
+  }
+}
+
+#loadingDiv {
+  color:pink;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+}
+
+.loading {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+   background-color:#394053;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.loading-text {
+	width: 100%;
+  display:flex;
+  justify-content:center;
+}
+
+.loading-text span {
+  overflow:hidden;
+  transition: line-height .5s;
   display: inline-block;
-  padding: 10px 25px;
-}
-
-.nav-links ul li a {
+  margin: 0 5px;
   color: #fff;
-  text-decoration: none;
-  font-size: 18px;
+ font-family: 'Raleway', sans-serif;
+  line-height:40px;
+  
+}
+.loading-text span:nth-child(1) {
+  filter: blur(0px);
+  animation: blur-text 1.5s 0s infinite linear alternate;
+}
+.loading-text span:nth-child(2) {
+  filter: blur(0px);
+  animation: blur-text 1.5s 0.2s infinite linear alternate;
+}
+.loading-text span:nth-child(3) {
+  filter: blur(0px);
+  animation: blur-text 1.5s 0.4s infinite linear alternate;
+}
+.loading-text span:nth-child(4) {
+  filter: blur(0px);
+  animation: blur-text 1.5s 0.6s infinite linear alternate;
+}
+.loading-text span:nth-child(5) {
+  filter: blur(0px);
+  animation: blur-text 1.5s 0.8s infinite linear alternate;
+}
+.loading-text span:nth-child(6) {
+  filter: blur(0px);
+  animation: blur-text 1.5s 1s infinite linear alternate;
+}
+.loading-text span:nth-child(7) {
+  filter: blur(0px);
+  animation: blur-text 1.5s 1.2s infinite linear alternate;
 }
 
-.left-sidebar {
-  width: 20%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  background: #ff1616;
+@keyframes blur-text {
+	0% {filter: blur(0px);}
+	100% {filter: blur(4px);}
 }
 
-.row {
-  padding: 0 10%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  position: relative;
-  margin-top: 5%;
-}
-
-.left-col {
-  flex-basis: 40%;
-}
-
-.right-col {
-  flex-basis: 55%;
-}
-
-.left-col img {
-  width: 80%;
-  cursor: pointer;
-  filter: grayscale(0);
-  transition: filter 1s;
-}
-
-.left-col img:hover {
-  filter: grayscale(1);
-}
-
-.right-col h1 {
-  font-style: 55px;
-  font-weight: 600;
-}
-
-.right-col p {
-  color: #777;
-  margin: 20px 0 70px;
-}
-
-.social-media {
-  display: flex;
-  margin-top: 30px;
-}
-
-.icon {
-  width: 100px;
-  height: 100px;
-  background: #555;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.icon i {
-  width: 28px;
-}
-
-.icon a {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #ff1616;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: 0.5s;
-}
-
-.icon a:hover {
-  opacity: 1;
+@keyframes fadeIn{
+    from{opacity:0} to{opacity:1}
 }
