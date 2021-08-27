@@ -55,7 +55,7 @@ nav {
   position: absolute;
   left: 0;
   top: 0;
-  background: #ffd416;
+  background: #16ffb9;
 }
 
 .row {
@@ -69,7 +69,7 @@ nav {
 
 
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
 
   .row{
       display: block;
