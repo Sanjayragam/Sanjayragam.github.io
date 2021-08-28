@@ -26,11 +26,7 @@
   </script>
 
   <script>
-
-    //http://demo.bonefishcode.com/space/demo/video/
-//https://codepen.io/fershopls/pen/GovZmV
-//http://www.awwwards.com/sites/steven-mengin-portfolio
-//https://codepen.io/eehayman/pen/qdGZJr
+    
 $(document).ready(function() {
 			$('#fullpage').fullpage({
 				anchors: ['firstPage', 'secondPage', '3rdPage'],
@@ -57,6 +53,22 @@ $(document).ready(function() {
     display: none;
   }
   </style>
+
+
+  <script> 
+    $(document).ready(function(){
+      $("#fli").click(function(){
+        $("#pane").slideDown("slow");
+      });
+    });
+    </script>
+    <style> 
+    
+    #pane {
+     
+      display: none;
+    }
+    </style>
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -89,15 +101,50 @@ $(document).ready(function() {
   
       </nav>
 
-     
-      <div class="fullpage">
+
+
+
+             
+
+
+              
+              <div class="fullpage">
+
+
+                <div class="section" id="fli">
+                   
+                   <button class="end-btn" > profile </button>
+                 
+                </div>
+
+              
+
+              <style>
+
+                  .end-btn {
+                    margin-top: 2vw;
+                    background-color: #DAA521;
+                    border: none;
+                    width: 15vw;
+                    height: 3vw;
+                    font-size: 1.5vw;
+                    color: #FFFFFF;
+                    border-radius: 0.5vw;
+                    font-weight: bold;
+                    cursor: pointer;
+                  }
+                                </style>
+
+              </div>
+      <div id="pane">
+      <div class="fullpage" id="">
 
        
-          <div class="section" id="section0" >
+         <div class="section" id="section0" >
             <div class="intro">
-              <div class="title-logo">
+              <a href="portfolio.html"><div class="title-logo">
                 Logo
-              </div>
+              </div></a>
               <p>Logo designs</p>
             </div>
           </div>
@@ -118,10 +165,10 @@ $(document).ready(function() {
               
               <div class="intro">
                 <div class="title-logo">
-                  art
+                  Art
                 </div>
                 <p>
-                  <p>others</p>
+                  <p>Vector art, Digital</p>
                 </p>
             </div>
           </div>
@@ -130,7 +177,7 @@ $(document).ready(function() {
               
             <div class="intro">
               <div class="title-logo">
-                art
+                Posters
               </div>
               <p>
                 <p>Posters</p>
@@ -143,6 +190,30 @@ $(document).ready(function() {
          
       </div>
 
+    </div>
+
+
+    <div class="fullpage">
+
+              
+      <div class="section" id="section" >
+        <div class="intro">
+          <div class="title-logo">
+            Visit my behance
+          </div>
+          <p></p>
+        </div>
+      </div>
+
+      <div class="section" id="section1">
+         <img src="images/be.svg" width="70%">
+       
+      </div>
+
+        
+
+    </div>
+
 
   
       <div class="footer" id="footer">
@@ -152,7 +223,7 @@ $(document).ready(function() {
           <div class="collab">
             <div class="row">
               <div class="col-lg-12">
-                <p class="wow fadeInUp">Got an interesting project? I can help you.</p>
+                <p class="wow fadeInUp">I’am available for freelancing. Feel free to contact me.</p>
               </div>
             </div>
           </div>

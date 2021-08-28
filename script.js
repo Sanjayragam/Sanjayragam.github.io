@@ -1,3 +1,4 @@
+
 $(window).on('load', function(){
   setTimeout(removeLoader, 2000); 
 });
@@ -26,3 +27,8 @@ $(document).ready(function(){
     $("#header").toggleClass("active")
   })
 });
+
+
+
+
+
