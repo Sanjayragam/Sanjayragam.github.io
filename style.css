@@ -160,7 +160,7 @@ section.sectionblue{
 	width: 100%;
 	height: 100%;
 	z-index: 9999;
-   background-color:#394053;
+   background-color:#232739;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -182,7 +182,7 @@ section.sectionblue{
   line-height:40px;
   
 }
-.loading-text span:nth-child(1) {
+/*.loading-text span:nth-child(1) {
   filter: blur(0px);
   animation: blur-text 1.5s 0s infinite linear alternate;
 }
@@ -209,7 +209,7 @@ section.sectionblue{
 .loading-text span:nth-child(7) {
   filter: blur(0px);
   animation: blur-text 1.5s 1.2s infinite linear alternate;
-}
+}*/
 
 @keyframes blur-text {
 	0% {filter: blur(0px);}
@@ -526,11 +526,20 @@ justify-content: center;
 #section2 {
   background: url("") center center no-repeat;
   background-size: cover;
-}*/
+}
 
 
 
 /*behance*/
+.load{
+	width: 20%;
+}
+@media only screen and (min-width: 1024px) {
+.load{
+	width: 10%;
+} 
+}
+
 
 
 

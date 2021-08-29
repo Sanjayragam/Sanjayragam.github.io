@@ -2,6 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="sign.png" type="sign.png" sizes="16x20">
   <title>sanjay pv</title>
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -72,18 +73,16 @@ $(document).ready(function() {
 </head>
 <body>
 <!-- partial:index.partial.html -->
-<!--<div style="" id="loadingDiv">
+<div style="" id="loadingDiv">
     <div class="loading loader">
       <div class="loading-text">
-        <span class="loading-text-words">H</span>
-        <span class="loading-text-words">E</span>
-        <span class="loading-text-words">L</span>
-        <span class="loading-text-words">L</span>
-        <span class="loading-text-words">O</span>
+        <img class="load"  src="final_final.gif" >
+  
+    
       
       </div>
     </div>
-</div>-->
+</div>
     <div id="panel" class="slide">
       <nav>
         <span id="brand">
@@ -270,7 +269,28 @@ $(document).ready(function() {
           </div>
         </div>
       </div>
+      <a href="#panel" class="float">
+      <i class="fa fa-plus my-float"></i>
+      </a>
 
+      <style>
+        .float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#0C9;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.my-float{
+	margin-top:22px;
+}
+      </style>
     
     </div>
 <section id="myDIV" >

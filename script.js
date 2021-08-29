@@ -1,6 +1,6 @@
 
 $(window).on('load', function(){
-  setTimeout(removeLoader, 2000); 
+  setTimeout(removeLoader, 3000); 
 });
 function removeLoader(){
    $( "#loadingDiv" ).fadeOut(500, function() {
