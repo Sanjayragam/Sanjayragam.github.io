@@ -48,12 +48,12 @@ $(document).ready(function() {
 			});
 		});
   </script>
- <style> 
+ <!--<style> 
 
   #panel {
     display: none;
   }
-  </style>
+  </style>-->
 
 
   <script> 
@@ -73,7 +73,7 @@ $(document).ready(function() {
 </head>
 <body>
 <!-- partial:index.partial.html -->
-<div style="" id="loadingDiv">
+<!--<div style="" id="loadingDiv">
     <div class="loading loader">
       <div class="loading-text">
         <img class="load"  src="final_final.gif" >
@@ -81,10 +81,10 @@ $(document).ready(function() {
     
       
       </div>
-    </div>
+    </div>-->
 </div>
     <div id="panel" class="slide">
-      <nav>
+      <!--<nav>
         <span id="brand">
           <a href=""><img src="sign.png" width="20%"></a>
         </span>
@@ -98,10 +98,83 @@ $(document).ready(function() {
   
       
   
-      </nav>
+      </nav>-->
 
 
+      <div class="grid-container">
+        <div class="grid-item pic"><img class="headimg" src="images/sanju.png" width="80%"></div>
+        <div class="grid-item conten"><span style="font-size: 4rem;">Hai I am</span><BR>Sanjay P V<div class="caption">I am a Graphic Designer</div></div>
+          
+          
+        
+      </div>
 
+      <style>
+        .grid-container {
+          display: grid;
+          grid-template-columns: 40% auto;
+          height: 100vh;
+         
+          padding: 10px;
+          padding: 0px 10px 10px 10px;
+
+
+        }
+
+
+        .caption
+        {
+          font-size: 2rem;
+        }
+        .pic {
+          background-color: rgb(243, 243, 243);
+    
+          color: rgb(27, 27, 27);
+        }
+        .headimg
+          {
+           
+            padding-left: 5rem;
+          }
+
+
+        .conten{
+          background-color: rgb(243, 243, 243);
+          /*border: 1px solid rgba(0, 0, 0, 0.322);*/
+          color: rgb(27, 27, 27);
+          font-size: 5rem;
+          font-family: "Poppins", sans-serif;
+          font-weight: 100;
+          padding-top: 5rem;
+          padding-left: 0rem;
+        }
+
+        @media (max-width: 768px) {
+
+
+          .grid-container{
+            display: block;
+          }
+
+          .headimg
+          {
+            width: 100%;
+            padding-left: 0rem;
+          }
+          .fullpage
+          {
+            margin-top: 20rem;
+          }
+
+          .conten
+          {
+            text-align: center;
+            padd
+          }
+
+
+          }
+        </style>
 
              
 
@@ -298,6 +371,7 @@ $(document).ready(function() {
   <div class="subtitle">Graphic Designer</div>
   <div class="button-down">
     <div>
+      <i class="fas fa-angle-down" id="flip" onclick="myFunction()"></i>
    
     </div>
   </div>
