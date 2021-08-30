@@ -487,16 +487,28 @@ nav #menu li a:hover {
 
 /*portfolio*/
 /*mobile*/
+
+.span1{
+	
+	font-size: 2rem;" 
+}
+
+/*portfolio*/
+/*mobile*/
 @media screen and (min-width: 800px) {
   .fullpage{
     display: flex;
   }
+  .span1
+{
+	font-size: 4rem;
+	
+}
 }
 
-.headimg
-{
-	margin-bottom: 0.1rem;
-}
+
+
+
 
 
 {
