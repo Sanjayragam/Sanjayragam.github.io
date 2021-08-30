@@ -326,6 +326,13 @@ section.sectionblue{
 		margin: 0 0 0 -22px;
 		padding: 0;
 	}
+
+	.conten
+        {
+        
+          font-size: 4.5rem;
+        
+        }
 }
 
 
@@ -482,6 +489,8 @@ nav #menu li a:hover {
     display: block;
   }
 
+  
+
 
 }
 
@@ -504,12 +513,12 @@ nav #menu li a:hover {
 	font-size: 4rem;
 	
 }
+
+.header-icon
+{
+	width: 40%;
 }
-
-
-
-
-
+}
 
 {
 
@@ -596,6 +605,8 @@ nav {
 			margin-left: 17rem;
 		
 		}
+
+		
 }
 
 
