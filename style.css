@@ -333,7 +333,7 @@ section.sectionblue{
 /*--------------- navigation --------------- */
 nav {
 	width: 100%;
-	background: #0f0f0f;
+	background-color: rgb(243, 243, 243);
 	height: 80px;
 	position: fixed;
 	z-index: 1;
@@ -348,7 +348,7 @@ nav #brand {
 }
 
 nav #brand a {
-	color: #fff;
+	color: rgb(41, 41, 41);
 	transition: all 0.3s ease-out;
 }
 
@@ -357,7 +357,7 @@ nav #brand a:hover {
 }
 
 nav #menu {
-	float: left;
+	
 	right: 80px;
 	position: fixed;
 }
@@ -377,7 +377,7 @@ nav #menu li span {
 }
 
 nav #menu li a {
-	color: #fff;
+	color: rgb(0, 0, 0);
 }
 
 nav #menu li a:hover {
@@ -463,8 +463,8 @@ nav #menu li a:hover {
 
 
 	nav #brand {
-		margin-left: 30px;
-    margin-top: 7px;
+		margin-left: 40px;
+    	margin-top: 7px;
 	}
 
 	#menu a {
