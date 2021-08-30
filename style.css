@@ -334,6 +334,7 @@ section.sectionblue{
 nav {
 	width: 100%;
 	background-color: rgb(243, 243, 243);
+	padding-top: ;
 	height: 80px;
 	position: fixed;
 	z-index: 1;
@@ -357,6 +358,7 @@ nav #brand a:hover {
 }
 
 nav #menu {
+	
 	
 	right: 40px;
 	position: fixed;
@@ -534,10 +536,40 @@ justify-content: center;
 .load{
 	width: 20%;
 }
+
+
+/*desktop only  ***************/
 @media only screen and (min-width: 1024px) {
 .load{
 	width: 10%;
 } 
+
+nav #menu {
+	
+	left: 40rem;
+
+}
+
+
+nav {
+	
+	padding-top: 2rem;
+	
+}
+
+.headimg
+{
+ 
+
+
+  margin-left: 10rem;
+}
+
+.headimg
+          {
+           
+            padding-top: 2rem;
+          }
 }
 
 
