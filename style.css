@@ -486,13 +486,19 @@ nav #menu li a:hover {
 }
 
 /*portfolio*/
-
+/*mobile*/
 @media screen and (min-width: 800px) {
   .fullpage{
     display: flex;
   }
 }
-.fullpage
+
+.headimg
+{
+	margin-bottom: 0.1rem;
+}
+
+
 {
 
 padding-top: 5rem;
@@ -564,6 +570,7 @@ nav {
 
 
   margin-left: 10rem;
+  
 }
 
 .headimg
