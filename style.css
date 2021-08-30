@@ -554,6 +554,7 @@ nav #menu {
 nav {
 	
 	padding-top: 2rem;
+	padding-bottom: 2rem;
 	
 }
 
@@ -570,6 +571,12 @@ nav {
            
             padding-top: 2rem;
           }
+
+		  nav #brand {
+		
+			margin-left: 17rem;
+		
+		}
 }
 
 
