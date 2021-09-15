@@ -48,12 +48,12 @@ $(document).ready(function() {
 			});
 		});
   </script>
- <style> 
+ <!--<style> 
 
   #panel {
     display: none;
   }
-  </style>
+  </style>-->
 
 
   <script> 
@@ -72,8 +72,7 @@ $(document).ready(function() {
     </style>
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<div style="" id="loadingDiv">
+<!--<div  id="loadingDiv">
     <div class="loading loader">
       <div class="loading-text">
         <img class="load"  src="final_final.gif" >
@@ -82,7 +81,10 @@ $(document).ready(function() {
       
       </div>
     </div>
-</div>
+</div>-->
+
+
+
     <div id="panel" class="slide">
       <nav>
         <span id="brand">
@@ -100,6 +102,18 @@ $(document).ready(function() {
   
       </nav>
 
+      <section id="myDI" style="background-color: rgb(243, 243, 243);color: rgb(22, 22, 22);">
+        <div class="title">I AM<BR>SANJAY P V</div>
+        <div class="subtitle">Graphic Designer</div>
+        <div class="button-down">
+          <div>
+            <i class="fas fa-angle-down" id="flip" onclick="myFunction()"></i>
+         
+          </div>
+        </div>
+      </section>
+      
+
 
       <div class="grid-container">
         <div class="grid-item pic"><img class="headimg" src="images/sanju4.png" width="70%"></div>
@@ -109,104 +123,105 @@ $(document).ready(function() {
         
       </div>
 
-      <style>
-        .grid-container {
-          display: grid;
-          grid-template-columns: 50% auto;
-          height: 100vh;
-         
-         
-          padding: 0px 0px 10px 0px;
+                          <style>
+                                  .grid-container 
+                                  {
+                                    display: grid;
+                                    grid-template-columns: 50% auto;
+                                    height: 100vh;
+                                  
+                                  
+                                    padding: 0px 0px 10px 0px;
 
 
-        }
+                                  }
 
 
-        .caption
-        {
-          font-size: 2rem;
-        }
-        .pic {
-          background-color: rgb(243, 243, 243);
-    
-        }
-        .headimg
-          {
-           
-            padding-left: 5rem;
-          }
+                                  .caption
+                                  {
+                                    font-size: 2rem;
+                                  }
+                                  .pic 
+                                  {
+                                    background-color: rgb(243, 243, 243);
+                              
+                                  }
+                                  .headimg
+                                    {
+                                    
+                                      padding-left: 5rem;
+                                    }
 
 
-        .conten
-        {
-          background-color: rgb(243, 243, 243);
-          line-height: 5rem;
-          /*border: 1px solid rgba(0, 0, 0, 0.322);*/
-          color: rgb(27, 27, 27);
-          font-size: 5rem;
-          font-family: "Poppins", sans-serif;
-          font-weight: 100;
-          padding-top: 20rem;
-          padding-left: 0rem;
-          
-        }
+                                  .conten
+                                  {
+                                    background-color: rgb(243, 243, 243);
+                                    line-height: 5rem;
+                                    /*border: 1px solid rgba(0, 0, 0, 0.322);*/
+                                    color: rgb(27, 27, 27);
+                                    font-size: 5rem;
+                                    font-family: "Poppins", sans-serif;
+                                    font-weight: 100;
+                                    padding-top: 20rem;
+                                    padding-left: 0rem;
+                                    
+                                  }
 
 
-            .span1
-            {
+                                      .span1
+                                      {
+                                        
+                                        font-size: 5rem;
+                                      }
+
+
+                                  @media (max-width: 768px) {
+
+
+                                    .grid-container{
+                                      display: block;
+                                    }
+
+                                    .headimg
+                                    {
+                                      width: 100%;
+                                      padding-left: 0rem;
+                                    }
+                                    .fullpage
+                                    {
+                                      margin-top: 20rem;
+                                    }
+
+                                    .conten
+                                    {
+                                      text-align: center;
+                                      padding-top: 2rem;
+                                    }
+
+                                    .span1
+                                      {
+                                        
+                                        font-size: 2rem;
+                                      }
+                                      .conten
+                                      {
+                                    
+                                          font-size: 4.5rem;
+                            
+                                    }
+                                  }
+                            </style>
+
+                                
+
+
               
-              font-size: 5rem;
-            }
-
-
-        @media (max-width: 768px) {
-
-
-          .grid-container{
-            display: block;
-          }
-
-          .headimg
-          {
-            width: 100%;
-            padding-left: 0rem;
-          }
-          .fullpage
-          {
-            margin-top: 20rem;
-          }
-
-          .conten
-          {
-            text-align: center;
-            padding-top: 2rem;
-          }
-
-          .span1
-            {
-              
-              font-size: 2rem;
-            }
-            .conten
-             {
-          
-                font-size: 4.5rem;
-         
-
-
-          }
-        </style>
-
-             
-
-
-              
-              <div class="fullpage">
+              <div class="fullpage" >
 
 
                 <div class="section" id="fli">
                    
-                  
+                   <button class="end-btn" > profile </button>
                  
                 </div>
 
@@ -267,7 +282,7 @@ $(document).ready(function() {
             </div>
           </div>
 
-          <div class="section" id="section2">
+          <div class="section" id="section4">
               
             <div class="intro">
               <div class="title-logo">
@@ -284,13 +299,11 @@ $(document).ready(function() {
          
       </div>
 
-    </div>
-
-
-    <div class="fullpage">
+      
+    <div class="fullpage"  >
 
               
-      <div class="section" id="section" >
+      <div class="section" >
         <div class="intro">
           <div class="title-logo">
             Visit my behance
@@ -299,7 +312,7 @@ $(document).ready(function() {
         </div>
       </div>
 
-      <div class="section" id="section1">
+      <div class="section" >
          <img src="images/be.svg" width="70%">
        
       </div>
@@ -307,6 +320,9 @@ $(document).ready(function() {
         
 
     </div>
+
+    </div>
+
 
 
   
@@ -385,17 +401,8 @@ $(document).ready(function() {
 }
       </style>
     
-    </div>*/
-<section id="myDIV" >
-  <div class="title">I AM<BR>SANJAY P V</div>
-  <div class="subtitle">Graphic Designer</div>
-  <div class="button-down">
-    <div>
-      <i class="fas fa-angle-down" id="flip" onclick="myFunction()"> click</i>
-   
     </div>
-  </div>
-</section>
+
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script><script  src="./script.js"></script>
 

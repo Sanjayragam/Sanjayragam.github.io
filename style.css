@@ -99,7 +99,7 @@ section.sectionblue{
   font-weight: 800;
   color: transparent;
   font-size:170px;
-  background: url("dev1.jpg") repeat;
+  background: url("images/dev1.jpg") repeat;
   background-position: 40% 50%;
   -webkit-background-clip: text;
   position:relative;
@@ -504,6 +504,10 @@ nav #menu li a:hover {
 @media screen and (min-width: 800px) {
   .fullpage{
     display: flex;
+	
+	
+	justify-content: center;
+	align-items: center;
   }
 
 
@@ -538,15 +542,23 @@ justify-content: center;
   padding: 5%;
 }
 #section0 {
-  background: url("images/casette1.jpg") center center no-repeat;
+  background: url("images/dev3.jpg") center center no-repeat;
   background-size: cover;
 }
 #section1 {
-  background: url("") center center no-repeat;
+	background: url("images/PACHA.jpg") center center no-repeat;
   background-size: cover;
 }
 #section2 {
-  background: url("") center center no-repeat;
+	background: url("images/dev2.jpg") center center no-repeat;
+  background-size: cover;
+}
+#section4 {
+	background: url("images/ui.jpg") center center no-repeat;
+  background-size: cover;
+}
+#section5 {
+	background: url("images/beh.jpg") center center no-repeat;
   background-size: cover;
 }
 
