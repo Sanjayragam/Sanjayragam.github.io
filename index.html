@@ -2,409 +2,58 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="images/sign.png" type="sign.png" sizes="16x20">
-  <title>sanjay pv</title>
-   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
- <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="./style.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- <script> 
- $(document).ready(function(){
-   $("#flip").click(function(){
-     $("#panel").slideDown("slow");
-   });
- });
- </script>
- <script>
-  function myFunction() {
-    var x = document.getElementById("myDIV");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  }
-  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodePen - Portfolio #scss #grid</title>
+  <link rel="stylesheet" href="./style.css">
 
-  <script>
-    
-$(document).ready(function() {
-			$('#fullpage').fullpage({
-				anchors: ['firstPage', 'secondPage', '3rdPage'],
-				sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
-				navigation: true,
-				navigationPosition: 'right',
-				navigationTooltips: ['Page 1', 'Page 2', 'Page 3'],
-        scrollingSpeed: 900,
-        //easing: 'easeInElastic',
-        //easingcss3: 'ease',
-        //verticalCentered: true,
-        //resize: false,
-        
-        //Custom selectors
-        //sectionSelector: '.section',
-        //slideSelector: '.slide',
-        scrollOverflow: true
-			});
-		});
-  </script>
- <!--<style> 
-
-  #panel {
-    display: none;
-  }
-  </style>-->
-
-
-  <script> 
-    $(document).ready(function(){
-      $("#fli").click(function(){
-        $("#pane").slideDown("slow");
-      });
-    });
-    </script>
-    <style> 
-    
-    #pane {
-     
-      display: none;
-    }
-    </style>
 </head>
 <body>
-<div  id="loadingDiv">
-    <div class="loading loader">
-      <div class="loading-text">
-        <img class="load"  src="final_final.gif" >
-  
-    
-      
-      </div>
-    </div>
-</div>
-
-
-
-    <div id="panel" class="slide">
+<!-- partial:index.partial.html -->
+<header>
+  <div class="container">
+    <div class="d-flex">
+      <div class="logo"><img src="assets/images/sign.png" width="70px"></div>
       <nav>
-        <span id="brand">
-          <a href=""><img src="images/sign.png" width="20%"></a>
-        </span>
-  
-        <ul id="menu">
- 
-          <li><a href="">me<span style="color: #eed600;"><b> .</b></span></a></li>
-          <li><a href="">works<span style="color: #eed600;"><b> .</b></span></a></li>
-          <li><a href="#footer">connect<span style="color: #eed600;"><b> .</b></span></a></li>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <!-- <li><a href="#">About</a></li>
+          <li><a href="#">Portfolio</a></li>
+          <li><a href="#">Contact</a></li> -->
         </ul>
-  
-      
-  
       </nav>
-
-      <section id="myDI" style="background-color: rgb(243, 243, 243);color: rgb(22, 22, 22);">
-        <div class="title">I AM<BR>SANJAY P V</div>
-        <div class="subtitle">Graphic Designer</div>
-        <div class="button-down">
-          <div>
-            <i class="fas fa-angle-down" id="flip" onclick="myFunction()"></i>
-         
-          </div>
-        </div>
-      </section>
-      
-
-
-      <div class="grid-container">
-        <div class="grid-item pic"><img class="headimg" src="images/sanju4.png" width="70%"></div>
-        <div class="grid-item conten"><span class="span1" >Hi, I am</span><BR><b>Sanjay P V</b><div class="caption">I am a Graphic Designer<br><a href="#footer"><img class="header-icon" src="images/socials.svg" width="60%" ></a></div></div>
-          
-          
-        
-      </div>
-
-                          <style>
-                                  .grid-container 
-                                  {
-                                    display: grid;
-                                    grid-template-columns: 50% auto;
-                                    height: 100vh;
-                                  
-                                  
-                                    padding: 0px 0px 10px 0px;
-
-
-                                  }
-
-
-                                  .caption
-                                  {
-                                    font-size: 2rem;
-                                  }
-                                  .pic 
-                                  {
-                                    background-color: rgb(243, 243, 243);
-                              
-                                  }
-                                  .headimg
-                                    {
-                                    
-                                      padding-left: 5rem;
-                                    }
-
-
-                                  .conten
-                                  {
-                                    background-color: rgb(243, 243, 243);
-                                    line-height: 5rem;
-                                    /*border: 1px solid rgba(0, 0, 0, 0.322);*/
-                                    color: rgb(27, 27, 27);
-                                    font-size: 5rem;
-                                    font-family: "Poppins", sans-serif;
-                                    font-weight: 100;
-                                    padding-top: 20rem;
-                                    padding-left: 0rem;
-                                    
-                                  }
-
-
-                                      .span1
-                                      {
-                                        
-                                        font-size: 5rem;
-                                      }
-
-
-                                  @media (max-width: 768px) {
-
-
-                                    .grid-container{
-                                      display: block;
-                                    }
-
-                                    .headimg
-                                    {
-                                      width: 100%;
-                                      padding-left: 0rem;
-                                    }
-                                    .fullpage
-                                    {
-                                      margin-top: 20rem;
-                                    }
-
-                                    .conten
-                                    {
-                                      text-align: center;
-                                      padding-top: 2rem;
-                                    }
-
-                                    .span1
-                                      {
-                                        
-                                        font-size: 2rem;
-                                      }
-                                      .conten
-                                      {
-                                    
-                                          font-size: 4.5rem;
-                            
-                                    }
-                                  }
-                            </style>
-
-                                
-
-
-              
-              <div class="fullpage" >
-
-
-                <div class="section" id="fli">
-                   
-                   <button class="end-btn" > profile </button>
-                 
-                </div>
-
-              
-
-              <style>
-
-                  .end-btn {
-                    margin-top: 2vw;
-                    background-color: #DAA521;
-                    border: none;
-                    width: 15vw;
-                    height: 3vw;
-                    font-size: 1.5vw;
-                    color: #FFFFFF;
-                    border-radius: 0.5vw;
-                    font-weight: bold;
-                    cursor: pointer;
-                  }
-                                </style>
-
-              </div>
-      <div id="pane">
-      <div class="fullpage" id="">
-
-       
-         <div class="section" id="section0" >
-            <div class="intro">
-              <a href="portfolio.html"><div class="title-logo">
-                Logo
-              </div></a>
-              <p>Logo designs</p>
-            </div>
-          </div>
-
-          <div class="section" id="section1">
-              
-            <div class="intro">
-              <a href="port2.html">
-              <div class="title-logo">
-                UI
-              </div></a>
-              <p>
-                <p>UI Designing</p>
-              </p>
-          </div>
-        </div>
-        
-          <div class="section" id="section2">
-              
-              <div class="intro">
-                <div class="title-logo">
-                  Art
-                </div>
-                <p>
-                  <p>Vector art, Digital</p>
-                </p>
-            </div>
-          </div>
-
-          <div class="section" id="section4">
-              
-            <div class="intro">
-              <div class="title-logo">
-                Posters
-              </div>
-              <p>
-                <p>Posters</p>
-              </p>
-          </div>
-        </div>
-
-        
-        
-         
-      </div>
-
-      
-    <div class="fullpage"  >
-
-              
-      <div class="section" >
-        <div class="intro">
-          <div class="title-logo">
-            Visit my behance
-          </div>
-          <p></p>
-        </div>
-      </div>
-
-      <div class="section" >
-         <img src="images/be.svg" width="70%">
-       
-      </div>
-
-        
-
     </div>
-
+    <div class="content">
+      <h1>Hello. I'm Sanjay <br />
+        UI/UX Designer, visual artist, from kerala.
+      </h1>
+      <p><abbr title="0800 987 789">Hire me,</abbr> if you need awesome design.</p>
     </div>
+  </div>
+</header>
+<main>
+  <div class="big-1">
+    <img src="assets/images/ID CARD.jpg" alt="">
+  </div>
 
+  <div class="small-1">
+    <img src="https://images.unsplash.com/photo-1544488994-3a0753185c37?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80" alt="">
+  </div>
 
-
-  
-      <div class="footer" id="footer">
-        <div class="container">
-          <br><br>
-  
-          <div class="collab">
-            <div class="row">
-              <div class="col-lg-12">
-                <p class="wow fadeInUp">I’am available for freelancing. Feel free to contact me.</p>
-                <a href="Sanjay P V_.pdf" download style="color: #e4e4e4;">
-                <p class="wow fadeInUp">Download CV</p></a>
-              </div>
-            </div>
-          </div>
-  
-          <br>
-  
-          <div class="hr">
-            <div class="row"></div>
-          </div>
-  
-          <br><br>
-  
-          <div class="info">
-            <div class="row">
-              <div class="col-lg-4" id="personal">
-                <p class="wow fadeInUp">connect with me</p>
-                <h4 class="wow fadeInUp" data-wow-delay="0.2s">ig @__sanjay_.__</h4>
-                <br><br>
-              </div>
-  
-              <div class="col-lg-4" id="media">
-                <p class="wow fadeInUp" data-wow-delay="0s">follow me</p>
-  
-                <ul>
-                  <li id="fb" class="wow fadeInUp" data-wow-delay="0.4s">dr</li>
-                  <li id="fb" class="wow fadeInUp" data-wow-delay="0.4s">px</li>
-                  <li id="ig" class="wow fadeInUp" data-wow-delay="0.6s">ig</li>
-                  <li id="tw" class="wow fadeInUp" data-wow-delay="0.8s">ln</li>
-                  <li id="yt" class="wow fadeInUp" data-wow-delay="1s">be</li>
-                </ul>
-  
-                <br><br>
-              </div>
-  
-              <div class="col-lg-4" id="address">
-                <p class="wow fadeInUp" data-wow-delay="0s">say hello</p>
-                <h4 class="wow fadeInUp" data-wow-delay="0.2s">sanjayragam@gmail.com</h4>
-                <br><br>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-     
-      </a>
-
-      <style>
-        .float{
-	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:40px;
-	right:40px;
-	background-color:#0C9;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-	box-shadow: 2px 2px 3px #999;
-}
-
-.my-float{
-	margin-top:22px;
-}
-      </style>
-    
-    </div>
-
+  <div class="small-2">
+    <img src="https://images.unsplash.com/photo-1454944338482-a69bb95894af?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=873&q=80" alt="">
+  </div>
+  <div class="big-2">
+    <img src="https://images.unsplash.com/photo-1429679310900-bad303d0e63a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
+  </div>
+  <div class="small-3" alt="">
+    <img src="https://images.unsplash.com/photo-1538426455889-1311ea3dad57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80" alt="">
+  </div>
+  <div class="small-4">
+    <img src="https://images.unsplash.com/photo-1561383507-2777ad5d74a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
+  </div>
+</main>
 <!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script><script  src="./script.js"></script>
+  <script  src="./script.js"></script>
 
 </body>
 </html>
