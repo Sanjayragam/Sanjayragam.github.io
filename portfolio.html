@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Stylish Picture Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="stylesheet" href="./style_port.css">
+
+</head>
+<body>
+
+  <a href="#" class="float">
+    <i class="fa fa-plus my-float"></i>
+    </a>
+
+    <style>
+      .float{
+position:fixed;
+width:60px;
+height:60px;
+bottom:40px;
+right:40px;
+background-color:#0C9;
+color:#FFF;
+border-radius:50px;
+text-align:center;
+box-shadow: 2px 2px 3px #999;
+}
+
+.my-float{
+margin-top:22px;
+}
+    </style>
+
+    <script>
+      $(window).on('load', function(){
+  setTimeout(removeLoader, 3000); 
+});
+function removeLoader(){
+   $( "#loadingDiv" ).fadeOut(500, function() {
+   $( "#loadingDiv" ).remove(); 
+  });  
+}
+    </script>
+<!-- partial:index.partial.html -->
+<ul class='nav-buttons'></ul>
+<ul class='menu'>
+  <li style="display: block; margin-top: 200vh;">
+      
+    <img alt='cut citrus fruits. ' src='images/cst-min (1).png' class="responsive">
+    Casette logo
+    <br><br>
+    <a href="cst.html"><button type="button" class="btn">Click Me!</button></a>
+    
+         
+  </li>
+  <li style="display: block; margin-top: 200vh;">
+      
+    <img alt='cut citrus fruits. ' src='images/cst-min (1).png' class="responsive">
+    Casette logo
+    <br><br>
+    <button type="button" class="btn">Click Me!</button>
+    
+         
+  </li>
+  <li>
+    <img alt='a bunch of blueberries. ' src='https://source.unsplash.com/TdDtTu2rv4s/500x500'>
+    Amet Consectetur
+  </li>
+  <li>
+    <img alt='a pineapple sitting on a table. ' src='https://source.unsplash.com/eudGUrDdBB0/500x500'>
+    Adipiscing Elit
+  </li>
+  <li>
+    <img alt='frozen raspberries. ' src='https://source.unsplash.com/eJH4f1rlG7g/500x500'>
+    Nunc Tortor
+  </li>
+  <li>
+    <img alt='a sliced strawberry. ' src='https://source.unsplash.com/24RUrLSW1HI/500x500'>
+    Metus Mollis
+  </li>
+  <li>
+    <img alt='an arrangement of assorted sliced fruits. ' src='https://source.unsplash.com/h5yMpgOI5nI/500x500'>
+    Congue Sagittis
+  </li>
+  <li>
+    <img alt='sliced watermelons. ' src='https://source.unsplash.com/2TYrR2IB72s/500x500'>
+    Vestibulum Et
+  </li>
+  <li>
+    <img alt='grapefruits, lemons, and pomegranates. ' src='https://source.unsplash.com/1cWZgnBhZRs/500x500'>
+    Donec Eget
+  </li>
+  <li>
+    <img alt='half of an avocado. ' src='https://source.unsplash.com/9aOswReDKPo/500x500'>
+    Maecenas et Justo
+  </li>
+  <li>
+    <img alt='half of a lime. ' src='https://source.unsplash.com/Nl7eLS8E2Ss/500x500'>
+    Malesuada Quam
+  </li>
+  <li>
+    <img alt='a single cherry with stem. ' src='https://source.unsplash.com/3HhXWJzG5Ko/500x500'>
+    Ultricies Sollicitudin
+  </li>
+  <li>
+    <img alt='a bunch of bananas. ' src='https://source.unsplash.com/fczCr7MdE7U/500x500'>
+    Gravida Nibh
+  </li>
+  <li>
+    <img alt='three pears. ' src='https://source.unsplash.com/uI900SItAyY/500x500'>
+    Pellentesque Sapien
+  </li>
+  <li>
+    <img alt='a basket full of peaches next to a plate with sliced peaches. ' src='https://source.unsplash.com/0AynZdszfz0/500x500'>
+    Suspendisse Vel
+  </li>
+  <li>
+    <img alt='a bowl of avocados. ' src='https://source.unsplash.com/C6JhUKs9q8M/500x500'>
+    Mauris Consectetur
+  </li>
+</ul>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script_js.js"></script>
+
+</body>
+</html>

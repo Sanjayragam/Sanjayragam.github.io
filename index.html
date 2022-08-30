@@ -2,58 +2,234 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CodePen - Portfolio #scss #grid</title>
-  <link rel="stylesheet" href="./style.css">
-
+  <link rel="icon" href="images/sign.png" type="sign.png" sizes="16x20">
+  <title>sanjay pv</title>
+  <link rel="stylesheet" href="bootstrap.min.css" >
+ <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="./style.css">
+ 
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<header>
-  <div class="container">
-    <div class="d-flex">
-      <div class="logo"><img src="assets/images/sign.png" width="70px"></div>
-      <nav>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <!-- <li><a href="#">About</a></li>
-          <li><a href="#">Portfolio</a></li>
-          <li><a href="#">Contact</a></li> -->
-        </ul>
-      </nav>
-    </div>
-    <div class="content">
-      <h1>Hello. I'm Sanjay <br />
-        UI/UX Designer, visual artist, from kerala.
-      </h1>
-      <p><abbr title="0800 987 789">Hire me,</abbr> if you need awesome design.</p>
-    </div>
-  </div>
-</header>
-<main>
-  <div class="big-1">
-    <img src="assets/images/ID CARD.jpg" alt="">
-  </div>
 
-  <div class="small-1">
-    <img src="https://images.unsplash.com/photo-1544488994-3a0753185c37?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80" alt="">
-  </div>
 
-  <div class="small-2">
-    <img src="https://images.unsplash.com/photo-1454944338482-a69bb95894af?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=873&q=80" alt="">
-  </div>
-  <div class="big-2">
-    <img src="https://images.unsplash.com/photo-1429679310900-bad303d0e63a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
-  </div>
-  <div class="small-3" alt="">
-    <img src="https://images.unsplash.com/photo-1538426455889-1311ea3dad57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80" alt="">
-  </div>
-  <div class="small-4">
-    <img src="https://images.unsplash.com/photo-1561383507-2777ad5d74a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
-  </div>
-</main>
+  <div  id="loadingDiv">
+    <div class="loading ">
+      <div class="loader">
+        <img class="load"  src="final_final.gif" >
+      </div>
+    </div>
+</div>
+
+<style>
+
+.loading {
+	position: fixed;
+
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+   background-color:#232739;
+   /* background-color:#0c2591; */
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.loader {
+  display:flex;
+  justify-content:center;
+}
+
+
+
+
+
+</style>
+
+  <header>
+    <div class="container">
+      <div class="d-flex">
+        <div class="logo"><img src="images/sign.png" width="70px"></div>
+        <nav>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <!-- <li><a href="#">About</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Contact</a></li> -->
+          </ul>
+        </nav>
+      </div>
+      <div class="content">
+        <h1 class="intro">Hello. I'm Sanjay <br />
+          <span class="introsub">UI/UX Designer, visual artist, </span>from kerala.
+        </h1>
+        <p><abbr title="0800 987 789">Hire me,</abbr> if you need awesome design.</p>
+      </div>
+    </div>
+  </header>
+
+
+
+    <div id="" class="slide">
+      
+      
+
+
+
+      <style>
+
+a.underline-hover-effect {
+  text-decoration: none;
+  color: inherit;
+}
+
+.underline-hover-effect {
+  display: inline-block;
+  padding-bottom: 0.25rem; /* defines the space between text and underline */
+  position: relative;
+}
+
+.underline-hover-effect::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: rgb(0, 255, 0);
+  transition: width 0.25s ease-out;
+}
+.underline-hover-effect:hover::before {
+  width: 100%;
+}
+
+      </style>
+                         
+
+
+      <div id="">
+      <div class="fullpage" id="">
+
+       
+         <div class="section" id="section0" >
+            <div class="intro" >
+             
+              <div class="title-logo">
+                <a href="google.com" class="underline-hover-effect"> 
+                Logo</a>
+              </div>
+              <p>Logo designs</p>
+            </div>
+          </div>
+
+          <div class="section" id="section1">
+              
+            <div class="intro" >
+                  <a href="port2.html">
+                    <div class="title-logo" id="intro1">
+                      UI
+                    </div>
+                   </a>
+                  <p id="introp1">UI/UX Designing</p>
+           </div>
+          </div>
+        
+          <div class="section" id="section2">
+              
+              <div class="intro">
+                <div class="title-logo">
+                  Art
+                </div>
+                
+                  <p>Vector art, Digital</p>
+              
+            </div>
+          </div>
+
+          <div class="section" id="section4">
+              
+            <div class="intro">
+              <div class="title-logo">
+                Posters
+              </div>
+              
+                <p>Posters</p>
+              
+          </div>
+        </div>
+
+        
+        
+         
+      </div>
+
+      
+    <div class="bedr">
+      <a href="https://www.behance.net/sanjaypv"><img src="images/behance-01.svg" class="behimg" ></a>
+    </div>
+
+    <div class="bedrmob">
+      <a href="https://www.behance.net/sanjaypv"><img src="images/behance mobile.svg" class="behimgmob" ></a>
+    </div>
+
+
+    <style>
+
+    
+    </style>
+
+  
+      <div class="footer" id="footer">
+        <div class="container">
+          <br><br>
+
+          <br>
+  
+          <div class="hr">
+            <div class="row"></div>
+          </div>
+  
+          <br><br>
+  
+          <div class="info">
+            <div class="row">
+              <div class="col-lg-4" id="personal">
+                <p class="wow fadeInUp">connect with me</p>
+                <h4 class="wow fadeInUp" data-wow-delay="0.2s">ig @__sanjay_.__</h4>
+                <br><br>
+              </div>
+  
+              <div class="col-lg-4" id="media">
+                <p class="wow fadeInUp" data-wow-delay="0s">follow me</p>
+  
+                <ul>
+                  <li id="fb" class="wow fadeInUp" data-wow-delay="0.4s">dr</li>
+                  <li id="fb" class="wow fadeInUp" data-wow-delay="0.4s">px</li>
+                  <li id="ig" class="wow fadeInUp" data-wow-delay="0.6s">ig</li>
+                  <li id="tw" class="wow fadeInUp" data-wow-delay="0.8s">ln</li>
+                  <li id="yt" class="wow fadeInUp" data-wow-delay="1s">be</li>
+                </ul>
+  
+                <br><br>
+              </div>
+  
+              <div class="col-lg-4" id="address">
+                <p class="wow fadeInUp" data-wow-delay="0s">say hello</p>
+                <h4 class="wow fadeInUp" data-wow-delay="0.2s">sanjayragam@gmail.com</h4>
+                <br><br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+      </a>
+
+      
+    
+    </div>
+
 <!-- partial -->
-  <script  src="./script.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script><script  src="./script.js"></script>
 
 </body>
 </html>

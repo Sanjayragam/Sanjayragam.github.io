@@ -1,3 +1,324 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,800,900|Roboto:400,900);
+
+
+html {
+	overflow: scroll;
+	overflow-x: hidden;
+  }
+  ::-webkit-scrollbar {
+	width: 0;  /* Remove scrollbar space */
+	background: transparent;  /* Optional: just make scrollbar invisible */
+  }
+  /* Optional: show position indicator in red */
+  ::-webkit-scrollbar-thumb {
+
+  }
+
+body{}
+  
+
+.slide
+{
+  background: rgb(244, 12, 12);
+  font-family: montserrat;
+	background: #ffffff !important;
+	color: rgb(0, 0, 0) !important;
+  
+}
+
+.collab {
+	text-align: right;
+}
+
+.collab p {
+	font-weight: lighter !important;
+	margin-bottom: 20px;
+}
+
+.hr {
+	background: rgba(255, 255, 255, 0.2);
+	height: 1px;
+}
+
+
+
+#fb::before {
+	display: inline-block;
+	content: "";
+	border-radius: 100%;
+	height: 4px;
+	width: 4px;
+	margin-right: 6px;
+	background: #3b5998;
+}
+
+#ig::before {
+	display: inline-block;
+	content: "";
+	border-radius: 100%;
+	height: 4px;
+	width: 4px;
+	margin-right: 6px;
+	background: #fcaf45;
+}
+
+#tw::before {
+	display: inline-block;
+	content: "";
+	border-radius: 100%;
+	height: 4px;
+	width: 4px;
+	margin-right: 6px;
+	background: #55acee;
+}
+
+#yt::before {
+	display: inline-block;
+	content: "";
+	border-radius: 100%;
+	height: 4px;
+	width: 4px;
+	margin-right: 6px;
+	background: #c4302b;
+}
+
+#media,
+#address {
+	text-align: right;
+}
+
+#media ul {
+	list-style: none;
+}
+
+#media ul li {
+	display: inline-block;
+}
+
+@media (max-width: 768px) {
+	.collab,
+	#personal,
+	#media,
+	#address {
+		text-align: center;
+	}
+
+	.info ul {
+		margin: 0 0 0 -22px;
+		padding: 0;
+	}
+
+	.conten
+        {
+        
+          font-size: 4.5rem;
+        
+        }
+}
+
+
+
+#toggle {
+	position: absolute;
+	right: 30px;
+	top: 20px;
+	font-weight: 300;
+	z-index: 2;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	float: right;
+	transition: all 0.3s ease-out;
+	visibility: hidden;
+	opacity: 0;
+}
+
+.close-btn {
+	position: absolute;
+	right: 16px;
+	font-weight: 300;
+	z-index: 2;
+	cursor: pointer;
+	top: -2px;
+	line-height: 80px;
+}
+
+
+@media (max-width: 768px) {
+
+
+	nav #brand {
+		margin-left: 40px;
+    	margin-top: 7px;
+	}
+
+	#menu a {
+		font-size: 12px;
+		font-weight: 300;
+	}
+
+	#resize li span {
+		font-weight: bolder;
+	}
+
+  .fullpage{
+    display: block;
+  }
+
+  .section {
+
+	border-radius: 15px;
+	margin: 20px;
+  }
+
+  .load{
+	width: 100px;
+  }
+
+
+}
+
+
+
+/*portfolio*/
+/*mobile*/
+
+.bedr{
+	display: none;
+}
+
+/*portfolio*/
+/*mobile*/
+@media screen and (min-width: 800px) {
+  .fullpage{
+    display: flex;
+	
+	
+	justify-content: center;
+	align-items: center;
+  }
+
+  .section {
+    height: 250px;
+  }
+
+  .bedrmob{
+	display: none;
+  }
+
+  .bedr{
+	display: block;
+  }
+  .load{
+	width: 200px;
+  }
+
+
+}
+
+
+.header-icon
+{
+	width: 40%;
+}
+}
+
+{
+
+padding-top: 5rem;
+
+align-items: center;
+flex-direction: row;
+justify-content: center;
+  
+}
+.intro .title-logo {
+	color: rgb(228, 228, 228);
+  font-size: 3em;
+  margin: 0;
+}
+.intro p {
+  color: rgb(228, 228, 228);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: 500;
+  font-size: 12px;
+}
+.section {
+  text-align: center;
+  padding: 5%;
+ 
+/* border-radius: 30px;
+  margin: 20px; */
+}
+
+#intro1{
+	color: rgb(0, 0, 0);
+}
+#introp1{
+	color: rgb(0, 0, 0);
+}
+#section0 {
+  background: url("images/dev3.jpg") center center no-repeat;
+  background-color: #06b555;
+  background-size: cover;
+
+}
+#section1 {
+	background: url("images/PACHA.jpg") center center no-repeat;
+	color: #000000;
+	background-color: #c4302b;
+	background-size: cover;
+
+}
+#section2 {
+	background: url("images/dev2.jpg") center center no-repeat;
+	background-color: #d3ad00;
+	background-size: cover;
+	color: white;
+
+
+}
+#section4 {
+	background: url("images/ui.jpg") center center no-repeat;
+	background-color: blueviolet;
+	background-size: cover;
+
+}
+
+
+
+
+/*behance*/
+
+
+.bedr{
+	height: 100%;
+	background-color: #ffffff
+}
+
+.behimg{
+	width: 30%;
+	display: block;
+  	margin-left: auto;
+ 	margin-right: auto;
+	margin-top: 200px
+}
+
+.behimgmob{
+	width: 80%;
+	display: block;
+  	margin-left: auto;
+ 	margin-right: auto;
+	margin-top: 5rem
+	
+}
+
+
+
+
+
+
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;700&display=swap");
 * {
   margin: 0;
@@ -23,9 +344,22 @@ html {
 
 body {
   font-size: 1.125rem;
-  font-family: "raleway";
-  color: #111;
+  font-family: "Roboto mono", sans-serif;
 
+
+}
+.list{
+  height: 50vh;
+}
+
+.intro{
+  color: #000000;
+  font-weight: 300;
+
+}
+
+.introsub{
+  font-weight: 700;
 }
 
 header nav ul, header .d-flex {
@@ -36,11 +370,6 @@ header nav ul, header .d-flex {
 .container {
   width: min(90rem, 90%);
   margin: 0 auto;
-}
-
-a {
-  text-decoration: none;
-  color: #111;
 }
 
 header .d-flex {
@@ -58,10 +387,10 @@ header .d-flex {
     margin-bottom: 15px;
   }
 }
-header .logo a {
+header .logo  {
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-weight: 700;
+  
 }
 header nav ul {
   list-style: none;
@@ -72,11 +401,11 @@ header nav ul {
     column-gap: 20px;
   }
 }
-header nav ul li a {
+header nav ul li  {
   font-size: 1rem;
 }
 @media screen and (max-width: 368px) {
-  header nav ul li a {
+  header nav ul li  {
     font-size: 0.938rem;
   }
 }
@@ -94,8 +423,9 @@ header .content {
 header .content h1 {
   font-size: clamp(2rem, 1.5294rem + 2.6471vw, 4rem);
   line-height: 1.2;
-  font-weight: 700;
+
 }
+
 header .content p {
   margin-top: 12px;
   letter-spacing: 0.5px;
@@ -143,3 +473,15 @@ main .small-3 {
 main .small-4 {
   grid-area: small-4;
 }
+
+
+
+
+
+
+
+
+
+
+
+
