@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,800,900|Roboto:400,900);
 
-
 html {
+	scroll-behavior: smooth;
 	overflow: scroll;
 	overflow-x: hidden;
   }
@@ -42,45 +42,6 @@ body{}
 
 
 
-#fb::before {
-	display: inline-block;
-	content: "";
-	border-radius: 100%;
-	height: 4px;
-	width: 4px;
-	margin-right: 6px;
-	background: #3b5998;
-}
-
-#ig::before {
-	display: inline-block;
-	content: "";
-	border-radius: 100%;
-	height: 4px;
-	width: 4px;
-	margin-right: 6px;
-	background: #fcaf45;
-}
-
-#tw::before {
-	display: inline-block;
-	content: "";
-	border-radius: 100%;
-	height: 4px;
-	width: 4px;
-	margin-right: 6px;
-	background: #55acee;
-}
-
-#yt::before {
-	display: inline-block;
-	content: "";
-	border-radius: 100%;
-	height: 4px;
-	width: 4px;
-	margin-right: 6px;
-	background: #c4302b;
-}
 
 #media,
 #address {
@@ -169,6 +130,7 @@ body{}
 
 	border-radius: 15px;
 	margin: 20px;
+	height: 150px;
   }
 
   .load{
@@ -265,7 +227,7 @@ justify-content: center;
 
 }
 #section1 {
-	background: url("images/PACHA.jpg") center center no-repeat;
+	background: url("images/uiux.jpg") center center no-repeat;
 	color: #000000;
 	background-color: #c4302b;
 	background-size: cover;
@@ -306,7 +268,7 @@ justify-content: center;
 }
 
 .behimgmob{
-	width: 80%;
+	width: 60%;
 	display: block;
   	margin-left: auto;
  	margin-right: auto;
