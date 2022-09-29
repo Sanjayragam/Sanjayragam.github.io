@@ -1,0 +1,270 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,800,900|Roboto:400,900);
+
+html {
+	scroll-behavior: smooth;
+	overflow: scroll;
+	overflow-x: hidden;
+  }
+  ::-webkit-scrollbar {
+	width: 0;  /* Remove scrollbar space */
+	background: transparent;  /* Optional: just make scrollbar invisible */
+  }
+  /* Optional: show position indicator in red */
+  ::-webkit-scrollbar-thumb {
+
+  }
+  
+  body{
+  margin: 0;
+  
+}
+
+.outer{
+
+  background-color: rgba(210, 105, 30, 0);
+  height: 100%;
+  display: flex;
+  padding: 100px;
+  padding-bottom: 10px;
+}
+
+.left{
+  height: 400px;
+  background-color: blueviolet;
+  width: 40%;
+  border-radius: 80px;
+  background-image: url("/images/404.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+
+.left:hover{
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1); 
+  transition: transform 0.5s;
+}
+
+#ui2{
+  background-image: url("/images/cover.jpg");
+}
+
+#ui1{
+  background-image: url("/images/NEELA\ COVER.jpg");
+}
+
+#ui3{
+  background-image: url("/images/muic\ art1.jpg");
+}
+
+#ui6{
+  background-image: url("/images/portfolio.jpg");
+}
+
+#ui5{
+  background-image: url("/images/calc\ 1.jpg");
+}
+
+#ui4{
+  background-image: url("/images/ec.jpg");
+}
+
+
+.header{
+
+  background-image: url("/images/ID\ CARD.jpg");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; 
+  height: 100px;
+}
+
+
+.right{
+  height: 400px;
+  background-color: rgba(155, 13, 13, 0);
+  width: 60%;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pagehead{
+font-size: 200px;
+text-align: center;
+}
+
+.heading{
+  font-family: poppins;
+  font-weight: 700;
+  margin-left: 5rem;
+  line-height: 1;
+  font-size: xxx-large;
+}
+
+
+
+.heading:hover{
+
+
+
+}
+
+
+.heading2{
+  font-family: poppins;
+  font-weight: 700;
+  text-align: right;
+  margin-right: 5rem;
+  line-height: 1;
+  font-size: xxx-large;
+}
+
+
+
+.subheading{
+  font-family: poppins;
+  font-weight: 300;
+  font-size: xx-large;
+}
+
+.subheading2{
+  font-family: poppins;
+  font-weight: 300;
+  font-size: xx-large;
+}
+
+.projectbtn{
+  background-color: rgb(255, 212, 212);
+  color: rgb(195, 22, 22);
+  font-size: 15px;
+  width: 100px;
+  text-align: center;
+  border-radius: 50px;
+  font-weight: 400;
+  padding: 10px;
+  margin-top: 1rem;
+}
+
+
+.projectbtn2{
+  background-color: rgb(255, 212, 212);
+  color: rgb(195, 22, 22);
+  font-size: 15px;
+  width: 100px;
+  float: right;
+  text-align: center;
+  border-radius: 50px;
+  font-weight: 400;
+  padding: 10px;
+  margin-top: 1rem;
+
+}
+
+
+.projectbtn:hover{
+
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1); 
+  transition: transform 0.5s;
+  background-color: rgb(250, 138, 138);
+
+}
+
+
+@media screen and (min-width: 800px) {
+  .outer{
+ 
+  }
+
+  hr{
+    display: none;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .outer{
+    display: block;
+    /* background-color: burlywood; */
+    margin: 10px;
+    padding: 30px;
+  
+  }
+
+  .left{
+    width: 100%;
+    border-radius: 0px;
+  }
+  
+  .right{
+    height:190px;
+    width: 100%;
+    /* padding: 20px; */
+    /* background-color: aquamarine; */
+  }
+
+  .heading{
+    margin: 0;
+    font-size: xx-large;
+  }
+  .heading2{
+    margin: 0;
+    background-color: rgba(137, 43, 226, 0);
+    margin-right: 1rem;
+    font-size: xx-large;
+  }
+
+
+  
+  
+  
+  .subheading{
+    font-family: poppins;
+    font-weight: 300;
+    font-size: x-large;
+  }
+  
+  .subheading2{
+    font-family: poppins;
+    font-weight: 300;
+    font-size: x-large;
+  }
+  
+  .projectbtn{
+    background-color: rgb(255, 212, 212);
+    color: rgb(195, 22, 22);
+    font-size: 15px;
+    width: 100px;
+    text-align: center;
+    border-radius: 50px;
+    font-weight: 400;
+    padding: 10px;
+    margin-top: 1rem;
+  }
+  
+  
+  .projectbtn2{
+    background-color: rgb(255, 212, 212);
+    color: rgb(195, 22, 22);
+    font-size: 15px;
+    width: 100px;
+    float: right;
+    text-align: center;
+    border-radius: 50px;
+    font-weight: 400;
+    padding: 10px;
+    margin-top: 1rem;
+  
+  }
+
+  
+
+}
