@@ -227,14 +227,14 @@ justify-content: center;
 
 }
 #section1 {
-	background: url("images/uiux.jpg") center center no-repeat;
+	background: url("images/muic\ art1.jpg") center center no-repeat;
 	color: #000000;
 	background-color: #c4302b;
 	background-size: cover;
 
 }
 #section2 {
-	background: url("images/dev2.jpg") center center no-repeat;
+	background: url("images/jake.jpg") center center no-repeat;
 	background-color: #d3ad00;
 	background-size: cover;
 	color: white;
@@ -242,7 +242,7 @@ justify-content: center;
 
 }
 #section4 {
-	background: url("images/ui.jpg") center center no-repeat;
+	background: url("images/uiux.jpg") center center no-repeat;
 	background-color: blueviolet;
 	background-size: cover;
 
