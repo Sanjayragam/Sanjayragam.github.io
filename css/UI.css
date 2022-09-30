@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <link rel="stylesheet" href="css/logo.css"> -->
-  <title>Document</title>
-  <style>
-    @import url(https://fonts.googleapis.com/css?family=Raleway:400,800,900|Roboto:400,900);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,800,900|Roboto:400,900);
 
 html {
 	scroll-behavior: smooth;
@@ -28,6 +19,7 @@ html {
   
 }
 
+
 .outer{
 
   background-color: rgba(210, 105, 30, 0);
@@ -42,8 +34,7 @@ html {
   height: 400px;
   /* background-color: blueviolet; */
   width: 40%;
-  border-radius: 80px;
-  background-image: url("/images/404.jpg");
+  border-radius: 30px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -57,42 +48,7 @@ html {
   transition: transform 0.5s;
 }
 
-#ui2{
-  background-image: url("/images/plant1.jpg");
-}
 
-#ui1{
-  background-image: url("/images/UI1.png");
-}
-
-#ui3{
-  background-image: url("/images/muic\ art1.jpg");
-}
-
-#ui6{
-  background-image: url("/images/portfolio.jpg");
-}
-
-#ui5{
-  background-image: url("/images/calc\ 1.jpg");
-}
-
-#ui4{
-  background-image: url("/images/ec.jpg");
-}
-
-
-#error{
-  background-color:#2084cf;
-}
-
-#plant{
-  background-color:#d3d1c4;
-}
-
-#music{
-  background-color: #480054;
-}
 .header{
 
   background-image: url("/images/ID\ CARD.jpg");
@@ -124,7 +80,7 @@ text-align: center;
   font-family: poppins;
   font-weight: 700;
   margin-left: 5rem;
-  line-height: 1;
+  line-height: 0.9;
   font-size: xxx-large;
 }
 
@@ -142,7 +98,7 @@ text-align: center;
   font-weight: 700;
   text-align: right;
   margin-right: 5rem;
-  line-height: 1;
+  line-height: 0.9;
   font-size: xxx-large;
 }
 
@@ -151,13 +107,13 @@ text-align: center;
 .subheading{
   font-family: poppins;
   font-weight: 300;
-  font-size: xx-large;
+  font-size: x-large;
 }
 
 .subheading2{
   font-family: poppins;
   font-weight: 300;
-  font-size: xx-large;
+  font-size: x-large;
 }
 
 .projectbtn{
@@ -198,15 +154,27 @@ text-align: center;
 
 }
 
+.projectbtn2:hover{
+
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1); 
+  transition: transform 0.5s;
+  background-color: rgb(250, 138, 138);
+
+}
+
+
 
 @media screen and (min-width: 800px) {
-  .outer{
- 
-  }
 
-  hr{
+
+  #uii{
     display: none;
   }
+
+  
+
 }
 
 
@@ -216,8 +184,12 @@ text-align: center;
     display: block;
     /* background-color: burlywood; */
     /* margin: 10px; */
-    padding: 20px;
+    padding: 0px;
   
+  }
+
+  #ui1{
+    display: ;
   }
 
   hr{
@@ -239,6 +211,7 @@ text-align: center;
 
   .heading{
     margin: 0;
+    margin: 30px;
     font-size: xx-large;
   }
   .heading2{
@@ -246,6 +219,7 @@ text-align: center;
     background-color: rgba(137, 43, 226, 0);
     margin-right: 1rem;
     font-size: xx-large;
+    margin: 30px;
   }
 
 
@@ -294,148 +268,3 @@ text-align: center;
   
 
 }
-  </style>
-</head>
-<body>
-
-
-<div class="header">
-
-</div>
-
-
-  <!----left-->
-<div class="outer" id="error">
-
-  <div class="left" id="ui1">
-    
-  </div>
-
-  <div class="right">
-    <div class="heading">404 error ui<br><span class="subheading">404 error page ui design</span>
-
-        <div class="projectbtn">see project</div>
-      </div>
-      
-    </div>
-    
-  </div>
-
- 
-</div>
-<!----left-->
-
-<hr>
-
-<!----right-->
-<div class="outer" id="plant">
-
-  
-  <div class="right">
-    <div class="heading2">Plant shopping app<br><span class="subheading2">404 error page ui design</span>
-      <div>
-        <div class="projectbtn2">see project</div>
-
-      </div>
-    </div>
-
-  </div>
-
-  <div class="left" id="ui2">
-    
-  </div>
-</div>
-<!----right-->
-
-  <!----left-->
-  <div class="outer" id="music">
-
-    <div class="left" id="ui3">
-    
-    </div>
-  
-    <div class="right">
-      <div class="heading">404 error ui<br><span class="subheading">404 error page ui design</span>
-  
-          <div class="projectbtn">see project</div>
-        </div>
-        
-      </div>
-      
-    </div>
-  
-   
-  </div>
-  <!----left-->
-  <hr>
-  
-  <!----right-->
-  <div class="outer">
-  
-    
-    <div class="right">
-      <div class="heading2">Plant shopping app<br><span class="subheading2">404 error page ui design</span>
-        <div>
-          <div class="projectbtn2">see project</div>
-  
-        </div>
-      </div>
-  
-    </div>
-  
-    <div class="left" id="ui4">
-    
-    </div>
-  </div>
-  <!----right-->
-  <hr>
-
-    <!----left-->
-<div class="outer">
-
-  <div class="left" id="ui5">
-    
-  </div>
-
-  <div class="right">
-    <div class="heading">404 error ui<br><span class="subheading">404 error page ui design</span>
-
-        <div class="projectbtn">see project</div>
-      </div>
-      
-    </div>
-    
-  </div>
-
- 
-</div>
-<!----left-->
-<hr>
-
-<!----right-->
-<div class="outer">
-
-  
-  <div class="right">
-    <div class="heading2">Plant shopping app<br><span class="subheading2">404 error page ui design</span>
-      <div>
-        <div class="projectbtn2">see project</div>
-
-      </div>
-    </div>
-
-  </div>
-
-  <div class="left" id="ui6">
-    
-  </div>
-</div>
-<!----right-->
-
-
-<hr>
-
-
-
-</body>
-</html>

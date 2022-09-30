@@ -48,7 +48,7 @@ html {
 }
 
 #ui2{
-  background-image: url("/images/theyyam1.jpg");
+  background-image: url("/images/theyyam.jpg");
 }
 
 #ui1{
@@ -80,6 +80,53 @@ html {
   #ui8{
     background-image: url("/images/rathri.jpg");
   }
+
+  #ui9{
+    background-image: url("/images/dwan.jpg");
+  }
+
+  #ui10{
+    background-image: url("/images/dream.jpg");
+  }
+#onambtn{
+  background-color: #bd2ce3;
+  color: #f9dfff;
+}
+
+#jakebtn{
+  background-color: #01b0f3;
+  color: #ffffff;
+}
+#theyyambtn{
+  background-color: #fc6b2c;
+  color: #ffe4d9;
+}
+
+#karibtn{
+  background-color: #e10f10;
+  color: #ffffff;
+
+}
+#junglebtn{
+  background-color: #a17140;
+  color: rgb(255, 236, 202);
+}
+
+#avocadobtn
+{
+  background-color: #6e5b30;
+  color: #ede896;
+}
+
+#dreambtn{
+  background-color: #0937d1;
+  color: #01b0f3;
+}
+
+#dawnbtn{
+  background-color: #f45308;
+  color: #ffffff;
+}
 
 
 .header{
@@ -177,6 +224,16 @@ text-align: center;
 }
 
 
+.projectbtn2:hover{
+
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1); 
+  transition: transform 0.5s;
+  background-color: rgb(250, 138, 138);
+
+}
+
 .projectbtn:hover{
 
   -ms-transform: scale(1.1);
@@ -211,7 +268,7 @@ text-align: center;
 
   .left{
     width: 100%;
-    border-radius: 0px;
+    border-radius: 50px;
   }
   
   .right{
