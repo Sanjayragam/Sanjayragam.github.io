@@ -42,6 +42,31 @@
   #uii{
     background-image: url("/images/uii.jpg");
   }
+
+  #ui14{
+    background-image: url("/images/experiment\ 1.jpg");
+
+
+  }
+
+  #ui15{
+    background-image: url("/images/login.jpg");
+
+
+  }
+
+  #login{
+    background-color: #b8b8b8;
+    color: #7e43cb;
+  }
+  #loginbtn{
+    background-color: #ffffff;
+    color: #7e43cb;
+  }
+  #loginsub{
+    color: #ffffff;
+  }
+
   #soukhya{
     background-color: #1097ce;
     color: white;
@@ -73,6 +98,11 @@
 #portfoliobtn{
     background-color: #4d4d4d;
     color: #ebd237;
+}
+
+#uibtn{
+  background-color:#d7eed2;
+  color: #000000;
 }
 
 

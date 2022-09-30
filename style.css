@@ -227,14 +227,14 @@ justify-content: center;
 
 }
 #section1 {
-	background: url("images/muic\ art1.jpg") center center no-repeat;
+	background: url("images/music.jpg") center center no-repeat;
 	color: #000000;
 	background-color: #c4302b;
 	background-size: cover;
 
 }
 #section2 {
-	background: url("images/jake.jpg") center center no-repeat;
+	background: url("images/JAKEE.jpg") center center no-repeat;
 	background-color: #d3ad00;
 	background-size: cover;
 	color: white;
@@ -242,7 +242,7 @@ justify-content: center;
 
 }
 #section4 {
-	background: url("images/uiux.jpg") center center no-repeat;
+	background: url("images/IDD.jpg") center center no-repeat;
 	background-color: blueviolet;
 	background-size: cover;
 
@@ -437,7 +437,77 @@ main .small-4 {
 }
 
 
+.aboutt{
+  width: 100%;
+  
+  background-color: #ededed;
+  font-family: raleway;
+  margin-top: 5rem;
+  padding: 100px;
+  line-height: 1.6;
 
+  text-align: justify;
+}
+  .toolsmob{
+    padding: 30px;
+
+  }
+
+  .toolsdesk{
+
+    padding: 0px;
+    
+  }
+
+  
+
+  @media (max-width: 768px) {
+
+      .aboutt{
+        padding: 40px;
+        height: 430px;
+  
+
+      }
+      .aboutme{
+        font-size: medium;
+      }
+      
+      .toolsdesk{
+    display: none;
+  }
+
+  .tools{
+        display: none;
+      }
+
+      .aboutt{
+      background-color: #ffffff;
+
+    }
+
+    .d-flex{
+      margin-left: 30px;
+    }
+
+  }
+
+
+
+  @media screen and (min-width: 800px) 
+  {
+
+   
+    .toolsmob{
+    display: none;
+  }
+ 
+  .aboutt{
+        height: 500px;
+      }
+
+     
+      }
 
 
 

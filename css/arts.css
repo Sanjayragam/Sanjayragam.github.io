@@ -88,9 +88,34 @@ html {
   #ui10{
     background-image: url("/images/dream.jpg");
   }
+
+  #ui11{
+    background-image: url("/images/aa.jpg");
+  }
+  #ui12{
+    background-image: url("/images/appu.jpg");
+  }
+
+  #ui13{
+    background-image: url("/images/coup.jpg");
+  }
+
+
 #onambtn{
   background-color: #bd2ce3;
   color: #f9dfff;
+}
+
+#appubtn{
+  background-color: #3b3b3b;
+  color: #ffffff;
+}
+
+
+
+#aabtn{
+  background-color: #ebc504;
+  color: #000000;
 }
 
 #jakebtn{
@@ -120,7 +145,7 @@ html {
 
 #dreambtn{
   background-color: #0937d1;
-  color: #01b0f3;
+  color: #ffffff;
 }
 
 #dawnbtn{
@@ -128,6 +153,9 @@ html {
   color: #ffffff;
 }
 
+a{
+  text-decoration: none;
+}
 
 .header{
 
