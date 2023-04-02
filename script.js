@@ -32,3 +32,32 @@ $(document).ready(function(){
 
 
 
+//light and dark mode switching
+$(function() {
+  $('#toggleDayOrNight').click(function(e) {
+      // toggle classes
+
+      $('#containers').toggleClass('containers-dark-mode ')
+      $('.body').toggleClass('body-dark-mode')
+      $('.logo').toggleClass('logo-dark')
+      $('.logomob').toggleClass('logo-dark')
+      $('.content').toggleClass('content-dark-mode')
+      $('.btn').toggleClass('btn-dark-mode')
+      $('.intro').toggleClass('intro-dark-mode')
+      $('.checkout').toggleClass('checkout-dark-mode')
+      $('.aboutt').toggleClass('aboutt-dark-mode')
+      $('.aboutme').toggleClass('aboutme-dark-mode')
+      
+      // set background-image when clicked
+      if($('#containers')[0].className) {
+      $('#toggleDayOrNight').css({'background-image':'url(images/sun.svg)'})
+      } else {
+      $('#toggleDayOrNight').css({'background-image':'url(images/moon.svg)'})
+      }
+  })
+})
+
+
+
+
+

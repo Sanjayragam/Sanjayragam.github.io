@@ -1,0 +1,48 @@
+
+
+@media screen and (min-width: 800px) 
+{
+
+ 
+    .toolsmob
+    {
+        display: none;
+    }
+
+    header .content h1 {
+        font-size: clamp(2rem, 1.5294rem + 2.6471vw, 4rem);
+        line-height: 1.2;
+      
+      }
+
+      .logomob{
+        display: none;
+      }
+
+      .giff{
+        width: 18%;
+      }
+
+      .aboutsection{
+
+        margin-top:150px;
+        /* background-color: aquamarine; */
+        display: flex;
+      
+      }
+
+      .aboutt{
+
+        /* padding-top: 100px; */
+        padding: 100px;
+        padding-left: 50;
+        
+
+      }
+
+      .skillsmob{
+        display: none;
+      }
+}
+
+

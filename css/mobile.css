@@ -1,0 +1,67 @@
+
+@media (max-width: 768px) {
+
+    .aboutt{
+      /* padding: 40px; */
+      /* height: 430px; */
+      
+      width: 83%;
+      margin-left: auto;
+      margin-right: auto;
+  
+
+
+    }
+    .aboutme{
+      font-size: medium;
+    }
+    
+    .toolsdesk{
+  display: none;
+}
+
+.tools{
+      display: none;
+    }
+
+
+
+  .d-flex{
+    margin-left: 30px;
+  }
+
+
+  /* #section0 {
+  
+    border-radius: 35px 35px 0px 0px
+  
+  }
+
+  #section4 {
+  
+    border-radius: 0px 0px 35px 35px
+  
+  }
+ */
+
+
+
+
+ header .content h1 {
+  font-size: 2.5rem;
+  
+
+}
+
+.logo{
+  display: none;
+}
+
+.skills{
+        display: none;
+      }
+
+
+
+}
+
