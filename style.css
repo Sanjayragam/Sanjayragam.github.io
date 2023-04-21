@@ -723,7 +723,7 @@ a {
 
   .marquee .item {
     width: 90vw;
-    height: 400px;
+    height: auto;
   }
 
   .headline {
