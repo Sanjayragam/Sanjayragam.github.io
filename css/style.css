@@ -1,0 +1,88 @@
+
+/* @import url('https://fonts.cdnfonts.com/css/gilroy-bold'); */
+
+@font-face {
+    font-family: Gilroy;
+    src: url(Gilroy.otf);
+}
+
+@font-face {
+    font-family: Gilroy;
+    src: url(fonts/Gilroy-Regular.ttf);
+  }
+  
+  @font-face {
+    font-family: Gilroy-medium;
+    src: url(fonts/Gilroy-Medium.ttf);
+  }
+  
+  @font-face {
+    font-family: Gilroy-bold;
+    src: url(fonts/Gilroy-Bold.ttf);
+  }
+
+
+body{
+    
+    background-color: #090909;
+    padding: 16px;
+}
+
+.sign{
+    /* background-color: rgb(46, 46, 46); */
+    margin-bottom: 27px; 
+    color: aliceblue; 
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.header{
+    /* background-color: rgb(46, 46, 46); */
+    color: aliceblue;
+    line-height: 46px;
+}
+
+.title{
+    color: var(--white, #F1F1F1);
+    font-family: "Gilroy-bold", sans-serif;
+    font-size: 33.584px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 45px;
+    font-weight: 700;
+}
+
+.hello{
+    color: var(--grey, #515151);
+    font-family: "Gilroy", sans-serif;
+    font-size: 33.584px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    font-size: 25px;
+    
+}
+
+.photo{
+    width: 100%;
+    margin-top: 30px;
+}
+
+.about-content{
+    color: #505050;
+    font-family: Gilroy-Light;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: 25px;
+}
+
+.about-title{
+    color: var(--white, #F1F1F1);
+    font-family: Gilroy-Bold;
+    font-size: 49px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 89.5%; /* 43.855px */
+}
