@@ -1,0 +1,192 @@
+#ui2{
+    background-image: url("/images/plant1.jpg");
+  }
+  
+  #ui1{
+    background-image: url("/images/UI1.png");
+  }
+  
+  #ui3{
+    background-image: url("/images/muic\ art1.jpg");
+  }
+  
+  #ui6{
+    background-image: url("/images/portfolio.jpg");
+  }
+  
+  #ui5{
+    background-image: url("/images/calc.png");
+    
+  }
+  
+  #ui4{
+    background-image: url("/images/UI1.png");
+
+  }
+
+  #ui11{
+    background-image: url("/images/portfolio.jpg");
+
+  }
+  
+
+  #ui12{
+    background-image: url("/images/soukhya.png");
+
+  }
+  
+  #ui13{
+    background-image: url("/images/website.png");
+
+  }
+  #uii{
+    background-image: url("/images/uii.jpg");
+  }
+
+  #ui14{
+    background-image: url("/images/experiment\ 1.jpg");
+
+
+  }
+
+  #ui15{
+    background-image: url("/images/login.jpg");
+
+
+  }
+
+  #login{
+    background-color: #b8b8b8;
+    color: #7e43cb;
+  }
+  #loginbtn{
+    background-color: #ffffff;
+    color: #7e43cb;
+  }
+  #loginsub{
+    color: #ffffff;
+  }
+
+  #soukhya{
+    background-color: #1097ce;
+    color: white;
+  }
+
+  #soukhyasub{
+    color: rgba(255, 255, 255, 0.625);
+  }
+
+  #soukhyabtn{
+    background-color: rgb(155, 247, 255);
+    color: rgb(4, 55, 97);
+  }
+
+  #portfolio{
+    background-color: #f3f3f3;
+  }
+
+  #portfoliohead{
+   color: #ebd237;
+
+  }
+
+  #portfoliosub{
+    color: #4d4d4d;
+ 
+   }
+
+#portfoliobtn{
+    background-color: #4d4d4d;
+    color: #ebd237;
+}
+
+#uibtn{
+  background-color:#d7eed2;
+  color: #000000;
+}
+
+
+#websitebtn{
+  background-color: #000000;
+  color: #ffffff;
+}
+
+
+
+
+
+
+
+
+a{
+  text-decoration: none;
+}
+
+
+
+
+  
+  #calculator{
+    background-color: #202020;
+  }
+  #error{
+    background-color:#2084cf;
+    color: white;
+  }
+  
+  #errorsub{
+    color: #ffffff72;
+  }
+  
+  #plant{
+    background-color:#d3d1c4;
+    color: #212121;
+  }
+  #plantsub{
+    color: #0000005f;
+  }
+  #buttonerror{
+    background-color: rgb(198, 237, 255);
+    color: rgb(0, 78, 129);
+    
+  }
+  
+  #buttonplant{
+    background-color: rgb(1, 94, 1);
+    color: white;
+  }
+  #music{
+    background-color: #480054;
+  }
+  #errormusic{
+    color: #ef95ff;
+  }
+  
+  #errormusicsub{
+    color: #a42cba;
+  }
+  
+  #btnmusic{
+    background-color:#a42cba ;
+    color:#ef95ff ;
+  }
+
+
+  #calculator{
+    background-color: #202020;
+  }
+
+
+  #calculatorsub{
+      color: #464646;
+  }
+
+
+  #calculator{
+    color: #676666;
+  }
+
+  #calculatorbtn{
+    background-color: #464646;
+    color: rgb(220, 220, 220);
+  }

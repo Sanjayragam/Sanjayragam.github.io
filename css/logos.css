@@ -1,0 +1,420 @@
+
+  
+  #ui1{
+    background-image: url("/images/away.jpg");
+  }
+  
+  #ui3{
+    background-image: url("/images/cycle.jpg");
+  }
+  
+
+  #ui5{
+    background-image: url("/images/travel.jpg");
+    
+  }
+
+  #ui2{
+    background-image: url("/images/cassette.jpg");
+    
+  }
+  
+  #ui4{
+    background-image: url("/images/foss.jpg");
+    
+  }
+  
+  #ui6{
+    background-image: url("/images/linto.jpg");
+    
+  }
+  
+  a{
+    text-decoration: none;
+  }
+  
+
+
+
+  
+  #FOSS{
+    background-color: #252525;
+  }
+
+  #Cassette{
+    background-color: #ededed;
+    color: #590909;
+  }
+
+  #linto{
+   background-color: #7c509d;
+
+  }
+
+  #Cassettesub{
+    color: #590909;
+ 
+   }
+
+#Cassettebtn{
+    background-color: #590909;
+    color: #ffffff;
+}
+
+#lintobtn{
+  background-color: #d6a0ff;
+  color: #7603a8;
+}
+#linto{
+  color: #d6a0ff;
+}
+#lintosub{
+  color: #d6a0ff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  #calculator{
+    background-color: #2f2622;
+  }
+  #error{
+    background-color: #343f15;
+    color: white;
+  }
+  
+  #errorsub{
+    color: #ffffff72;
+  }
+  
+  #plant{
+    background-color:#d3d1c4;
+    color: #212121;
+  }
+  #plantsub{
+    color: #0000005f;
+  }
+  #buttonerror{
+    background-color:#dad006;
+    color: rgb(0, 0, 0);
+    
+  }
+  
+  #buttonplant{
+    background-color: rgb(1, 94, 1);
+    color: white;
+  }
+  #music{
+    background-color: #ffffff;
+
+  }
+  #errormusic{
+    color: #232323;
+  }
+  
+  #errormusicsub{
+    color: #000000;
+  }
+  
+  #btnmusic{
+    background-color:#000000 ;
+    color:#ffffff ;
+  }
+
+
+  #calculatorhead{
+    color: #cfcfcf;
+  }
+
+
+  #calculatorsub{
+      color: #666666;
+  }
+
+
+  #calculator{
+    color: #676666;
+  }
+
+  #calculatorbtn{
+    background-color: #e7e7e7;
+    color: rgb(56, 40, 40);
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  @import url(https://fonts.googleapis.com/css?family=Raleway:400,800,900|Roboto:400,900);
+
+html {
+	scroll-behavior: smooth;
+	overflow: scroll;
+	overflow-x: hidden;
+  }
+  ::-webkit-scrollbar {
+	width: 0;  /* Remove scrollbar space */
+	background: transparent;  /* Optional: just make scrollbar invisible */
+  }
+  /* Optional: show position indicator in red */
+  ::-webkit-scrollbar-thumb {
+
+  }
+  
+  body{
+  margin: 0;
+  
+}
+
+.outer{
+
+  background-color: rgba(210, 105, 30, 0);
+  height: 100%;
+  display: flex;
+  padding: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.left{
+  height: 400px;
+  /* background-color: blueviolet; */
+  width: 40%;
+  border-radius: 50px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+
+.left:hover{
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1); 
+  transition: transform 0.5s;
+}
+
+
+.header{
+
+  background-image: url("/images/ID\ CARD.jpg");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; 
+  height: 100px;
+}
+
+
+.right{
+  height: 400px;
+  background-color: rgba(155, 13, 13, 0);
+  width: 60%;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pagehead{
+font-size: 200px;
+text-align: center;
+}
+
+.heading{
+  font-family: poppins;
+  font-weight: 700;
+  margin-left: 5rem;
+  line-height: 0.9;
+  font-size: xxx-large;
+}
+
+
+
+.heading:hover{
+
+
+
+}
+
+
+.heading2{
+  font-family: poppins;
+  font-weight: 700;
+  text-align: right;
+  margin-right: 5rem;
+  line-height: 0.9;
+  font-size: xxx-large;
+}
+
+
+
+.subheading{
+  font-family: poppins;
+  font-weight: 300;
+  font-size: x-large;
+}
+
+.subheading2{
+  font-family: poppins;
+  font-weight: 300;
+  font-size: x-large;
+}
+
+.projectbtn{
+  background-color: rgb(255, 212, 212);
+  color: rgb(195, 22, 22);
+  font-size: 15px;
+  width: 100px;
+  text-align: center;
+  border-radius: 50px;
+  font-weight: 400;
+  padding: 10px;
+  margin-top: 1rem;
+}
+
+
+.projectbtn2{
+  background-color: rgb(255, 212, 212);
+  color: rgb(195, 22, 22);
+  font-size: 15px;
+  width: 100px;
+  float: right;
+  text-align: center;
+  border-radius: 50px;
+  font-weight: 400;
+  padding: 10px;
+  margin-top: 1rem;
+
+}
+
+
+.projectbtn:hover{
+
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1); 
+  transition: transform 0.5s;
+  background-color: rgb(250, 138, 138);
+
+}
+
+
+@media screen and (min-width: 800px) {
+  .outer{
+ 
+  }
+
+  hr{
+    display: none;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .outer{
+    display: block;
+    /* background-color: burlywood; */
+    /* margin: 10px; */
+    padding: 30px;
+  
+  }
+
+  hr{
+    display: none;
+  }
+
+  .left{
+    width: 100%;
+    border-radius: 40px;
+    padding-top: 0;
+  }
+  
+  .right{
+    height:190px;
+    width: 100%;
+    /* padding: 20px; */
+    /* background-color: aquamarine; */
+  }
+
+  .heading{
+    margin: 0;
+    margin: 30px;
+    font-size: xx-large;
+  }
+  .heading2{
+    margin: 0;
+    background-color: rgba(137, 43, 226, 0);
+    margin-right: 1rem;
+    font-size: xx-large;
+    margin: 30px;
+  }
+
+
+  
+  
+  
+  .subheading{
+    font-family: poppins;
+    font-weight: 300;
+    font-size: x-large;
+  }
+  
+  .subheading2{
+    font-family: poppins;
+    font-weight: 300;
+    font-size: x-large;
+  }
+  
+  .projectbtn{
+    background-color: rgb(255, 212, 212);
+    color: rgb(195, 22, 22);
+    font-size: 15px;
+    width: 100px;
+    text-align: center;
+    border-radius: 50px;
+    font-weight: 400;
+    padding: 10px;
+    margin-top: 1rem;
+  }
+  
+  
+  .projectbtn2{
+    background-color: rgb(255, 212, 212);
+    color: rgb(195, 22, 22);
+    font-size: 15px;
+    width: 100px;
+    float: right;
+    text-align: center;
+    border-radius: 50px;
+    font-weight: 400;
+    padding: 10px;
+    margin-top: 1rem;
+  
+  }
+
+  
+
+}

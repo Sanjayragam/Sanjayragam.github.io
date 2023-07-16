@@ -1,0 +1,91 @@
+@media screen and (min-width: 800px) {
+
+
+
+
+
+
+  .toolsmob {
+    display: none;
+  }
+
+  header .content h1 {
+    font-size: clamp(2rem, 1.5294rem + 2.6471vw, 4rem);
+    line-height: 1.2;
+  }
+
+
+
+  header .content {
+    padding-top: 3em;
+    padding-bottom: 3.5em;
+    padding-inline: min(7vw, 6em);
+    background-color;
+  }
+
+
+  .logomob {
+    display: none;
+  }
+
+  .aboutsection {
+    margin-top: 150px;
+    /* background-color: aquamarine; */
+    display: flex;
+  }
+
+  .aboutt {
+    /* padding-top: 100px; */
+    padding: 60px;
+    padding-left: 50;
+  }
+
+  .skillsmob {
+    display: none;
+  }
+
+  .profile {
+    display: flex;
+  }
+
+  .mobile {
+    display: none;
+  }
+
+  .footerflex {
+    display: flex;
+  }
+
+  .mail {
+    font-size: 2rem;
+  }
+
+  #maildiv {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+
+
+  .marquees__wrapper {
+
+    --backgroundColor: #ffffff;
+    --backgroundColorDark: var(--primaryColor);
+
+    -webkit-mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0),
+      var(--backgroundColorDark) 20%,
+      var(--backgroundColorDark) 80%,
+      rgba(0, 0, 0, 0)
+    );
+    mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0),
+      var(--backgroundColorDark) 20%,
+      var(--backgroundColorDark) 80%,
+      rgba(0, 0, 0, 0)
+    );
+  }
+}
