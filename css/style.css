@@ -1,0 +1,32 @@
+
+/* @import url('https://fonts.cdnfonts.com/css/gilroy-bold'); */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@font-face {
+    font-family: Gilroy-light;
+    src: url(Gilroy.otf);
+}
+
+@font-face {
+    font-family: Gilroy;
+    src: url(fonts/Gilroy-Regular.ttf);
+  }
+  
+  @font-face {
+    font-family: Gilroy-medium;
+    src: url(fonts/Gilroy-Medium.ttf);
+  }
+  
+  @font-face {
+    font-family: Gilroy-bold;
+    src: url(fonts/Gilroy-Bold.ttf);
+  }
+
+
+
+
+
+  
