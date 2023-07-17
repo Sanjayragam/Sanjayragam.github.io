@@ -8,18 +8,7 @@
         /* padding: 16px; */
     }
 
-    .marquee__group .item {
-        width: 100px;
-        height: 20px;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: var(--cardShadow);
-        transition: 300ms ease-in-out;
-        background: var(--gradient1);
-        /* filter: grayscale(200%); */
     
-        
-      }
 
     .outer-header{
 
