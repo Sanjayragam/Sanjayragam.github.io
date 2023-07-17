@@ -54,3 +54,16 @@ cloneMarqueeGroup() {
 }
 
 for (const m of marquees) new Marquee({ el: m });
+
+
+
+
+
+$(window).on('load', function(){
+  setTimeout(removeLoader, 3000); 
+});
+function removeLoader(){
+   $( "#loadingDiv" ).fadeOut(500, function() {
+   $( "#loadingDiv" ).remove(); 
+  });  
+}
