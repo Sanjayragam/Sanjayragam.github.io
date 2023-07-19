@@ -54,4 +54,55 @@ html {
 
 
 
+
+
+
+
+  .track {
+  position: absolute;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee 70s linear infinite;
+  }
+  
+  @keyframes marquee {
+  from {
+  transform: translateX(0);
+  }
+  to {
+  transform: translateX(-50%);
+  }
+  }
+  
+  /* .getin {
+  border: 3px solid #000000;
+  border-radius: 50px;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: fit-content;
+  width: fit-content;
+  background-color: #000000;
+  color: #00ff1a;
+  } */
+  
+  /* .getin:hover{
+  background-color: #000000;
+  color: #07d653;
+  cursor: pointer;
+  }
+   */
+  .marqueecontent {
+  display: inline;
+  color: #ffffff;
+  font-size: 6rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 900;
+  }
+  
+
+
+
+
+
   

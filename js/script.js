@@ -9,7 +9,7 @@ constructor({ el }) {
   ];
 
   this.marqueeTiming = {
-    duration: this.el.dataset.duration * 10000,
+    duration: this.el.dataset.duration * 20000,
     direction: this.el.dataset.reverse ? "reverse" : "normal",
     iterations: Infinity
   };
