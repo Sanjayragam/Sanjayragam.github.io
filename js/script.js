@@ -67,3 +67,6 @@ function removeLoader(){
    $( "#loadingDiv" ).remove(); 
   });  
 }
+
+
+
