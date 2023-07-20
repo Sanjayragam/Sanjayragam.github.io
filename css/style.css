@@ -108,4 +108,142 @@ body{
 
 
 
+.white{
+  color: #ffffff;
+  font-family: 'Space Grotesk';
+  font-size: 30px;
+  font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@import url("https://fonts.googleapis.com/css2?family=Hind&family=Montserrat:wght@700&display=swap");
+ :root {
+	 --text-font: "Space Grotesk", sans-serif;
+	 --title-font: "Space Grotesk", sans-serif;
+	 --dark: #ffffff;
+	 --grey: #717171;
+	 --light-gray: #a1a1a1;
+	 --faded-gray: #e1e1e1;
+}
+ * {
+	
+	 box-sizing: border-box;
+	
+}
+ .imgcard {
+	 width: 100%;
+	 vertical-align: top;
+}
+ .card {
+	 text-align: left;
+}
+ .card__img {
+	 margin-bottom: 10px;
+   border-radius: 50px;
+}
+ .card__title {
+  /* background-color: aquamarine; */
+	 font-family: var(--title-font);
+	 text-transform: capitalize;
+	 color: var(--dark);
+	 line-height: 35px;
+	 font-size: 24px;
+}
+ .card__text {
+  /* background-color: brown; */
+	 font-family: var(--text-font);
+	 color: var(--grey);
+	 font-size: 16px;
+	 line-height: 26px;
+	 margin-bottom: px;
+}
+ .card__readbtn {
+	 font-family: var(--text-font);
+	 font-size: 14px;
+	 text-transform: uppercase;
+	 color: var(--light-gray);
+	 text-decoration: none;
+	 line-height: 26px;
+	 transition: all ease 0.3s;
+	 position: relative;
+}
+ .card__readbtn::after {
+	 content: "";
+	 position: absolute;
+	 left: 0;
+	 bottom: 0;
+	 width: 0;
+	 height: 2px;
+	 background-color: var(--dark);
+	 transition: all ease 0.3s;
+}
+ .card__readbtn:hover {
+	 color: var(--dark);
+}
+ .card__readbtn:hover::after {
+	 width: 100%;
+}
+ .divider {
+	 background-color: var(--faded-gray);
+	 height: 2px;
+	 max-width: 30px;
+	 margin: 15px auto 20px;
+}
+ .grid {
+	 display: grid;
+	 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	 gap: 30px;
+	 max-width: 1150px;
+	 margin: 50px auto;
+	 padding: 0 10px;
+}
+.card__contenido{
+  /* background-color: cadetblue; */
+}
+
+.round{
+  border-radius: 15px;
+}
+ 
+
+.marqueee{
+  /* background-color: aqua; */
+  
+}
+
+
+
+.marquee-content {
+  display: flex;
+  animation: scrolling 30s linear infinite;
+}
+
+.marquee-item {
+  flex: 0 0 6vw;
+  margin: 0 1vw;
+/*   flex: 0 0 20vw; */
+/*   margin: 0 2vw; */
+}
+
+.marquee-item img {
+  display: block;
+  width: 100%;
+/*   padding: 0 20px; */
+}
+
+@keyframes scrolling {
+  0% { transform: translateX(0); }
+  100% { transform: translatex(-144vw); }
+}
+
 
