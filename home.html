@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#2e1a17" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>TapQR – Restaurant Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Allan:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ─── Reset & base ─────────────────────────────────────── */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            background: #000;
+        }
+
+        body {
+            font-family: 'Figtree', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overscroll-behavior: none;
+        }
+
+        /* ─── Root PWA shell ───────────────────────────────────── */
+        #app {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            min-height: 100%;
+            background: #000;
+            position: relative;
+        }
+
+        /* ─── HERO / LANDING ───────────────────────────────────── */
+        .landing {
+            background: #2e1a17;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            overflow: hidden;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .hero {
+            position: relative;
+            height: 400px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-bg-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0) 84%,
+                    rgba(0, 0, 0, 0.58) 99%,
+                    rgba(0, 0, 0, 1) 124%);
+        }
+
+        .hero-blur {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.39);
+            filter: blur(40px);
+            height: 368px;
+            left: -103px;
+            top: 212px;
+            width: 712px;
+            pointer-events: none;
+        }
+
+        /* Top bar */
+        .hero-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            position: relative;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+
+        .hero-topbar-left,
+        .hero-topbar-right {
+            display: flex;
+            align-items: center;
+            padding: 24px;
+        }
+
+        .avatar-ring {
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            border-radius: 40.816px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .avatar-inner {
+            background: #4f0b0a;
+            border-radius: 89.796px;
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .avatar-inner img {
+            width: 36.735px;
+            height: 36.735px;
+            object-fit: cover;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .veg-badge {
+            background: #fff;
+            border: 0.618px solid rgba(18, 133, 64, 0.01);
+            border-radius: 43.234px;
+            display: flex;
+            align-items: center;
+            gap: 0.88px;
+            padding: 1.235px 11px 2.47px 3px;
+        }
+
+        .veg-badge-icon {
+            width: 27.117px;
+            height: 27.117px;
+            object-fit: contain;
+        }
+
+        .veg-badge-text {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 900;
+            font-size: 12px;
+            color: #21973b;
+            letter-spacing: -0.24px;
+            white-space: nowrap;
+        }
+
+        /* Hero bottom content */
+        .hero-bottom {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 24px 24px 32px;
+            width: 100%;
+            position: relative;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+
+        .hero-text-col {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .hero-title {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .hero-title-main {
+            color: #fff;
+            line-height: 36.094px;
+        }
+
+        .hero-title-main p:first-child {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 500;
+            font-size: 37.02px;
+        }
+
+        .hero-title-main p:last-child {
+            font-family: 'Figtree', sans-serif;
+            font-style: italic;
+            font-size: 37.02px;
+            font-weight: 400;
+        }
+
+        .hero-subtitle {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.4;
+            width: 255px;
+        }
+
+        .hero-dots {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .dot-active {
+            background: #d9d9d9;
+            width: 15.75px;
+            height: 7px;
+            border-radius: 8px;
+        }
+
+        .dot-inactive {
+            background: rgba(255, 255, 255, 0.2);
+            width: 7px;
+            height: 7px;
+            border-radius: 8px;
+        }
+
+        .dot-dark {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* CTA arrow button */
+        .cta-btn {
+            background: #fff;
+            border: none;
+            border-radius: 60px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            width: 54px;
+            height: 54px;
+            transition: transform 0.15s;
+        }
+
+        .cta-btn:active {
+            transform: scale(0.93);
+        }
+
+        .arrow-icon {
+            width: 24px;
+            height: 24px;
+            transform: rotate(-90deg) scaleY(-1);
+            flex-shrink: 0;
+        }
+
+        /* ─── MAIN CONTENT CARD ─────────────────────────────────── */
+        .main-card {
+            background: #fff;
+            border-radius: 24px 24px 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding-top: 20px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            overflow: hidden;
+        }
+
+        /* Search bar */
+        .search-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .search-bar {
+            background: #f4f5f7;
+            border-radius: 8px;
+            height: 56px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 19px 26px;
+            gap: 13px;
+        }
+
+        .search-icon {
+            width: 15px;
+            height: 15px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .search-placeholder {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            color: #676767;
+            white-space: nowrap;
+        }
+
+        /* ─── Category grid ─────────────────────────────────────── */
+        .categories-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            align-items: flex-start;
+            padding: 24px 0 20px;
+            width: 100%;
+        }
+
+        .category-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            width: 100%;
+        }
+
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            height: 93px;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .category-icon-wrap {
+            background: #fdfdfd;
+            border: 1.317px solid #e8eaed;
+            border-radius: 178px;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.2s, transform 0.15s;
+        }
+
+        .category-item:active .category-icon-wrap {
+            transform: scale(0.9);
+        }
+
+        .category-item.active .category-icon-wrap {
+            border-color: #21973b;
+            background: rgba(33, 151, 59, 0.06);
+        }
+
+        .category-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        .category-label {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 500;
+            font-size: 15px;
+            color: #666;
+            letter-spacing: 0.3px;
+            text-align: center;
+            text-transform: capitalize;
+            white-space: nowrap;
+        }
+
+        /* ─── Section headers ───────────────────────────────────── */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        .section-title {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: #000;
+            letter-spacing: 0.96px;
+            text-transform: uppercase;
+        }
+
+        .section-view-all {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 500;
+            font-size: 15px;
+            color: #797d82;
+            cursor: pointer;
+        }
+
+        /* ─── Most Ordered horizontal scroll ──────────────────── */
+        .most-ordered-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            align-items: flex-start;
+            padding-bottom: 24px;
+            padding-top: 20px;
+            width: 100%;
+        }
+
+        .most-ordered-scroll {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            overflow-x: auto;
+            overflow-y: clip;
+            padding: 0 20px;
+            width: 100%;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .most-ordered-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .dish-card {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-start;
+            flex-shrink: 0;
+            width: 310px;
+        }
+
+        .dish-card-img {
+            position: relative;
+            height: 350px;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .dish-card-img-bg {
+            position: absolute;
+            inset: 0;
+            border-radius: 10px;
+        }
+
+        .dish-card-img-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .dish-card-blur {
+            position: absolute;
+            background: #000;
+            filter: blur(27px);
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 103px;
+            width: 512px;
+        }
+
+        .dish-card-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            position: relative;
+            width: 100%;
+        }
+
+        .dish-card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            align-items: flex-start;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .dish-card-name {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 500;
+            font-size: 28px;
+            color: #fff;
+            line-height: normal;
+        }
+
+        .dish-card-sub {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            color: #fff;
+            letter-spacing: -0.3px;
+            line-height: 16px;
+        }
+
+        .dish-card-arrow {
+            background: #fff;
+            border-radius: 60px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 54px;
+            height: 54px;
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+
+        .dish-card-arrow:active {
+            transform: scale(0.9);
+        }
+
+        .dish-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 9px;
+            width: 100%;
+        }
+
+        .dish-meta-left {
+            display: flex;
+            align-items: center;
+            gap: 4.462px;
+            height: 20.081px;
+            overflow: hidden;
+        }
+
+        .veg-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4.462px;
+        }
+
+        .veg-dot-img {
+            width: 17.85px;
+            height: 17.85px;
+            object-fit: contain;
+        }
+
+        .veg-label {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 400;
+            font-size: 14.503px;
+            color: #10ac33;
+            line-height: 20.081px;
+            white-space: nowrap;
+        }
+
+        .meta-sep {
+            font-size: 14.503px;
+            color: #c0b9b9;
+            line-height: 20.081px;
+        }
+
+        .meta-time {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 400;
+            font-size: 14.503px;
+            color: rgba(2, 6, 12, 0.75);
+            line-height: 20.081px;
+            white-space: nowrap;
+        }
+
+        .dish-price {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: #444;
+            white-space: nowrap;
+        }
+
+        /* ─── Highlights / Stories row ─────────────────────────── */
+        .highlights-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            align-items: flex-start;
+            padding: 20px 0;
+            width: 100%;
+        }
+
+        .stories-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            overflow: hidden;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .story-ring {
+            border: 3px solid #7638fa;
+            border-radius: 90px;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .story-ring.add-ring {
+            border-color: #00da00;
+            gap: 10px;
+            position: relative;
+        }
+
+        .story-avatar {
+            border-radius: 100px;
+            width: 68px;
+            height: 68px;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+            background: #fff;
+        }
+
+        .story-avatar img {
+            width: 100%;
+            height: 177.88%;
+            object-fit: cover;
+            position: absolute;
+            top: -20.21%;
+            left: 0;
+        }
+
+        .story-add-avatar {
+            background: #dfdcdc;
+            border-radius: 100px;
+            width: 68px;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .story-add-avatar svg {
+            width: 31px;
+            height: 31px;
+            opacity: 0.6;
+        }
+
+        .story-add-btn {
+            background: #0c1014;
+            border: 3px solid #fff;
+            border-radius: 100px;
+            width: 18px;
+            height: 18px;
+            position: absolute;
+            bottom: 3.08px;
+            right: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .story-add-btn svg {
+            width: 8px;
+            height: 8px;
+        }
+
+        /* ─── Popular Categories ────────────────────────────────── */
+        .popular-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 12px 0 24px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .pop-grid {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding-left: 20px;
+            width: 100%;
+        }
+
+        .pop-item {
+            width: 108px;
+            height: 118px;
+            border-radius: 8px;
+            background: linear-gradient(134.076deg, rgba(255, 235, 217, 0.5) 3.055%, rgba(255, 178, 112, 0.5) 115.73%);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: transform 0.15s;
+        }
+
+        .pop-item:active {
+            transform: scale(0.95);
+        }
+
+        .pop-item-img {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .pop-item-img img {
+            position: absolute;
+            object-fit: contain;
+            display: block;
+        }
+
+        .pop-item-label {
+            position: absolute;
+            bottom: 0.4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 107.457px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+            font-family: 'Figtree', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: #525252;
+            white-space: nowrap;
+        }
+
+        /* ─── Filter Chips ─────────────────────────────────────── */
+        .filter-bar {
+            display: flex;
+            gap: 6px;
+            height: 64px;
+            align-items: center;
+            padding: 12px 20px;
+            width: 100%;
+        }
+
+        .filter-chip {
+            background: #fff;
+            border: 1.5px solid #e1e2e2;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            gap: 5px;
+            padding: 12px 22px;
+            cursor: pointer;
+            flex: 1;
+            transition: background 0.15s;
+        }
+
+        .filter-chip:active {
+            background: #f4f5f7;
+        }
+
+        .filter-chip-sm {
+            flex: 0;
+            width: 40px;
+            padding: 12px;
+            flex-shrink: 0;
+            background: #fff;
+            border: 1.5px solid #e1e2e2;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .filter-chip-text {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            color: #414449;
+            white-space: nowrap;
+        }
+
+        .filter-arrow {
+            display: inline-block;
+            transform: scaleY(-1);
+        }
+
+        .filter-arrow svg {
+            width: 10px;
+            height: 6px;
+            display: block;
+        }
+
+        /* ─── Menu Grid (starters etc.) ────────────────────────── */
+        .menu-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            align-items: flex-start;
+            padding: 24px 20px;
+            width: 100%;
+        }
+
+        .menu-grid {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            width: 100%;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .menu-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .menu-item-card {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-start;
+            flex-shrink: 0;
+            width: 164px;
+            cursor: pointer;
+        }
+
+        .menu-item-img {
+            aspect-ratio: 164 / 190;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 100%;
+            background: #fff;
+        }
+
+        .menu-item-img img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .menu-item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .menu-item-name {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: rgba(2, 6, 12, 0.8);
+            line-height: normal;
+        }
+
+        .menu-item-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .menu-item-row {
+            display: flex;
+            align-items: center;
+            gap: 4.462px;
+            overflow: hidden;
+        }
+
+        .menu-veg-dot {
+            width: 15.503px;
+            height: 15.503px;
+            object-fit: contain;
+        }
+
+        .menu-veg-label {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 400;
+            font-size: 13px;
+            color: #10ac33;
+            white-space: nowrap;
+        }
+
+        .menu-sep {
+            font-size: 14.503px;
+            color: #c0b9b9;
+        }
+
+        .menu-time {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 400;
+            font-size: 13px;
+            color: rgba(2, 6, 12, 0.75);
+            white-space: nowrap;
+        }
+
+        .menu-cuisine {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            color: #b1b1b1;
+            letter-spacing: -0.3px;
+            line-height: 16px;
+            white-space: nowrap;
+        }
+
+        .menu-price {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            color: #444;
+            white-space: nowrap;
+        }
+
+        /* ─── Footer ─────────────────────────────────────────────── */
+        .footer {
+            display: flex;
+            flex-direction: column;
+            gap: 41px;
+            align-items: center;
+            padding: 34px 0;
+            width: 100%;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: center;
+            width: 143.645px;
+        }
+
+        .footer-powered {
+            font-size: 13px;
+            color: rgba(0, 0, 0, 0.56);
+            text-align: center;
+            line-height: 18px;
+            font-weight: 400;
+        }
+
+        .footer-logo-row {
+            display: flex;
+            gap: 13px;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .footer-line {
+            background: rgba(0, 0, 0, 0.21);
+            height: 0.566px;
+            width: 24.322px;
+            flex-shrink: 0;
+        }
+
+        .footer-logo {
+            font-family: 'Allan', cursive;
+            font-size: 33px;
+            color: #000;
+            text-align: center;
+            white-space: nowrap;
+            line-height: 19px;
+        }
+
+        .footer-logo .bold {
+            font-weight: 700;
+        }
+
+        .footer-url {
+            font-size: 13px;
+            color: rgba(0, 0, 0, 0.56);
+            text-align: center;
+            line-height: 18px;
+        }
+
+        /* ─── Micro-interactions ─────────────────────────────────── */
+        @media (hover: hover) {
+            .category-icon-wrap:hover {
+                border-color: #21973b;
+            }
+
+            .story-ring:hover {
+                opacity: 0.85;
+            }
+
+            .dish-card-arrow:hover {
+                background: #f5f5f5;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- ═══════════════════════════════════════════
+       LANDING / HERO
+  ═══════════════════════════════════════════ -->
+        <section class="landing">
+            <div class="hero">
+                <!-- Background -->
+                <div class="hero-bg" aria-hidden="true">
+                    <img src="https://www.figma.com/api/mcp/asset/5923310c-3169-43e3-ae15-acf9f08da0df" alt="" />
+                    <div class="hero-bg-overlay"></div>
+                </div>
+                <div class="hero-blur" aria-hidden="true"></div>
+
+                <!-- Top bar -->
+                <div class="hero-topbar">
+                    <div class="hero-topbar-left">
+                        <div class="avatar-ring">
+                            <div class="avatar-inner">
+                                <img src="https://www.figma.com/api/mcp/asset/2a9aedd6-7097-456a-8efe-ee356e77b848"
+                                    alt="User avatar" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-topbar-right">
+                        <div class="veg-badge">
+                            <img class="veg-badge-icon"
+                                src="https://www.figma.com/api/mcp/asset/e611f392-40cf-4951-8339-3658200e5246" alt="" />
+                            <span class="veg-badge-text">Veg</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom content -->
+                <div class="hero-bottom">
+                    <div class="hero-text-col">
+                        <div class="hero-title">
+                            <div class="hero-title-main">
+                                <p>Today's</p>
+                                <p>Spotlight Dish</p>
+                            </div>
+                            <p class="hero-subtitle">Slow-boiled in rich Cajun butter with baby potatoes and herbs.</p>
+                        </div>
+                        <div class="hero-dots">
+                            <div class="dot-active"></div>
+                            <div class="dot-inactive"></div>
+                            <div class="dot-dark"></div>
+                        </div>
+                    </div>
+                    <button class="cta-btn" aria-label="View dish">
+                        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 18L18 6M18 6H8M18 6V16" stroke="#000" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════
+       MAIN CARD
+  ═══════════════════════════════════════════ -->
+        <main class="main-card">
+
+            <!-- Search bar -->
+            <div class="search-wrap">
+                <div class="search-bar">
+                    <img class="search-icon"
+                        src="https://www.figma.com/api/mcp/asset/7f26f8f1-1cc2-4371-9ec7-045805201d67" alt="" />
+                    <span class="search-placeholder">Search dishes or ingredients</span>
+                </div>
+            </div>
+
+            <!-- ── Category rows ── -->
+            <div class="categories-section">
+                <!-- Row 1 -->
+                <div class="category-row">
+                    <div class="category-item active">
+                        <div class="category-icon-wrap">
+                            <img class="category-icon"
+                                src="https://www.figma.com/api/mcp/asset/13beefaf-fb66-4059-89a3-f9d234e76a96"
+                                alt="Starters" />
+                        </div>
+                        <span class="category-label">Starters</span>
+                    </div>
+                    <div class="category-item">
+                        <div class="category-icon-wrap">
+                            <img class="category-icon"
+                                src="https://www.figma.com/api/mcp/asset/79fee7d1-ab42-4421-be87-7bbacf55e5a1"
+                                alt="Main" />
+                        </div>
+                        <span class="category-label">Main</span>
+                    </div>
+                    <div class="category-item">
+                        <div class="category-icon-wrap">
+                            <img class="category-icon"
+                                src="https://www.figma.com/api/mcp/asset/13beefaf-fb66-4059-89a3-f9d234e76a96"
+                                alt="Desserts" />
+                        </div>
+                        <span class="category-label">Desserts</span>
+                    </div>
+                    <div class="category-item">
+                        <div class="category-icon-wrap">
+                            <img class="category-icon"
+                                src="https://www.figma.com/api/mcp/asset/13beefaf-fb66-4059-89a3-f9d234e76a96"
+                                alt="Drinks" />
+                        </div>
+                        <span class="category-label">Drinks</span>
+                    </div>
+                </div>
+                <!-- Row 2 -->
+                <div class="category-row">
+                    <div class="category-item">
+                        <div class="category-icon-wrap">
+                            <img class="category-icon"
+                                src="https://www.figma.com/api/mcp/asset/13beefaf-fb66-4059-89a3-f9d234e76a96"
+                                alt="Alcohol" />
+                        </div>
+                        <span class="category-label">Alcohol</span>
+                    </div>
+                    <div class="category-item">
+                        <div class="category-icon-wrap">
+                            <img class="category-icon"
+                                src="https://www.figma.com/api/mcp/asset/13beefaf-fb66-4059-89a3-f9d234e76a96"
+                                alt="Starters" />
+                        </div>
+                        <span class="category-label">Starters</span>
+                    </div>
+                    <div class="category-item">
+                        <div class="category-icon-wrap">
+                            <img class="category-icon"
+                                src="https://www.figma.com/api/mcp/asset/13beefaf-fb66-4059-89a3-f9d234e76a96"
+                                alt="Starters" />
+                        </div>
+                        <span class="category-label">Starters</span>
+                    </div>
+                    <div class="category-item">
+                        <div class="category-icon-wrap">
+                            <img class="category-icon"
+                                src="https://www.figma.com/api/mcp/asset/13beefaf-fb66-4059-89a3-f9d234e76a96"
+                                alt="Starters" />
+                        </div>
+                        <span class="category-label">Starters</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Our Most Ordered ── -->
+            <div class="most-ordered-section">
+                <div class="section-header">
+                    <span class="section-title">OUR MOST ORDERED</span>
+                    <span class="section-view-all">View all</span>
+                </div>
+                <div class="most-ordered-scroll">
+                    <!-- Card 1 -->
+                    <div class="dish-card">
+                        <div class="dish-card-img">
+                            <div class="dish-card-img-bg">
+                                <img src="https://www.figma.com/api/mcp/asset/c2f0ab32-a6dd-4a07-ba3e-2eac0d7643a9"
+                                    alt="DalLazeez" />
+                            </div>
+                            <div class="dish-card-blur" aria-hidden="true"></div>
+                            <div class="dish-card-bottom">
+                                <div class="dish-card-info">
+                                    <span class="dish-card-name">DalLazeez</span>
+                                    <span class="dish-card-sub">North Indian, Veg starters</span>
+                                </div>
+                                <button class="dish-card-arrow" aria-label="View DalLazeez">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        style="transform:rotate(-90deg) scaleY(-1)">
+                                        <path d="M6 18L18 6M18 6H8M18 6V16" stroke="#000" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="dish-meta">
+                            <div class="dish-meta-left">
+                                <div class="veg-indicator">
+                                    <img class="veg-dot-img"
+                                        src="https://www.figma.com/api/mcp/asset/21d9a7a4-6065-4c1c-9ac7-65ddbf026520"
+                                        alt="" />
+                                    <span class="veg-label">Veg</span>
+                                </div>
+                                <span class="meta-sep">|</span>
+                                <span class="meta-time">20-25 mins</span>
+                            </div>
+                            <span class="dish-price">₹675</span>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="dish-card">
+                        <div class="dish-card-img">
+                            <div class="dish-card-img-bg">
+                                <img src="https://www.figma.com/api/mcp/asset/c2f0ab32-a6dd-4a07-ba3e-2eac0d7643a9"
+                                    alt="DalLazeez" />
+                            </div>
+                            <div class="dish-card-blur" aria-hidden="true"></div>
+                            <div class="dish-card-bottom">
+                                <div class="dish-card-info">
+                                    <span class="dish-card-name">DalLazeez</span>
+                                    <span class="dish-card-sub">North Indian, Veg starters</span>
+                                </div>
+                                <button class="dish-card-arrow" aria-label="View DalLazeez">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        style="transform:rotate(-90deg) scaleY(-1)">
+                                        <path d="M6 18L18 6M18 6H8M18 6V16" stroke="#000" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="dish-meta">
+                            <div class="dish-meta-left">
+                                <div class="veg-indicator">
+                                    <img class="veg-dot-img"
+                                        src="https://www.figma.com/api/mcp/asset/21d9a7a4-6065-4c1c-9ac7-65ddbf026520"
+                                        alt="" />
+                                    <span class="veg-label">Veg</span>
+                                </div>
+                                <span class="meta-sep">|</span>
+                                <span class="meta-time">20-25 mins</span>
+                            </div>
+                            <span class="dish-price">₹675</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Today's Highlights ── -->
+            <div class="highlights-section">
+                <div class="section-header" style="padding: 3px 20px;">
+                    <span class="section-title">TODAY'S HIGHLIGHTS</span>
+                    <span class="section-view-all">View all</span>
+                </div>
+                <div class="stories-row">
+                    <!-- Add story -->
+                    <div class="story-ring add-ring" style="position:relative;">
+                        <div class="story-add-avatar">
+                            <!-- Gallery circle icon -->
+                            <svg viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="15.5" cy="15.5" r="12" stroke="#555" stroke-width="1.5" />
+                                <path d="M10 19.5l3-4 2.5 3 2-2.5 3.5 5.5H10z" fill="#555" />
+                                <circle cx="19" cy="12" r="2" fill="#555" />
+                            </svg>
+                        </div>
+                        <div class="story-add-btn">
+                            <svg viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 1v6M1 4h6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Stories -->
+                    <div class="story-ring">
+                        <div class="story-avatar">
+                            <img src="https://www.figma.com/api/mcp/asset/315935ea-aaa6-4fd9-affe-18ddfb26ab89"
+                                alt="Story 1" />
+                        </div>
+                    </div>
+                    <div class="story-ring">
+                        <div class="story-avatar">
+                            <img src="https://www.figma.com/api/mcp/asset/315935ea-aaa6-4fd9-affe-18ddfb26ab89"
+                                alt="Story 2" />
+                        </div>
+                    </div>
+                    <div class="story-ring">
+                        <div class="story-avatar" style="overflow:hidden; position:relative;">
+                            <img src="https://www.figma.com/api/mcp/asset/ba2b52f6-53f2-4354-a480-d821683fab92"
+                                alt="Story 3"
+                                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+                        </div>
+                    </div>
+                    <div class="story-ring">
+                        <div class="story-avatar" style="overflow:hidden; position:relative;">
+                            <img src="https://www.figma.com/api/mcp/asset/8896a819-3722-4ec1-89db-67064a3ca4c4"
+                                alt="Story 4"
+                                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Popular Categories ── -->
+            <div class="popular-section">
+                <div class="section-header" style="padding: 3px 20px; overflow:hidden;">
+                    <span class="section-title">POPULAR CATEGORIES</span>
+                    <span class="section-view-all">View all</span>
+                </div>
+                <div class="pop-grid">
+                    <!-- Biriyani -->
+                    <div class="pop-item">
+                        <div class="pop-item-img">
+                            <img src="https://www.figma.com/api/mcp/asset/4098b633-3a68-4b25-bfce-0ce86928f0c5"
+                                alt="Biriyani"
+                                style="width:77.288px;height:60.132px;top:50%;left:50%;transform:translate(-50%,-54%);object-fit:contain;" />
+                        </div>
+                        <span class="pop-item-label">Biriyani</span>
+                    </div>
+                    <!-- Wraps -->
+                    <div class="pop-item">
+                        <div class="pop-item-img">
+                            <img src="https://www.figma.com/api/mcp/asset/9cf328a7-5e39-492a-a2c3-13b3ec57275e"
+                                alt="Wraps"
+                                style="width:74.25px;height:57.158px;top:50%;left:50%;transform:translate(-50%,-54%);object-fit:contain;" />
+                        </div>
+                        <span class="pop-item-label">Biriyani</span>
+                    </div>
+                    <!-- Pizza -->
+                    <div class="pop-item">
+                        <div class="pop-item-img">
+                            <img src="https://www.figma.com/api/mcp/asset/d746e37a-c156-4355-b1a2-107237be3891"
+                                alt="Pizza"
+                                style="width:85.974px;height:43.318px;top:50%;left:50%;transform:translate(-50%,-54%);object-fit:contain;" />
+                        </div>
+                        <span class="pop-item-label">Biriyani</span>
+                    </div>
+                    <!-- More -->
+                    <div class="pop-item">
+                        <div class="pop-item-img">
+                            <img src="https://www.figma.com/api/mcp/asset/9bf79849-e6ff-415a-a815-079638325d77"
+                                alt="Item" style="width:100%;height:120%;top:-3.75%;left:0;object-fit:cover;" />
+                        </div>
+                        <span class="pop-item-label">Biriyani</span>
+                    </div>
+                    <div class="pop-item">
+                        <div class="pop-item-img">
+                            <img src="https://www.figma.com/api/mcp/asset/9bf79849-e6ff-415a-a815-079638325d77"
+                                alt="Item" style="width:100%;height:120%;top:-3.75%;left:0;object-fit:cover;" />
+                        </div>
+                        <span class="pop-item-label">Biriyani</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Filter Bar ── -->
+            <div class="filter-bar">
+                <div class="filter-chip" style="flex:1.2;">
+                    <img src="https://www.figma.com/api/mcp/asset/48da7e33-2076-439a-b749-abcce574e4be" alt=""
+                        style="width:15px;height:15px;object-fit:contain;" />
+                    <span class="filter-chip-text">Filters</span>
+                    <span class="filter-arrow">
+                        <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L5 5L9 1" stroke="#414449" stroke-width="1.2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                </div>
+                <div class="filter-chip" style="flex:1.2;">
+                    <span class="filter-chip-text">All Cuisine</span>
+                    <span class="filter-arrow">
+                        <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L5 5L9 1" stroke="#414449" stroke-width="1.2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                </div>
+                <div class="filter-chip-sm">
+                    <img src="https://www.figma.com/api/mcp/asset/d704fdd9-848a-4594-b98d-c08dcf427abd" alt=""
+                        style="width:18px;height:14px;object-fit:contain;" />
+                </div>
+                <div class="filter-chip-sm" style="border-width:1px;">
+                    <img src="https://www.figma.com/api/mcp/asset/178b4397-8874-4dfc-bd20-89e3e1c55af4" alt=""
+                        style="width:17px;height:17px;object-fit:contain;" />
+                </div>
+            </div>
+
+            <!-- ── Starters (43) ── -->
+            <div class="menu-section">
+                <div class="section-header" style="padding:0;">
+                    <span class="section-title">Starters (43)</span>
+                    <span class="section-view-all">View all</span>
+                </div>
+                <div class="menu-grid">
+                    <!-- Item 1 -->
+                    <div class="menu-item-card">
+                        <div class="menu-item-img">
+                            <img src="https://www.figma.com/api/mcp/asset/47b0ff45-854f-4497-a194-a6532f1a5149"
+                                alt="Tandoori Chooza" />
+                        </div>
+                        <div class="menu-item-info">
+                            <span class="menu-item-name">Tandoori Chooza</span>
+                            <div class="menu-item-meta">
+                                <div class="menu-item-row">
+                                    <img class="menu-veg-dot"
+                                        src="https://www.figma.com/api/mcp/asset/9cbdd052-d3d7-4a6a-8c8b-f239412b5a8a"
+                                        alt="" />
+                                    <span class="menu-veg-label">Veg</span>
+                                    <span class="menu-sep">|</span>
+                                    <span class="menu-time">20-25 mins</span>
+                                </div>
+                                <span class="menu-cuisine">North Indian, Veg starters</span>
+                            </div>
+                            <span class="menu-price">₹675</span>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="menu-item-card">
+                        <div class="menu-item-img">
+                            <img src="https://www.figma.com/api/mcp/asset/960ef2f6-4e5e-4505-8dad-9b446a27c03c"
+                                alt="Tandoori Broccoli" />
+                        </div>
+                        <div class="menu-item-info">
+                            <span class="menu-item-name">Tandoori Broccoli</span>
+                            <div class="menu-item-meta">
+                                <div class="menu-item-row">
+                                    <img class="menu-veg-dot"
+                                        src="https://www.figma.com/api/mcp/asset/9cbdd052-d3d7-4a6a-8c8b-f239412b5a8a"
+                                        alt="" />
+                                    <span class="menu-veg-label">Veg</span>
+                                    <span class="menu-sep">|</span>
+                                    <span class="menu-time">20-25 mins</span>
+                                </div>
+                                <span class="menu-cuisine">North Indian, Veg starters</span>
+                            </div>
+                            <span class="menu-price">₹675</span>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="menu-item-card">
+                        <div class="menu-item-img">
+                            <img src="https://www.figma.com/api/mcp/asset/960ef2f6-4e5e-4505-8dad-9b446a27c03c"
+                                alt="Tandoori Broccoli" />
+                        </div>
+                        <div class="menu-item-info">
+                            <span class="menu-item-name">Tandoori Broccoli</span>
+                            <div class="menu-item-meta">
+                                <div class="menu-item-row">
+                                    <img class="menu-veg-dot"
+                                        src="https://www.figma.com/api/mcp/asset/9cbdd052-d3d7-4a6a-8c8b-f239412b5a8a"
+                                        alt="" />
+                                    <span class="menu-veg-label">Veg</span>
+                                    <span class="menu-sep">|</span>
+                                    <span class="menu-time">20-25 mins</span>
+                                </div>
+                                <span class="menu-cuisine">North Indian, Veg starters</span>
+                            </div>
+                            <span class="menu-price">₹675</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Starters (43) – Second section ── -->
+            <div class="menu-section">
+                <div class="section-header" style="padding:0;">
+                    <span class="section-title">Starters (43)</span>
+                    <span class="section-view-all" style="font-size:13px;">View all</span>
+                </div>
+                <div class="menu-grid">
+                    <!-- Item 1 -->
+                    <div class="menu-item-card">
+                        <div class="menu-item-img">
+                            <img src="https://www.figma.com/api/mcp/asset/ba2b52f6-53f2-4354-a480-d821683fab92"
+                                alt="Tandoori Chooza" />
+                        </div>
+                        <div class="menu-item-info">
+                            <span class="menu-item-name">Tandoori Chooza</span>
+                            <div class="menu-item-meta">
+                                <div class="menu-item-row">
+                                    <img class="menu-veg-dot"
+                                        src="https://www.figma.com/api/mcp/asset/9cbdd052-d3d7-4a6a-8c8b-f239412b5a8a"
+                                        alt="" />
+                                    <span class="menu-veg-label">Veg</span>
+                                    <span class="menu-sep">|</span>
+                                    <span class="menu-time">20-25 mins</span>
+                                </div>
+                                <span class="menu-cuisine">North Indian, Veg starters</span>
+                            </div>
+                            <span class="menu-price">₹675</span>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="menu-item-card">
+                        <div class="menu-item-img">
+                            <img src="https://www.figma.com/api/mcp/asset/0de65893-0cab-4bcf-baee-cd16add539d2"
+                                alt="Tandoori Broccoli" />
+                        </div>
+                        <div class="menu-item-info">
+                            <span class="menu-item-name">Tandoori Broccoli</span>
+                            <div class="menu-item-meta">
+                                <div class="menu-item-row">
+                                    <img class="menu-veg-dot"
+                                        src="https://www.figma.com/api/mcp/asset/9cbdd052-d3d7-4a6a-8c8b-f239412b5a8a"
+                                        alt="" />
+                                    <span class="menu-veg-label">Veg</span>
+                                    <span class="menu-sep">|</span>
+                                    <span class="menu-time">20-25 mins</span>
+                                </div>
+                                <span class="menu-cuisine">North Indian, Veg starters</span>
+                            </div>
+                            <span class="menu-price">₹675</span>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="menu-item-card">
+                        <div class="menu-item-img">
+                            <img src="https://www.figma.com/api/mcp/asset/0de65893-0cab-4bcf-baee-cd16add539d2"
+                                alt="Tandoori Broccoli" />
+                        </div>
+                        <div class="menu-item-info">
+                            <span class="menu-item-name">Tandoori Broccoli</span>
+                            <div class="menu-item-meta">
+                                <div class="menu-item-row">
+                                    <img class="menu-veg-dot"
+                                        src="https://www.figma.com/api/mcp/asset/9cbdd052-d3d7-4a6a-8c8b-f239412b5a8a"
+                                        alt="" />
+                                    <span class="menu-veg-label">Veg</span>
+                                    <span class="menu-sep">|</span>
+                                    <span class="menu-time">20-25 mins</span>
+                                </div>
+                                <span class="menu-cuisine">North Indian, Veg starters</span>
+                            </div>
+                            <span class="menu-price">₹675</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Footer ── -->
+            <div class="footer">
+                <div class="footer-brand">
+                    <p class="footer-powered">Powered by</p>
+                    <div class="footer-logo-row">
+                        <div class="footer-line"></div>
+                        <div class="footer-logo">
+                            Ta<span style="letter-spacing:1.44px;">p</span><span class="bold">Q</span><span class="bold"
+                                style="letter-spacing:-5.12px;">R</span>
+                        </div>
+                        <div class="footer-line"></div>
+                    </div>
+                </div>
+                <p class="footer-url">www.tapq.com</p>
+            </div>
+
+        </main><!-- /main-card -->
+
+    </div><!-- /app -->
+
+    <script>
+        // Category active state toggle
+        document.querySelectorAll('.category-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.category-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
