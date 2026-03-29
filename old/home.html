@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#2e1a17" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>TapQR – Restaurant Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Allan:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+    <div class="phone-shell">
+        <div class="phone-frame">
+            <div id="app">
+
+                <!-- ═══════════════════════════════════════════
+       LANDING / HERO
+  ═══════════════════════════════════════════ -->
+                <section class="landing">
+                    <div class="hero">
+                        <!-- Background -->
+                        <div class="hero-bg" aria-hidden="true">
+                            <img src="Images/Hero bg.png" alt="" />
+                            <div class="hero-bg-overlay"></div>
+                        </div>
+                        <div class="hero-blur" aria-hidden="true"></div>
+
+                        <!-- Top bar -->
+                        <div class="hero-topbar">
+                            <div class="hero-topbar-left">
+                                <div class="avatar-ring">
+                                    <div class="avatar-inner">
+                                        <img src="https://www.figma.com/api/mcp/asset/2a9aedd6-7097-456a-8efe-ee356e77b848"
+                                            alt="User avatar" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hero-topbar-right">
+                                <div class="veg-badge">
+                                    <img class="veg-badge-icon"
+                                        src="https://www.figma.com/api/mcp/asset/e611f392-40cf-4951-8339-3658200e5246"
+                                        alt="" />
+                                    <span class="veg-badge-text">Veg</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom content -->
+                        <div class="hero-bottom">
+                            <div class="hero-text-col">
+                                <div class="hero-title">
+                                    <div class="hero-title-main">
+                                        <p>Today's</p>
+                                        <p>Spotlight Dish</p>
+                                    </div>
+                                    <p class="hero-subtitle">Slow-boiled in rich Cajun butter with baby potatoes and
+                                        herbs.</p>
+                                </div>
+                                <div class="hero-dots">
+                                    <div class="dot-active"></div>
+                                    <div class="dot-inactive"></div>
+                                    <div class="dot-dark"></div>
+                                </div>
+                            </div>
+                            <button class="cta-btn" aria-label="View dish">
+                                <svg class="arrow-icon" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 18L18 6M18 6H8M18 6V16" stroke="#000" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ═══════════════════════════════════════════
+       MAIN CARD
+  ═══════════════════════════════════════════ -->
+                <main class="main-card">
+
+                    <!-- Search bar -->
+                    <div class="search-wrap">
+                        <div class="search-bar">
+                            <img class="search-icon"
+                                src="https://www.figma.com/api/mcp/asset/7f26f8f1-1cc2-4371-9ec7-045805201d67" alt="" />
+                            <span class="search-placeholder">Search dishes or ingredients</span>
+                        </div>
+                    </div>
+
+                    <!-- ── Category rows ── -->
+                    <div class="categories-section">
+                        <!-- Row 1 -->
+                        <div class="category-row">
+                            <div class="category-item active">
+                                <div class="category-icon-wrap">
+                                    <img class="category-icon"
+                                        src="https://www.figma.com/api/mcp/asset/13beefaf-fb66-4059-89a3-f9d234e76a96"
+                                        alt="Starters" />
+                                </div>
+                                <span class="category-label">categories</span>
+                            </div>
+                            <div class="category-item">
+                                <div class="category-icon-wrap">
+                                    <img class="category-icon"
+                                        src="https://www.figma.com/api/mcp/asset/79fee7d1-ab42-4421-be87-7bbacf55e5a1"
+                                        alt="Main" />
+                                </div>
+                                <span class="category-label">categories</span>
+                            </div>
+                            <div class="category-item">
+                                <div class="category-icon-wrap">
+                                    <img class="category-icon"
+                                        src="https://www.figma.com/api/mcp/asset/13beefaf-fb66-4059-89a3-f9d234e76a96"
+                                        alt="Desserts" />
+                                </div>
+                                <span class="category-label">categories</span>
+                            </div>
+                            <div class="category-item">
+                                <div class="category-icon-wrap">
+                                    <img class="category-icon"
+                                        src="https://www.figma.com/api/mcp/asset/13beefaf-fb66-4059-89a3-f9d234e76a96"
+                                        alt="Drinks" />
+                                </div>
+                                <span class="category-label">categories</span>
+                            </div>
+                        </div>
+                        <!-- Row 2 -->
+                        <div class="category-row">
+                            <div class="category-item">
+                                <div class="category-icon-wrap">
+                                    <img class="category-icon"
+                                        src="https://www.figma.com/api/mcp/asset/13beefaf-fb66-4059-89a3-f9d234e76a96"
+                                        alt="Alcohol" />
+                                </div>
+                                <span class="category-label">categories</span>
+                            </div>
+                            <div class="category-item">
+                                <div class="category-icon-wrap">
+                                    <img class="category-icon"
+                                        src="https://www.figma.com/api/mcp/asset/13beefaf-fb66-4059-89a3-f9d234e76a96"
+                                        alt="Starters" />
+                                </div>
+                                <span class="category-label">categories</span>
+                            </div>
+                            <div class="category-item">
+                                <div class="category-icon-wrap">
+                                    <img class="category-icon"
+                                        src="https://www.figma.com/api/mcp/asset/13beefaf-fb66-4059-89a3-f9d234e76a96"
+                                        alt="Starters" />
+                                </div>
+                                <span class="category-label">categories</span>
+                            </div>
+                            <div class="category-item">
+                                <div class="category-icon-wrap">
+                                    <img class="category-icon"
+                                        src="https://www.figma.com/api/mcp/asset/13beefaf-fb66-4059-89a3-f9d234e76a96"
+                                        alt="Starters" />
+                                </div>
+                                <span class="category-label">categories</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ── Our Most Ordered ── -->
+                    <div class="most-ordered-section">
+                        <div class="section-header">
+                            <span class="section-title">OUR MOST ORDERED</span>
+                            <span class="section-view-all">View all</span>
+                        </div>
+                        <div class="most-ordered-scroll">
+                            <!-- Card 1 -->
+                            <div class="dish-card">
+                                <div class="dish-card-img">
+                                    <div class="dish-card-img-bg">
+                                        <img src="https://www.figma.com/api/mcp/asset/c2f0ab32-a6dd-4a07-ba3e-2eac0d7643a9"
+                                            alt="DalLazeez" />
+                                    </div>
+                                    <div class="dish-card-blur" aria-hidden="true"></div>
+                                    <div class="dish-card-bottom">
+                                        <div class="dish-card-info">
+                                            <span class="dish-card-name">DalLazeez</span>
+                                            <span class="dish-card-sub">North Indian, Veg starters</span>
+                                        </div>
+                                        <button class="dish-card-arrow" aria-label="View DalLazeez">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                style="transform:rotate(-90deg) scaleY(-1)">
+                                                <path d="M6 18L18 6M18 6H8M18 6V16" stroke="#000" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="dish-meta">
+                                    <div class="dish-meta-left">
+                                        <div class="veg-indicator">
+                                            <img class="veg-dot-img"
+                                                src="https://www.figma.com/api/mcp/asset/21d9a7a4-6065-4c1c-9ac7-65ddbf026520"
+                                                alt="" />
+                                            <span class="veg-label">Veg</span>
+                                        </div>
+                                        <span class="meta-sep">|</span>
+                                        <span class="meta-time">20-25 mins</span>
+                                    </div>
+                                    <span class="dish-price">₹675</span>
+                                </div>
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="dish-card">
+                                <div class="dish-card-img">
+                                    <div class="dish-card-img-bg">
+                                        <img src="https://www.figma.com/api/mcp/asset/c2f0ab32-a6dd-4a07-ba3e-2eac0d7643a9"
+                                            alt="DalLazeez" />
+                                    </div>
+                                    <div class="dish-card-blur" aria-hidden="true"></div>
+                                    <div class="dish-card-bottom">
+                                        <div class="dish-card-info">
+                                            <span class="dish-card-name">DalLazeez</span>
+                                            <span class="dish-card-sub">North Indian, Veg starters</span>
+                                        </div>
+                                        <button class="dish-card-arrow" aria-label="View DalLazeez">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                style="transform:rotate(-90deg) scaleY(-1)">
+                                                <path d="M6 18L18 6M18 6H8M18 6V16" stroke="#000" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="dish-meta">
+                                    <div class="dish-meta-left">
+                                        <div class="veg-indicator">
+                                            <img class="veg-dot-img"
+                                                src="https://www.figma.com/api/mcp/asset/21d9a7a4-6065-4c1c-9ac7-65ddbf026520"
+                                                alt="" />
+                                            <span class="veg-label">Veg</span>
+                                        </div>
+                                        <span class="meta-sep">|</span>
+                                        <span class="meta-time">20-25 mins</span>
+                                    </div>
+                                    <span class="dish-price">₹675</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ── Today's Highlights ── -->
+                    <div class="highlights-section">
+                        <div class="section-header" style="padding: 3px 20px;">
+                            <span class="section-title">TODAY'S HIGHLIGHTS</span>
+                            <span class="section-view-all">View all</span>
+                        </div>
+                        <div class="stories-row">
+                            <!-- Add story -->
+                            <div class="story-ring add-ring" style="position:relative;">
+                                <div class="story-add-avatar">
+                                    <!-- Gallery circle icon -->
+                                    <svg viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="15.5" cy="15.5" r="12" stroke="#555" stroke-width="1.5" />
+                                        <path d="M10 19.5l3-4 2.5 3 2-2.5 3.5 5.5H10z" fill="#555" />
+                                        <circle cx="19" cy="12" r="2" fill="#555" />
+                                    </svg>
+                                </div>
+                                <div class="story-add-btn">
+                                    <svg viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 1v6M1 4h6" stroke="#fff" stroke-width="1.5"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <!-- Stories -->
+                            <div class="story-ring">
+                                <div class="story-avatar">
+                                    <img src="https://www.figma.com/api/mcp/asset/315935ea-aaa6-4fd9-affe-18ddfb26ab89"
+                                        alt="Story 1" />
+                                </div>
+                            </div>
+                            <div class="story-ring">
+                                <div class="story-avatar">
+                                    <img src="https://www.figma.com/api/mcp/asset/315935ea-aaa6-4fd9-affe-18ddfb26ab89"
+                                        alt="Story 2" />
+                                </div>
+                            </div>
+                            <div class="story-ring">
+                                <div class="story-avatar" style="overflow:hidden; position:relative;">
+                                    <img src="https://www.figma.com/api/mcp/asset/ba2b52f6-53f2-4354-a480-d821683fab92"
+                                        alt="Story 3"
+                                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+                                </div>
+                            </div>
+                            <div class="story-ring">
+                                <div class="story-avatar" style="overflow:hidden; position:relative;">
+                                    <img src="https://www.figma.com/api/mcp/asset/8896a819-3722-4ec1-89db-67064a3ca4c4"
+                                        alt="Story 4"
+                                        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ── Popular Categories ── -->
+                    <div class="popular-section">
+                        <div class="section-header" style="padding: 3px 20px; overflow:hidden;">
+                            <span class="section-title">POPULAR CATEGORIES</span>
+                            <span class="section-view-all">View all</span>
+                        </div>
+                        <div class="pop-grid">
+                            <!-- Biriyani -->
+                            <div class="pop-item">
+                                <div class="pop-item-img">
+                                    <img src="https://www.figma.com/api/mcp/asset/4098b633-3a68-4b25-bfce-0ce86928f0c5"
+                                        alt="Biriyani"
+                                        style="width:77.288px;height:60.132px;top:50%;left:50%;transform:translate(-50%,-54%);object-fit:contain;" />
+                                </div>
+                                <span class="pop-item-label">Biriyani</span>
+                            </div>
+                            <!-- Wraps -->
+                            <div class="pop-item">
+                                <div class="pop-item-img">
+                                    <img src="https://www.figma.com/api/mcp/asset/9cf328a7-5e39-492a-a2c3-13b3ec57275e"
+                                        alt="Wraps"
+                                        style="width:74.25px;height:57.158px;top:50%;left:50%;transform:translate(-50%,-54%);object-fit:contain;" />
+                                </div>
+                                <span class="pop-item-label">Biriyani</span>
+                            </div>
+                            <!-- Pizza -->
+                            <div class="pop-item">
+                                <div class="pop-item-img">
+                                    <img src="https://www.figma.com/api/mcp/asset/d746e37a-c156-4355-b1a2-107237be3891"
+                                        alt="Pizza"
+                                        style="width:85.974px;height:43.318px;top:50%;left:50%;transform:translate(-50%,-54%);object-fit:contain;" />
+                                </div>
+                                <span class="pop-item-label">Biriyani</span>
+                            </div>
+                            <!-- More -->
+                            <div class="pop-item">
+                                <div class="pop-item-img">
+                                    <img src="https://www.figma.com/api/mcp/asset/9bf79849-e6ff-415a-a815-079638325d77"
+                                        alt="Item" style="width:100%;height:120%;top:-3.75%;left:0;object-fit:cover;" />
+                                </div>
+                                <span class="pop-item-label">Biriyani</span>
+                            </div>
+                            <div class="pop-item">
+                                <div class="pop-item-img">
+                                    <img src="https://www.figma.com/api/mcp/asset/9bf79849-e6ff-415a-a815-079638325d77"
+                                        alt="Item" style="width:100%;height:120%;top:-3.75%;left:0;object-fit:cover;" />
+                                </div>
+                                <span class="pop-item-label">Biriyani</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ── Filter Bar ── -->
+                    <div class="filter-bar">
+                        <div class="filter-chip" style="flex:1.2;">
+                            <img src="https://www.figma.com/api/mcp/asset/48da7e33-2076-439a-b749-abcce574e4be" alt=""
+                                style="width:15px;height:15px;object-fit:contain;" />
+                            <span class="filter-chip-text">Filters</span>
+                            <span class="filter-arrow">
+                                <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1L5 5L9 1" stroke="#414449" stroke-width="1.2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="filter-chip" style="flex:1.2;">
+                            <span class="filter-chip-text">All Cuisine</span>
+                            <span class="filter-arrow">
+                                <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1L5 5L9 1" stroke="#414449" stroke-width="1.2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="filter-chip-sm">
+                            <img src="https://www.figma.com/api/mcp/asset/d704fdd9-848a-4594-b98d-c08dcf427abd" alt=""
+                                style="width:18px;height:14px;object-fit:contain;" />
+                        </div>
+                        <div class="filter-chip-sm" style="border-width:1px;">
+                            <img src="https://www.figma.com/api/mcp/asset/178b4397-8874-4dfc-bd20-89e3e1c55af4" alt=""
+                                style="width:17px;height:17px;object-fit:contain;" />
+                        </div>
+                    </div>
+
+                    <!-- ── Starters (43) ── -->
+                    <div class="menu-section">
+                        <div class="section-header" style="padding:0;">
+                            <span class="section-title">Starters (43)</span>
+                            <span class="section-view-all">View all</span>
+                        </div>
+                        <div class="menu-grid">
+                            <!-- Item 1 -->
+                            <div class="menu-item-card">
+                                <div class="menu-item-img">
+                                    <img src="https://www.figma.com/api/mcp/asset/47b0ff45-854f-4497-a194-a6532f1a5149"
+                                        alt="Tandoori Chooza" />
+                                </div>
+                                <div class="menu-item-info">
+                                    <span class="menu-item-name">Tandoori Chooza</span>
+                                    <div class="menu-item-meta">
+                                        <div class="menu-item-row">
+                                            <img class="menu-veg-dot"
+                                                src="https://www.figma.com/api/mcp/asset/9cbdd052-d3d7-4a6a-8c8b-f239412b5a8a"
+                                                alt="" />
+                                            <span class="menu-veg-label">Veg</span>
+                                            <span class="menu-sep">|</span>
+                                            <span class="menu-time">20-25 mins</span>
+                                        </div>
+                                        <span class="menu-cuisine">North Indian, Veg starters</span>
+                                    </div>
+                                    <span class="menu-price">₹675</span>
+                                </div>
+                            </div>
+                            <!-- Item 2 -->
+                            <div class="menu-item-card">
+                                <div class="menu-item-img">
+                                    <img src="https://www.figma.com/api/mcp/asset/960ef2f6-4e5e-4505-8dad-9b446a27c03c"
+                                        alt="Tandoori Broccoli" />
+                                </div>
+                                <div class="menu-item-info">
+                                    <span class="menu-item-name">Tandoori Broccoli</span>
+                                    <div class="menu-item-meta">
+                                        <div class="menu-item-row">
+                                            <img class="menu-veg-dot"
+                                                src="https://www.figma.com/api/mcp/asset/9cbdd052-d3d7-4a6a-8c8b-f239412b5a8a"
+                                                alt="" />
+                                            <span class="menu-veg-label">Veg</span>
+                                            <span class="menu-sep">|</span>
+                                            <span class="menu-time">20-25 mins</span>
+                                        </div>
+                                        <span class="menu-cuisine">North Indian, Veg starters</span>
+                                    </div>
+                                    <span class="menu-price">₹675</span>
+                                </div>
+                            </div>
+                            <!-- Item 3 -->
+                            <div class="menu-item-card">
+                                <div class="menu-item-img">
+                                    <img src="https://www.figma.com/api/mcp/asset/960ef2f6-4e5e-4505-8dad-9b446a27c03c"
+                                        alt="Tandoori Broccoli" />
+                                </div>
+                                <div class="menu-item-info">
+                                    <span class="menu-item-name">Tandoori Broccoli</span>
+                                    <div class="menu-item-meta">
+                                        <div class="menu-item-row">
+                                            <img class="menu-veg-dot"
+                                                src="https://www.figma.com/api/mcp/asset/9cbdd052-d3d7-4a6a-8c8b-f239412b5a8a"
+                                                alt="" />
+                                            <span class="menu-veg-label">Veg</span>
+                                            <span class="menu-sep">|</span>
+                                            <span class="menu-time">20-25 mins</span>
+                                        </div>
+                                        <span class="menu-cuisine">North Indian, Veg starters</span>
+                                    </div>
+                                    <span class="menu-price">₹675</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ── Starters (43) – Second section ── -->
+                    <div class="menu-section">
+                        <div class="section-header" style="padding:0;">
+                            <span class="section-title">Starters (43)</span>
+                            <span class="section-view-all" style="font-size:13px;">View all</span>
+                        </div>
+                        <div class="menu-grid">
+                            <!-- Item 1 -->
+                            <div class="menu-item-card">
+                                <div class="menu-item-img">
+                                    <img src="https://www.figma.com/api/mcp/asset/ba2b52f6-53f2-4354-a480-d821683fab92"
+                                        alt="Tandoori Chooza" />
+                                </div>
+                                <div class="menu-item-info">
+                                    <span class="menu-item-name">Tandoori Chooza</span>
+                                    <div class="menu-item-meta">
+                                        <div class="menu-item-row">
+                                            <img class="menu-veg-dot"
+                                                src="https://www.figma.com/api/mcp/asset/9cbdd052-d3d7-4a6a-8c8b-f239412b5a8a"
+                                                alt="" />
+                                            <span class="menu-veg-label">Veg</span>
+                                            <span class="menu-sep">|</span>
+                                            <span class="menu-time">20-25 mins</span>
+                                        </div>
+                                        <span class="menu-cuisine">North Indian, Veg starters</span>
+                                    </div>
+                                    <span class="menu-price">₹675</span>
+                                </div>
+                            </div>
+                            <!-- Item 2 -->
+                            <div class="menu-item-card">
+                                <div class="menu-item-img">
+                                    <img src="https://www.figma.com/api/mcp/asset/0de65893-0cab-4bcf-baee-cd16add539d2"
+                                        alt="Tandoori Broccoli" />
+                                </div>
+                                <div class="menu-item-info">
+                                    <span class="menu-item-name">Tandoori Broccoli</span>
+                                    <div class="menu-item-meta">
+                                        <div class="menu-item-row">
+                                            <img class="menu-veg-dot"
+                                                src="https://www.figma.com/api/mcp/asset/9cbdd052-d3d7-4a6a-8c8b-f239412b5a8a"
+                                                alt="" />
+                                            <span class="menu-veg-label">Veg</span>
+                                            <span class="menu-sep">|</span>
+                                            <span class="menu-time">20-25 mins</span>
+                                        </div>
+                                        <span class="menu-cuisine">North Indian, Veg starters</span>
+                                    </div>
+                                    <span class="menu-price">₹675</span>
+                                </div>
+                            </div>
+                            <!-- Item 3 -->
+                            <div class="menu-item-card">
+                                <div class="menu-item-img">
+                                    <img src="https://www.figma.com/api/mcp/asset/0de65893-0cab-4bcf-baee-cd16add539d2"
+                                        alt="Tandoori Broccoli" />
+                                </div>
+                                <div class="menu-item-info">
+                                    <span class="menu-item-name">Tandoori Broccoli</span>
+                                    <div class="menu-item-meta">
+                                        <div class="menu-item-row">
+                                            <img class="menu-veg-dot"
+                                                src="https://www.figma.com/api/mcp/asset/9cbdd052-d3d7-4a6a-8c8b-f239412b5a8a"
+                                                alt="" />
+                                            <span class="menu-veg-label">Veg</span>
+                                            <span class="menu-sep">|</span>
+                                            <span class="menu-time">20-25 mins</span>
+                                        </div>
+                                        <span class="menu-cuisine">North Indian, Veg starters</span>
+                                    </div>
+                                    <span class="menu-price">₹675</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ── Footer ── -->
+                    <div class="footer">
+                        <div class="footer-brand">
+                            <p class="footer-powered">Powered by</p>
+                            <div class="footer-logo-row">
+                                <div class="footer-line"></div>
+                                <div class="footer-logo">
+                                    Ta<span style="letter-spacing:1.44px;">p</span><span class="bold">Q</span><span
+                                        class="bold" style="letter-spacing:-5.12px;">R</span>
+                                </div>
+                                <div class="footer-line"></div>
+                            </div>
+                        </div>
+                        <p class="footer-url">www.tapq.com</p>
+                    </div>
+
+                </main><!-- /main-card -->
+
+            </div><!-- /app -->
+        </div><!-- phone-frame -->
+    </div><!-- phone-shell -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Category active state toggle
+        function initCategoryToggle() {
+            document.querySelectorAll('.category-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.category-item').forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                });
+            });
+        }
+        initCategoryToggle();
+
+        // ═══════════════════════════════════════════
+        // SUPABASE INTEGRATION
+        // ═══════════════════════════════════════════
+        const supabaseUrl = 'https://lnahubwsaoxgcansoqjk.supabase.co';
+        const supabaseKey = 'sb_publishable_7h6wtynhmXRFaGBReelDGg_V4l3gVeW'; // Extracted from older commit or file
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function fetchMenuData() {
+            if (!supabase) {
+                console.warn('Supabase not initialized. Using fallback hardcoded data. Please add your Anon Key.');
+                return;
+            }
+
+            try {
+                // Fetch Categories
+                const { data: categories, error: catError } = await supabase.from('categories').select('*').order('id');
+
+                if (catError) {
+                    const searchBar = document.querySelector('.search-placeholder');
+                    if (searchBar) {
+                        searchBar.textContent = "Error: " + catError.message;
+                        searchBar.style.color = "red";
+                    }
+                    console.error('catError:', catError);
+                } else if (categories && categories.length > 0) {
+                    renderCategories(categories);
+                }
+
+                // Fetch Spotlight Dishes
+                const { data: spotlightData } = await supabase.from('spotlight_dishes').select('*').eq('is_active', true).order('display_order');
+                if (spotlightData && spotlightData.length > 0) renderSpotlight(spotlightData);
+
+                // Fetch Most Ordered
+                const { data: mostOrdered } = await supabase.from('most_ordered').select('*').order('id');
+                if (mostOrdered && mostOrdered.length > 0) renderMostOrdered(mostOrdered);
+
+                // Fetch Highlights
+                const { data: highlights } = await supabase.from('highlights').select('*').order('id');
+                if (highlights && highlights.length > 0) renderHighlights(highlights);
+
+                // Fetch Popular Categories
+                const { data: popCategories } = await supabase.from('popular_categories').select('*').order('id');
+                if (popCategories && popCategories.length > 0) renderPopularCategories(popCategories);
+
+                // Fetch Starters (assuming category_name = 'Starters')
+                const { data: starters } = await supabase.from('menu_items')
+                    .select('*')
+                    .eq('category_name', 'Starters')
+                    .order('id');
+                if (starters && starters.length > 0) renderMenuGrid(starters);
+
+            } catch (err) {
+                console.error("Failed to load generic items from Supabase:", err);
+                const searchBar = document.querySelector('.search-placeholder');
+                if (searchBar) {
+                    searchBar.textContent = "Exception: " + err.message;
+                    searchBar.style.color = "red";
+                }
+            }
+        }
+
+        // --- Render Functions ---
+
+        let spotlightItems = [];
+        let currentSpotlightIndex = 0;
+        let spotlightInterval = null;
+
+        function renderSpotlight(items) {
+            if (!items || items.length === 0) return;
+            spotlightItems = items;
+
+            // Generate dots
+            const dotsContainer = document.querySelector('.hero-dots');
+            if (dotsContainer) {
+                dotsContainer.innerHTML = items.map((_, i) => `<div class="${i === 0 ? 'dot-active' : 'dot-inactive'}"></div>`).join('');
+            }
+
+            // Render first immediately
+            updateSpotlightUI(0);
+
+            // Start auto scroll
+            if (items.length > 1 && !spotlightInterval) {
+                spotlightInterval = setInterval(() => {
+                    const nextIndex = (currentSpotlightIndex + 1) % items.length;
+                    transitionSpotlight(nextIndex);
+                }, 4000);
+            }
+        }
+
+        function transitionSpotlight(index) {
+            const heroBgImg = document.querySelector('.hero-bg img');
+            const heroTextCol = document.querySelector('.hero-text-col');
+
+            if (heroBgImg) heroBgImg.style.opacity = '0';
+            if (heroTextCol) heroTextCol.style.opacity = '0';
+
+            setTimeout(() => {
+                updateSpotlightUI(index);
+                if (heroBgImg) heroBgImg.style.opacity = '1';
+                if (heroTextCol) heroTextCol.style.opacity = '1';
+            }, 500); // match CSS fade time
+        }
+
+        function updateSpotlightUI(index) {
+            currentSpotlightIndex = index;
+            const item = spotlightItems[index];
+            const heroBgImg = document.querySelector('.hero-bg img');
+            const heroTitleMain = document.querySelector('.hero-title-main');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+
+            if (heroBgImg) heroBgImg.src = item.image_url;
+            if (heroSubtitle) heroSubtitle.textContent = item.description;
+            if (heroTitleMain) {
+                const words = item.title.split(' ');
+                const firstWord = words.shift();
+                const rest = words.join(' ');
+                heroTitleMain.innerHTML = `<p>${firstWord}</p><p>${rest}</p>`;
+            }
+
+            const dots = document.querySelectorAll('.hero-dots div');
+            dots.forEach((dot, i) => {
+                dot.className = i === index ? 'dot-active' : 'dot-inactive';
+            });
+        }
+
+        function renderCategories(items) {
+            const container = document.querySelector('.categories-section');
+            if (!container) return;
+
+            let html = '';
+            // Split into rows of 4
+            for (let i = 0; i < items.length; i += 4) {
+                const chunk = items.slice(i, i + 4);
+                html += '<div class="category-row">';
+                chunk.forEach(cat => {
+                    const activeClass = cat.is_active ? 'active' : '';
+                    html += `
+                        <div class="category-item ${activeClass}">
+                            <div class="category-icon-wrap">
+                                <img class="category-icon" src="${cat.icon_url}" alt="${cat.name}" />
+                            </div>
+                            <span class="category-label">${cat.name}</span>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+            }
+            container.innerHTML = html;
+            initCategoryToggle(); // rebind events
+        }
+
+        function renderMostOrdered(items) {
+            const container = document.querySelector('.most-ordered-scroll');
+            if (!container) return;
+            let html = '';
+            items.forEach(item => {
+                const vegHTML = item.is_veg
+                    ? `<div class="veg-indicator"><img class="veg-dot-img" src="https://www.figma.com/api/mcp/asset/21d9a7a4-6065-4c1c-9ac7-65ddbf026520" alt=""/><span class="veg-label">Veg</span></div>`
+                    : '';
+                html += `
+                    <div class="dish-card">
+                        <div class="dish-card-img">
+                            <div class="dish-card-img-bg"><img src="${item.img_url}" alt="${item.name}" /></div>
+                            <div class="dish-card-blur" aria-hidden="true"></div>
+                            <div class="dish-card-bottom">
+                                <div class="dish-card-info">
+                                    <span class="dish-card-name">${item.name}</span>
+                                    <span class="dish-card-sub">${item.type_label}</span>
+                                </div>
+                                <button class="dish-card-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="transform:rotate(-90deg) scaleY(-1)"><path d="M6 18L18 6M18 6H8M18 6V16" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
+                            </div>
+                        </div>
+                        <div class="dish-meta">
+                            <div class="dish-meta-left">
+                                ${vegHTML}
+                                <span class="meta-sep">|</span>
+                                <span class="meta-time">${item.time_estimate}</span>
+                            </div>
+                            <span class="dish-price">₹${item.price}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function renderHighlights(items) {
+            const container = document.querySelector('.stories-row');
+            if (!container) return;
+            // keep the add button
+            let html = `
+                <div class="story-ring add-ring" style="position:relative;">
+                    <div class="story-add-avatar">
+                        <svg viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="15.5" cy="15.5" r="12" stroke="#555" stroke-width="1.5" /><path d="M10 19.5l3-4 2.5 3 2-2.5 3.5 5.5H10z" fill="#555" /><circle cx="19" cy="12" r="2" fill="#555" /></svg>
+                    </div>
+                    <div class="story-add-btn">
+                        <svg viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 1v6M1 4h6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" /></svg>
+                    </div>
+                </div>
+            `;
+            items.forEach(h => {
+                html += `
+                    <div class="story-ring">
+                        <div class="story-avatar" style="overflow:hidden; position:relative;">
+                            <img src="${h.img_url}" alt="Story" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function renderPopularCategories(items) {
+            const container = document.querySelector('.pop-grid');
+            if (!container) return;
+            let html = '';
+            items.forEach(cat => {
+                html += `
+                    <div class="pop-item">
+                        <div class="pop-item-img">
+                            <img src="${cat.img_url}" alt="${cat.name}" style="width:100%;height:120%;top:-3.75%;left:0;object-fit:cover;" />
+                        </div>
+                        <span class="pop-item-label">${cat.name}</span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function renderMenuGrid(items) {
+            // Because there are multiple grids, we'll replace the first one for starters (as an example)
+            const containers = document.querySelectorAll('.menu-grid');
+            if (!containers.length) return;
+            const container = containers[0]; // grab first instance
+
+            let html = '';
+            items.forEach(item => {
+                const vegHTML = item.is_veg
+                    ? `<img class="menu-veg-dot" src="https://www.figma.com/api/mcp/asset/9cbdd052-d3d7-4a6a-8c8b-f239412b5a8a" alt=""/><span class="menu-veg-label">Veg</span>`
+                    : '';
+                html += `
+                    <div class="menu-item-card">
+                        <div class="menu-item-img">
+                            <img src="${item.img_url}" alt="${item.name}" />
+                        </div>
+                        <div class="menu-item-info">
+                            <span class="menu-item-name">${item.name}</span>
+                            <div class="menu-item-meta">
+                                <div class="menu-item-row">
+                                    ${vegHTML}
+                                    <span class="menu-sep">|</span>
+                                    <span class="menu-time">${item.time_estimate}</span>
+                                </div>
+                                <span class="menu-cuisine">${item.type_label}</span>
+                            </div>
+                            <span class="menu-price">₹${item.price}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // Initialize Call
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', fetchMenuData);
+        } else {
+            fetchMenuData(); // Fire immediately if already loaded
+        }
+
+        // Aggressive Auto-Snap Logic (Dual Target)
+        const appContainer = document.getElementById('app');
+        const mainCard = document.querySelector('.main-card');
+
+        // Dynamically enforce boundary limits
+        const setCardHeight = () => {
+            const h = appContainer.clientHeight || window.innerHeight;
+            mainCard.style.height = (h - 96) + 'px';
+        };
+        setCardHeight();
+        window.addEventListener('resize', setCardHeight);
+
+        let isAtTop = false;
+        let isAnimating = false;
+        const maxScroll = 304; // 400px hero - 96px topbar
+
+        // 1. Listen for inner-sheet scrolling (iOS bypasses parent limits frequently)
+        mainCard.addEventListener('scroll', () => {
+            if (isAnimating) return;
+            
+            if (!isAtTop && mainCard.scrollTop > 5) {
+                isAnimating = true;
+                
+                // Snap sheet upward
+                if (typeof appContainer.scrollTo === 'function') {
+                    appContainer.scrollTo({ top: maxScroll, behavior: 'smooth' });
+                } else {
+                    appContainer.scrollTop = maxScroll;
+                }
+                
+                setTimeout(() => {
+                    isAnimating = false;
+                    isAtTop = true;
+                }, 400); 
+            }
+        }, { passive: true });
+
+        // 2. Listen for parent scrolling (Hero interacting / pull to dismiss)
+        appContainer.addEventListener('scroll', () => {
+            if (isAnimating) return;
+            const st = appContainer.scrollTop;
+            
+            // If they interact with the hero image and scroll up
+            if (!isAtTop && st > 5) {
+                isAnimating = true;
+                if (typeof appContainer.scrollTo === 'function') {
+                    appContainer.scrollTo({ top: maxScroll, behavior: 'smooth' });
+                } else {
+                    appContainer.scrollTop = maxScroll;
+                }
+                setTimeout(() => {
+                    isAnimating = false;
+                    isAtTop = true;
+                }, 400);
+            } 
+            // If firmly at top, and user pulls it down past a 10px buffer, snap down
+            else if (isAtTop && st < maxScroll - 10) {
+                isAnimating = true;
+                
+                // Immediately reset internal flow
+                if (mainCard.scrollTop > 0) mainCard.scrollTop = 0; 
+                
+                // Navigate back to hero
+                if (typeof appContainer.scrollTo === 'function') {
+                    appContainer.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    appContainer.scrollTop = 0;
+                }
+                
+                setTimeout(() => {
+                    isAnimating = false;
+                    isAtTop = false;
+                }, 400);
+            }
+        }, { passive: true });
+
+
+    </script>
+</body>
+
+</html>

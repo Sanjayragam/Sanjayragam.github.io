@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>3D Menu – Dish Detail</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&family=Allan:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="dishpage.css">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+</head>
+
+<body>
+  <div class="screen">
+
+    <!-- Background glow -->
+    <div class="bg-glow"></div>
+
+    <!-- Top Nav -->
+    <div class="top-nav">
+      <a class="back-btn" href="category.html">
+        <svg width="19" height="14" viewBox="0 0 19 14" fill="none">
+          <path d="M18 7H2M2 7L8 1M2 7L8 13" stroke="#000" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        <span>BACK</span>
+      </a>
+      <div class="nav-actions">
+        <button class="nav-btn">
+          <img src="https://www.figma.com/api/mcp/asset/399e4354-afe6-4b53-8c4c-55b1a4ef38eb" alt="search" />
+        </button>
+        <button class="nav-btn">
+          <img src="https://www.figma.com/api/mcp/asset/0880add7-6bf8-4151-aa62-ccfa7998eef9" alt="menu" />
+        </button>
+      </div>
+    </div>
+
+    <!-- Dish Info -->
+    <div class="dish-info-top">
+      <div class="breadcrumb">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M2 12 C2 8, 7 4, 8 2 C9 4, 14 8, 14 12" stroke="#6c6c6c" stroke-width="1.3" stroke-linecap="round" />
+        </svg>
+        In starters
+      </div>
+      <div class="dish-main-name">Tandoori Chooza</div>
+      <div class="dish-meta-row">
+        <div class="dish-meta-left">
+          <div class="dish-type-row">
+            <span class="non-veg">
+              <img src="https://www.figma.com/api/mcp/asset/94a5d554-2911-4275-9554-60b130130f95" alt="non-veg" />
+              Non veg
+            </span>
+            <span class="dot-sep">•</span>
+            <span class="cook-time">20-25 mins</span>
+          </div>
+          <div class="dish-kitchen">North Indian, Veg starters</div>
+        </div>
+        <div class="dish-price-lg">₹300</div>
+      </div>
+    </div>
+
+    <!-- Shadow ellipse under dish -->
+    <div class="shadow-ellipse" style="top:490px;"></div>
+
+    <!-- 3D Dish Viewer -->
+    <div class="viewer-area" id="viewer">
+      <div class="dish-3d-container" id="dishContainer">
+        <model-viewer src="https://raw.githubusercontent.com/sanjaymepv/Assets/main/Burger.glb" camera-controls
+          auto-rotate shadow-intensity="1" alt="3D Burger" class="dish-3d-model"
+          max-camera-orbit="auto 90deg auto"></model-viewer>
+      </div>
+    </div>
+
+    <!-- View on Table Button -->
+    <!-- <button class="view-on-table-btn" onclick="location.href='ar.html'">
+      <img src="https://www.figma.com/api/mcp/asset/b9564934-fda3-475d-9b5c-fed832e7ccf5" alt="AR"
+        style="width:23px;height:25px;" />
+      <!-- <span>View on your table</span> -->
+    </button> -->
+
+    <!-- Add FAB -->
+    <button class="add-fab">
+      <img src="https://www.figma.com/api/mcp/asset/e6809f51-52ad-4e02-a055-b1bcec6845a7" alt="add"
+        style="width:26px;height:26px;" />
+    </button>
+
+    <!-- Bottom Section -->
+    <div class="bottom-section">
+      <div class="bottom-header">
+        <span class="bottom-title">Select Dishes</span>
+        <div class="see-all">
+          See all
+          <svg viewBox="0 0 19 14" fill="none">
+            <path d="M1 7H17M17 7L11 1M17 7L11 13" stroke="#797d82" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="related-scroll">
+        <div class="related-card">
+          <div class="related-img">
+            <img src="https://www.figma.com/api/mcp/asset/b3cad1df-4442-4a08-8a96-7c5b0d59ca4b" alt="Dahi Ke Kabab" />
+          </div>
+          <div class="related-info">
+            <div class="related-name">Dahi Ke Kabab</div>
+            <div class="related-meta">
+              <svg viewBox="0 0 16 16" fill="#f5a623">
+                <path d="M8 1l1.8 3.6L14 5.3l-3 2.9.7 4.1L8 10.3l-3.7 1.9.7-4.1-3-2.9 4.2-.7z" />
+              </svg>
+              4.4
+              <span>•</span>
+              20-25 mins
+            </div>
+            <div class="related-price">₹675</div>
+          </div>
+        </div>
+
+        <div class="related-card">
+          <div class="related-img">
+            <img src="https://www.figma.com/api/mcp/asset/b5c44b58-90dd-4f2e-8c8d-22c6b3eee6ee"
+              alt="Tandoori Broccoli" />
+          </div>
+          <div class="related-info">
+            <div class="related-name">Tandoori Broccoli</div>
+            <div class="related-meta">
+              <svg viewBox="0 0 16 16" fill="#f5a623">
+                <path d="M8 1l1.8 3.6L14 5.3l-3 2.9.7 4.1L8 10.3l-3.7 1.9.7-4.1-3-2.9 4.2-.7z" />
+              </svg>
+              4.2
+              <span>•</span>
+              15-20 mins
+            </div>
+            <div class="related-price">₹450</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>

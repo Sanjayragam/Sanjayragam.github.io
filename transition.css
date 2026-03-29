@@ -1,0 +1,61 @@
+/* Page Transition Animations */
+body {
+    background: #000;
+}
+
+.screen {
+    animation-duration: 0.35s;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform, opacity;
+}
+
+/* Entrance from Right */
+.slide-in-forward .screen {
+    animation-name: slideInRight;
+}
+
+/* Exit to Left */
+.slide-out-forward .screen {
+    animation-name: slideOutLeft;
+}
+
+/* Entrance from Left */
+.slide-in-back .screen {
+    animation-name: slideInLeft;
+}
+
+/* Exit to Right */
+.slide-out-back .screen {
+    animation-name: slideOutRight;
+}
+
+.fade-in .screen {
+    animation-name: fadeIn;
+}
+
+/* Keyframes */
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutLeft {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(-30%); opacity: 0; }
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutRight {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
