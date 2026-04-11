@@ -137,7 +137,7 @@
  }
 
  @font-face {
-     font-family: Albra;
+     font-family: Eatvetica;
      /* set name */
      src: url(Fonts/Eatvetica-Demo-BF689c375706135.woff);
      /* url of the font */
@@ -148,7 +148,7 @@
  }
 
  .hero-text h1 {
-     font-family: Albra;
+     font-family: Eatvetica;
      font-size: 40PX;
      font-weight: 800;
      line-height: 1.0;
