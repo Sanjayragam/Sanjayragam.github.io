@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Category Section</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,600&family=Syne:wght@700;800&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --bg: #FDFAF7;
+      --text-h: #1A1209;
+      --text-muted: #9E8E7A;
+      --accent: #C84B2F;
+      --cat-w: 140px;
+      --cat-h: 140px;
+      --cat-r: 13px;
+    }
+
+
+
+    /* ==================== SECTION HEADER ROW ==================== */
+    .section-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-h);
+    }
+
+    .section-see {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      cursor: pointer;
+    }
+
+    /* ==================== CATEGORIES TRACK ==================== */
+    .categories-track {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px 22px;
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      margin-bottom: 26px;
+    }
+
+    .categories-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* ==================== BASE CARD ==================== */
+    .cat-card {
+      position: relative;
+      width: var(--cat-w);
+      height: var(--cat-h);
+      border-radius: var(--cat-r);
+      overflow: hidden;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      cursor: pointer;
+      transition: transform .22s cubic-bezier(.34, 1.56, .64, 1);
+      transform-style: preserve-3d;
+    }
+
+    /* Radial gradient background fill */
+    .cat-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    /* ==================== LABEL BLOCK ==================== */
+    .cat-lbl {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      line-height: 0;
+      white-space: nowrap;
+      z-index: 3;
+      transform: translateY(-50%);
+    }
+
+    .cat-lbl-l1 {
+      font-family: 'Figtree', sans-serif;
+      display: block;
+      line-height: 0.9;
+      letter-spacing: -0.461px;
+    }
+
+    .cat-lbl-l2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-weight: 600;
+      display: block;
+      line-height: 0.9;
+      letter-spacing: -0.461px;
+    }
+
+    /* ==================== FOOD IMAGE CONTAINERS ==================== */
+
+    /* Card 1 — Starters */
+    .img-starters {
+      position: absolute;
+      bottom: -20px;
+      left: calc(50% + 41px);
+      transform: translateX(-50%);
+      width: 186px;
+      height: 93px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Card 2 — Main Course */
+    .img-main {
+      position: absolute;
+      bottom: -37px;
+      left: calc(50% + 30.5px);
+      transform: translateX(-50%);
+      width: 155px;
+      height: 108px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Card 3 — Salad */
+    .img-salad-wrap {
+      position: absolute;
+      left: calc(50% + 18.31px);
+      top: 55px;
+      transform: translateX(-50%);
+      width: 160.611px;
+      height: 160.611px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .img-salad-inner {
+      transform: rotate(-8.11deg);
+      width: 142px;
+      height: 142px;
+      flex-shrink: 0;
+    }
+
+    /* Card 4 — Sweet */
+    .img-sweet {
+      position: absolute;
+      left: 17px;
+      top: 38px;
+      width: 151px;
+      height: 151px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Card 5 — Thirst */
+    .img-thirst {
+      position: absolute;
+      top: 60px;
+      left: calc(50% + 6px);
+      transform: translateX(-50%);
+      width: 110px;
+      height: 164px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .img-thirst-ellipse {
+      position: absolute;
+      left: -19px;
+      top: 83px;
+      width: 56.404px;
+      height: 56.404px;
+      z-index: 1;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .img-thirst-ellipse img {
+      position: absolute;
+      width: 327%;
+      height: 327%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: none;
+    }
+
+    /* Card 6 — Bar */
+    .img-bar {
+      position: absolute;
+      top: 69px;
+      left: calc(50% + 20px);
+      transform: translateX(-50%);
+      width: 92px;
+      height: 95px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* All food images fill their containers */
+    .cat-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .img-salad-inner img {
+      width: 142px;
+      height: 142px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==================== CATEGORY SECTION ==================== -->
+  <div class="section-row">
+    <span class="section-title">Categories</span>
+    <span class="section-see">See all</span>
+  </div>
+
+  <div class="categories-track" id="catTrack">
+
+    <!-- Card 1: Our Starters -->
+    <div class="cat-card" style="border:1px solid #ffeae9;">
+      <div class="cat-bg"
+        style="background:radial-gradient(ellipse at 4.5px 140px,#BE4130 4.3%,#C65647 16.3%,#CE6A5E 28.2%,#DF958B 52.2%,#EFBFb9 76.1%,#FFE9E6 100%);opacity:.5;">
+      </div>
+      <div class="cat-lbl" style="color:#9d4901; left:12px; top:37.8px;">
+        <span class="cat-lbl-l1" style="font-size:22.368px; font-weight:700; color:#9d4901;">Our</span>
+        <span class="cat-lbl-l2" style="font-size:22.368px; color:#9d4901;">Starters</span>
+      </div>
+      <div class="img-starters">
+        <img src="https://www.figma.com/api/mcp/asset/29d01591-0ae2-4887-99cc-1ac6ba930f41"
+          alt="Spicy grilled chicken" />
+      </div>
+    </div>
+
+    <!-- Card 2: Main Course -->
+    <div class="cat-card" style="border:1px solid #f9ebca;">
+      <div class="cat-bg"
+        style="background:radial-gradient(ellipse at 4.5px 140px,#FF9522 4.3%,#FFA13B 16.3%,#FFAD53 28.2%,#FFC683 52.2%,#FFDEB4 76.1%,#FFF7E4 100%);opacity:.6;">
+      </div>
+      <div class="cat-lbl" style="color:#d77a16; left:12px; top:30.8px;">
+        <span class="cat-lbl-l1" style="font-size:22.122px; font-weight:500; color:#d77a16;">Main</span>
+        <span class="cat-lbl-l2" style="font-size:22.122px; color:#d77a16;">Course</span>
+      </div>
+      <div class="img-main">
+        <img src="https://www.figma.com/api/mcp/asset/d7729765-43a6-4f71-acb8-e041dc8153f0" alt="Nasi rawon" />
+      </div>
+    </div>
+
+    <!-- Card 3: Salad Selection -->
+    <div class="cat-card" style="border:1px solid #e0f8df;">
+      <div class="cat-bg"
+        style="background:radial-gradient(ellipse at 24px 127.5px,#669E38 4.3%,#87B364 28.2%,#A9C891 52.2%,#CBD5BD 76.1%,#EDF2E9 100%);opacity:.5;">
+      </div>
+      <div class="cat-lbl" style="color:#3a690c; left:17px; top:34.8px;">
+        <span class="cat-lbl-l1" style="font-size:22.122px; font-weight:500; color:#3a690c;">Salad</span>
+        <span class="cat-lbl-l2" style="font-size:22.122px; color:#3a690c;">Selection</span>
+      </div>
+      <div class="img-salad-wrap">
+        <div class="img-salad-inner">
+          <img src="https://www.figma.com/api/mcp/asset/9b351e1b-c900-436c-b433-d2a23136be9f" alt="Creamy avocado" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4: Sweet Delights -->
+    <div class="cat-card" style="border:1px solid rgba(246,198,208,0.26);">
+      <div class="cat-bg"
+        style="background:radial-gradient(ellipse at 24px 127.5px,#FF6C8C 4.3%,#FF9FB4 52.2%,#FFD3DC 100%);opacity:.5;">
+      </div>
+      <div class="cat-lbl" style="color:#b43651; left:17px; top:34.8px;">
+        <span class="cat-lbl-l1" style="font-size:22.122px; font-weight:500; color:#b43651;">Sweet</span>
+        <span class="cat-lbl-l2" style="font-size:22.122px; color:#b43651;">Delights</span>
+      </div>
+      <div class="img-sweet">
+        <img src="https://www.figma.com/api/mcp/asset/b66fa4aa-6506-4595-8f55-f9a9bcf807f2" alt="Belgian waffles" />
+      </div>
+    </div>
+
+    <!-- Card 5: Thirst Quenchers -->
+    <div class="cat-card" style="border:1px solid #e9f0ff;">
+      <div class="cat-bg"
+        style="background:radial-gradient(ellipse at 4.5px 140px,#2261FF 4.3%,#3B73FF 16.3%,#5585FF 28.2%,#87A9FF 52.2%,#B9CDFF 76.1%,#EBF1FF 100%);opacity:.6;">
+      </div>
+      <div class="img-thirst-ellipse">
+        <img src="https://www.figma.com/api/mcp/asset/d548f539-606c-4efc-ad9f-d9d8ff1dc432" alt="" />
+      </div>
+      <div class="cat-lbl" style="color:#123688; left:calc(50% - 58px); top:34.8px;">
+        <span class="cat-lbl-l1" style="font-size:22.122px; font-weight:500; color:#123688;">Thirst</span>
+        <span class="cat-lbl-l2" style="font-size:22.122px; color:#123688;">Quenchers</span>
+      </div>
+      <div class="img-thirst">
+        <img src="https://www.figma.com/api/mcp/asset/ea659f31-deb8-4e5e-afd1-acce92a0d71c" alt="Blue margarita" />
+      </div>
+    </div>
+
+    <!-- Card 6: Bar Menu -->
+    <div class="cat-card" style="border:1px solid #fcf0ec;">
+      <div class="cat-bg"
+        style="background:radial-gradient(ellipse at 4.5px 140px,#611A00 4.3%,#6B270E 10.3%,#75341D 16.3%,#884A3A 28.2%,#9C6957 40.2%,#B08474 52.2%,#C49E91 64.1%,#D7B8AE 76.1%,#FFEAE4 100%);opacity:.6;">
+      </div>
+      <div class="cat-lbl" style="color:#441911; left:calc(50% - 58px); top:34.8px;">
+        <span class="cat-lbl-l1" style="font-size:22.122px; font-weight:500; color:#441911;">Bar</span>
+        <span class="cat-lbl-l2" style="font-size:22.122px; color:#441911;">Menu</span>
+      </div>
+      <div class="img-bar">
+        <img src="https://www.figma.com/api/mcp/asset/e7ee65e8-dc92-4662-9277-0694294f5274" alt="Old fashioned" />
+      </div>
+    </div>
+
+  </div><!-- /categories-track -->
+
+  <script>
+    /* 3D tilt on category cards */
+    document.querySelectorAll('.cat-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const dx = (e.clientX - r.left - r.width / 2) / (r.width / 2);
+        const dy = (e.clientY - r.top - r.height / 2) / (r.height / 2);
+        card.style.transform = `perspective(520px) rotateX(${-dy * 9}deg) rotateY(${dx * 9}deg) translateZ(6px)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+      let ts = null;
+      card.addEventListener('touchstart', e => { ts = e.touches[0]; }, { passive: true });
+      card.addEventListener('touchmove', e => {
+        if (!ts) return;
+        const r = card.getBoundingClientRect();
+        const t = e.touches[0];
+        const dx = (t.clientX - r.left - r.width / 2) / (r.width / 2);
+        const dy = (t.clientY - r.top - r.height / 2) / (r.height / 2);
+        card.style.transform = `perspective(520px) rotateX(${-dy * 5}deg) rotateY(${dx * 5}deg) translateZ(4px)`;
+      }, { passive: true });
+      card.addEventListener('touchend', () => { ts = null; card.style.transform = ''; });
+    });
+  </script>
+
+</body>
+
+</html>

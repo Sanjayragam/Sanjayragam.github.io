@@ -14,13 +14,13 @@
     href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;900&family=Allan:wght@400;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="index.css">
-  <link rel="stylesheet" href="home.css">
+  <!-- <link rel="stylesheet" href="home.css"> -->
 </head>
 
 <body>
 
   <div class="phone-shell">
-    <div class="phone-frame">
+    <div class="phone-frame" style="transform-origin: center center;">
 
       <!-- ══════════ SPLASH SCREEN ══════════ -->
       <div id="splash" class="screen active">
@@ -84,6 +84,23 @@
   </div><!-- phone-shell -->
 
   <script>
+    // ── SCALING FOR DESKTOP ──
+    function fitPhoneFrame() {
+      const frame = document.querySelector('.phone-frame');
+      // If we are not on a tiny screen, apply scaling so the 844px frame fits entirely within viewport
+      if (window.innerWidth > 480) {
+        // Leave a 40px margin (20px top + 20px bottom)
+        const scaleHeight = (window.innerHeight - 40) / 844;
+        const scaleWidth = (window.innerWidth - 40) / 390;
+        const scale = Math.min(1, scaleHeight, scaleWidth);
+        frame.style.transform = `scale(${scale})`;
+      } else {
+        frame.style.transform = 'none';
+      }
+    }
+    window.addEventListener('resize', fitPhoneFrame);
+    fitPhoneFrame(); // Initial fit
+
     // ── NAVIGATION ──
     document.getElementById('exploreBtn')?.addEventListener('click', function (e) {
       e.preventDefault();

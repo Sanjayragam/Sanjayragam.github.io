@@ -20,7 +20,9 @@
 
         <!-- ── HERO ── -->
         <div class="hero">
-            <div class="hero-bg"></div>
+            <div class="overlay"></div>
+            <div class="hero-bg">
+            </div>
             <div class="hero-gradient"></div>
 
             <div class="hero-top">
@@ -35,7 +37,7 @@
 
             <div class="hero-bottom">
                 <div class="hero-text">
-                    <h1>Today's<br>Spotlight<br>Dish</h1>
+                    <h1><span class="hero-title-first-word">Today's</span><br>Spotlight<br>Dish</h1>
                     <p class="hero-subtitle">Slow-boiled in rich Cajun butter with baby potatoes and herbs.</p>
                     <div class="hero-dots">
                         <div class="dot-active"></div>
@@ -56,6 +58,7 @@
 
         <div class="content-card-container">
             <div class="content-card">
+                <div class="grab-handle"></div>
 
                 <!-- Search -->
                 <div class="search-section">
@@ -84,29 +87,150 @@
                         </div>
                     </div>
 
-                    <div class="categories-scroll">
+                    <!-- <div class="categories-scroll">
                         <div class="cat-card cat-card-main" onclick="location.href='category.html'">
                             <span class="cat-label cat-label-main">Starters</span>
-                            <img class="cat-img" src="Images/starters.png" alt="Main"
+                            <img class="cat-img" src="Images/main course.png" alt="Main"
                                 style="position:absolute;right:-20px;bottom:0;width:130px;" />
                         </div>
-                        <div class="cat-card cat-card-starters" onclick="location.href='category.html'">
-                            <span class="cat-label cat-label-starters">Main</span>
-                            <img class="cat-img" src="Images/Main.png" alt="Starters"
-                                style="position:absolute;right:-25px;top:30px;width:140px;" />
-                        </div>
-                        <div class="cat-card cat-card-vegs" onclick="location.href='category.html'">
-                            <span class="cat-label cat-label-vegs">Salads</span>
-                            <img class="cat-img" src="Images/salads.png" alt="Vegs"
-                                style="position:absolute;right:-45px;top:30px;width:160px;mix-blend-mode:multiply;" />
-                        </div>
-                        <div class="cat-card cat-card-starters" onclick="location.href='category.html'">
-                            <span class="cat-label cat-label-starters">Starters</span>
-                            <img src="https://www.figma.com/api/mcp/asset/ad54e7d7-7319-4691-a342-9bdbcc3f718a"
-                                alt="Starters" style="position:absolute;right:-25px;top:30px;width:140px;" />
-                        </div>
+
                         <div class="cat-placeholder"></div>
                     </div>
+ -->
+
+
+
+
+
+
+
+
+
+
+                    <div class="categories-track" id="catTrack">
+
+                        <!-- Card 1: Our Starters -->
+                        <div class="cat-card" style="border:1px solid #ffeae9;">
+                            <div class="cat-bg"
+                                style="background:radial-gradient(ellipse at 4.5px 140px,#BE4130 4.3%,#C65647 16.3%,#CE6A5E 28.2%,#DF958B 52.2%,#EFBFb9 76.1%,#FFE9E6 100%);opacity:.5;">
+                            </div>
+                            <div class="cat-lbl" style="color:#9d4901; left:12px; top:37.8px;">
+                                <span class="cat-lbl-l1"
+                                    style="font-size:22.368px; font-weight:700; color:#9d4901;">Our</span>
+                                <span class="cat-lbl-l2" style="font-size:22.368px; color:#9d4901;">Starters</span>
+                            </div>
+                            <div class="img-starters">
+                                <img src="https://www.figma.com/api/mcp/asset/29d01591-0ae2-4887-99cc-1ac6ba930f41"
+                                    alt="Spicy grilled chicken" />
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Main Course -->
+                        <div class="cat-card" style="border:1px solid #f9ebca;">
+                            <div class="cat-bg"
+                                style="background:radial-gradient(ellipse at 4.5px 140px,#FF9522 4.3%,#FFA13B 16.3%,#FFAD53 28.2%,#FFC683 52.2%,#FFDEB4 76.1%,#FFF7E4 100%);opacity:.6;">
+                            </div>
+                            <div class="cat-lbl" style="color:#d77a16; left:12px; top:30.8px;">
+                                <span class="cat-lbl-l1"
+                                    style="font-size:22.122px; font-weight:500; color:#d77a16;">Main</span>
+                                <span class="cat-lbl-l2" style="font-size:22.122px; color:#d77a16;">Course</span>
+                            </div>
+                            <div class="img-main">
+                                <img src="https://www.figma.com/api/mcp/asset/d7729765-43a6-4f71-acb8-e041dc8153f0"
+                                    alt="Nasi rawon" />
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Salad Selection -->
+                        <div class="cat-card" style="border:1px solid #e0f8df;">
+                            <div class="cat-bg"
+                                style="background:radial-gradient(ellipse at 24px 127.5px,#669E38 4.3%,#87B364 28.2%,#A9C891 52.2%,#CBD5BD 76.1%,#EDF2E9 100%);opacity:.5;">
+                            </div>
+                            <div class="cat-lbl" style="color:#3a690c; left:17px; top:34.8px;">
+                                <span class="cat-lbl-l1"
+                                    style="font-size:22.122px; font-weight:500; color:#3a690c;">Salad</span>
+                                <span class="cat-lbl-l2" style="font-size:22.122px; color:#3a690c;">Selection</span>
+                            </div>
+                            <div class="img-salad-wrap">
+                                <div class="img-salad-inner">
+                                    <img src="https://www.figma.com/api/mcp/asset/9b351e1b-c900-436c-b433-d2a23136be9f"
+                                        alt="Creamy avocado" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Sweet Delights -->
+                        <div class="cat-card" style="border:1px solid rgba(246,198,208,0.26);">
+                            <div class="cat-bg"
+                                style="background:radial-gradient(ellipse at 24px 127.5px,#FF6C8C 4.3%,#FF9FB4 52.2%,#FFD3DC 100%);opacity:.5;">
+                            </div>
+                            <div class="cat-lbl" style="color:#b43651; left:17px; top:34.8px;">
+                                <span class="cat-lbl-l1"
+                                    style="font-size:22.122px; font-weight:500; color:#b43651;">Sweet</span>
+                                <span class="cat-lbl-l2" style="font-size:22.122px; color:#b43651;">Delights</span>
+                            </div>
+                            <div class="img-sweet">
+                                <img src="https://www.figma.com/api/mcp/asset/b66fa4aa-6506-4595-8f55-f9a9bcf807f2"
+                                    alt="Belgian waffles" />
+                            </div>
+                        </div>
+
+                        <!-- Card 5: Thirst Quenchers -->
+                        <div class="cat-card" style="border:1px solid #e9f0ff;">
+                            <div class="cat-bg"
+                                style="background:radial-gradient(ellipse at 4.5px 140px,#2261FF 4.3%,#3B73FF 16.3%,#5585FF 28.2%,#87A9FF 52.2%,#B9CDFF 76.1%,#EBF1FF 100%);opacity:.6;">
+                            </div>
+                            <div class="img-thirst-ellipse">
+                                <img src="https://www.figma.com/api/mcp/asset/d548f539-606c-4efc-ad9f-d9d8ff1dc432"
+                                    alt="" />
+                            </div>
+                            <div class="cat-lbl" style="color:#123688; left:calc(50% - 58px); top:34.8px;">
+                                <span class="cat-lbl-l1"
+                                    style="font-size:22.122px; font-weight:500; color:#123688;">Thirst</span>
+                                <span class="cat-lbl-l2" style="font-size:22.122px; color:#123688;">Quenchers</span>
+                            </div>
+                            <div class="img-thirst">
+                                <img src="https://www.figma.com/api/mcp/asset/ea659f31-deb8-4e5e-afd1-acce92a0d71c"
+                                    alt="Blue margarita" />
+                            </div>
+                        </div>
+
+                        <!-- Card 6: Bar Menu -->
+                        <div class="cat-card" style="border:1px solid #fcf0ec;">
+                            <div class="cat-bg"
+                                style="background:radial-gradient(ellipse at 4.5px 140px,#611A00 4.3%,#6B270E 10.3%,#75341D 16.3%,#884A3A 28.2%,#9C6957 40.2%,#B08474 52.2%,#C49E91 64.1%,#D7B8AE 76.1%,#FFEAE4 100%);opacity:.6;">
+                            </div>
+                            <div class="cat-lbl" style="color:#441911; left:calc(50% - 58px); top:34.8px;">
+                                <span class="cat-lbl-l1"
+                                    style="font-size:22.122px; font-weight:500; color:#441911;">Bar</span>
+                                <span class="cat-lbl-l2" style="font-size:22.122px; color:#441911;">Menu</span>
+                            </div>
+                            <div class="img-bar">
+                                <img src="https://www.figma.com/api/mcp/asset/e7ee65e8-dc92-4662-9277-0694294f5274"
+                                    alt="Old fashioned" />
+                            </div>
+                        </div>
+
+                    </div><!-- /categories-track -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     <!-- View Full Menu -->
                     <div class="full-menu-row" style="margin-top:20px;">

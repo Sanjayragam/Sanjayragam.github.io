@@ -28,17 +28,19 @@ async function fetchHomepageData() {
     if (err2) console.error("Categories Error:", err2);
     else if (categories && categories.length > 0) renderCategories(categories);
 
-    // 3. Most Ordered (Dynamically fetching Top 5 rated items from the 'dishes' table)
-    const { data: mostOrdered, error: err3 } = await supabaseClient.from('dishes')
-        .select('*')
-        .order('rating', { ascending: false })
-        .limit(5);
+    // 3. Most Ordered (Dynamically fetching items from the 'special_most_ordered' table)
+    const { data: mostOrdered, error: err3 } = await supabaseClient.from('special_most_ordered')
+        .select('*');
         
     if (err3) console.error("Most Ordered Error:", err3);
     else if (mostOrdered && mostOrdered.length > 0) renderMostOrdered(mostOrdered);
 
     // 4. Popular Categories
-    const { data: popCategories, error: err4 } = await supabaseClient.from('popular_categories').select('*');
+    const { data: popCategories, error: err4 } = await supabaseClient.from('popular_categories')
+        .select('*')
+        .eq('is_active', true)
+        .order('display_order', { ascending: true });
+        
     if (err4) console.error("Pop Categories Error:", err4);
     else if (popCategories && popCategories.length > 0) renderPopularCategories(popCategories);
 
@@ -76,16 +78,76 @@ function renderSpotlight(items) {
 }
 
 function transitionSpotlight(index) {
-    const heroBg = document.querySelector('.hero-bg');
-    const heroText = document.querySelector('.hero-text');
+    const heroGradient = document.querySelector('.hero-gradient');
+    const oldBg = document.querySelector('.hero-bg:not(.sliding-out)');
+    const heroTitle = document.querySelector('.hero-text h1');
+    const heroSub = document.querySelector('.hero-subtitle');
     
-    if (heroBg) heroBg.style.opacity = '0';
-    if (heroText) heroText.style.opacity = '0';
+    if (heroTitle) {
+        heroTitle.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+        heroTitle.style.opacity = '0';
+        heroTitle.style.transform = 'translateY(8px)';
+    }
+    if (heroSub) {
+        heroSub.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+        heroSub.style.opacity = '0';
+        heroSub.style.transform = 'translateY(8px)';
+    }
 
+    if (oldBg) {
+        oldBg.classList.add('sliding-out');
+        oldBg.style.transition = 'transform 0.5s ease-in-out';
+    }
+
+    const item = spotlightItems[index];
+    const newBg = document.createElement('div');
+    newBg.className = 'hero-bg';
+    newBg.style.position = 'absolute';
+    newBg.style.inset = '0';
+    newBg.style.backgroundSize = 'cover';
+    newBg.style.backgroundPosition = 'center';
+    
+    const imgUrl = item.image_url || item.img_url;
+    if (imgUrl) {
+        newBg.style.backgroundImage = `url(${imgUrl})`;
+    }
+    
+    // Start the new background fully positioned to the right
+    newBg.style.transform = 'translateX(100%)';
+    newBg.style.transition = 'transform 0.5s ease-in-out';
+    
+    // Insert behind the gradient
+    if (heroGradient && heroGradient.parentNode) {
+        heroGradient.parentNode.insertBefore(newBg, heroGradient);
+    }
+
+    // Force reflow to ensure the transform jump to 100% is registered before animating
+    newBg.offsetWidth;
+    
+    // Trigger slide animations
+    newBg.style.transform = 'translateX(0)';
+    if (oldBg) {
+        oldBg.style.transform = 'translateX(-100%)';
+    }
+
+    // Update the text while the camera is moving
     setTimeout(() => {
         updateSpotlightUI(index);
-        if (heroBg) heroBg.style.opacity = '1';
-        if (heroText) heroText.style.opacity = '1';
+        if (heroTitle) {
+            heroTitle.style.opacity = '1';
+            heroTitle.style.transform = 'translateY(0px)';
+        }
+        if (heroSub) {
+            heroSub.style.opacity = '1';
+            heroSub.style.transform = 'translateY(0px)';
+        }
+    }, 250);
+
+    // Clean up the old background element after animation completes
+    setTimeout(() => {
+        if (oldBg && oldBg.parentNode) {
+            oldBg.parentNode.removeChild(oldBg);
+        }
     }, 500);
 }
 
@@ -93,29 +155,34 @@ function updateSpotlightUI(index) {
     currentSpotlightIndex = index;
     const item = spotlightItems[index];
 
-    const heroBg = document.querySelector('.hero-bg');
+    // For the initial load: Set the background of the initial hero-bg div.
+    // During a transition, the transitionSpotlight function already sets the new bg's image!
+    const imgUrl = item.image_url || item.img_url;
+    if (!document.querySelector('.sliding-out') && imgUrl) {
+        const initialBg = document.querySelector('.hero-bg');
+        if (initialBg) {
+            initialBg.style.backgroundImage = `url(${imgUrl})`;
+            initialBg.style.backgroundSize = 'cover';
+            initialBg.style.backgroundPosition = 'center';
+        }
+    }
+
     const heroTitle = document.querySelector('.hero-text h1');
     const heroSub = document.querySelector('.hero-subtitle');
     const heroCta = document.querySelector('.hero-cta');
-
-    const imgUrl = item.image_url || item.img_url;
-    if (heroBg && imgUrl) {
-        heroBg.style.backgroundImage = `url(${imgUrl})`;
-        heroBg.style.backgroundSize = 'cover';
-        heroBg.style.backgroundPosition = 'center';
-    }
 
     if (heroTitle) {
         const titleText = item.title || item.name || '';
         if (titleText) {
             const words = titleText.split(' ');
+            if (words.length > 0) {
+                words[0] = `<span class="hero-title-first-word">${words[0]}</span>`;
+            }
             heroTitle.innerHTML = words.join('<br>'); 
         }
     }
-    if (heroSub) heroSub.textContent = item.description;
+    if (heroSub) heroSub.textContent = item.description || item.desc || '';
 
-    // Route CTA to the dish-detail if spotlight has a specific referenced dish ID
-    // If not, we just rely on generic routing or keep the visual CTA
     if (heroCta && item.dish_id) {
         heroCta.setAttribute('onclick', `location.href='dish-detail.html?id=${item.dish_id}'`);
     }
@@ -167,15 +234,27 @@ function renderMostOrdered(items) {
         // If 'dish_id' exists on most_ordered link to it, otherwise default
         const linkId = item.dish_id || item.id;
 
+        // Build derived values for the special table format if present
+        let timeEstimate = item.time_estimate || item.prep_time || '20-25 mins';
+        if (item.prep_time_min && item.prep_time_max) {
+            timeEstimate = `${item.prep_time_min}-${item.prep_time_max} mins`;
+        } else if (item.prep_time_min) {
+            timeEstimate = `${item.prep_time_min} mins`;
+        }
+        
+        const subLabel = item.category || item.type_label || item.cuisine_type || '';
+        const imgUrl = item.img_url || item.image_url || 'Images/card1.png';
+        const price = item.price ? `₹${item.price}` : '';
+
         html += `
             <div class="dish-card" onclick="location.href='dish-detail.html?id=${linkId}'">
                 <div class="dish-card-img">
-                    <img src="${item.img_url}" alt="${item.name}" />
+                    <img src="${imgUrl}" alt="${item.name}" />
                     <div class="dish-card-overlay"></div>
                     <div class="dish-card-info">
                         <div>
                             <div class="dish-card-name">${item.name}</div>
-                            <div class="dish-card-sub">${item.type_label || item.cuisine_type || ''}</div>
+                            <div class="dish-card-sub">${subLabel}</div>
                         </div>
                         <div class="dish-arrow">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
@@ -186,9 +265,9 @@ function renderMostOrdered(items) {
                     <div class="dish-tags">
                         ${vegHTML}
                         <span class="tag-sep">|</span>
-                        <span class="tag-time">${item.time_estimate || item.prep_time || '20-25 mins'}</span>
+                        <span class="tag-time">${timeEstimate}</span>
                     </div>
-                    <div class="dish-price">₹${item.price}</div>
+                    <div class="dish-price">${price}</div>
                 </div>
             </div>
         `;
@@ -203,18 +282,14 @@ function renderPopularCategories(items) {
 
     let html = '';
     items.forEach(cat => {
-        // Build the overlapping avatars dynamically if arrays exist, otherwise use single image 
-        let avatarsHTML = '';
-        if (cat.avatar_urls && Array.isArray(cat.avatar_urls)) {
-            avatarsHTML = cat.avatar_urls.map(url => `<div class="chip-av"><img src="${url}" alt=""/></div>`).join('');
-        } else {
-            // Fallback for visual styling
-            avatarsHTML = `
-                <div class="chip-av"><img src="${cat.img_url || ''}" alt=""/></div>
-                <div class="chip-av"></div>
-                <div class="chip-av"></div>
-            `;
-        }
+        // The user specifically requested that the single image from the row
+        // be duplicated across all three overlapping avatars in the pill!
+        const imageUrl = cat.image_url || cat.img_url || '';
+        const avatarsHTML = `
+            <div class="chip-av"><img src="${imageUrl}" alt=""/></div>
+            <div class="chip-av"><img src="${imageUrl}" alt=""/></div>
+            <div class="chip-av"><img src="${imageUrl}" alt=""/></div>
+        `;
         
         html += `
             <div class="cat-chip" onclick="location.href='category.html?categoryId=${cat.id}'">

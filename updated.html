@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#FDFAF7" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="3D Menu" />
+  <title>3D Menu</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Figtree = Figma's Figtree. Playfair Display Italic = closest web-safe substitute for Albra TRIAL Semi Italic -->
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==================== RESET ==================== */
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+
+    /* ==================== DESIGN TOKENS ==================== */
+    :root {
+      --bg:           #FDFAF7;
+      --surface:      #FFFFFF;
+      --border-soft:  rgba(0,0,0,0.06);
+      --text-h:       #1A1209;
+      --text-body:    #5C4D3A;
+      --text-muted:   #9E8E7A;
+      --accent:       #C84B2F;
+
+      /* Figma exact card dimensions */
+      --cat-w:        140px;
+      --cat-h:        140px;
+      --cat-r:        13px;
+
+      --nav-h:        68px;
+      --safe-bottom:  env(safe-area-inset-bottom, 0px);
+    }
+
+    html, body {
+      height:100%; width:100%;
+      overflow:hidden;
+      background:var(--bg);
+      color:var(--text-h);
+      font-family:'Figtree', sans-serif;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    /* ==================== APP SHELL ==================== */
+    #app {
+      position:relative;
+      width:100%; height:100%;
+      max-width:430px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+    }
+
+    /* ==================== PAGES ==================== */
+    .pages { flex:1; position:relative; overflow:hidden; }
+    .page {
+      position:absolute; inset:0;
+      overflow-y:auto; overflow-x:hidden;
+      opacity:0; pointer-events:none;
+      transform:translateY(14px);
+      transition: opacity .32s cubic-bezier(.4,0,.2,1), transform .32s cubic-bezier(.4,0,.2,1);
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .page::-webkit-scrollbar { display:none; }
+    .page.active { opacity:1; pointer-events:all; transform:translateY(0); }
+
+    /* ==================== HOME ==================== */
+    #page-home { padding:0; }
+
+    /* Top bar */
+    .topbar {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:52px 20px 16px;
+    }
+    .topbar-left .sup {
+      font-size:12px; font-weight:500; color:var(--text-muted);
+      letter-spacing:.05em; text-transform:uppercase; margin-bottom:3px;
+    }
+    .topbar-left h1 {
+      font-family:'Syne',sans-serif; font-size:25px; font-weight:800;
+      color:var(--text-h); line-height:1.15;
+    }
+    .topbar-right { display:flex; align-items:center; gap:10px; }
+    .topbar-notif {
+      width:38px; height:38px; border-radius:50%;
+      background:var(--surface); border:1px solid var(--border-soft);
+      display:flex; align-items:center; justify-content:center;
+      font-size:18px; position:relative; cursor:pointer;
+    }
+    .notif-pip {
+      position:absolute; top:7px; right:8px;
+      width:7px; height:7px; background:#E8402A;
+      border-radius:50%; border:1.5px solid var(--bg);
+    }
+    .topbar-avatar {
+      width:38px; height:38px; border-radius:50%;
+      background:linear-gradient(135deg,#C84B2F,#E8855F);
+      display:flex; align-items:center; justify-content:center;
+      font-size:15px; font-weight:700; font-family:'Syne',sans-serif; color:#fff;
+    }
+
+    /* Search */
+    .search-bar {
+      margin:0 20px 22px;
+      display:flex; align-items:center; gap:10px;
+      background:var(--surface); border:1px solid var(--border-soft);
+      border-radius:14px; padding:11px 16px;
+      box-shadow:0 1px 4px rgba(0,0,0,.04);
+    }
+    .search-icon { font-size:16px; color:var(--text-muted); flex-shrink:0; }
+    .search-bar input {
+      flex:1; border:none; outline:none; background:transparent;
+      font-size:14px; font-family:'Figtree',sans-serif; color:var(--text-h);
+    }
+    .search-bar input::placeholder { color:var(--text-muted); }
+
+    /* Section row */
+    .section-row {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 20px; margin-bottom:14px;
+    }
+    .section-title { font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:var(--text-h); }
+    .section-see   { font-size:13px; font-weight:500; color:var(--accent); cursor:pointer; }
+
+    /* ===================================================================
+       CATEGORY CARDS — pixel-perfect replication of Figma node 3727:406
+       Parent: flex row, gap:10px, align-items:center
+       Each card: 140×140px, border-radius:13px, overflow:hidden, shrink:0
+       =================================================================== */
+    .categories-track {
+      display:flex;
+      flex-direction:row;
+      align-items:center;
+      gap:10px;                   /* Figma gap: 10px */
+      padding:10px 20px 22px;     /* side bleed + vertical so overflow images show */
+      overflow-x:auto;
+      overflow-y:visible;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      margin-bottom:26px;
+    }
+    .categories-track::-webkit-scrollbar { display:none; }
+
+    /* Base card */
+    .cat-card {
+      position:relative;
+      width:var(--cat-w);         /* 140px */
+      height:var(--cat-h);        /* 140px */
+      border-radius:var(--cat-r); /* 13px */
+      overflow:hidden;
+      flex-shrink:0;
+      scroll-snap-align:start;
+      cursor:pointer;
+      transition:transform .22s cubic-bezier(.34,1.56,.64,1);
+      /* perspective for 3D tilt */
+      transform-style:preserve-3d;
+    }
+
+    /* Radial gradient fill (full abs coverage) */
+    .cat-bg {
+      position:absolute; inset:0;
+      pointer-events:none;
+    }
+
+    /* ---- Label block ----
+       Figma: position absolute, top varies per card, -translateY(50%),
+       left 12px (starters/main) or 17px (salad/sweet) or calc(50%-58px) (thirst/bar)
+       flex-col, leading-0, whitespace-nowrap */
+    .cat-lbl {
+      position:absolute;
+      display:flex; flex-direction:column; justify-content:center;
+      line-height:0;
+      white-space:nowrap;
+      z-index:3;
+      transform:translateY(-50%);
+    }
+    /* Line 1: Figtree SemiBold (starters) / Medium (rest), 22.37px / 22.12px */
+    .cat-lbl-l1 {
+      font-family:'Figtree', sans-serif;
+      display:block;
+      line-height:0.9;
+      letter-spacing:-0.461px;
+    }
+    /* Line 2: Albra TRIAL Semi Italic → Playfair Display Italic 600 */
+    .cat-lbl-l2 {
+      font-family:'Playfair Display', Georgia, serif;
+      font-style:italic;
+      font-weight:600;
+      display:block;
+      line-height:0.9;
+      letter-spacing:-0.461px;
+    }
+
+    /* ---- Per-card food image containers (exact Figma values) ---- */
+
+    /* Card 1 Starters: chicken
+       bottom:-20px, h:93px, w:186px, left:calc(50%+41px), translateX(-50%) */
+    .img-starters {
+      position:absolute;
+      bottom:-20px;
+      left:calc(50% + 41px);
+      transform:translateX(-50%);
+      width:186px; height:93px;
+      z-index:2;
+      pointer-events:none;
+    }
+
+    /* Card 2 Main: nasi rawon
+       bottom:-37px, h:108px, w:155px, left:calc(50%+30.5px), translateX(-50%) */
+    .img-main {
+      position:absolute;
+      bottom:-37px;
+      left:calc(50% + 30.5px);
+      transform:translateX(-50%);
+      width:155px; height:108px;
+      z-index:2;
+      pointer-events:none;
+    }
+
+    /* Card 3 Salad: avocado
+       wrapper: left:calc(50%+18.31px), top:55px, translateX(-50%), size:160.611
+       inner: rotate(-8.11deg), size:142px */
+    .img-salad-wrap {
+      position:absolute;
+      left:calc(50% + 18.31px);
+      top:55px;
+      transform:translateX(-50%);
+      width:160.611px; height:160.611px;
+      display:flex; align-items:center; justify-content:center;
+      z-index:2;
+      pointer-events:none;
+    }
+    .img-salad-inner {
+      transform:rotate(-8.11deg);
+      width:142px; height:142px;
+      flex-shrink:0;
+    }
+
+    /* Card 4 Sweet: waffles
+       left:17px, top:38px, size:151px */
+    .img-sweet {
+      position:absolute;
+      left:17px; top:38px;
+      width:151px; height:151px;
+      z-index:2;
+      pointer-events:none;
+    }
+
+    /* Card 5 Thirst: margarita
+       top:60px, h:164px, w:110px, left:calc(50%+6px), translateX(-50%) */
+    .img-thirst {
+      position:absolute;
+      top:60px;
+      left:calc(50% + 6px);
+      transform:translateX(-50%);
+      width:110px; height:164px;
+      z-index:2;
+      pointer-events:none;
+    }
+
+    /* Ellipse glow thirst: left:-19px, top:83px, size:56.404px */
+    .img-thirst-ellipse {
+      position:absolute;
+      left:-19px; top:83px;
+      width:56.404px; height:56.404px;
+      z-index:1;
+      overflow:visible;
+      pointer-events:none;
+    }
+    .img-thirst-ellipse img {
+      /* inset:-113.47% → scale factor ≈ 3.27 */
+      position:absolute;
+      width:327%; height:327%;
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      max-width:none;
+    }
+
+    /* Card 6 Bar: rum
+       top:69px, h:95px, w:92px, left:calc(50%+20px), translateX(-50%) */
+    .img-bar {
+      position:absolute;
+      top:69px;
+      left:calc(50% + 20px);
+      transform:translateX(-50%);
+      width:92px; height:95px;
+      z-index:2;
+      pointer-events:none;
+    }
+
+    /* All food images fill their containers */
+    .cat-card img { width:100%; height:100%; object-fit:cover; display:block; }
+    .img-salad-inner img { width:142px; height:142px; object-fit:cover; }
+
+    /* ==================== FEATURED BANNER ==================== */
+    .featured {
+      margin:0 20px 26px;
+      border-radius:20px;
+      overflow:hidden;
+      background:linear-gradient(135deg,#2D1A0E 0%,#5C3018 55%,#8C4A1E 100%);
+      padding:22px 20px 22px;
+      position:relative; min-height:128px;
+    }
+    .featured::after {
+      content:''; position:absolute; right:-10px; top:-10px;
+      width:160px; height:160px;
+      background:radial-gradient(circle,rgba(255,150,60,.22) 0%,transparent 70%);
+      pointer-events:none;
+    }
+    .feat-badge {
+      display:inline-flex; align-items:center; gap:5px;
+      background:rgba(255,255,255,.11); border:1px solid rgba(255,255,255,.2);
+      border-radius:100px; padding:3px 10px;
+      font-size:10.5px; font-weight:600; color:#FFD4A8;
+      letter-spacing:.05em; text-transform:uppercase; margin-bottom:10px;
+    }
+    .feat-dot {
+      width:5px; height:5px; border-radius:50%;
+      background:#FF8C3A; box-shadow:0 0 6px #FF8C3A;
+      animation:fpulse 2s ease-in-out infinite;
+    }
+    @keyframes fpulse { 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(.8);opacity:.5;} }
+    .featured h2 {
+      font-family:'Syne',sans-serif; font-size:19px; font-weight:800;
+      color:#FFF5EE; line-height:1.2; margin-bottom:7px; max-width:180px;
+    }
+    .featured p { font-size:12px; color:rgba(255,245,238,.6); line-height:1.5; max-width:170px; margin-bottom:15px; }
+    .feat-cta {
+      display:inline-flex; align-items:center; gap:6px;
+      background:#FF8C3A; color:#fff;
+      font-family:'Figtree',sans-serif; font-size:12px; font-weight:700;
+      padding:8px 16px; border-radius:100px; border:none; cursor:pointer;
+      box-shadow:0 3px 14px rgba(255,140,58,.4);
+      transition:transform .15s;
+    }
+    .feat-cta:active { transform:scale(.96); }
+    .feat-food {
+      position:absolute; right:-8px; bottom:0;
+      height:138px; width:155px;
+      object-fit:contain; object-position:bottom right;
+      pointer-events:none;
+    }
+
+    /* ==================== POPULAR SCROLL ==================== */
+    .popular-scroll {
+      display:flex; gap:12px;
+      padding:0 20px 26px;
+      overflow-x:auto; -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .popular-scroll::-webkit-scrollbar { display:none; }
+    .pop-card {
+      flex-shrink:0; width:148px;
+      background:var(--surface);
+      border-radius:16px; border:1px solid var(--border-soft);
+      overflow:hidden; cursor:pointer;
+      box-shadow:0 2px 10px rgba(0,0,0,.05);
+      transition:transform .18s;
+    }
+    .pop-card:active { transform:scale(.95); }
+    .pop-img { width:100%; height:98px; object-fit:cover; display:block; background:#F0EAE2; }
+    .pop-body { padding:10px 12px 12px; }
+    .pop-tag {
+      display:inline-block; font-size:9.5px; font-weight:600;
+      text-transform:uppercase; letter-spacing:.06em;
+      color:var(--accent); background:rgba(200,75,47,.08);
+      border-radius:100px; padding:2px 7px; margin-bottom:5px;
+    }
+    .pop-name { font-family:'Syne',sans-serif; font-size:13px; font-weight:700; color:var(--text-h); margin-bottom:6px; line-height:1.25; }
+    .pop-row { display:flex; align-items:center; justify-content:space-between; }
+    .pop-price { font-family:'Syne',sans-serif; font-size:13.5px; font-weight:700; color:var(--accent); }
+    .pop-rating { font-size:11px; color:var(--text-muted); }
+
+    /* ==================== BOTTOM NAV ==================== */
+    .bottom-nav {
+      flex-shrink:0;
+      height:calc(var(--nav-h) + var(--safe-bottom));
+      padding-bottom:var(--safe-bottom);
+      background:rgba(253,250,247,.92);
+      backdrop-filter:blur(20px) saturate(160%);
+      -webkit-backdrop-filter:blur(20px) saturate(160%);
+      border-top:1px solid var(--border-soft);
+      position:relative; z-index:10;
+    }
+    .nav-inner {
+      height:var(--nav-h);
+      display:flex; align-items:center; justify-content:space-around;
+      padding:0 4px; position:relative;
+    }
+    .nav-indicator {
+      position:absolute; bottom:10px;
+      height:3px; width:22px; border-radius:100px;
+      background:var(--accent);
+      transition:left .38s cubic-bezier(.34,1.56,.64,1);
+      transform:translateX(-50%);
+    }
+    .nav-btn {
+      display:flex; flex-direction:column; align-items:center; gap:3px;
+      background:none; border:none; padding:8px 14px;
+      cursor:pointer; flex:1; border-radius:12px;
+      transition:background .15s; position:relative;
+    }
+    .nav-btn:active { background:rgba(0,0,0,.04); }
+    .nav-icon {
+      width:22px; height:22px; display:flex; align-items:center; justify-content:center;
+      font-size:19px;
+      filter:grayscale(1) opacity(.35);
+      transition:transform .3s cubic-bezier(.34,1.56,.64,1), filter .25s;
+    }
+    .nav-btn.active .nav-icon { filter:none; transform:translateY(-2px) scale(1.1); }
+    .nav-lbl {
+      font-family:'Figtree',sans-serif; font-size:10px; font-weight:600;
+      color:var(--text-muted); transition:color .2s; letter-spacing:.02em;
+    }
+    .nav-btn.active .nav-lbl { color:var(--accent); }
+    /* FAB */
+    .nav-fab {
+      width:52px; height:52px; border-radius:50%;
+      background:linear-gradient(135deg,#D95F2A,#B03018);
+      border:none; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      font-size:22px; color:#fff;
+      box-shadow:0 4px 18px rgba(200,75,47,.42), 0 0 0 5px rgba(200,75,47,.1);
+      transition:transform .25s cubic-bezier(.34,1.56,.64,1);
+      position:relative; top:-8px; flex-shrink:0;
+    }
+    .nav-fab:active { transform:scale(.92) translateY(2px); }
+    /* Notif dot */
+    .notif-dot {
+      position:absolute; top:7px; right:10px;
+      width:7px; height:7px; background:#E8402A;
+      border-radius:50%; border:1.5px solid var(--bg);
+    }
+
+    /* ==================== MENU SHEET ==================== */
+    #menu-overlay {
+      position:fixed; inset:0; z-index:100;
+      pointer-events:none; opacity:0;
+      transition:opacity .28s ease;
+    }
+    #menu-overlay.open { pointer-events:all; opacity:1; }
+    .menu-backdrop {
+      position:absolute; inset:0;
+      background:rgba(20,10,5,.48); backdrop-filter:blur(3px);
+    }
+    .menu-sheet {
+      position:absolute; bottom:0; left:0; right:0;
+      max-width:430px; margin:0 auto;
+      background:#FDFAF7; border-radius:26px 26px 0 0;
+      border-top:1px solid var(--border-soft);
+      padding:10px 24px 40px;
+      transform:translateY(100%);
+      transition:transform .42s cubic-bezier(.34,1.15,.64,1);
+      box-shadow:0 -8px 40px rgba(0,0,0,.1);
+    }
+    #menu-overlay.open .menu-sheet { transform:translateY(0); }
+    .sheet-handle { width:36px; height:4px; border-radius:100px; background:#D8CFC4; margin:0 auto 22px; }
+    .sheet-title { font-family:'Syne',sans-serif; font-size:18px; font-weight:800; color:var(--text-h); margin-bottom:20px; }
+    .sheet-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:20px; }
+    .sheet-item { display:flex; flex-direction:column; align-items:center; gap:7px; cursor:pointer; }
+    .sheet-icon { width:52px; height:52px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:24px; transition:transform .18s cubic-bezier(.34,1.56,.64,1); }
+    .sheet-item:active .sheet-icon { transform:scale(.9); }
+    .sheet-item span { font-size:11px; font-weight:500; color:var(--text-body); text-align:center; }
+    .sheet-divider { height:1px; background:var(--border-soft); margin:4px 0 16px; }
+    .sheet-links { display:flex; flex-direction:column; gap:2px; }
+    .sheet-link { display:flex; align-items:center; gap:14px; padding:12px; border-radius:13px; cursor:pointer; transition:background .15s; }
+    .sheet-link:active { background:rgba(0,0,0,.04); }
+    .sheet-link-icon { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:17px; }
+    .sheet-link-lbl { flex:1; font-size:14px; font-weight:500; color:var(--text-h); }
+    .sheet-link-arr { color:var(--text-muted); font-size:13px; }
+
+    /* ==================== SUB PAGES ==================== */
+    .subpage { padding:56px 20px 28px; }
+    .subpage-hdr { margin-bottom:28px; }
+    .subpage-sup { font-size:12px; font-weight:500; color:var(--text-muted); letter-spacing:.07em; text-transform:uppercase; margin-bottom:4px; }
+    .subpage-hdr h1 { font-family:'Syne',sans-serif; font-size:26px; font-weight:800; color:var(--text-h); line-height:1.1; }
+    .empty { display:flex; flex-direction:column; align-items:center; justify-content:center; height:55vh; gap:14px; text-align:center; }
+    .empty-ico { font-size:52px; }
+    .empty h2 { font-family:'Syne',sans-serif; font-size:20px; font-weight:700; color:var(--text-h); }
+    .empty p { font-size:13.5px; color:var(--text-muted); max-width:220px; line-height:1.6; }
+
+    /* Profile page */
+    .profile-hdr { display:flex; flex-direction:column; align-items:center; gap:10px; padding:20px 0 26px; }
+    .avatar { width:76px; height:76px; border-radius:50%; background:linear-gradient(135deg,#C84B2F,#E8855F); display:flex; align-items:center; justify-content:center; font-size:28px; border:3px solid rgba(200,75,47,.3); box-shadow:0 0 0 6px rgba(200,75,47,.08); }
+    .profile-hdr h2 { font-family:'Syne',sans-serif; font-size:19px; font-weight:800; color:var(--text-h); }
+    .profile-hdr p { font-size:13px; color:var(--text-muted); }
+    .pstats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:24px; }
+    .pstat { background:var(--surface); border:1px solid var(--border-soft); border-radius:14px; padding:13px 10px; text-align:center; }
+    .pstat-v { font-family:'Syne',sans-serif; font-size:18px; font-weight:800; color:var(--text-h); }
+    .pstat-l { font-size:10.5px; color:var(--text-muted); margin-top:2px; }
+    .psec { margin-bottom:22px; }
+    .psec-lbl { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); margin-bottom:10px; }
+    .prow { display:flex; align-items:center; gap:14px; padding:13px 15px; background:var(--surface); border:1px solid var(--border-soft); border-radius:13px; margin-bottom:7px; cursor:pointer; }
+    .prow-ico { font-size:17px; width:22px; text-align:center; }
+    .prow-lbl { flex:1; font-size:13.5px; font-weight:500; color:var(--text-h); }
+    .prow-arr { color:var(--text-muted); font-size:12px; }
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <div class="pages">
+
+    <!-- ===================== HOME PAGE ===================== -->
+    <div class="page active" id="page-home">
+
+      <!-- Top bar -->
+      <div class="topbar">
+        <div class="topbar-left">
+          <div class="sup">Good evening 🌙</div>
+          <h1>What's on<br>your mind?</h1>
+        </div>
+        <div class="topbar-right">
+          <div class="topbar-notif" onclick="openMenu()">
+            🔔<span class="notif-pip"></span>
+          </div>
+          <div class="topbar-avatar">S</div>
+        </div>
+      </div>
+
+      <!-- Search -->
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search dishes, drinks…" />
+      </div>
+
+      <!-- ====================================================
+           CATEGORIES — pixel-perfect from Figma node 3727:406
+           ==================================================== -->
+      <div class="section-row">
+        <span class="section-title">Categories</span>
+        <span class="section-see">See all</span>
+      </div>
+
+      <div class="categories-track" id="catTrack">
+
+        <!-- ── Card 1: Our Starters (3727:407) ── -->
+        <!-- border:#ffeae9 | bg: radial warm red | text:#9d4901 | label-top: SemiBold "Our" | left:12px top:37.8px -->
+        <div class="cat-card" data-node-id="3727:407"
+             style="border:1px solid #ffeae9;"
+             onclick="navigate('starters')">
+          <div class="cat-bg" style="background:radial-gradient(ellipse at 4.5px 140px,#BE4130 4.3%,#C65647 16.3%,#CE6A5E 28.2%,#DF958B 52.2%,#EFBFb9 76.1%,#FFE9E6 100%);opacity:.5;"></div>
+          <!-- label: left:12px, top:37.8px, -translateY(50%) -->
+          <div class="cat-lbl" data-node-id="3727:409"
+               style="color:#9d4901; left:12px; top:37.8px;">
+            <span class="cat-lbl-l1" style="font-size:22.368px; font-weight:700; color:#9d4901;">Our</span>
+            <span class="cat-lbl-l2" style="font-size:22.368px; color:#9d4901;">Starters</span>
+          </div>
+          <!-- food: bottom:-20px, w:186px, h:93px, left:calc(50%+41px), -translateX(50%) -->
+          <div class="img-starters" data-node-id="3727:408">
+            <img src="https://www.figma.com/api/mcp/asset/29d01591-0ae2-4887-99cc-1ac6ba930f41" alt="Spicy grilled chicken" />
+          </div>
+        </div>
+
+        <!-- ── Card 2: Main Course (3727:410) ── -->
+        <!-- border:#f9ebca | bg: radial orange | text:#d77a16 | label: Medium | left:12px top:30.8px -->
+        <div class="cat-card" data-node-id="3727:410"
+             style="border:1px solid #f9ebca;"
+             onclick="navigate('main')">
+          <div class="cat-bg" style="background:radial-gradient(ellipse at 4.5px 140px,#FF9522 4.3%,#FFA13B 16.3%,#FFAD53 28.2%,#FFC683 52.2%,#FFDEB4 76.1%,#FFF7E4 100%);opacity:.6;"></div>
+          <div class="cat-lbl" data-node-id="3727:412"
+               style="color:#d77a16; left:12px; top:30.8px;">
+            <span class="cat-lbl-l1" style="font-size:22.122px; font-weight:500; color:#d77a16;">Main</span>
+            <span class="cat-lbl-l2" style="font-size:22.122px; color:#d77a16;">Course</span>
+          </div>
+          <!-- food: bottom:-37px, w:155px, h:108px, left:calc(50%+30.5px) -->
+          <div class="img-main" data-node-id="3727:411">
+            <img src="https://www.figma.com/api/mcp/asset/d7729765-43a6-4f71-acb8-e041dc8153f0" alt="Nasi rawon" />
+          </div>
+        </div>
+
+        <!-- ── Card 3: Salad Selection (3727:413) ── -->
+        <!-- border:#e0f8df | bg: radial green | text:#3a690c | label: left:17px top:34.8px -->
+        <div class="cat-card" data-node-id="3727:413"
+             style="border:1px solid #e0f8df;"
+             onclick="navigate('salad')">
+          <div class="cat-bg" style="background:radial-gradient(ellipse at 24px 127.5px,#669E38 4.3%,#87B364 28.2%,#A9C891 52.2%,#CBD5BD 76.1%,#EDF2E9 100%);opacity:.5;"></div>
+          <div class="cat-lbl" data-node-id="3727:415"
+               style="color:#3a690c; left:17px; top:34.8px;">
+            <span class="cat-lbl-l1" style="font-size:22.122px; font-weight:500; color:#3a690c;">Salad</span>
+            <span class="cat-lbl-l2" style="font-size:22.122px; color:#3a690c;">Selection</span>
+          </div>
+          <!-- avocado: top:55px, left:calc(50%+18.31px), w:160.611, h:160.611, rotate:-8.11deg inner:142px -->
+          <div class="img-salad-wrap" data-node-id="3727:414">
+            <div class="img-salad-inner">
+              <img src="https://www.figma.com/api/mcp/asset/9b351e1b-c900-436c-b433-d2a23136be9f" alt="Creamy avocado" />
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Card 4: Sweet Delights (3727:416) ── -->
+        <!-- border:rgba(246,198,208,0.26) | bg: radial pink | text:#b43651 | label: left:17px top:34.8px -->
+        <div class="cat-card" data-node-id="3727:416"
+             style="border:1px solid rgba(246,198,208,0.26);"
+             onclick="navigate('sweet')">
+          <div class="cat-bg" style="background:radial-gradient(ellipse at 24px 127.5px,#FF6C8C 4.3%,#FF9FB4 52.2%,#FFD3DC 100%);opacity:.5;"></div>
+          <div class="cat-lbl" data-node-id="3727:417"
+               style="color:#b43651; left:17px; top:34.8px;">
+            <span class="cat-lbl-l1" style="font-size:22.122px; font-weight:500; color:#b43651;">Sweet</span>
+            <span class="cat-lbl-l2" style="font-size:22.122px; color:#b43651;">Delights</span>
+          </div>
+          <!-- waffles: left:17px, top:38px, size:151px -->
+          <div class="img-sweet" data-node-id="3727:418">
+            <img src="https://www.figma.com/api/mcp/asset/b66fa4aa-6506-4595-8f55-f9a9bcf807f2" alt="Belgian waffles" />
+          </div>
+        </div>
+
+        <!-- ── Card 5: Thirst Quenchers (3727:419) ── -->
+        <!-- border:#e9f0ff | bg: radial blue | text:#123688 | label: left:calc(50%-58px), top:34.8px -->
+        <div class="cat-card" data-node-id="3727:419"
+             style="border:1px solid #e9f0ff;"
+             onclick="navigate('thirst')">
+          <div class="cat-bg" style="background:radial-gradient(ellipse at 4.5px 140px,#2261FF 4.3%,#3B73FF 16.3%,#5585FF 28.2%,#87A9FF 52.2%,#B9CDFF 76.1%,#EBF1FF 100%);opacity:.6;"></div>
+          <!-- ellipse glow: left:-19px, top:83px, size:56.404px, inset:-113.47% -->
+          <div class="img-thirst-ellipse" data-node-id="3727:421">
+            <img src="https://www.figma.com/api/mcp/asset/d548f539-606c-4efc-ad9f-d9d8ff1dc432" alt="" />
+          </div>
+          <div class="cat-lbl" data-node-id="3727:422"
+               style="color:#123688; left:calc(50% - 58px); top:34.8px;">
+            <span class="cat-lbl-l1" style="font-size:22.122px; font-weight:500; color:#123688;">Thirst</span>
+            <span class="cat-lbl-l2" style="font-size:22.122px; color:#123688;">Quenchers</span>
+          </div>
+          <!-- margarita: top:60px, w:110px, h:164px, left:calc(50%+6px) -->
+          <div class="img-thirst" data-node-id="3727:420">
+            <img src="https://www.figma.com/api/mcp/asset/ea659f31-deb8-4e5e-afd1-acce92a0d71c" alt="Blue margarita" />
+          </div>
+        </div>
+
+        <!-- ── Card 6: Bar Menu (3727:423) ── -->
+        <!-- border:#fcf0ec | bg: radial deep brown | text:#441911 | label: left:calc(50%-58px), top:34.8px -->
+        <div class="cat-card" data-node-id="3727:423"
+             style="border:1px solid #fcf0ec;"
+             onclick="navigate('bar')">
+          <div class="cat-bg" style="background:radial-gradient(ellipse at 4.5px 140px,#611A00 4.3%,#6B270E 10.3%,#75341D 16.3%,#884A3A 28.2%,#9C6957 40.2%,#B08474 52.2%,#C49E91 64.1%,#D7B8AE 76.1%,#FFEAE4 100%);opacity:.6;"></div>
+          <div class="cat-lbl" data-node-id="3727:425"
+               style="color:#441911; left:calc(50% - 58px); top:34.8px;">
+            <span class="cat-lbl-l1" style="font-size:22.122px; font-weight:500; color:#441911;">Bar</span>
+            <span class="cat-lbl-l2" style="font-size:22.122px; color:#441911;">Menu</span>
+          </div>
+          <!-- rum: top:69px, w:92px, h:95px, left:calc(50%+20px) -->
+          <div class="img-bar" data-node-id="3727:424">
+            <img src="https://www.figma.com/api/mcp/asset/e7ee65e8-dc92-4662-9277-0694294f5274" alt="Old fashioned" />
+          </div>
+        </div>
+
+      </div><!-- /categories-track -->
+
+      <!-- Featured banner -->
+      <div class="featured">
+        <div class="feat-badge"><span class="feat-dot"></span>Today's Special</div>
+        <h2>Chef's Signature Platter</h2>
+        <p>Handcrafted with the finest seasonal ingredients.</p>
+        <button class="feat-cta" onclick="navigate('main')">Order Now →</button>
+        <img class="feat-food"
+             src="https://www.figma.com/api/mcp/asset/29d01591-0ae2-4887-99cc-1ac6ba930f41"
+             alt="Featured dish" />
+      </div>
+
+      <!-- Popular now -->
+      <div class="section-row">
+        <span class="section-title">Popular Now</span>
+        <span class="section-see">View all</span>
+      </div>
+      <div class="popular-scroll">
+        <div class="pop-card" onclick="navigate('main')">
+          <img class="pop-img" src="https://www.figma.com/api/mcp/asset/d7729765-43a6-4f71-acb8-e041dc8153f0" alt="Nasi Rawon" />
+          <div class="pop-body">
+            <span class="pop-tag">Main Course</span>
+            <div class="pop-name">Nasi Rawon</div>
+            <div class="pop-row"><span class="pop-price">$12.50</span><span class="pop-rating">⭐ 4.9</span></div>
+          </div>
+        </div>
+        <div class="pop-card" onclick="navigate('thirst')">
+          <img class="pop-img" src="https://www.figma.com/api/mcp/asset/ea659f31-deb8-4e5e-afd1-acce92a0d71c" alt="Margarita" />
+          <div class="pop-body">
+            <span class="pop-tag">Drinks</span>
+            <div class="pop-name">Blue Margarita</div>
+            <div class="pop-row"><span class="pop-price">$9.00</span><span class="pop-rating">⭐ 4.8</span></div>
+          </div>
+        </div>
+        <div class="pop-card" onclick="navigate('sweet')">
+          <img class="pop-img" src="https://www.figma.com/api/mcp/asset/b66fa4aa-6506-4595-8f55-f9a9bcf807f2" alt="Waffles" />
+          <div class="pop-body">
+            <span class="pop-tag">Dessert</span>
+            <div class="pop-name">Belgian Waffles</div>
+            <div class="pop-row"><span class="pop-price">$8.50</span><span class="pop-rating">⭐ 4.7</span></div>
+          </div>
+        </div>
+        <div class="pop-card" onclick="navigate('salad')">
+          <img class="pop-img" src="https://www.figma.com/api/mcp/asset/9b351e1b-c900-436c-b433-d2a23136be9f" alt="Avocado" />
+          <div class="pop-body">
+            <span class="pop-tag">Salad</span>
+            <div class="pop-name">Avocado Delight</div>
+            <div class="pop-row"><span class="pop-price">$11.00</span><span class="pop-rating">⭐ 4.6</span></div>
+          </div>
+        </div>
+      </div>
+      <div style="height:20px;"></div>
+
+    </div><!-- /page-home -->
+
+    <!-- ===== STARTERS ===== -->
+    <div class="page" id="page-starters">
+      <div class="subpage">
+        <div class="subpage-hdr"><div class="subpage-sup">Menu</div><h1>Our Starters</h1></div>
+        <div class="empty"><div class="empty-ico">🍗</div><h2>Starters</h2><p>Crispy, savoury bites to begin your dining experience.</p></div>
+      </div>
+    </div>
+
+    <!-- ===== MAIN COURSE ===== -->
+    <div class="page" id="page-main">
+      <div class="subpage">
+        <div class="subpage-hdr"><div class="subpage-sup">Menu</div><h1>Main Course</h1></div>
+        <div class="empty"><div class="empty-ico">🍛</div><h2>Main Course</h2><p>Hearty, flavour-packed mains crafted with care.</p></div>
+      </div>
+    </div>
+
+    <!-- ===== SALAD ===== -->
+    <div class="page" id="page-salad">
+      <div class="subpage">
+        <div class="subpage-hdr"><div class="subpage-sup">Menu</div><h1>Salad Selection</h1></div>
+        <div class="empty"><div class="empty-ico">🥑</div><h2>Salad Selection</h2><p>Fresh vibrant salads bursting with nutrients.</p></div>
+      </div>
+    </div>
+
+    <!-- ===== SWEET ===== -->
+    <div class="page" id="page-sweet">
+      <div class="subpage">
+        <div class="subpage-hdr"><div class="subpage-sup">Menu</div><h1>Sweet Delights</h1></div>
+        <div class="empty"><div class="empty-ico">🧇</div><h2>Sweet Delights</h2><p>Indulgent desserts worth every single bite.</p></div>
+      </div>
+    </div>
+
+    <!-- ===== THIRST ===== -->
+    <div class="page" id="page-thirst">
+      <div class="subpage">
+        <div class="subpage-hdr"><div class="subpage-sup">Menu</div><h1>Thirst Quenchers</h1></div>
+        <div class="empty"><div class="empty-ico">🍹</div><h2>Thirst Quenchers</h2><p>Refreshing cocktails and mocktails to cool you down.</p></div>
+      </div>
+    </div>
+
+    <!-- ===== BAR ===== -->
+    <div class="page" id="page-bar">
+      <div class="subpage">
+        <div class="subpage-hdr"><div class="subpage-sup">Menu</div><h1>Bar Menu</h1></div>
+        <div class="empty"><div class="empty-ico">🥃</div><h2>Bar Menu</h2><p>Premium spirits, classic cocktails and fine wines.</p></div>
+      </div>
+    </div>
+
+    <!-- ===== SEARCH ===== -->
+    <div class="page" id="page-search">
+      <div class="subpage">
+        <div class="subpage-hdr"><div class="subpage-sup">Find anything</div><h1>Search</h1></div>
+        <div class="empty"><div class="empty-ico">🔍</div><h2>Search Menu</h2><p>Dishes, drinks, and more — just type to discover.</p></div>
+      </div>
+    </div>
+
+    <!-- ===== ORDERS ===== -->
+    <div class="page" id="page-orders">
+      <div class="subpage">
+        <div class="subpage-hdr"><div class="subpage-sup">Your history</div><h1>Orders</h1></div>
+        <div class="empty"><div class="empty-ico">📋</div><h2>Your Orders</h2><p>Track and reorder your favourite meals.</p></div>
+      </div>
+    </div>
+
+    <!-- ===== PROFILE ===== -->
+    <div class="page" id="page-profile">
+      <div class="subpage">
+        <div class="profile-hdr">
+          <div class="avatar">👤</div>
+          <h2>Sanjay P V</h2>
+          <p>sanjay@3dmenu.app</p>
+        </div>
+        <div class="pstats">
+          <div class="pstat"><div class="pstat-v">42</div><div class="pstat-l">Orders</div></div>
+          <div class="pstat"><div class="pstat-v">4.9★</div><div class="pstat-l">Rating</div></div>
+          <div class="pstat"><div class="pstat-v">Pro</div><div class="pstat-l">Plan</div></div>
+        </div>
+        <div class="psec">
+          <div class="psec-lbl">Account</div>
+          <div class="prow"><div class="prow-ico">👤</div><div class="prow-lbl">Edit Profile</div><div class="prow-arr">›</div></div>
+          <div class="prow"><div class="prow-ico">🔔</div><div class="prow-lbl">Notifications</div><div class="prow-arr">›</div></div>
+          <div class="prow"><div class="prow-ico">🔐</div><div class="prow-lbl">Privacy & Security</div><div class="prow-arr">›</div></div>
+        </div>
+        <div class="psec">
+          <div class="psec-lbl">Preferences</div>
+          <div class="prow"><div class="prow-ico">📍</div><div class="prow-lbl">Saved Addresses</div><div class="prow-arr">›</div></div>
+          <div class="prow"><div class="prow-ico">🎁</div><div class="prow-lbl">Offers & Vouchers</div><div class="prow-arr">›</div></div>
+          <div class="prow"><div class="prow-ico">🚀</div><div class="prow-lbl">Upgrade Plan</div><div class="prow-arr">›</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /pages -->
+
+  <!-- ==================== BOTTOM NAV ==================== -->
+  <nav class="bottom-nav">
+    <div class="nav-inner">
+      <div class="nav-indicator" id="navIndicator"></div>
+
+      <button class="nav-btn active" id="nav-home" onclick="navigate('home')" aria-label="Home">
+        <div class="nav-icon">🏠</div>
+        <div class="nav-lbl">Home</div>
+      </button>
+      <button class="nav-btn" id="nav-search" onclick="navigate('search')" aria-label="Search">
+        <div class="nav-icon">🔍</div>
+        <div class="nav-lbl">Search</div>
+      </button>
+
+      <button class="nav-fab" onclick="openMenu()" aria-label="Browse menu">＋</button>
+
+      <button class="nav-btn" id="nav-orders" onclick="navigate('orders')" aria-label="Orders">
+        <div class="nav-icon">📋</div>
+        <div class="nav-lbl">Orders</div>
+        <div class="notif-dot"></div>
+      </button>
+      <button class="nav-btn" id="nav-profile" onclick="navigate('profile')" aria-label="Profile">
+        <div class="nav-icon">👤</div>
+        <div class="nav-lbl">Profile</div>
+      </button>
+    </div>
+  </nav>
+
+</div><!-- /app -->
+
+<!-- ==================== MENU SHEET ==================== -->
+<div id="menu-overlay" role="dialog" aria-modal="true" aria-label="Browse Menu">
+  <div class="menu-backdrop" onclick="closeMenu()"></div>
+  <div class="menu-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">Browse Menu</div>
+    <div class="sheet-grid">
+      <div class="sheet-item" onclick="sheetNav('starters')">
+        <div class="sheet-icon" style="background:rgba(190,65,48,.1)">🍗</div><span>Starters</span>
+      </div>
+      <div class="sheet-item" onclick="sheetNav('main')">
+        <div class="sheet-icon" style="background:rgba(255,149,34,.1)">🍛</div><span>Main Course</span>
+      </div>
+      <div class="sheet-item" onclick="sheetNav('salad')">
+        <div class="sheet-icon" style="background:rgba(102,158,56,.1)">🥑</div><span>Salads</span>
+      </div>
+      <div class="sheet-item" onclick="sheetNav('sweet')">
+        <div class="sheet-icon" style="background:rgba(255,108,140,.1)">🧇</div><span>Desserts</span>
+      </div>
+      <div class="sheet-item" onclick="sheetNav('thirst')">
+        <div class="sheet-icon" style="background:rgba(34,97,255,.1)">🍹</div><span>Drinks</span>
+      </div>
+      <div class="sheet-item" onclick="sheetNav('bar')">
+        <div class="sheet-icon" style="background:rgba(97,26,0,.1)">🥃</div><span>Bar</span>
+      </div>
+      <div class="sheet-item">
+        <div class="sheet-icon" style="background:rgba(200,75,47,.08)">🔥</div><span>Specials</span>
+      </div>
+      <div class="sheet-item" onclick="sheetNav('profile')">
+        <div class="sheet-icon" style="background:rgba(0,0,0,.05)">⚙️</div><span>Settings</span>
+      </div>
+    </div>
+    <div class="sheet-divider"></div>
+    <div class="sheet-links">
+      <div class="sheet-link">
+        <div class="sheet-link-icon" style="background:rgba(200,75,47,.08)">📍</div>
+        <div class="sheet-link-lbl">Table Reservations</div>
+        <div class="sheet-link-arr">›</div>
+      </div>
+      <div class="sheet-link">
+        <div class="sheet-link-icon" style="background:rgba(255,140,58,.1)">🎁</div>
+        <div class="sheet-link-lbl">Offers & Vouchers</div>
+        <div class="sheet-link-arr">›</div>
+      </div>
+      <div class="sheet-link">
+        <div class="sheet-link-icon" style="background:rgba(102,158,56,.1)">📖</div>
+        <div class="sheet-link-lbl">Full Menu PDF</div>
+        <div class="sheet-link-arr">›</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ==================== NAVIGATION ==================== */
+  const NAV_BTNS = ['home','search','orders','profile'];
+  let current = 'home';
+
+  function navigate(page) {
+    if (page === current) return;
+    document.getElementById('page-' + current)?.classList.remove('active');
+    document.getElementById('page-' + page)?.classList.add('active');
+    NAV_BTNS.forEach(id => document.getElementById('nav-'+id)?.classList.remove('active'));
+    const btn = document.getElementById('nav-' + page);
+    if (btn) { btn.classList.add('active'); updateIndicator(btn); }
+    current = page;
+    closeMenu();
+  }
+
+  function updateIndicator(btn) {
+    const ind = document.getElementById('navIndicator');
+    if (!ind || !btn) return;
+    const r  = btn.getBoundingClientRect();
+    const nr = btn.closest('.nav-inner').getBoundingClientRect();
+    ind.style.left = (r.left + r.width / 2 - nr.left) + 'px';
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const h = document.getElementById('nav-home');
+    if (h) setTimeout(() => updateIndicator(h), 60);
+  });
+
+  /* ==================== MENU SHEET ==================== */
+  function openMenu() { document.getElementById('menu-overlay').classList.add('open'); }
+  function closeMenu() { document.getElementById('menu-overlay').classList.remove('open'); }
+  function sheetNav(page) { closeMenu(); setTimeout(() => navigate(page), 220); }
+
+  /* ==================== 3D TILT — category cards ==================== */
+  document.querySelectorAll('.cat-card').forEach(card => {
+    // Mouse
+    card.addEventListener('mousemove', e => {
+      const r  = card.getBoundingClientRect();
+      const dx = (e.clientX - r.left - r.width  / 2) / (r.width  / 2);
+      const dy = (e.clientY - r.top  - r.height / 2) / (r.height / 2);
+      card.style.transform = `perspective(520px) rotateX(${-dy*9}deg) rotateY(${dx*9}deg) translateZ(6px)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    // Touch
+    let ts = null;
+    card.addEventListener('touchstart', e => { ts = e.touches[0]; }, { passive:true });
+    card.addEventListener('touchmove', e => {
+      if (!ts) return;
+      const r  = card.getBoundingClientRect();
+      const t  = e.touches[0];
+      const dx = (t.clientX - r.left - r.width  / 2) / (r.width  / 2);
+      const dy = (t.clientY - r.top  - r.height / 2) / (r.height / 2);
+      card.style.transform = `perspective(520px) rotateX(${-dy*5}deg) rotateY(${dx*5}deg) translateZ(4px)`;
+    }, { passive:true });
+    card.addEventListener('touchend', () => { ts = null; card.style.transform = ''; });
+  });
+
+  /* ==================== PWA ==================== */
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(()=>{}));
+  }
+</script>
+</body>
+</html>
