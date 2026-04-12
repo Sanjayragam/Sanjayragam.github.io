@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>3D Menu – Search</title>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&family=Allan:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .screen {
+      width: 100%;
+      max-width: 390px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: #fff;
+      position: relative;
+    }
+
+    /* ── TOP NAV ── */
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 56px 20px 16px;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      color: #1a1a1a;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      flex-shrink: 0;
+    }
+
+    .back-btn img { width: 20px; height: 20px; }
+
+    /* ── SEARCH INPUT BAR ── */
+    .search-input-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      background: #F5F5F7;
+      border-radius: 14px;
+      padding: 10px 14px;
+      gap: 10px;
+    }
+
+    .search-input-wrap svg { flex-shrink: 0; }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-family: 'Figtree', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: #1a1a1a;
+      outline: none;
+    }
+
+    .search-input::placeholder { color: #ABABAB; }
+
+    .clear-btn {
+      background: #CDCDCD;
+      border: none;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 20px 12px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .see-all {
+      font-size: 13px;
+      font-weight: 600;
+      color: #B8541B;
+      text-decoration: none;
+    }
+
+    /* ── RECENT SEARCHES ── */
+    .recent-list {
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .recent-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid #F2F2F2;
+      cursor: pointer;
+    }
+
+    .recent-item:last-child { border-bottom: none; }
+
+    .recent-icon {
+      width: 38px;
+      height: 38px;
+      background: #F5F5F7;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .recent-text { flex: 1; }
+    .recent-name { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+    .recent-sub  { font-size: 12px; color: #999; margin-top: 2px; }
+
+    .recent-remove {
+      color: #CDCDCD;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+    }
+
+    /* ── TRENDING ── */
+    .trending-chips {
+      padding: 4px 20px 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #F5F5F7;
+      border-radius: 20px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #414449;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .chip:active { background: #ebebed; }
+
+    .chip-emoji { font-size: 15px; }
+
+    /* ── POPULAR CATEGORIES ── */
+    .categories-grid {
+      padding: 4px 20px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .cat-card {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      height: 96px;
+      cursor: pointer;
+    }
+
+    .cat-card-bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cat-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 60%);
+    }
+
+    .cat-card-label {
+      position: absolute;
+      bottom: 10px;
+      left: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .cat-card-count {
+      position: absolute;
+      bottom: 10px;
+      right: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ── SEARCH RESULTS (hidden by default) ── */
+    .results-section {
+      display: none;
+      padding: 0 20px;
+    }
+
+    .results-section.visible { display: block; }
+
+    .result-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid #F2F2F2;
+      cursor: pointer;
+    }
+
+    .result-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #f0f0f0;
+    }
+
+    .result-info { flex: 1 }
+    .result-name { font-size: 14px; font-weight: 700; color: #1a1a1a; }
+    .result-meta { font-size: 12px; color: #999; margin-top: 3px; }
+    .result-price { font-size: 14px; font-weight: 700; color: #1a1a1a; }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .empty-state.visible { display: flex; }
+
+    .empty-icon {
+      width: 72px;
+      height: 72px;
+      background: #F5F5F7;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .empty-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 6px;
+    }
+
+    .empty-sub {
+      font-size: 14px;
+      color: #999;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+<div class="screen">
+
+  <!-- Top Nav with Search -->
+  <div class="top-nav">
+    <a class="back-btn" href="home.html">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M12.5 15L7.5 10L12.5 5" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <div class="search-input-wrap">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <circle cx="7" cy="7" r="5.5" stroke="#ABABAB" stroke-width="1.5"/>
+        <path d="M11 11L14 14" stroke="#ABABAB" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search for dishes, cuisines..." autofocus />
+      <button class="clear-btn" id="clearBtn" style="display:none;" onclick="clearSearch()">
+        <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+          <path d="M1 1L7 7M7 1L1 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Default State: Recent + Trending + Popular -->
+  <div id="defaultState">
+
+    <!-- Recent Searches -->
+    <div class="section-header">
+      <span class="section-title">Recent Searches</span>
+      <a class="see-all" href="#">Clear all</a>
+    </div>
+
+    <div class="recent-list">
+      <div class="recent-item">
+        <div class="recent-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="7.5" cy="7.5" r="5" stroke="#999" stroke-width="1.3"/>
+            <path d="M11 11L14 14" stroke="#999" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="recent-text">
+          <div class="recent-name">Tandoori Chicken</div>
+          <div class="recent-sub">North Indian · Starters</div>
+        </div>
+        <span class="recent-remove">×</span>
+      </div>
+      <div class="recent-item">
+        <div class="recent-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="7.5" cy="7.5" r="5" stroke="#999" stroke-width="1.3"/>
+            <path d="M11 11L14 14" stroke="#999" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="recent-text">
+          <div class="recent-name">Butter Chicken</div>
+          <div class="recent-sub">Main Course</div>
+        </div>
+        <span class="recent-remove">×</span>
+      </div>
+      <div class="recent-item">
+        <div class="recent-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="7.5" cy="7.5" r="5" stroke="#999" stroke-width="1.3"/>
+            <path d="M11 11L14 14" stroke="#999" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="recent-text">
+          <div class="recent-name">Mojito</div>
+          <div class="recent-sub">Drinks</div>
+        </div>
+        <span class="recent-remove">×</span>
+      </div>
+    </div>
+
+    <!-- Trending Now -->
+    <div class="section-header" style="margin-top: 8px;">
+      <span class="section-title">Trending Now 🔥</span>
+    </div>
+
+    <div class="trending-chips">
+      <div class="chip"><span class="chip-emoji">🥗</span>Dal Makhani</div>
+      <div class="chip"><span class="chip-emoji">🍗</span>Chicken Wings</div>
+      <div class="chip"><span class="chip-emoji">🥂</span>Sangria</div>
+      <div class="chip"><span class="chip-emoji">🍢</span>Seekh Kebab</div>
+      <div class="chip"><span class="chip-emoji">🍮</span>Gulab Jamun</div>
+      <div class="chip"><span class="chip-emoji">🫕</span>Rogan Josh</div>
+    </div>
+
+    <!-- Popular Categories -->
+    <div class="section-header" style="margin-top: 8px;">
+      <span class="section-title">Popular Categories</span>
+    </div>
+
+    <div class="categories-grid">
+      <div class="cat-card" onclick="location.href='category.html'">
+        <img class="cat-card-bg" src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=300&q=80" alt="Starters" />
+        <div class="cat-card-overlay"></div>
+        <div class="cat-card-label">Starters</div>
+        <div class="cat-card-count">43 items</div>
+      </div>
+      <div class="cat-card" onclick="location.href='category.html'">
+        <img class="cat-card-bg" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=300&q=80" alt="Main Course" />
+        <div class="cat-card-overlay"></div>
+        <div class="cat-card-label">Main Course</div>
+        <div class="cat-card-count">31 items</div>
+      </div>
+      <div class="cat-card" onclick="location.href='category.html'">
+        <img class="cat-card-bg" src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=300&q=80" alt="Desserts" />
+        <div class="cat-card-overlay"></div>
+        <div class="cat-card-label">Desserts</div>
+        <div class="cat-card-count">18 items</div>
+      </div>
+      <div class="cat-card" onclick="location.href='category.html'">
+        <img class="cat-card-bg" src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=300&q=80" alt="Drinks" />
+        <div class="cat-card-overlay"></div>
+        <div class="cat-card-label">Drinks</div>
+        <div class="cat-card-count">26 items</div>
+      </div>
+    </div>
+
+  </div><!-- end defaultState -->
+
+  <!-- Search Results State -->
+  <div id="resultsState" style="display:none;">
+    <div class="section-header">
+      <span class="section-title" id="resultsCount">Results</span>
+    </div>
+    <div class="results-section visible" id="resultsList">
+      <!-- Injected by JS -->
+    </div>
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+          <circle cx="13" cy="13" r="9" stroke="#CCC" stroke-width="2"/>
+          <path d="M20 20L27 27" stroke="#CCC" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="empty-title">No results found</div>
+      <div class="empty-sub">We couldn't find any dish matching your search.<br/>Try a different keyword.</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const DISHES = [
+  { name: 'Tandoori Broccoli', meta: 'Veg · 20-25 mins · ₹675', img: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=120&q=80' },
+  { name: 'Tandoori Chooza',   meta: 'Non-Veg · 25-30 mins · ₹850', img: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=120&q=80' },
+  { name: 'Seekh Kebab',       meta: 'Non-Veg · 20-25 mins · ₹720', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=120&q=80' },
+  { name: 'Paneer Tikka',      meta: 'Veg · 15-20 mins · ₹580', img: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=120&q=80' },
+  { name: 'Dal Makhani',       meta: 'Veg · 25-30 mins · ₹420', img: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=120&q=80' },
+  { name: 'Butter Chicken',    meta: 'Non-Veg · 20-25 mins · ₹680', img: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=120&q=80' },
+  { name: 'Mojito',            meta: 'Non-Alcoholic · ₹280', img: 'https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=120&q=80' },
+  { name: 'Gulab Jamun',       meta: 'Veg · ₹220', img: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=120&q=80' },
+];
+
+const input = document.getElementById('searchInput');
+const clearBtn = document.getElementById('clearBtn');
+const defaultState = document.getElementById('defaultState');
+const resultsState = document.getElementById('resultsState');
+const resultsCount = document.getElementById('resultsCount');
+const resultsList = document.getElementById('resultsList');
+const emptyState = document.getElementById('emptyState');
+
+input.addEventListener('input', function() {
+  const q = this.value.trim().toLowerCase();
+  clearBtn.style.display = q ? 'flex' : 'none';
+
+  if (!q) {
+    defaultState.style.display = 'block';
+    resultsState.style.display = 'none';
+    return;
+  }
+
+  defaultState.style.display = 'none';
+  resultsState.style.display = 'block';
+
+  const matches = DISHES.filter(d => d.name.toLowerCase().includes(q));
+  resultsCount.textContent = `${matches.length} result${matches.length !== 1 ? 's' : ''} for "${this.value.trim()}"`;
+
+  if (!matches.length) {
+    resultsList.style.display = 'none';
+    emptyState.classList.add('visible');
+  } else {
+    emptyState.classList.remove('visible');
+    resultsList.style.display = 'block';
+    resultsList.innerHTML = matches.map(d => `
+      <div class="result-item" onclick="location.href='dish-detail.html'">
+        <img class="result-img" src="${d.img}" alt="${d.name}" onerror="this.style.background='#f0f0f0'" />
+        <div class="result-info">
+          <div class="result-name">${d.name}</div>
+          <div class="result-meta">${d.meta.split('·').slice(0,-1).join('·')}</div>
+        </div>
+        <div class="result-price">₹${d.meta.split('₹')[1]}</div>
+      </div>
+    `).join('');
+  }
+});
+
+function clearSearch() {
+  input.value = '';
+  clearBtn.style.display = 'none';
+  defaultState.style.display = 'block';
+  resultsState.style.display = 'none';
+  input.focus();
+}
+
+// Remove recent items
+document.querySelectorAll('.recent-remove').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    this.closest('.recent-item').style.opacity = '0';
+    this.closest('.recent-item').style.transition = 'opacity 0.2s';
+    setTimeout(() => this.closest('.recent-item').remove(), 200);
+  });
+});
+</script>
+</body>
+</html>

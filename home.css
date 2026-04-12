@@ -16,7 +16,7 @@
      --bg-light: #f4f4f4;
      --text-dark: rgba(2, 6, 12, 0.8);
      --text-muted: #797d82;
-     --font-main: 'Figtree', sans-serif;
+     --font-main: 'Gilroy', sans-serif;
  }
 
  html,
@@ -25,14 +25,57 @@
      height: 100%;
      background: #ffffff;
      font-family: var(--font-main);
-     overflow-x: hidden;
+     overflow: hidden;
  }
 
 
 
+ .nav-actions {
+     display: flex;
+     gap: 9px;
+     pointer-events: all;
+ }
+
+ .nav-action-btn {
+     width: 42px;
+     height: 42px;
+     background: #fff;
+     border-radius: 42px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     cursor: pointer;
+     border: none;
+ }
+
+ .nav-action-btn img,
+ .nav-action-btn svg {
+     width: 20px;
+     height: 20px;
+ }
 
 
 
+ .restaurant-name-1 {
+     color: #FFF;
+     font-family: Gilroy-SemiBold;
+     font-size: 14px;
+     font-style: normal;
+     font-weight: 400;
+     line-height: 13.635px;
+     /* 97.395% */
+     letter-spacing: -0.215px;
+ }
+
+ .restaurant-name-2 {
+     color: rgba(255, 255, 255, 0.60);
+     font-family: Gilroy-Medium;
+     font-size: 12px;
+     font-style: normal;
+     font-weight: 400;
+     line-height: 11.482px;
+     /* 95.686% */
+ }
 
 
 
@@ -256,8 +299,11 @@
      width: 100%;
      margin: 0 auto;
      background: #000;
-     min-height: 100vh;
+     height: 100vh;
      position: relative;
+     overflow-y: auto;
+     scroll-snap-type: y mandatory;
+     scroll-behavior: smooth;
  }
 
 
@@ -275,6 +321,8 @@
      height: 420px;
      overflow: hidden;
      flex-shrink: 0;
+     scroll-snap-align: start;
+     z-index: 1;
  }
 
  .hero-bg {
@@ -293,7 +341,7 @@
  }
 
  .hero-top {
-     position: absolute;
+     position: sticky;
      top: 0;
      left: 0;
      right: 0;
@@ -382,6 +430,15 @@
          /* url of the font */
  }
 
+
+ @font-face {
+     font-family: Gilroy;
+     /* set name */
+     src: url(Fonts/Gilroy-Medium.otf)
+         /* url of the font */
+ }
+
+
  .hero-text {
      transition: opacity 0.5s ease;
      display: flex;
@@ -405,7 +462,7 @@
      /* font-weight: 200; */
      /* letter-spacing: normal; */
      /* font-size: 60px; */
-     /* color: #ed2c2b; */
+     color: #FFBB00
  }
 
  .overlay {
@@ -419,12 +476,15 @@
 
  .hero-subtitle {
      font-size: 16px;
-     font-weight: 100;
+     font-weight: 300;
      line-height: 135%;
-     color: rgba(250, 243, 218, 0.8);
      letter-spacing: -0.5px;
      width: 255px;
      margin-bottom: 16px;
+
+
+     color: rgba(250, 243, 218, 0.80);
+     font-family: Figtree;
  }
 
  .hero-dots {
@@ -435,7 +495,7 @@
 
  .dot-active {
      width: 15.75px;
-     height: 7px;
+     height: 5px;
      background: var(--red);
      border-radius: 8px;
      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease-out, border-radius 0.4s ease-out;
@@ -480,14 +540,23 @@
  }
 
  /* ── WHITE CARD SECTION ── */
- .content-card {
-     background: #fff;
-     border-radius: 16px 16px 0 0;
-     position: sticky;
+ .content-card-container {
+     position: relative;
      z-index: 2;
+     height: calc(100vh - 94px);
+     overflow-y: auto;
+     scroll-snap-align: start;
+     scroll-margin-top: 94px;
+     background: #fff;
+     border-radius: 28px 28px 0 0;
  }
 
- .content-card-container {}
+ .content-card {
+     background: #fff;
+     border-radius: 28px 28px 0 0;
+     position: relative;
+     z-index: 2;
+ }
 
  .grab-handle {
      width: 44px;
@@ -505,9 +574,9 @@
 
  .search-bar {
 
-     border-radius: 62px;
-     border: 1px solid #E9E9E9;
-     background: #FAFAFA;
+     border-radius: 32px;
+     /* border: 2px solid #e6e6e6; */
+     background: #ebeaea;
      height: 61px;
      display: flex;
      align-items: center;

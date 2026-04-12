@@ -2,6 +2,33 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchHomepageData();
+    
+    // Bottom Sheet Nested Scroll Handoff
+    const screen = document.querySelector('.screen');
+    const container = document.querySelector('.content-card-container');
+    
+    if (screen && container) {
+        // Initially lock internal scroll so drags propagate to .screen
+        container.style.overflowY = 'visible';
+
+        screen.addEventListener('scroll', () => {
+            // Maximum scroll distance of .screen is exactly 326px 
+            // We unlock the inner scroll container right as it hits the top!
+            if (screen.scrollTop >= 325) {
+                container.style.overflowY = 'auto';
+            } else {
+                container.style.overflowY = 'visible';
+            }
+        });
+        
+        container.addEventListener('scroll', () => {
+            // If user scrolls back down to the very top of the card's inner content,
+            // we lock it again so their next swipe down drags the card down physically!
+            if (container.scrollTop <= 1) {
+                container.style.overflowY = 'visible';
+            }
+        });
+    }
 });
 
 async function fetchHomepageData() {
@@ -57,6 +84,7 @@ async function fetchHomepageData() {
 let spotlightItems = [];
 let currentSpotlightIndex = 0;
 let spotlightInterval = null;
+let heroSwipeAttached = false;
 
 function renderSpotlight(items) {
     if (!items || items.length === 0) return;
@@ -69,15 +97,66 @@ function renderSpotlight(items) {
 
     updateSpotlightUI(0);
 
-    if (items.length > 1 && !spotlightInterval) {
-        spotlightInterval = setInterval(() => {
-            const nextIndex = (currentSpotlightIndex + 1) % items.length;
-            transitionSpotlight(nextIndex);
-        }, 4000);
+    if (items.length > 1) {
+        if (!spotlightInterval) {
+            spotlightInterval = setInterval(() => {
+                const nextIndex = (currentSpotlightIndex + 1) % items.length;
+                transitionSpotlight(nextIndex, 'next');
+            }, 4000);
+        }
+
+        if (!heroSwipeAttached) {
+            heroSwipeAttached = true;
+            const heroElem = document.querySelector('.hero');
+            if (heroElem) {
+                let touchStartX = 0;
+                let touchEndX = 0;
+                
+                heroElem.addEventListener('touchstart', e => {
+                    touchStartX = e.changedTouches[0].screenX;
+                }, { passive: true });
+                
+                heroElem.addEventListener('touchend', e => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleHeroSwipe();
+                }, { passive: true });
+                
+                function handleHeroSwipe() {
+                    const SWIPE_THRESHOLD = 40;
+                    const diff = touchStartX - touchEndX;
+                    
+                    if (Math.abs(diff) > SWIPE_THRESHOLD) {
+                        let newIndex = currentSpotlightIndex;
+                        let direction = 'next';
+
+                        if (diff > 0) {
+                            // Swiped left => Next
+                            newIndex = (currentSpotlightIndex + 1) % items.length;
+                            direction = 'next';
+                        } else {
+                            // Swiped right => Prev
+                            newIndex = (currentSpotlightIndex - 1 + items.length) % items.length;
+                            direction = 'prev';
+                        }
+                        
+                        // Restart the auto-sliding interval
+                        if (spotlightInterval) {
+                            clearInterval(spotlightInterval);
+                            spotlightInterval = setInterval(() => {
+                                const nextIndexIter = (currentSpotlightIndex + 1) % items.length;
+                                transitionSpotlight(nextIndexIter, 'next');
+                            }, 4000);
+                        }
+                        
+                        transitionSpotlight(newIndex, direction);
+                    }
+                }
+            }
+        }
     }
 }
 
-function transitionSpotlight(index) {
+function transitionSpotlight(index, direction = 'next') {
     const heroGradient = document.querySelector('.hero-gradient');
     const oldBg = document.querySelector('.hero-bg:not(.sliding-out)');
     const heroTitle = document.querySelector('.hero-text h1');
@@ -112,8 +191,11 @@ function transitionSpotlight(index) {
         newBg.style.backgroundImage = `url(${imgUrl})`;
     }
     
-    // Start the new background fully positioned to the right
-    newBg.style.transform = 'translateX(100%)';
+    const startTranslate = direction === 'next' ? '100%' : '-100%';
+    const endTranslateOld = direction === 'next' ? '-100%' : '100%';
+
+    // Start the new background fully positioned to the right (or left if reversing)
+    newBg.style.transform = `translateX(${startTranslate})`;
     newBg.style.transition = 'transform 0.5s ease-in-out';
     
     // Insert behind the gradient
@@ -121,13 +203,13 @@ function transitionSpotlight(index) {
         heroGradient.parentNode.insertBefore(newBg, heroGradient);
     }
 
-    // Force reflow to ensure the transform jump to 100% is registered before animating
+    // Force reflow to ensure the transform jump is registered before animating
     newBg.offsetWidth;
     
     // Trigger slide animations
     newBg.style.transform = 'translateX(0)';
     if (oldBg) {
-        oldBg.style.transform = 'translateX(-100%)';
+        oldBg.style.transform = `translateX(${endTranslateOld})`;
     }
 
     // Update the text while the camera is moving
