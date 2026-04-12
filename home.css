@@ -575,8 +575,8 @@
  .search-bar {
 
      border-radius: 32px;
-     /* border: 2px solid #e6e6e6; */
-     background: #ebeaea;
+     border: 2px solid #e6e6e6;
+     background: #f8f7f7;
      height: 61px;
      display: flex;
      align-items: center;
@@ -639,6 +639,8 @@
      color: #000;
      line-height: 1.4;
      width: 232px;
+     font-family: figtree;
+
  }
 
  .section-title-sm {
