@@ -42,8 +42,8 @@
 
 
                     <div class="nav-actions">
-                        <button class="nav-action-btn">
-                            <img src="Images/search.png" alt="menu" />
+                        <button class="nav-action-btn top-search-btn">
+                            <img src="Images/search.png" alt="search" />
                         </button>
                         <button class="nav-action-btn">
                             <img src="Images/cart.png" alt="menu" />
@@ -76,422 +76,362 @@
 
         <div class="content-card-container">
             <div class="content-card">
-                <div class="grab-handle"></div>
 
-                <!-- Search -->
+                <!-- ── DRAG HANDLE + SEARCH ── -->
                 <div class="search-section">
+                    <div class="home-indicator"></div>
                     <div class="search-bar" onclick="location.href='search.html'">
                         <div class="search-left">
-                            <svg viewBox="0 0 15 15" fill="none">
-                                <circle cx="6.5" cy="6.5" r="5.5" stroke="#676767" stroke-width="1.5" />
-                                <path d="M10.5 10.5L13.5 13.5" stroke="#676767" stroke-width="1.5"
-                                    stroke-linecap="round" />
-                            </svg>
-                            <span>Search dishes, ingredients</span>
+                            <div class="search-icon">
+                                <img src="https://www.figma.com/api/mcp/asset/bae0aaf6-d965-4288-bdeb-789e9092916c"
+                                    alt="search" />
+                            </div>
+                            <span class="search-placeholder">Search dishes , keywords</span>
                         </div>
-                        <div class="ai-btn">
-                            <img src="Images/AI icon.png" alt="AI" />
+                        <div class="ai-chip">
+                            <div class="ai-chip-icon">
+                                <img src="https://www.figma.com/api/mcp/asset/f5618670-c03c-4f14-b7c2-bece0aafc2f3"
+                                    alt="AI" />
+                            </div>
+                            <span class="ai-chip-label">AI</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Categories -->
-                <div class="section">
-                    <div class="section-header">
-                        <div class="section-title">What would you like to have today?</div>
-                        <div class="see-all">
-                            See all
-
+                <!-- ── WHAT WOULD YOU LIKE ── -->
+                <div class="what-section">
+                    <div class="what-header">
+                        <div class="what-title">What would you like to have today?&nbsp;</div>
+                        <div class="see-all-btn">
+                            <div class="see-all-pill">
+                                <img class="arrow-img"
+                                    src="https://www.figma.com/api/mcp/asset/6736d3a3-b248-41db-b85f-7712bae44635"
+                                    alt="→" style="transform:scaleY(-1);" />
+                            </div>
                         </div>
                     </div>
 
-                    <!-- <div class="categories-scroll">
-                        <div class="cat-card cat-card-main" onclick="location.href='category.html'">
-                            <span class="cat-label cat-label-main">Starters</span>
-                            <img class="cat-img" src="Images/main course.png" alt="Main"
-                                style="position:absolute;right:-20px;bottom:0;width:130px;" />
+                    <!-- ── BANNER CATEGORY CARDS ── -->
+                    <div class="banner-cards-section">
+                        <div class="banner-cards-scroll">
+                            <!-- Cards will be populated dynamically from Supabase -->
+                            <!-- Spacer -->
+                            <div class="banner-card-placeholder"></div>
                         </div>
-
-                        <div class="cat-placeholder"></div>
                     </div>
- -->
 
-
-
-
-
-
-
-
-
-
-                    <div class="categories-track" id="catTrack">
-
-                        <!-- Card 1: Our Starters -->
-                        <div class="cat-card" style="border:1px solid #ffeae9;">
-                            <div class="cat-bg"
-                                style="background:radial-gradient(ellipse at 4.5px 140px,#BE4130 4.3%,#C65647 16.3%,#CE6A5E 28.2%,#DF958B 52.2%,#EFBFb9 76.1%,#FFE9E6 100%);opacity:.5;">
+                    <!-- ── VIEW FULL MENU ── -->
+                    <div class="full-menu-wrap">
+                        <button class="full-menu-btn" onclick="location.href='category.html'">
+                            <div class="menu-icon">
+                                <img src="https://www.figma.com/api/mcp/asset/c7ccb5eb-4f46-4c24-893a-4724e4c11e74"
+                                    alt="menu" />
                             </div>
-                            <div class="cat-lbl" style="color:#9d4901; left:12px; top:37.8px;">
-                                <span class="cat-lbl-l1"
-                                    style="font-size:22.368px; font-weight:700; color:#9d4901;">Our</span>
-                                <span class="cat-lbl-l2" style="font-size:22.368px; color:#9d4901;">Starters</span>
-                            </div>
-                            <div class="img-starters">
-                                <img src="https://www.figma.com/api/mcp/asset/29d01591-0ae2-4887-99cc-1ac6ba930f41"
-                                    alt="Spicy grilled chicken" />
-                            </div>
-                        </div>
-
-                        <!-- Card 2: Main Course -->
-                        <div class="cat-card" style="border:1px solid #f9ebca;">
-                            <div class="cat-bg"
-                                style="background:radial-gradient(ellipse at 4.5px 140px,#FF9522 4.3%,#FFA13B 16.3%,#FFAD53 28.2%,#FFC683 52.2%,#FFDEB4 76.1%,#FFF7E4 100%);opacity:.6;">
-                            </div>
-                            <div class="cat-lbl" style="color:#d77a16; left:12px; top:30.8px;">
-                                <span class="cat-lbl-l1"
-                                    style="font-size:22.122px; font-weight:500; color:#d77a16;">Main</span>
-                                <span class="cat-lbl-l2" style="font-size:22.122px; color:#d77a16;">Course</span>
-                            </div>
-                            <div class="img-main">
-                                <img src="https://www.figma.com/api/mcp/asset/d7729765-43a6-4f71-acb8-e041dc8153f0"
-                                    alt="Nasi rawon" />
-                            </div>
-                        </div>
-
-                        <!-- Card 3: Salad Selection -->
-                        <div class="cat-card" style="border:1px solid #e0f8df;">
-                            <div class="cat-bg"
-                                style="background:radial-gradient(ellipse at 24px 127.5px,#669E38 4.3%,#87B364 28.2%,#A9C891 52.2%,#CBD5BD 76.1%,#EDF2E9 100%);opacity:.5;">
-                            </div>
-                            <div class="cat-lbl" style="color:#3a690c; left:17px; top:34.8px;">
-                                <span class="cat-lbl-l1"
-                                    style="font-size:22.122px; font-weight:500; color:#3a690c;">Salad</span>
-                                <span class="cat-lbl-l2" style="font-size:22.122px; color:#3a690c;">Selection</span>
-                            </div>
-                            <div class="img-salad-wrap">
-                                <div class="img-salad-inner">
-                                    <img src="https://www.figma.com/api/mcp/asset/9b351e1b-c900-436c-b433-d2a23136be9f"
-                                        alt="Creamy avocado" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Card 4: Sweet Delights -->
-                        <div class="cat-card" style="border:1px solid rgba(246,198,208,0.26);">
-                            <div class="cat-bg"
-                                style="background:radial-gradient(ellipse at 24px 127.5px,#FF6C8C 4.3%,#FF9FB4 52.2%,#FFD3DC 100%);opacity:.5;">
-                            </div>
-                            <div class="cat-lbl" style="color:#b43651; left:17px; top:34.8px;">
-                                <span class="cat-lbl-l1"
-                                    style="font-size:22.122px; font-weight:500; color:#b43651;">Sweet</span>
-                                <span class="cat-lbl-l2" style="font-size:22.122px; color:#b43651;">Delights</span>
-                            </div>
-                            <div class="img-sweet">
-                                <img src="https://www.figma.com/api/mcp/asset/b66fa4aa-6506-4595-8f55-f9a9bcf807f2"
-                                    alt="Belgian waffles" />
-                            </div>
-                        </div>
-
-                        <!-- Card 5: Thirst Quenchers -->
-                        <div class="cat-card" style="border:1px solid #e9f0ff;">
-                            <div class="cat-bg"
-                                style="background:radial-gradient(ellipse at 4.5px 140px,#2261FF 4.3%,#3B73FF 16.3%,#5585FF 28.2%,#87A9FF 52.2%,#B9CDFF 76.1%,#EBF1FF 100%);opacity:.6;">
-                            </div>
-                            <div class="img-thirst-ellipse">
-                                <img src="https://www.figma.com/api/mcp/asset/d548f539-606c-4efc-ad9f-d9d8ff1dc432"
-                                    alt="" />
-                            </div>
-                            <div class="cat-lbl" style="color:#123688; left:calc(50% - 58px); top:34.8px;">
-                                <span class="cat-lbl-l1"
-                                    style="font-size:22.122px; font-weight:500; color:#123688;">Thirst</span>
-                                <span class="cat-lbl-l2" style="font-size:22.122px; color:#123688;">Quenchers</span>
-                            </div>
-                            <div class="img-thirst">
-                                <img src="https://www.figma.com/api/mcp/asset/ea659f31-deb8-4e5e-afd1-acce92a0d71c"
-                                    alt="Blue margarita" />
-                            </div>
-                        </div>
-
-                        <!-- Card 6: Bar Menu -->
-                        <div class="cat-card" style="border:1px solid #fcf0ec;">
-                            <div class="cat-bg"
-                                style="background:radial-gradient(ellipse at 4.5px 140px,#611A00 4.3%,#6B270E 10.3%,#75341D 16.3%,#884A3A 28.2%,#9C6957 40.2%,#B08474 52.2%,#C49E91 64.1%,#D7B8AE 76.1%,#FFEAE4 100%);opacity:.6;">
-                            </div>
-                            <div class="cat-lbl" style="color:#441911; left:calc(50% - 58px); top:34.8px;">
-                                <span class="cat-lbl-l1"
-                                    style="font-size:22.122px; font-weight:500; color:#441911;">Bar</span>
-                                <span class="cat-lbl-l2" style="font-size:22.122px; color:#441911;">Menu</span>
-                            </div>
-                            <div class="img-bar">
-                                <img src="https://www.figma.com/api/mcp/asset/e7ee65e8-dc92-4662-9277-0694294f5274"
-                                    alt="Old fashioned" />
-                            </div>
-                        </div>
-
-                    </div><!-- /categories-track -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <!-- View Full Menu -->
-                    <div class="full-menu-row" style="margin-top:20px;">
-                        <div class="divider-line"></div>
-                        <button class="full-menu-btn">
-                            <img src="Images/Menu icon.svg" alt="menu" />
-                            View Full menu
+                            <span>View Full menu</span>
                         </button>
-                        <div class="divider-line"></div>
+                    </div>
+
+                    <!-- ── TABS + DISH CARDS ── -->
+                    <div class="dish-section">
+                        <!-- Tab bar -->
+                        <div class="tab-bar">
+                            <div class="tab-item">
+                                <span class="tab-label-active">Most Ordered</span>
+                            </div>
+                            <div class="tab-item">
+                                <span class="tab-label-inactive">Signatures</span>
+                                <div class="tab-underline"></div>
+                            </div>
+                            <div class="tab-item">
+                                <span class="tab-label-inactive">Budget</span>
+                                <div class="tab-underline"></div>
+                            </div>
+                            <div class="tab-active-bar"></div>
+                        </div>
+
+                        <!-- Dish Cards -->
+                        <div class="dish-grid-wrap">
+                            <div class="dish-grid">
+
+                                <!-- Dish 1: Tandoori Broccoli -->
+                                <div class="dish-card" onclick="location.href='dish-detail.html'">
+                                    <div class="dish-card-img-wrap">
+                                        <img src="https://www.figma.com/api/mcp/asset/2cfad848-5797-4bbe-acc7-69eeacf1a6dc"
+                                            alt="Tandoori Broccoli" />
+                                        <img src="https://www.figma.com/api/mcp/asset/f96ac1ad-70a0-4962-8af2-c6c9b7bef97e"
+                                            alt=""
+                                            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+                                        <img src="https://www.figma.com/api/mcp/asset/3ba1ee31-e209-4ee0-b4d1-da95ead1aa37"
+                                            alt=""
+                                            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+                                        <button class="dish-add-btn"><span>+</span></button>
+                                    </div>
+                                    <div class="dish-card-meta">
+                                        <div class="dish-card-name">Tandoori Broccoli</div>
+                                        <div class="dish-card-tags">
+                                            <div class="veg-indicator">
+                                                <div class="dot"></div>
+                                            </div>
+                                            <span class="tag-veg-label">Veg</span>
+                                            <span class="tag-sep">|</span>
+                                            <span class="tag-time">20-25 mins</span>
+                                        </div>
+                                        <div class="dish-price-row">
+                                            <span class="dish-price">₹675</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Dish 2: Tandoori Chooza -->
+                                <div class="dish-card" onclick="location.href='dish-detail.html'">
+                                    <div class="dish-card-img-wrap">
+                                        <img src="https://www.figma.com/api/mcp/asset/2cfad848-5797-4bbe-acc7-69eeacf1a6dc"
+                                            alt="Tandoori Chooza"
+                                            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+                                        <img src="https://www.figma.com/api/mcp/asset/b5cab332-3024-4f6d-950b-6c4a68ec438a"
+                                            alt="Tandoori Chooza"
+                                            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+                                        <button class="dish-add-btn"><span>+</span></button>
+                                    </div>
+                                    <div class="dish-card-meta">
+                                        <div class="dish-card-name">Tandoori Chooza</div>
+                                        <div class="dish-card-tags">
+                                            <div class="nonveg-indicator">
+                                                <div class="dot"></div>
+                                            </div>
+                                            <span class="tag-nonveg-label">Non-Veg</span>
+                                            <span class="tag-sep">|</span>
+                                            <span class="tag-time">20-25 mins</span>
+                                        </div>
+                                        <div class="dish-price-row">
+                                            <span class="dish-price">₹300</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Dish 3 -->
+                                <div class="dish-card" onclick="location.href='dish-detail.html'">
+                                    <div class="dish-card-img-wrap">
+                                        <img src="https://www.figma.com/api/mcp/asset/2cfad848-5797-4bbe-acc7-69eeacf1a6dc"
+                                            alt="Dish"
+                                            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+                                        <img src="https://www.figma.com/api/mcp/asset/f96ac1ad-70a0-4962-8af2-c6c9b7bef97e"
+                                            alt=""
+                                            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+                                        <button class="dish-add-btn"><span>+</span></button>
+                                    </div>
+                                    <div class="dish-card-meta">
+                                        <div class="dish-card-name">Tandoori Chooza</div>
+                                        <div class="dish-card-tags">
+                                            <div class="nonveg-indicator">
+                                                <div class="dot"></div>
+                                            </div>
+                                            <span class="tag-nonveg-label">Non-Veg</span>
+                                            <span class="tag-sep">|</span>
+                                            <span class="tag-time">20-25 mins</span>
+                                        </div>
+                                        <div class="dish-price-row">
+                                            <span class="dish-price">₹300</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div><!-- end dish-grid -->
+                        </div><!-- end dish-grid-wrap -->
+                    </div><!-- end dish-section -->
+
+                    <!-- ── POPULAR CATEGORIES ── -->
+                    <div class="pop-cats-section">
+                        <div class="pop-cats-header">
+                            <span class="pop-cats-title">Popular Categories</span>
+                            <span class="pop-cats-see-all" onclick="location.href='category.html'">See All</span>
+                        </div>
+                        <div class="pop-cats-grid">
+                            <div class="pop-cat-card" onclick="location.href='category.html'">
+                                <div class="pop-cat-img" style="width:59px;height:46px;">
+                                    <img src="https://www.figma.com/api/mcp/asset/ab83b8e0-07f6-4d9d-a6cc-cc68af921e9b"
+                                        alt="Burgers" style="width:75px;height:54px;margin-left:-8px;" />
+                                </div>
+                                <span class="pop-cat-label">Ride</span>
+                            </div>
+                            <div class="pop-cat-card" onclick="location.href='category.html'">
+                                <div class="pop-cat-img" style="width:58px;height:45px;">
+                                    <img src="https://www.figma.com/api/mcp/asset/f9f4d8de-a1c0-4f7e-a2a5-642e96319004"
+                                        alt="Healthy" style="width:67px;height:45px;" />
+                                </div>
+                                <span class="pop-cat-label">2-Wheels</span>
+                            </div>
+                            <div class="pop-cat-card" onclick="location.href='category.html'">
+                                <div class="pop-cat-img" style="width:65px;height:33px;">
+                                    <img src="https://www.figma.com/api/mcp/asset/78e85afe-19dd-4eb7-bffd-9bdd5bf21968"
+                                        alt="Rolls" style="width:65px;height:40px;" />
+                                </div>
+                                <span class="pop-cat-label">Rolls</span>
+                            </div>
+                            <div class="pop-cat-card" onclick="location.href='category.html'">
+                                <div class="pop-cat-img" style="width:58px;height:45px;">
+                                    <img src="https://www.figma.com/api/mcp/asset/f9f4d8de-a1c0-4f7e-a2a5-642e96319004"
+                                        alt="Healthy" style="width:67px;height:45px;" />
+                                </div>
+                                <span class="pop-cat-label">2-Wheels</span>
+                            </div>
+                            <div class="pop-cat-card" onclick="location.href='category.html'">
+                                <div class="pop-cat-img" style="width:58px;height:45px;">
+                                    <img src="https://www.figma.com/api/mcp/asset/f9f4d8de-a1c0-4f7e-a2a5-642e96319004"
+                                        alt="Healthy" style="width:67px;height:45px;" />
+                                </div>
+                                <span class="pop-cat-label">2-Wheels</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- end what-section -->
+
+                <!-- ── LARGE PROMO BANNERS ── -->
+                <div class="large-banners-row">
+                    <!-- Banner 1: Reserve a ride -->
+                    <div class="large-banner-card">
+                        <img class="banner-bg"
+                            src="https://www.figma.com/api/mcp/asset/5b0f8795-8068-4c50-b3e0-31c793bc450e"
+                            alt="Ride on your schedule" />
+                        <div class="large-banner-copy">
+                            <div class="large-banner-title">Ride on your schedule</div>
+                            <div class="large-banner-cta">
+                                <span class="large-banner-cta-label">Reserve a ride</span>
+                                <div class="large-banner-cta-arrow">
+                                    <img src="https://www.figma.com/api/mcp/asset/96f81be5-4bf5-4cb0-87c7-f78d19d45452"
+                                        alt="→" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Banner 2: Uber Black -->
+                    <div class="large-banner-card">
+                        <img class="banner-bg"
+                            src="https://www.figma.com/api/mcp/asset/b2fb6e4f-112b-4360-8ca7-f8edeeb3fec5"
+                            alt="Enjoy a luxury car" />
+                        <div class="large-banner-copy">
+                            <div class="large-banner-title">Enjoy a luxury car</div>
+                            <div class="large-banner-cta">
+                                <span class="large-banner-cta-label">Try Uber Black</span>
+                                <div class="large-banner-cta-arrow">
+                                    <img src="https://www.figma.com/api/mcp/asset/96f81be5-4bf5-4cb0-87c7-f78d19d45452"
+                                        alt="→" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Most Ordered -->
-                <div class="most-ordered">
-                    <div class="section-header">
-                        <span class="section-title-sm">Our most ordered</span>
-                        <div class="see-all">
-                            See all
-                            <svg class="see-all-arrow" viewBox="0 0 19 14" fill="none">
-                                <path d="M1 7H17M17 7L11 1M17 7L11 13" stroke="#797d82" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div class="dishes-scroll">
-                        <!-- Dish Card 1 -->
-                        <div class="dish-card" onclick="location.href='dish-detail.html'">
-                            <div class="dish-card-img">
-                                <img src="Images/card1.png" />
-                                <div class="dish-card-overlay"> </div>
-                                <div class="dish-card-info">
-                                    <div>
-                                        <div class="dish-card-name">DalLazeez</div>
-                                        <div class="dish-card-sub">North Indian, Veg starters</div>
-                                    </div>
-                                    <div class="dish-arrow">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="white" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dish-meta">
-                                <div class="dish-tags">
-                                    <span class="tag-veg">
-                                        <img class="tag-veg-dot"
-                                            src="https://www.figma.com/api/mcp/asset/198dc533-2ac2-46ad-93ab-53a6cc47bf8e"
-                                            alt="veg" />
-                                        Veg
-                                    </span>
-                                    <span class="tag-sep">|</span>
-                                    <span class="tag-time">20-25 mins</span>
-                                </div>
-                                <div class="dish-price">₹675</div>
-                            </div>
-                        </div>
-
-                        <!-- Dish Card 2 -->
-                        <div class="dish-card" onclick="location.href='dish-detail.html'">
-                            <div class="dish-card-img">
-                                <img src="Images/card2.png" alt="DalLazeez" />
-                                <div class="dish-card-overlay"></div>
-                                <div class="dish-card-info">
-                                    <div>
-                                        <div class="dish-card-name">DalLazeez</div>
-                                        <div class="dish-card-sub">North Indian, Veg starters</div>
-                                    </div>
-                                    <div class="dish-arrow">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="white" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dish-meta">
-                                <div class="dish-tags">
-                                    <span class="tag-veg">
-                                        <img class="tag-veg-dot"
-                                            src="https://www.figma.com/api/mcp/asset/198dc533-2ac2-46ad-93ab-53a6cc47bf8e"
-                                            alt="veg" />
-                                        Veg
-                                    </span>
-                                    <span class="tag-sep">|</span>
-                                    <span class="tag-time">20-25 mins</span>
-                                </div>
-                                <div class="dish-price">₹675</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Popular Categories -->
-                <div class="pop-cats">
-                    <div class="section-header">
-                        <span class="section-title-sm">Popular categories</span>
-                        <div class="see-all">
-                            See all
-                            <svg class="see-all-arrow" viewBox="0 0 19 14" fill="none">
-                                <path d="M1 7H17M17 7L11 1M17 7L11 13" stroke="#797d82" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div class="pop-cats-scroll">
-                        <div class="cat-chip" onclick="location.href='category.html'">
-                            <div class="cat-chip-avatars">
-                                <div class="chip-av"></div>
-                                <div class="chip-av"><img
-                                        src="https://www.figma.com/api/mcp/asset/cef45cac-0dfb-451a-a446-975c88bbf4bd"
-                                        alt="" /></div>
-                                <div class="chip-av"><img
-                                        src="https://www.figma.com/api/mcp/asset/21478d7d-d727-4af5-8da1-fd1c06db45dd"
-                                        alt="" /></div>
-                            </div>
-                            <span class="cat-chip-name">Special Biriyani</span>
-                        </div>
-                        <div class="cat-chip" onclick="location.href='category.html'">
-                            <div class="cat-chip-avatars">
-                                <div class="chip-av"></div>
-                                <div class="chip-av"></div>
-                                <div class="chip-av"></div>
-                            </div>
-                            <span class="cat-chip-name">Rolls and Grills</span>
-                        </div>
-                        <div class="cat-chip" onclick="location.href='category.html'">
-                            <div class="cat-chip-avatars">
-                                <div class="chip-av"></div>
-                                <div class="chip-av"></div>
-                                <div class="chip-av"></div>
-                            </div>
-                            <span class="cat-chip-name">Starters</span>
-                        </div>
-                        <div class="cat-chip" onclick="location.href='category.html'">
-                            <div class="cat-chip-avatars">
-                                <div class="chip-av"></div>
-                                <div class="chip-av"></div>
-                                <div class="chip-av"></div>
-                            </div>
-                            <span class="cat-chip-name">Noodles</span>
-                        </div>
-                        <div class="cat-chip" onclick="location.href='category.html'">
-                            <div class="cat-chip-avatars">
-                                <div class="chip-av"></div>
-                                <div class="chip-av"></div>
-                                <div class="chip-av"></div>
-                            </div>
-                            <span class="cat-chip-name">Breads</span>
-                        </div>
-                        <div class="cat-chip" onclick="location.href='category.html'">
-                            <div class="cat-chip-avatars">
-                                <div class="chip-av"></div>
-                                <div class="chip-av"></div>
-                                <div class="chip-av"></div>
-                            </div>
-                            <span class="cat-chip-name">Pasta</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Highlights -->
-                <div class="highlights">
-                    <div class="section-header" style="margin-bottom:12px;">
-                        <span class="section-title-sm">Recent Higlights
+                <!-- ── RECENT HIGHLIGHTS ── -->
+                <div class="highlights-section">
+                    <div class="highlights-header">
+                        <span class="highlights-title">Recent higlights</span>
                     </div>
                     <div class="stories-row">
                         <!-- Add story -->
                         <div class="story-add">
                             <div class="story-add-inner">
-                                <svg width="31" height="31" viewBox="0 0 31 31" fill="none">
-                                    <rect x="4" y="4" width="23" height="23" rx="3" stroke="#808080"
-                                        stroke-width="1.5" />
-                                    <circle cx="12" cy="12" r="2" stroke="#808080" stroke-width="1.5" />
-                                    <path d="M4 20L9 15L13 19L19 13L27 21" stroke="#808080" stroke-width="1.5"
-                                        stroke-linecap="round" />
-                                </svg>
+                                <div class="gallery-icon">
+                                    <img src="https://www.figma.com/api/mcp/asset/93712184-589c-4e00-bcbf-87e931e29946"
+                                        alt="" />
+                                </div>
                             </div>
                             <div class="story-plus">
-                                <svg viewBox="0 0 8 8" fill="none">
-                                    <path d="M4 1V7M1 4H7" stroke="white" stroke-width="1.5" stroke-linecap="round" />
-                                </svg>
+                                <img src="https://www.figma.com/api/mcp/asset/e7c8125e-4811-4e1a-ad92-d618510a3e4e"
+                                    alt="+" />
                             </div>
                         </div>
+                        <!-- Story 1 -->
                         <div class="story-item">
-                            <img src="https://www.figma.com/api/mcp/asset/b2ba9509-b0e3-4b85-835d-282553986be3"
-                                alt="story" />
+                            <div class="story-avatar">
+                                <img src="https://www.figma.com/api/mcp/asset/72beb549-e89b-4638-beb7-372526e6e5e5"
+                                    alt="story" />
+                                <img src="https://www.figma.com/api/mcp/asset/f96ac1ad-70a0-4962-8af2-c6c9b7bef97e"
+                                    alt=""
+                                    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:100px;" />
+                            </div>
                         </div>
+                        <!-- Story 2 -->
                         <div class="story-item">
-                            <img src="https://www.figma.com/api/mcp/asset/b2ba9509-b0e3-4b85-835d-282553986be3"
-                                alt="story" />
+                            <div class="story-avatar">
+                                <img src="https://www.figma.com/api/mcp/asset/72beb549-e89b-4638-beb7-372526e6e5e5"
+                                    alt="story" />
+                            </div>
                         </div>
+                        <!-- Story 3 -->
                         <div class="story-item">
-                            <img src="https://www.figma.com/api/mcp/asset/b304d840-819d-47ed-8bfd-17a072a1ad39"
-                                alt="story" />
+                            <div class="story-avatar">
+                                <img src="https://www.figma.com/api/mcp/asset/72beb549-e89b-4638-beb7-372526e6e5e5"
+                                    alt="story" />
+                                <img src="https://www.figma.com/api/mcp/asset/92cd0fb9-e77f-41d7-a630-6bd0e97c41ea"
+                                    alt=""
+                                    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:100px;" />
+                            </div>
                         </div>
+                        <!-- Story 4 -->
                         <div class="story-item">
-                            <img src="https://www.figma.com/api/mcp/asset/52be8819-4cd5-4745-b75c-cf21a46d0782"
-                                alt="story" />
+                            <div class="story-avatar">
+                                <img src="https://www.figma.com/api/mcp/asset/72beb549-e89b-4638-beb7-372526e6e5e5"
+                                    alt="story" />
+                                <img src="https://www.figma.com/api/mcp/asset/4a5038f1-ceef-4a68-8ed3-a8629d2cd444"
+                                    alt=""
+                                    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:100px;" />
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Group Cart Banner -->
-                <div class="group-cart-banner">
+                <!-- Spacer -->
+                <div style="height:0;width:100%;flex-shrink:0;"></div>
+
+                <!-- ── GROUP CART BANNER ── -->
+                <div class="group-cart-section">
                     <div class="gc-top">
-                        <div class="gc-icon">
-                            <img src="https://www.figma.com/api/mcp/asset/2741d355-a8ce-44a8-ad7d-36e50a6c0e1a"
-                                alt="group" />
+                        <div class="gc-icon-wrap">
+                            <div class="gc-icon">
+                                <img src="https://www.figma.com/api/mcp/asset/3b2a875f-3791-4369-b417-c9f7578b89a3"
+                                    alt="group" />
+                            </div>
                         </div>
                         <div class="gc-text">
-                            <div class="gc-title">Having a team lunch?</div>
-                            <div class="gc-sub">Join a synced cart where everyone can add what they want.</div>
-                            <div class="gc-avatars">
+                            <span class="gc-title">Having a team lunch?</span>
+                            <span class="gc-sub">Join a synced cart where everyone can add what they want.</span>
+                            <div class="gc-avatars-row">
                                 <div class="gc-av"><img
-                                        src="https://www.figma.com/api/mcp/asset/4f5e3b84-6394-4915-bc27-3b9710d8b12b"
-                                        alt="" /></div>
+                                        src="https://www.figma.com/api/mcp/asset/220a1959-95b8-42ac-a10d-636e70b1e68a"
+                                        alt="member" /></div>
                                 <div class="gc-av"><img
-                                        src="https://www.figma.com/api/mcp/asset/9113e6fc-f2e1-4fdd-bee5-f7d0c3f63158"
-                                        alt="" /></div>
+                                        src="https://www.figma.com/api/mcp/asset/66e13c8c-d43b-4ac5-8476-d24b3643e6c3"
+                                        alt="member" /></div>
                                 <div class="gc-av"><img
-                                        src="https://www.figma.com/api/mcp/asset/afceb4ec-8cdd-4ccf-99de-be485293e94b"
-                                        alt="" /></div>
+                                        src="https://www.figma.com/api/mcp/asset/844e4d2a-6616-4bad-a650-5960c8e1923b"
+                                        alt="member" /></div>
                             </div>
                         </div>
                     </div>
                     <button class="gc-btn">
-                        <span style="font-size:22px;">⊞</span>
-                        Join Group Cart
+                        <div class="gc-btn-logo">
+                            <div class="gc-btn-logo-mask"
+                                style="-webkit-mask-image:url('https://www.figma.com/api/mcp/asset/eb81d39a-8b60-444c-ac60-3a7bf1f2ce9b');mask-image:url('https://www.figma.com/api/mcp/asset/eb81d39a-8b60-444c-ac60-3a7bf1f2ce9b');">
+                            </div>
+                        </div>
+                        <span class="gc-btn-text">Join Group Cart</span>
                     </button>
                 </div>
 
-                <!-- Footer -->
+                <!-- ── FOOTER ── -->
                 <div class="footer">
-                    <div class="powered-by">Powered by</div>
-                    <div class="tapqr-logo">
-                        <div class="tapqr-line"></div>
-                        <div class="tapqr-text">Tap<strong>QR</strong></div>
-                        <div class="tapqr-line"></div>
+                    <div class="footer-inner">
+                        <span class="powered-by">Powered by</span>
+                        <div class="tapqr-logo">
+                            <div class="tapqr-line"></div>
+                            <span class="tapqr-text">Ta<span class="track-p">p</span><span class="bold">Q</span><span
+                                    class="bold track-r">R</span></span>
+                            <div class="tapqr-line"></div>
+                        </div>
                     </div>
-                    <div class="tapqr-url">www.tapqr.com</div>
+                    <span class="tapqr-url">www.tapqr.com</span>
                 </div>
 
             </div><!-- end content-card -->

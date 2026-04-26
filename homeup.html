@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="theme-color" content="#000000"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<title>Koi Resto Bar – 3D Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Allan:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+/* ─────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:        #000000;
+  --white:        #FFFFFF;
+  --grey-800:     #4C4C4C;
+  --grey-200:     #F3F3F3;
+  --grey-100:     #FFFFFF;
+  --red:          #ed2c2b;
+  --green-dark:   #21973b;
+  --green-mat:    #2e7d32;
+  --red-mat:      #d32f2f;
+  --cream:        #faf3da;
+  --gold:         #ffbb00;
+  --font:         'Geist', sans-serif;
+}
+
+html, body {
+  width: 100%; min-height: 100%;
+  background: #000;
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Mobile viewport centering */
+.screen {
+  max-width: 390px;
+  margin: 0 auto;
+  background: #000;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ─────────────────────────────────────────
+   HERO — 420px full-bleed
+───────────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 420px;
+  overflow: hidden;
+  background: #1a0505;
+  flex-shrink: 0;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://www.figma.com/api/mcp/asset/70432a89-11f2-49a0-b1b3-833675a86599');
+  background-size: cover;
+  background-position: center;
+}
+.hero-gradient {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+    rgba(0,0,0,0) 26.905%,
+    rgba(0,0,0,0.41) 59.769%,
+    rgba(0,0,0,0.7) 114.05%);
+}
+
+/* Top row inside hero */
+.hero-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  flex-shrink: 0;
+}
+.hero-top-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+  position: sticky;
+  top: 0;
+}
+.restaurant-avatar-wrap {
+  display: flex;
+  align-items: center;
+  position: relative;
+  box-shadow: 0px 4px 9.7px 0px rgba(0,0,0,0.35);
+  flex-shrink: 0;
+}
+.restaurant-avatar {
+  width: 46px; height: 46px;
+  border-radius: 103.265px;
+  border: 1.725px solid rgba(255,255,255,0.4);
+  background: #4f0b0a;
+  overflow: hidden;
+  cursor: pointer;
+}
+.restaurant-avatar img {
+  width: 42.245px; height: 42.245px;
+  object-fit: cover;
+  display: block;
+  margin: 1.5px auto;
+}
+.restaurant-name-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6.31px;
+}
+.restaurant-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 13.635px;
+  white-space: nowrap;
+  letter-spacing: 0;
+}
+.restaurant-location {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  line-height: 11.482px;
+  white-space: nowrap;
+}
+
+.hero-top-right {
+  padding: 24px;
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.veg-badge {
+  background: #fff;
+  border: 0.618px solid rgba(18,133,64,0.01);
+  border-radius: 43.234px;
+  padding: 1.235px 9.882px 2.47px;
+  display: flex;
+  align-items: center;
+}
+.veg-badge-inner {
+  display: grid;
+  grid-template-columns: max-content;
+  grid-template-rows: max-content;
+  place-items: start;
+  position: relative;
+}
+.veg-dot-icon {
+  grid-column: 1; grid-row: 1;
+  width: 11.117px; height: 11.117px;
+  margin-top: 6.37px; margin-left: 0;
+  position: relative;
+}
+.veg-dot-icon img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.veg-text {
+  grid-column: 1; grid-row: 1;
+  font-family: 'Inter', var(--font);
+  font-weight: 900;
+  font-size: 19.764px;
+  color: var(--green-dark);
+  letter-spacing: -0.3953px;
+  line-height: normal;
+  margin-left: 11.12px;
+  margin-top: 0;
+  white-space: nowrap;
+}
+
+/* Hero bottom content */
+.hero-bottom {
+  position: relative;
+  height: 291px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 24px 20px 32px;
+  width: 100%;
+  flex-shrink: 0;
+}
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+  min-width: 0;
+}
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  color: var(--cream);
+  line-height: 0;
+}
+.hero-title .line1 {
+  font-family: 'Geist', sans-serif;
+  font-weight: 700;
+  font-size: 59.06px;
+  line-height: 51.045px;
+  margin-bottom: 0;
+  white-space: nowrap;
+  letter-spacing: -1px;
+}
+.hero-title .line2 {
+  font-family: 'Geist', sans-serif;
+  font-size: 68.06px;
+  line-height: 51.045px;
+  white-space: nowrap;
+}
+.hero-title .line2 .gold { color: var(--gold); font-weight: 800; font-style: italic; }
+.hero-title .line2 .cream { color: var(--cream); font-weight: 800; }
+
+.hero-subtitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(250,243,218,0.6);
+  line-height: 1.4;
+  min-width: 100%;
+  width: min-content;
+}
+
+.hero-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.dot-wide {
+  width: 15.75px; height: 7px;
+  background: #fff;
+  border-radius: 8px;
+}
+.dot-sm {
+  width: 7px; height: 7px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 8px;
+}
+.dot-sm-img {
+  width: 7px; height: 7px;
+  position: relative;
+  flex-shrink: 0;
+}
+.dot-sm-img img { position: absolute; inset: 0; width: 100%; display: block; }
+
+.hero-cta-btn {
+  background: var(--red);
+  width: 54px; height: 54px;
+  border-radius: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.15s;
+}
+.hero-cta-btn:active { transform: scale(0.93); }
+.hero-cta-btn .arrow-icon {
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  transform: rotate(-90deg) scaleY(-1);
+}
+.hero-cta-btn .arrow-icon img { width: 24px; height: 24px; display: block; }
+
+/* ─────────────────────────────────────────
+   WHITE CONTENT CARD
+───────────────────────────────────────── */
+.content-card {
+  background: #fff;
+  border-radius: 26px 26px 0 0;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── DRAG HANDLE + SEARCH ── */
+.search-section {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  align-items: center;
+  padding: 9px 20px 12px;
+  width: 100%;
+}
+.home-indicator {
+  width: 52.434px; height: 4px;
+  background: #e4e4e4;
+  border-radius: 109.238px;
+  flex-shrink: 0;
+}
+.search-bar {
+  background: var(--grey-200);
+  border-radius: 12px;
+  height: 54px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 10px 16px 20px;
+  cursor: pointer;
+}
+.search-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.search-icon { width: 20px; height: 20px; flex-shrink: 0; }
+.search-icon img { width: 100%; height: 100%; display: block; }
+.search-placeholder {
+  font-size: 14px;
+  font-weight: 500;
+  color: #757575;
+  white-space: nowrap;
+}
+.ai-chip {
+  background: #fff;
+  border-radius: 50px;
+  padding: 6px 18px 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.ai-chip-icon { width: 22px; height: 22px; flex-shrink: 0; }
+.ai-chip-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ai-chip-label {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+/* ── WHAT WOULD YOU LIKE section ── */
+.what-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 0 24px;
+  width: 390px;
+}
+.what-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+.what-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+  line-height: 1.35;
+  width: 232px;
+}
+.see-all-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.see-all-pill {
+  background: var(--grey-200);
+  border-radius: 32px;
+  padding: 10px 20px 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  cursor: pointer;
+}
+.see-all-pill .arrow-img {
+  width: 18.844px; height: 13.46px;
+  display: block;
+}
+
+/* ── CATEGORY BANNER CARDS ── */
+.banner-cards-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0 0 8px 20px;
+}
+.banner-cards-scroll {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.banner-cards-scroll::-webkit-scrollbar { display: none; }
+
+.banner-card {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  width: 161px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.banner-card-img {
+  width: 161px; height: 120px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  background: #e8e0d5;
+}
+.banner-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Starters card — food floats from bottom */
+.banner-card-img .food-float {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) translateX(-4.5px);
+  width: 180px; height: 168px;
+  pointer-events: none;
+}
+.banner-card-img .food-float img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+}
+/* Main Course card */
+.banner-card-img .food-float2 {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateX(-19.5px);
+  width: 270px; height: 149px;
+  pointer-events: none;
+}
+.banner-card-img .food-float2 img { width: 100%; height: 100%; object-fit: cover; }
+/* Salads card */
+.banner-card-img.bg-cover { background: #ccc; }
+.banner-card-img .cover-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.banner-card-meta { display: flex; flex-direction: column; gap: 1px; }
+.banner-card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.banner-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  line-height: 1.41;
+  white-space: nowrap;
+}
+.banner-card-arrow {
+  width: 16px; height: 16px;
+  flex-shrink: 0;
+  position: relative;
+}
+.banner-card-arrow img { position: absolute; inset: 0; width: 100%; display: block; }
+.banner-card-sub {
+  font-size: 12px;
+  font-weight: 400;
+  color: #4c4c4c;
+  line-height: 20px;
+  min-width: 100%;
+  width: min-content;
+}
+.banner-card-placeholder { width: 161px; height: 181px; flex-shrink: 0; }
+
+/* ── VIEW FULL MENU BUTTON ── */
+.full-menu-wrap {
+  padding: 0 20px;
+}
+.full-menu-btn {
+  background: #000;
+  border-radius: 10px;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.full-menu-btn:active { opacity: 0.85; }
+.full-menu-btn .menu-icon { width: 28.5px; height: 28.5px; flex-shrink: 0; }
+.full-menu-btn .menu-icon img { width: 100%; height: 100%; display: block; }
+.full-menu-btn span {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: 0.32px;
+  white-space: pre;
+}
+
+/* ── TAB + DISH GRID SECTION ── */
+.dish-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 10px 0 0;
+}
+
+/* Tab bar */
+.tab-bar {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 20px;
+  border-bottom: 2px solid var(--grey-200);
+}
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 16px 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  background: #fff;
+}
+.tab-label-active {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  line-height: normal;
+  white-space: nowrap;
+  padding-bottom: 13px;
+}
+.tab-label-inactive {
+  font-size: 16px;
+  font-weight: 600;
+  color: #5e5e5e;
+  line-height: 28px;
+  text-align: center;
+  white-space: nowrap;
+}
+.tab-underline { height: 4px; border-radius: 20px 20px 0 0; width: 100%; }
+/* Active tab indicator */
+.tab-active-bar {
+  position: absolute;
+  bottom: -2px;
+  left: 20px;
+  width: 130px;
+  height: 3px;
+  background: #000;
+  border-radius: 20px 20px 0 0;
+}
+
+/* Dish card grid */
+.dish-grid-wrap {
+  padding: 0 20px;
+}
+.dish-grid {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  width: 342px;
+}
+.dish-grid::-webkit-scrollbar { display: none; }
+
+.dish-card {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  cursor: pointer;
+  isolation: isolate;
+  overflow: visible;
+}
+.dish-card-img-wrap {
+  width: 198px; height: 198px;
+  border-radius: 12.298px;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+.dish-card-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.dish-add-btn {
+  position: absolute;
+  bottom: 12.3px; right: 12.3px;
+  width: 39.354px; height: 39.354px;
+  background: #000;
+  border-radius: 12.298px;
+  box-shadow: 0px 4.919px 12.298px 0px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.15s;
+}
+.dish-add-btn:active { transform: scale(0.92); }
+.dish-add-btn span {
+  font-size: 24.596px;
+  font-weight: 700;
+  color: #fff;
+  line-height: normal;
+  text-align: center;
+  display: block;
+  margin-top: -2px;
+}
+
+.dish-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 4px;
+  z-index: 1;
+  width: 198px;
+}
+.dish-card-name {
+  font-size: 15.2px;
+  font-weight: 600;
+  color: #111;
+  line-height: normal;
+  width: 100%;
+}
+.dish-card-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+.veg-indicator {
+  border: 2px solid var(--green-mat);
+  width: 14px; height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  flex-shrink: 0;
+}
+.veg-indicator .dot { background: var(--green-mat); border-radius: 3px; width: 6px; height: 6px; }
+.nonveg-indicator {
+  border: 2px solid var(--red-mat);
+  width: 14px; height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  flex-shrink: 0;
+}
+.nonveg-indicator .dot { background: var(--red-mat); border-radius: 3px; width: 6px; height: 6px; }
+
+.tag-veg-label { font-size: 12px; font-weight: 600; color: var(--green-mat); white-space: nowrap; }
+.tag-nonveg-label { font-size: 12px; font-weight: 600; color: var(--red-mat); white-space: nowrap; }
+.tag-sep { font-size: 12px; font-weight: 300; color: #ddd; white-space: nowrap; }
+.tag-time { font-size: 12px; font-weight: 500; color: #888; white-space: nowrap; }
+
+.dish-price-row {
+  padding-top: 8px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.dish-price {
+  font-size: 15.2px;
+  font-weight: 700;
+  color: #111;
+  line-height: normal;
+  flex: 1;
+}
+
+/* ── POPULAR CATEGORIES ── */
+.pop-cats-section {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding: 10px 20px 0;
+}
+.pop-cats-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 20px;
+}
+.pop-cats-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+.pop-cats-see-all {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  line-height: 20px;
+  text-align: right;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.pop-cats-grid {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  width: 100%;
+}
+.pop-cats-grid::-webkit-scrollbar { display: none; }
+
+.pop-cat-card {
+  background: var(--grey-200);
+  border-radius: 12px;
+  width: 77.5px; height: 108px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 19px 9px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.pop-cat-card:active { background: #e8e8e8; }
+.pop-cat-img {
+  position: relative;
+  overflow: hidden;
+}
+.pop-cat-img img { display: block; object-fit: contain; max-width: 100%; }
+.pop-cat-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #000;
+  text-align: center;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+/* ── LARGE PROMO BANNERS ── */
+.large-banners-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 18px 0 4px 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  flex-shrink: 0;
+}
+.large-banners-row::-webkit-scrollbar { display: none; }
+
+.large-banner-card {
+  width: 327px; height: 136px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.large-banner-card img.banner-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.large-banner-copy {
+  position: absolute;
+  top: 14px; left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+.large-banner-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 28px;
+  width: 161px;
+}
+.large-banner-cta {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+.large-banner-cta-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 20px;
+  white-space: nowrap;
+}
+.large-banner-cta-arrow {
+  width: 20px; height: 20px;
+  position: relative;
+  flex-shrink: 0;
+}
+.large-banner-cta-arrow img {
+  position: absolute;
+  top: 50%; left: calc(50% - 0.25px);
+  transform: translate(-50%, -50%);
+  width: 13.5px; height: 12px;
+  display: block;
+}
+
+/* ── RECENT HIGHLIGHTS ── */
+.highlights-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px 0;
+  width: 390px;
+  flex-shrink: 0;
+}
+.highlights-header {
+  padding: 3px 20px;
+  overflow: hidden;
+}
+.highlights-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+.stories-row {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  padding: 0 20px;
+  overflow: hidden;
+}
+/* Add story */
+.story-add {
+  border: 3px solid #00da00;
+  border-radius: 90px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.story-add-inner {
+  background: #dfdcdc;
+  border-radius: 100px;
+  width: 68px; height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 18px;
+}
+.story-add-inner .gallery-icon {
+  width: 31px; height: 31px;
+  opacity: 0.6;
+  position: relative;
+  overflow: hidden;
+}
+.story-add-inner .gallery-icon img { position: absolute; width: 100%; height: 100%; display: block; }
+.story-plus {
+  position: absolute;
+  bottom: 3.08px; right: 3px;
+  width: 18px; height: 18px;
+  border-radius: 100px;
+  background: #0c1014;
+  border: 3px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.story-plus img { width: 9px; height: 9px; display: block; }
+
+.story-item {
+  border: 3px solid var(--red);
+  border-radius: 90px;
+  padding: 5px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.story-avatar {
+  width: 68px; height: 68px;
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative;
+  background: #fff;
+}
+.story-avatar img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* ── GROUP CART BANNER ── */
+.group-cart-section {
+  background: #fff;
+  border-radius: 6px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow: hidden;
+  width: 100%;
+  flex-shrink: 0;
+}
+.gc-top { display: flex; gap: 10px; align-items: flex-start; }
+.gc-icon-wrap {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.gc-icon {
+  width: 40px; height: 40px;
+  border: 0.816px solid #d2d2d2;
+  border-radius: 40.816px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gc-icon img { width: 21px; height: 21px; object-fit: cover; display: block; }
+.gc-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 11px; }
+.gc-title { font-size: 18px; font-weight: 600; color: #000; line-height: 1.35; white-space: nowrap; }
+.gc-sub { font-size: 14px; font-weight: 500; color: #4c4c4c; line-height: 20px; white-space: pre-wrap; }
+.gc-avatars-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10.556px;
+}
+.gc-av {
+  width: 32px; height: 32px;
+  border-radius: 21.111px;
+  border: 1.759px solid #fff;
+  margin-right: -10.556px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.gc-av img { width: 100%; height: 100%; object-fit: cover; border-radius: 21.111px; display: block; }
+
+.gc-btn {
+  background: #000;
+  border-radius: 10px;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.gc-btn:active { opacity: 0.85; }
+.gc-btn-logo {
+  display: grid;
+  grid-template-columns: max-content;
+  grid-template-rows: max-content;
+  place-items: start;
+}
+.gc-btn-logo-mask {
+  grid-column: 1; grid-row: 1;
+  background: #fff;
+  width: 44.905px; height: 29.571px;
+  margin-left: -15.34px; margin-top: -4.38px;
+  -webkit-mask-position: 15.337px 4.381px;
+  mask-position: 15.337px 4.381px;
+  -webkit-mask-size: 23px 23px;
+  mask-size: 23px 23px;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+.gc-btn-text {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* ── FOOTER ── */
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 41px;
+  padding: 34px 20px;
+  width: 100%;
+  flex-shrink: 0;
+}
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  width: 143.645px;
+}
+.powered-by {
+  font-size: 13px;
+  color: rgba(0,0,0,0.56);
+  text-align: center;
+  line-height: 18px;
+  width: 100%;
+}
+.tapqr-logo {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  justify-content: center;
+  width: 100%;
+}
+.tapqr-line { width: 24.322px; height: 0.566px; background: rgba(0,0,0,0.21); }
+.tapqr-text {
+  font-family: 'Allan', serif;
+  font-size: 33px;
+  color: #000;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 19px;
+}
+.tapqr-text .bold { font-weight: 700; }
+.tapqr-text .track-p { letter-spacing: 1.44px; }
+.tapqr-text .track-r { letter-spacing: -5.12px; }
+.tapqr-url {
+  font-size: 13px;
+  color: rgba(0,0,0,0.56);
+  text-align: center;
+  line-height: 18px;
+  min-width: 100%;
+  width: min-content;
+}
+</style>
+</head>
+<body>
+<div class="screen">
+
+  <!-- ═══════════════════════════════════
+       HERO SECTION
+  ═══════════════════════════════════ -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-gradient"></div>
+
+    <!-- inner flex col -->
+    <div style="display:flex;flex-direction:column;height:100%;justify-content:space-between;position:relative;z-index:1;">
+
+      <!-- Top row -->
+      <div class="hero-top">
+        <!-- Left: avatar + name -->
+        <div class="hero-top-left">
+          <div class="restaurant-avatar-wrap">
+            <div class="restaurant-avatar" onclick="location.href='restaurant.html'">
+              <img src="https://www.figma.com/api/mcp/asset/404b2615-ed24-405c-96cc-5dd27e589ca6" alt="Restaurant Avatar"/>
+            </div>
+          </div>
+          <div class="restaurant-name-block">
+            <div class="restaurant-name">Koi Resto Bar</div>
+            <div class="restaurant-location">Mathikere, Bengaluru</div>
+          </div>
+        </div>
+        <!-- Right: Veg badge -->
+        <div class="hero-top-right">
+          <div class="veg-badge">
+            <div class="veg-badge-inner">
+              <div class="veg-dot-icon">
+                <img src="https://www.figma.com/api/mcp/asset/b4e161a2-d461-4a60-85c9-65d273aed910" alt=""/>
+              </div>
+              <span class="veg-text">Veg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom content -->
+      <div class="hero-bottom">
+        <div class="hero-content">
+          <!-- Title -->
+          <div class="hero-title">
+            <span class="line1">Today's</span>
+            <span class="line2"><span class="gold">Spotlight</span><span class="cream"> Dish</span></span>
+          </div>
+          <!-- Subtitle -->
+          <div class="hero-subtitle">Slow-boiled in rich Cajun butter with baby potatoes and herbs.</div>
+          <!-- Dots -->
+          <div class="hero-dots">
+            <div class="dot-wide"></div>
+            <div class="dot-sm"></div>
+            <div class="dot-sm-img">
+              <img src="https://www.figma.com/api/mcp/asset/865b22d1-854d-4499-8504-b70d61771d2f" alt=""/>
+            </div>
+          </div>
+        </div>
+        <!-- Arrow CTA -->
+        <button class="hero-cta-btn" onclick="location.href='dish-detail.html'">
+          <div class="arrow-icon">
+            <img src="https://www.figma.com/api/mcp/asset/c08ece77-a02d-4ddb-b19e-c52a7340cab6" alt="→"/>
+          </div>
+        </button>
+      </div>
+
+    </div><!-- end inner flex -->
+  </div><!-- end hero -->
+
+
+  <!-- ═══════════════════════════════════
+       WHITE CONTENT CARD
+  ═══════════════════════════════════ -->
+  <div class="content-card">
+
+    <!-- ── DRAG HANDLE + SEARCH ── -->
+    <div class="search-section">
+      <div class="home-indicator"></div>
+      <div class="search-bar" onclick="location.href='search.html'">
+        <div class="search-left">
+          <div class="search-icon">
+            <img src="https://www.figma.com/api/mcp/asset/bae0aaf6-d965-4288-bdeb-789e9092916c" alt="search"/>
+          </div>
+          <span class="search-placeholder">Search dishes , keywords</span>
+        </div>
+        <div class="ai-chip">
+          <div class="ai-chip-icon">
+            <img src="https://www.figma.com/api/mcp/asset/f5618670-c03c-4f14-b7c2-bece0aafc2f3" alt="AI"/>
+          </div>
+          <span class="ai-chip-label">AI</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── WHAT WOULD YOU LIKE ── -->
+    <div class="what-section">
+      <div class="what-header">
+        <div class="what-title">What would you like to have today?&nbsp;</div>
+        <div class="see-all-btn">
+          <div class="see-all-pill">
+            <img class="arrow-img" src="https://www.figma.com/api/mcp/asset/6736d3a3-b248-41db-b85f-7712bae44635" alt="→" style="transform:scaleY(-1) rotate(180deg);"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── BANNER CATEGORY CARDS ── -->
+      <div class="banner-cards-section">
+        <div class="banner-cards-scroll">
+
+          <!-- Starters card -->
+          <div class="banner-card" onclick="location.href='category.html'">
+            <div class="banner-card-img" style="background:linear-gradient(135deg,#3a2a1a 0%,#5c3a20 100%);">
+              <div class="food-float">
+                <img src="https://www.figma.com/api/mcp/asset/be0b69ee-3a89-4b9b-b368-b9003671d843" alt="Starters"/>
+              </div>
+            </div>
+            <div class="banner-card-meta">
+              <div class="banner-card-title-row">
+                <span class="banner-card-title">Starters</span>
+                <div class="banner-card-arrow">
+                  <img src="https://www.figma.com/api/mcp/asset/35dd03b1-18e4-4186-89bf-fc50aed136c6" alt="→"/>
+                </div>
+              </div>
+              <span class="banner-card-sub">Light bites to begin</span>
+            </div>
+          </div>
+
+          <!-- Main Course card -->
+          <div class="banner-card" onclick="location.href='category.html'">
+            <div class="banner-card-img" style="background:linear-gradient(135deg,#2a3a1a 0%,#3a5c20 100%);">
+              <div class="food-float2">
+                <img src="https://www.figma.com/api/mcp/asset/288775de-7712-4662-b093-4bac4878e302" alt="Main Course"/>
+              </div>
+            </div>
+            <div class="banner-card-meta">
+              <div class="banner-card-title-row">
+                <span class="banner-card-title">Main Course</span>
+                <div class="banner-card-arrow">
+                  <img src="https://www.figma.com/api/mcp/asset/35dd03b1-18e4-4186-89bf-fc50aed136c6" alt="→"/>
+                </div>
+              </div>
+              <span class="banner-card-sub">Hearty signature dishes</span>
+            </div>
+          </div>
+
+          <!-- Salads card -->
+          <div class="banner-card" onclick="location.href='category.html'">
+            <div class="banner-card-img bg-cover">
+              <img class="cover-img" src="https://www.figma.com/api/mcp/asset/4cd48279-15d3-4061-9cc2-c1953a91f262" alt="Salads" style="object-position:-62.2% -235%;" />
+            </div>
+            <div class="banner-card-meta">
+              <div class="banner-card-title-row">
+                <span class="banner-card-title">Salads Course</span>
+                <div class="banner-card-arrow">
+                  <img src="https://www.figma.com/api/mcp/asset/35dd03b1-18e4-4186-89bf-fc50aed136c6" alt="→"/>
+                </div>
+              </div>
+              <span class="banner-card-sub">Fresh and crisp</span>
+            </div>
+          </div>
+
+          <!-- Spacer -->
+          <div class="banner-card-placeholder"></div>
+        </div>
+      </div>
+
+      <!-- ── VIEW FULL MENU ── -->
+      <div class="full-menu-wrap">
+        <button class="full-menu-btn" onclick="location.href='category.html'">
+          <div class="menu-icon">
+            <img src="https://www.figma.com/api/mcp/asset/c7ccb5eb-4f46-4c24-893a-4724e4c11e74" alt="menu"/>
+          </div>
+          <span>View  Full menu</span>
+        </button>
+      </div>
+
+      <!-- ── TABS + DISH CARDS ── -->
+      <div class="dish-section">
+        <!-- Tab bar -->
+        <div class="tab-bar">
+          <div class="tab-item">
+            <span class="tab-label-active">Most Ordered</span>
+          </div>
+          <div class="tab-item">
+            <span class="tab-label-inactive">Signatures</span>
+            <div class="tab-underline"></div>
+          </div>
+          <div class="tab-item">
+            <span class="tab-label-inactive">Budget</span>
+            <div class="tab-underline"></div>
+          </div>
+          <div class="tab-active-bar"></div>
+        </div>
+
+        <!-- Dish Cards -->
+        <div class="dish-grid-wrap">
+          <div class="dish-grid">
+
+            <!-- Dish 1: Tandoori Broccoli -->
+            <div class="dish-card" onclick="location.href='dish-detail.html'">
+              <div class="dish-card-img-wrap">
+                <img src="https://www.figma.com/api/mcp/asset/2cfad848-5797-4bbe-acc7-69eeacf1a6dc" alt="Tandoori Broccoli"/>
+                <img src="https://www.figma.com/api/mcp/asset/f96ac1ad-70a0-4962-8af2-c6c9b7bef97e" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
+                <img src="https://www.figma.com/api/mcp/asset/3ba1ee31-e209-4ee0-b4d1-da95ead1aa37" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
+                <button class="dish-add-btn"><span>+</span></button>
+              </div>
+              <div class="dish-card-meta">
+                <div class="dish-card-name">Tandoori Broccoli</div>
+                <div class="dish-card-tags">
+                  <div class="veg-indicator"><div class="dot"></div></div>
+                  <span class="tag-veg-label">Veg</span>
+                  <span class="tag-sep">|</span>
+                  <span class="tag-time">20-25 mins</span>
+                </div>
+                <div class="dish-price-row">
+                  <span class="dish-price">₹675</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dish 2: Tandoori Chooza -->
+            <div class="dish-card" onclick="location.href='dish-detail.html'">
+              <div class="dish-card-img-wrap">
+                <img src="https://www.figma.com/api/mcp/asset/2cfad848-5797-4bbe-acc7-69eeacf1a6dc" alt="Tandoori Chooza" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
+                <img src="https://www.figma.com/api/mcp/asset/b5cab332-3024-4f6d-950b-6c4a68ec438a" alt="Tandoori Chooza" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
+                <button class="dish-add-btn"><span>+</span></button>
+              </div>
+              <div class="dish-card-meta">
+                <div class="dish-card-name">Tandoori Chooza</div>
+                <div class="dish-card-tags">
+                  <div class="nonveg-indicator"><div class="dot"></div></div>
+                  <span class="tag-nonveg-label">Non-Veg</span>
+                  <span class="tag-sep">|</span>
+                  <span class="tag-time">20-25 mins</span>
+                </div>
+                <div class="dish-price-row">
+                  <span class="dish-price">₹300</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dish 3 -->
+            <div class="dish-card" onclick="location.href='dish-detail.html'">
+              <div class="dish-card-img-wrap">
+                <img src="https://www.figma.com/api/mcp/asset/2cfad848-5797-4bbe-acc7-69eeacf1a6dc" alt="Dish" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
+                <img src="https://www.figma.com/api/mcp/asset/f96ac1ad-70a0-4962-8af2-c6c9b7bef97e" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
+                <button class="dish-add-btn"><span>+</span></button>
+              </div>
+              <div class="dish-card-meta">
+                <div class="dish-card-name">Tandoori Chooza</div>
+                <div class="dish-card-tags">
+                  <div class="nonveg-indicator"><div class="dot"></div></div>
+                  <span class="tag-nonveg-label">Non-Veg</span>
+                  <span class="tag-sep">|</span>
+                  <span class="tag-time">20-25 mins</span>
+                </div>
+                <div class="dish-price-row">
+                  <span class="dish-price">₹300</span>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- end dish-grid -->
+        </div><!-- end dish-grid-wrap -->
+      </div><!-- end dish-section -->
+
+      <!-- ── POPULAR CATEGORIES ── -->
+      <div class="pop-cats-section">
+        <div class="pop-cats-header">
+          <span class="pop-cats-title">Popular Categories</span>
+          <span class="pop-cats-see-all" onclick="location.href='category.html'">See All</span>
+        </div>
+        <div class="pop-cats-grid">
+          <div class="pop-cat-card" onclick="location.href='category.html'">
+            <div class="pop-cat-img" style="width:59px;height:46px;">
+              <img src="https://www.figma.com/api/mcp/asset/ab83b8e0-07f6-4d9d-a6cc-cc68af921e9b" alt="Burgers" style="width:75px;height:54px;margin-left:-8px;"/>
+            </div>
+            <span class="pop-cat-label">Ride</span>
+          </div>
+          <div class="pop-cat-card" onclick="location.href='category.html'">
+            <div class="pop-cat-img" style="width:58px;height:45px;">
+              <img src="https://www.figma.com/api/mcp/asset/f9f4d8de-a1c0-4f7e-a2a5-642e96319004" alt="Healthy" style="width:67px;height:45px;"/>
+            </div>
+            <span class="pop-cat-label">2-Wheels</span>
+          </div>
+          <div class="pop-cat-card" onclick="location.href='category.html'">
+            <div class="pop-cat-img" style="width:65px;height:33px;">
+              <img src="https://www.figma.com/api/mcp/asset/78e85afe-19dd-4eb7-bffd-9bdd5bf21968" alt="Rolls" style="width:65px;height:40px;"/>
+            </div>
+            <span class="pop-cat-label">Rolls</span>
+          </div>
+          <div class="pop-cat-card" onclick="location.href='category.html'">
+            <div class="pop-cat-img" style="width:58px;height:45px;">
+              <img src="https://www.figma.com/api/mcp/asset/f9f4d8de-a1c0-4f7e-a2a5-642e96319004" alt="Healthy" style="width:67px;height:45px;"/>
+            </div>
+            <span class="pop-cat-label">2-Wheels</span>
+          </div>
+          <div class="pop-cat-card" onclick="location.href='category.html'">
+            <div class="pop-cat-img" style="width:58px;height:45px;">
+              <img src="https://www.figma.com/api/mcp/asset/f9f4d8de-a1c0-4f7e-a2a5-642e96319004" alt="Healthy" style="width:67px;height:45px;"/>
+            </div>
+            <span class="pop-cat-label">2-Wheels</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end what-section -->
+
+    <!-- ── LARGE PROMO BANNERS ── -->
+    <div class="large-banners-row">
+      <!-- Banner 1: Reserve a ride -->
+      <div class="large-banner-card">
+        <img class="banner-bg" src="https://www.figma.com/api/mcp/asset/5b0f8795-8068-4c50-b3e0-31c793bc450e" alt="Ride on your schedule"/>
+        <div class="large-banner-copy">
+          <div class="large-banner-title">Ride on your schedule</div>
+          <div class="large-banner-cta">
+            <span class="large-banner-cta-label">Reserve a ride</span>
+            <div class="large-banner-cta-arrow">
+              <img src="https://www.figma.com/api/mcp/asset/96f81be5-4bf5-4cb0-87c7-f78d19d45452" alt="→"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Banner 2: Uber Black -->
+      <div class="large-banner-card">
+        <img class="banner-bg" src="https://www.figma.com/api/mcp/asset/b2fb6e4f-112b-4360-8ca7-f8edeeb3fec5" alt="Enjoy a luxury car"/>
+        <div class="large-banner-copy">
+          <div class="large-banner-title">Enjoy a luxury car</div>
+          <div class="large-banner-cta">
+            <span class="large-banner-cta-label">Try Uber Black</span>
+            <div class="large-banner-cta-arrow">
+              <img src="https://www.figma.com/api/mcp/asset/96f81be5-4bf5-4cb0-87c7-f78d19d45452" alt="→"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RECENT HIGHLIGHTS ── -->
+    <div class="highlights-section">
+      <div class="highlights-header">
+        <span class="highlights-title">Recent higlights</span>
+      </div>
+      <div class="stories-row">
+        <!-- Add story -->
+        <div class="story-add">
+          <div class="story-add-inner">
+            <div class="gallery-icon">
+              <img src="https://www.figma.com/api/mcp/asset/93712184-589c-4e00-bcbf-87e931e29946" alt=""/>
+            </div>
+          </div>
+          <div class="story-plus">
+            <img src="https://www.figma.com/api/mcp/asset/e7c8125e-4811-4e1a-ad92-d618510a3e4e" alt="+"/>
+          </div>
+        </div>
+        <!-- Story 1 -->
+        <div class="story-item">
+          <div class="story-avatar">
+            <img src="https://www.figma.com/api/mcp/asset/72beb549-e89b-4638-beb7-372526e6e5e5" alt="story"/>
+            <img src="https://www.figma.com/api/mcp/asset/f96ac1ad-70a0-4962-8af2-c6c9b7bef97e" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:100px;"/>
+          </div>
+        </div>
+        <!-- Story 2 -->
+        <div class="story-item">
+          <div class="story-avatar">
+            <img src="https://www.figma.com/api/mcp/asset/72beb549-e89b-4638-beb7-372526e6e5e5" alt="story"/>
+          </div>
+        </div>
+        <!-- Story 3 -->
+        <div class="story-item">
+          <div class="story-avatar">
+            <img src="https://www.figma.com/api/mcp/asset/72beb549-e89b-4638-beb7-372526e6e5e5" alt="story"/>
+            <img src="https://www.figma.com/api/mcp/asset/92cd0fb9-e77f-41d7-a630-6bd0e97c41ea" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:100px;"/>
+          </div>
+        </div>
+        <!-- Story 4 -->
+        <div class="story-item">
+          <div class="story-avatar">
+            <img src="https://www.figma.com/api/mcp/asset/72beb549-e89b-4638-beb7-372526e6e5e5" alt="story"/>
+            <img src="https://www.figma.com/api/mcp/asset/4a5038f1-ceef-4a68-8ed3-a8629d2cd444" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:100px;"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spacer -->
+    <div style="height:0;width:100%;flex-shrink:0;"></div>
+
+    <!-- ── GROUP CART BANNER ── -->
+    <div class="group-cart-section">
+      <div class="gc-top">
+        <div class="gc-icon-wrap">
+          <div class="gc-icon">
+            <img src="https://www.figma.com/api/mcp/asset/3b2a875f-3791-4369-b417-c9f7578b89a3" alt="group"/>
+          </div>
+        </div>
+        <div class="gc-text">
+          <span class="gc-title">Having a team lunch?</span>
+          <span class="gc-sub">Join a  synced cart where everyone can add what they want.</span>
+          <div class="gc-avatars-row">
+            <div class="gc-av"><img src="https://www.figma.com/api/mcp/asset/220a1959-95b8-42ac-a10d-636e70b1e68a" alt="member"/></div>
+            <div class="gc-av"><img src="https://www.figma.com/api/mcp/asset/66e13c8c-d43b-4ac5-8476-d24b3643e6c3" alt="member"/></div>
+            <div class="gc-av"><img src="https://www.figma.com/api/mcp/asset/844e4d2a-6616-4bad-a650-5960c8e1923b" alt="member"/></div>
+          </div>
+        </div>
+      </div>
+      <button class="gc-btn">
+        <div class="gc-btn-logo">
+          <div class="gc-btn-logo-mask" style="-webkit-mask-image:url('https://www.figma.com/api/mcp/asset/eb81d39a-8b60-444c-ac60-3a7bf1f2ce9b');mask-image:url('https://www.figma.com/api/mcp/asset/eb81d39a-8b60-444c-ac60-3a7bf1f2ce9b');"></div>
+        </div>
+        <span class="gc-btn-text">Join Group Cart</span>
+      </button>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <div class="footer">
+      <div class="footer-inner">
+        <span class="powered-by">Powered by</span>
+        <div class="tapqr-logo">
+          <div class="tapqr-line"></div>
+          <span class="tapqr-text">Ta<span class="track-p">p</span><span class="bold">Q</span><span class="bold track-r">R</span></span>
+          <div class="tapqr-line"></div>
+        </div>
+      </div>
+      <span class="tapqr-url">www.tapqr.com</span>
+    </div>
+
+  </div><!-- end content-card -->
+</div><!-- end screen -->
+
+<script>
+  // Tab switching
+  const tabs = document.querySelectorAll('.tab-item');
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => {
+        const lbl = t.querySelector('.tab-label-active, .tab-label-inactive');
+        if (lbl && lbl.classList.contains('tab-label-active')) {
+          lbl.className = 'tab-label-inactive';
+        }
+      });
+      const lbl = tab.querySelector('.tab-label-active, .tab-label-inactive');
+      if (lbl) lbl.className = 'tab-label-active';
+      // Move active bar
+      const bar = document.querySelector('.tab-active-bar');
+      if (bar) {
+        const rect = tab.getBoundingClientRect();
+        const parentRect = tab.closest('.tab-bar').getBoundingClientRect();
+        bar.style.left = (rect.left - parentRect.left) + 'px';
+        bar.style.width = rect.width + 'px';
+        bar.style.transition = 'left 0.2s, width 0.2s';
+      }
+    });
+  });
+</script>
+</body>
+</html>

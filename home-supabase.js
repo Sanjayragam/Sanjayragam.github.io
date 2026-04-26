@@ -2,25 +2,33 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchHomepageData();
-    
+
     // Bottom Sheet Nested Scroll Handoff
     const screen = document.querySelector('.screen');
     const container = document.querySelector('.content-card-container');
-    
+
     if (screen && container) {
         // Initially lock internal scroll so drags propagate to .screen
         container.style.overflowY = 'visible';
 
         screen.addEventListener('scroll', () => {
+            const heroElem = document.querySelector('.hero');
+            const searchSection = document.querySelector('.search-section');
             // Maximum scroll distance of .screen is exactly 326px 
             // We unlock the inner scroll container right as it hits the top!
             if (screen.scrollTop >= 325) {
                 container.style.overflowY = 'auto';
+                container.classList.add('scrolled-top');
+                if (heroElem) heroElem.classList.add('scrolled-top');
+                if (searchSection) searchSection.classList.add('hidden');
             } else {
                 container.style.overflowY = 'visible';
+                container.classList.remove('scrolled-top');
+                if (heroElem) heroElem.classList.remove('scrolled-top');
+                if (searchSection) searchSection.classList.remove('hidden');
             }
         });
-        
+
         container.addEventListener('scroll', () => {
             // If user scrolls back down to the very top of the card's inner content,
             // we lock it again so their next swipe down drags the card down physically!
@@ -51,14 +59,16 @@ async function fetchHomepageData() {
     }
 
     // 2. Categories ("What would you like to have today?")
-    const { data: categories, error: err2 } = await supabaseClient.from('categories').select('*');
+    const { data: categories, error: err2 } = await supabaseClient.from('categories')
+        .select('*')
+        .order('sort_order', { ascending: true });
     if (err2) console.error("Categories Error:", err2);
     else if (categories && categories.length > 0) renderCategories(categories);
 
     // 3. Most Ordered (Dynamically fetching items from the 'special_most_ordered' table)
     const { data: mostOrdered, error: err3 } = await supabaseClient.from('special_most_ordered')
         .select('*');
-        
+
     if (err3) console.error("Most Ordered Error:", err3);
     else if (mostOrdered && mostOrdered.length > 0) renderMostOrdered(mostOrdered);
 
@@ -67,7 +77,7 @@ async function fetchHomepageData() {
         .select('*')
         .eq('is_active', true)
         .order('display_order', { ascending: true });
-        
+
     if (err4) console.error("Pop Categories Error:", err4);
     else if (popCategories && popCategories.length > 0) renderPopularCategories(popCategories);
 
@@ -111,20 +121,20 @@ function renderSpotlight(items) {
             if (heroElem) {
                 let touchStartX = 0;
                 let touchEndX = 0;
-                
+
                 heroElem.addEventListener('touchstart', e => {
                     touchStartX = e.changedTouches[0].screenX;
                 }, { passive: true });
-                
+
                 heroElem.addEventListener('touchend', e => {
                     touchEndX = e.changedTouches[0].screenX;
                     handleHeroSwipe();
                 }, { passive: true });
-                
+
                 function handleHeroSwipe() {
                     const SWIPE_THRESHOLD = 40;
                     const diff = touchStartX - touchEndX;
-                    
+
                     if (Math.abs(diff) > SWIPE_THRESHOLD) {
                         let newIndex = currentSpotlightIndex;
                         let direction = 'next';
@@ -138,7 +148,7 @@ function renderSpotlight(items) {
                             newIndex = (currentSpotlightIndex - 1 + items.length) % items.length;
                             direction = 'prev';
                         }
-                        
+
                         // Restart the auto-sliding interval
                         if (spotlightInterval) {
                             clearInterval(spotlightInterval);
@@ -147,7 +157,7 @@ function renderSpotlight(items) {
                                 transitionSpotlight(nextIndexIter, 'next');
                             }, 4000);
                         }
-                        
+
                         transitionSpotlight(newIndex, direction);
                     }
                 }
@@ -161,7 +171,7 @@ function transitionSpotlight(index, direction = 'next') {
     const oldBg = document.querySelector('.hero-bg:not(.sliding-out)');
     const heroTitle = document.querySelector('.hero-text h1');
     const heroSub = document.querySelector('.hero-subtitle');
-    
+
     if (heroTitle) {
         heroTitle.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
         heroTitle.style.opacity = '0';
@@ -185,19 +195,19 @@ function transitionSpotlight(index, direction = 'next') {
     newBg.style.inset = '0';
     newBg.style.backgroundSize = 'cover';
     newBg.style.backgroundPosition = 'center';
-    
+
     const imgUrl = item.image_url || item.img_url;
     if (imgUrl) {
         newBg.style.backgroundImage = `url(${imgUrl})`;
     }
-    
+
     const startTranslate = direction === 'next' ? '100%' : '-100%';
     const endTranslateOld = direction === 'next' ? '-100%' : '100%';
 
     // Start the new background fully positioned to the right (or left if reversing)
     newBg.style.transform = `translateX(${startTranslate})`;
     newBg.style.transition = 'transform 0.5s ease-in-out';
-    
+
     // Insert behind the gradient
     if (heroGradient && heroGradient.parentNode) {
         heroGradient.parentNode.insertBefore(newBg, heroGradient);
@@ -205,7 +215,7 @@ function transitionSpotlight(index, direction = 'next') {
 
     // Force reflow to ensure the transform jump is registered before animating
     newBg.offsetWidth;
-    
+
     // Trigger slide animations
     newBg.style.transform = 'translateX(0)';
     if (oldBg) {
@@ -260,7 +270,7 @@ function updateSpotlightUI(index) {
             if (words.length > 0) {
                 words[0] = `<span class="hero-title-first-word">${words[0]}</span>`;
             }
-            heroTitle.innerHTML = words.join('<br>'); 
+            heroTitle.innerHTML = words.join('<br>');
         }
     }
     if (heroSub) heroSub.textContent = item.description || item.desc || '';
@@ -277,28 +287,44 @@ function updateSpotlightUI(index) {
 }
 
 // ── RENDER: PRIMARY CATEGORIES ──
-const CAT_STYLES = ['cat-card-main', 'cat-card-starters', 'cat-card-vegs'];
+const CAT_GRADIENTS = [
+    // 'linear-gradient(135deg,#3a2a1a 0%,#5c3a20 100%)',
+    // 'linear-gradient(135deg,#2a3a1a 0%,#3a5c20 100%)',
+    // 'linear-gradient(135deg,#1a2a3a 0%,#203a5c 100%)',
+    // 'linear-gradient(135deg,#3a1a1a 0%,#5c2020 100%)'
+];
+
 function renderCategories(items) {
-    const container = document.querySelector('.categories-scroll');
+    const container = document.querySelector('.banner-cards-scroll');
     if (!container) return;
 
     let html = '';
     items.forEach((cat, index) => {
-        const styleClass = CAT_STYLES[index % CAT_STYLES.length];
-        
-        // Use standard labels and image positions
-        // We link directly to category.html passing the ID
+        const bgStyle = CAT_GRADIENTS[index % CAT_GRADIENTS.length];
+        const iconUrl = cat.icon_url || cat.image_url || 'Images/default.png';
+        const subTitle = cat.description || cat.subtitle || 'Explore category';
+
         html += `
-            <div class="cat-card ${styleClass}" onclick="location.href='category.html?categoryId=${cat.id}'">
-                <span class="cat-label ${styleClass.replace('cat-card', 'cat-label')}">${cat.name}</span>
-                <img class="cat-img" src="${cat.icon_url}" alt="${cat.name}" style="position:absolute;right:-20px;bottom:0;width:130px; object-fit:contain;"/>
+            <div class="banner-card" onclick="location.href='category.html?categoryId=${cat.id}'">
+                <div class="banner-card-img" style="background:${bgStyle};">
+                    <img src="${iconUrl}" alt="${cat.name}" />
+                </div>
+                <div class="banner-card-meta">
+                    <div class="banner-card-title-row">
+                        <span class="banner-card-title">${cat.name}</span>
+                        <div class="banner-card-arrow">
+                            <img src="Images/Arrow.svg" alt="→" />
+                        </div>
+                    </div>
+                    <span class="banner-card-sub">${subTitle}</span>
+                </div>
             </div>
         `;
     });
-    
+
     // add placeholder block for layout spacing at end
-    html += '<div class="cat-placeholder"></div>';
-    
+    html += '<div class="banner-card-placeholder"></div>';
+
     container.innerHTML = html;
 }
 
@@ -323,7 +349,7 @@ function renderMostOrdered(items) {
         } else if (item.prep_time_min) {
             timeEstimate = `${item.prep_time_min} mins`;
         }
-        
+
         const subLabel = item.category || item.type_label || item.cuisine_type || '';
         const imgUrl = item.img_url || item.image_url || 'Images/card1.png';
         const price = item.price ? `₹${item.price}` : '';
@@ -372,7 +398,7 @@ function renderPopularCategories(items) {
             <div class="chip-av"><img src="${imageUrl}" alt=""/></div>
             <div class="chip-av"><img src="${imageUrl}" alt=""/></div>
         `;
-        
+
         html += `
             <div class="cat-chip" onclick="location.href='category.html?categoryId=${cat.id}'">
                 <div class="cat-chip-avatars">${avatarsHTML}</div>
