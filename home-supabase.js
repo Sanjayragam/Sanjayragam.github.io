@@ -65,12 +65,8 @@ async function fetchHomepageData() {
     if (err2) console.error("Categories Error:", err2);
     else if (categories && categories.length > 0) renderCategories(categories);
 
-    // 3. Most Ordered (Dynamically fetching items from the 'special_most_ordered' table)
-    const { data: mostOrdered, error: err3 } = await supabaseClient.from('special_most_ordered')
-        .select('*');
-
-    if (err3) console.error("Most Ordered Error:", err3);
-    else if (mostOrdered && mostOrdered.length > 0) renderMostOrdered(mostOrdered);
+    // 3. Dish Tabs (Most Ordered, Signatures, Budget)
+    setupDishTabs();
 
     // 4. Popular Categories
     const { data: popCategories, error: err4 } = await supabaseClient.from('popular_categories')
@@ -328,21 +324,84 @@ function renderCategories(items) {
     container.innerHTML = html;
 }
 
-// ── RENDER: MOST ORDERED ──
-function renderMostOrdered(items) {
-    const container = document.querySelector('.dishes-scroll');
+// ── RENDER: TAB DISHES ──
+async function fetchTabDishes(filterValue) {
+    const { data: dishes, error } = await supabaseClient.from('dishes')
+        .select('*')
+        .contains('featured_in', [filterValue]);
+
+    if (error) console.error(`Error fetching dishes for tab ${filterValue}:`, error);
+    else renderTabDishes(dishes || []);
+}
+
+function setupDishTabs() {
+    const tabItems = document.querySelectorAll('.tab-item');
+    const activeBar = document.querySelector('.tab-active-bar');
+    if (!tabItems.length) return;
+
+    const filters = ['most_ordered', 'signature', 'budget'];
+
+    const moveActiveBar = (tab) => {
+        if (activeBar) {
+            const span = tab.querySelector('span');
+            if (span) {
+                const offsetLeft = tab.offsetLeft + span.offsetLeft;
+                activeBar.style.left = `${offsetLeft}px`;
+                activeBar.style.width = `${span.offsetWidth}px`;
+            }
+        }
+    };
+
+    tabItems.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+            // Update active state
+            tabItems.forEach((t, i) => {
+                const span = t.querySelector('span');
+                const labelName = span ? span.innerText.trim() : t.innerText.trim();
+                if (i === index) {
+                    t.innerHTML = `<span class="tab-label-active">${labelName}</span>`;
+                } else {
+                    t.innerHTML = `<span class="tab-label-inactive">${labelName}</span>`;
+                }
+            });
+
+            // Move the active bar
+            setTimeout(() => {
+                moveActiveBar(tab);
+            }, 10);
+
+            // Fetch dishes for this tab
+            fetchTabDishes(filters[index]);
+        });
+    });
+
+    // Initial setup
+    setTimeout(() => {
+        if (tabItems[0]) moveActiveBar(tabItems[0]);
+    }, 100);
+
+    // Initial fetch
+    fetchTabDishes('most_ordered');
+}
+
+function renderTabDishes(items) {
+    const container = document.querySelector('.dish-grid');
     if (!container) return;
 
+    if (items.length === 0) {
+        container.innerHTML = `<div style="padding: 20px; color: #888;">No dishes found.</div>`;
+        return;
+    }
+
     let html = '';
-    items.forEach(item => {
-        const vegHTML = item.is_veg
-            ? `<span class="tag-veg"><img class="tag-veg-dot" src="https://www.figma.com/api/mcp/asset/198dc533-2ac2-46ad-93ab-53a6cc47bf8e" alt="veg"/>Veg</span>`
-            : `<span class="tag-veg" style="color:#e02020;"><img class="tag-veg-dot" src="https://www.figma.com/api/mcp/asset/94a5d554-2911-4275-9554-60b130130f95" alt="non-veg"/>Non Veg</span>`;
+    items.forEach((item, index) => {
+        const isVeg = item.is_veg;
+        const vegIcon = isVeg ? 'Images/veg dot.svg' : 'Images/non veg dot.svg';
+        const vegLabel = isVeg ? 'Veg' : 'Non-Veg';
+        const vegClass = isVeg ? 'veg-indicator' : 'nonveg-indicator';
+        const tagClass = isVeg ? 'tag-veg-label' : 'tag-nonveg-label';
 
-        // If 'dish_id' exists on most_ordered link to it, otherwise default
         const linkId = item.dish_id || item.id;
-
-        // Build derived values for the special table format if present
         let timeEstimate = item.time_estimate || item.prep_time || '20-25 mins';
         if (item.prep_time_min && item.prep_time_max) {
             timeEstimate = `${item.prep_time_min}-${item.prep_time_max} mins`;
@@ -350,32 +409,28 @@ function renderMostOrdered(items) {
             timeEstimate = `${item.prep_time_min} mins`;
         }
 
-        const subLabel = item.category || item.type_label || item.cuisine_type || '';
-        const imgUrl = item.img_url || item.image_url || 'Images/card1.png';
+        const imgUrl = item.img_url || item.image_url || 'Images/hero3.jpg';
         const price = item.price ? `₹${item.price}` : '';
 
         html += `
-            <div class="dish-card" onclick="location.href='dish-detail.html?id=${linkId}'">
-                <div class="dish-card-img">
-                    <img src="${imgUrl}" alt="${item.name}" />
-                    <div class="dish-card-overlay"></div>
-                    <div class="dish-card-info">
-                        <div>
-                            <div class="dish-card-name">${item.name}</div>
-                            <div class="dish-card-sub">${subLabel}</div>
-                        </div>
-                        <div class="dish-arrow">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                        </div>
-                    </div>
+            <div class="dish-card" onclick="location.href='dish-detail.html?id=${linkId}'" style="animation: slideUpFadeIn 0.4s ease forwards; animation-delay: ${index * 0.08}s; opacity: 0;">
+                <div class="dish-card-img-wrap">
+                    <img src="${imgUrl}" alt="${item.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+                    <button class="dish-add-btn"><span>+</span></button>
                 </div>
-                <div class="dish-meta">
-                    <div class="dish-tags">
-                        ${vegHTML}
+                <div class="dish-card-meta">
+                    <div class="dish-card-name">${item.name}</div>
+                    <div class="dish-card-tags">
+                        <div class="${vegClass}">
+                            <img src="${vegIcon}" alt="">
+                        </div>
+                        <span class="${tagClass}">${vegLabel}</span>
                         <span class="tag-sep">|</span>
                         <span class="tag-time">${timeEstimate}</span>
                     </div>
-                    <div class="dish-price">${price}</div>
+                    <div class="dish-price-row">
+                        <span class="dish-price">${price}</span>
+                    </div>
                 </div>
             </div>
         `;

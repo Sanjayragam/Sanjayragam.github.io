@@ -67,34 +67,35 @@
 
 
 
+ .restaurant-info-group {
+     display: flex;
+     align-items: center;
+     gap: 12px;
+ }
+
  .restaurant-name-1 {
      color: #FFF;
-     font-family: Geist;
+     font-family: Geist, sans-serif;
      font-size: 16px;
      font-style: normal;
-     font-weight: 400;
-     line-height: 15.635px;
-     /* 97.395% */
+     font-weight: 600;
+     line-height: 1.2;
      letter-spacing: -0.215px;
  }
 
  .restaurant-name {
-
-
      display: flex;
      flex-direction: column;
-     gap: 6px;
-
+     gap: 2px;
  }
 
  .restaurant-name-2 {
-     color: rgba(255, 255, 255, 0.60);
-     font-family: Geist;
+     color: rgba(255, 255, 255, 0.75);
+     font-family: var(--font-main), Geist, sans-serif;
      font-size: 14px;
      font-style: normal;
-     font-weight: 400;
-     line-height: 14.482px;
-     /* 95.686% */
+     font-weight: 200;
+     line-height: 1.2;
  }
 
 
@@ -323,7 +324,6 @@
      position: relative;
      overflow-y: auto;
      scroll-snap-type: y mandatory;
-     scroll-behavior: smooth;
  }
 
 
@@ -991,7 +991,7 @@
      display: flex;
      flex-direction: column;
      gap: 24px;
-     padding: 10px 0 0;
+
  }
 
  /* Tab bar */
@@ -1039,7 +1039,6 @@
      width: 100%;
  }
 
- /* Active tab indicator */
  .tab-active-bar {
      position: absolute;
      bottom: -2px;
@@ -1048,6 +1047,18 @@
      height: 3px;
      background: #000;
      border-radius: 20px 20px 0 0;
+     transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1), width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+ }
+
+ @keyframes slideUpFadeIn {
+     0% {
+         opacity: 0;
+         transform: translateY(20px);
+     }
+     100% {
+         opacity: 1;
+         transform: translateY(0);
+     }
  }
 
  /* Dish card grid */
@@ -1097,13 +1108,16 @@
  }
 
  .dish-add-btn {
+
+     background-color: rgba(255, 255, 255, 0.425);
+     -webkit-backdrop-filter: blur(5px);
+     backdrop-filter: blur(3px);
      position: absolute;
      bottom: 12.3px;
      right: 12.3px;
-     width: 39.354px;
-     height: 39.354px;
-     background: #000;
-     border-radius: 12.298px;
+     width: 42px;
+     height: 42px;
+     border-radius: 50px;
      box-shadow: 0px 4.919px 12.298px 0px rgba(0, 0, 0, 0.2);
      display: flex;
      align-items: center;
@@ -1193,6 +1207,7 @@
      font-weight: 600;
      color: var(--green-mat);
      white-space: nowrap;
+     color: #2E7D32;
  }
 
  .tag-nonveg-label {
@@ -1200,6 +1215,7 @@
      font-weight: 600;
      color: var(--red-mat);
      white-space: nowrap;
+     color: #EE1E25;
  }
 
  .tag-sep {
@@ -1729,3 +1745,52 @@
      line-height: 18px;
      min-width: 100%;
      width: min-content;
+
+     /* Cart Badge */
+     .nav-action-btn {
+         position: relative;
+     }
+
+     .cart-badge {
+         position: absolute;
+         top: -4px;
+         right: -4px;
+         background: var(--red, #ed2c2b);
+         color: white;
+         font-size: 10px;
+         font-weight: 700;
+         width: 18px;
+         height: 18px;
+         border-radius: 50%;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         border: 2px solid #fff;
+         transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+     }
+
+     .cart-badge.hidden {
+         display: none;
+     }
+
+     .cart-badge.pop {
+         transform: scale(1.3);
+     }
+
+     /* Dynamic button themes */
+     .dish-add-btn.light-btn {
+         background: #fff;
+         box-shadow: 0px 4.919px 12.298px 0px rgba(0, 0, 0, 0.1);
+     }
+
+     .dish-add-btn.light-btn span {
+         color: #000;
+     }
+
+     .dish-add-btn.dark-btn {
+         background: #000;
+     }
+
+     .dish-add-btn.dark-btn span {
+         color: #fff;
+     }
