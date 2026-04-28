@@ -65,8 +65,8 @@ async function fetchHomepageData() {
     if (err2) console.error("Categories Error:", err2);
     else if (categories && categories.length > 0) renderCategories(categories);
 
-    // 3. Dish Tabs (Most Ordered, Signatures, Budget)
-    setupDishTabs();
+    // 3. Dish Tabs (Dynamically fetched from dishes table)
+    await setupDishTabs();
 
     // 4. Popular Categories
     const { data: popCategories, error: err4 } = await supabaseClient.from('popular_categories')
@@ -334,20 +334,72 @@ async function fetchTabDishes(filterValue) {
     else renderTabDishes(dishes || []);
 }
 
-function setupDishTabs() {
+async function setupDishTabs() {
+    const tabBar = document.querySelector('.tab-bar');
+    if (!tabBar) return;
+
+    // Fetch all featured_in arrays to get unique tabs
+    const { data, error } = await supabaseClient.from('dishes').select('featured_in');
+    
+    let filtersSet = new Set();
+    if (!error && data) {
+        data.forEach(item => {
+            if (Array.isArray(item.featured_in)) {
+                item.featured_in.forEach(f => filtersSet.add(f));
+            }
+        });
+    }
+
+    let filters = Array.from(filtersSet);
+    
+    // Fallback if no data is found
+    if (filters.length === 0) {
+        filters = ['most_ordered', 'signature', 'budget'];
+    }
+
+    // Sort logic: keep most_ordered first, signature second
+    const priority = ['most_ordered', 'signature', 'budget'];
+    filters.sort((a, b) => {
+        const indexA = priority.indexOf(a);
+        const indexB = priority.indexOf(b);
+        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+        if (indexA !== -1) return -1;
+        if (indexB !== -1) return 1;
+        return a.localeCompare(b);
+    });
+
+    const formatLabel = (str) => {
+        return str.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    };
+
+    let tabsHTML = '';
+    filters.forEach((filter, index) => {
+        const label = formatLabel(filter);
+        const spanClass = index === 0 ? 'tab-label-active' : 'tab-label-inactive';
+        tabsHTML += `
+            <div class="tab-item" data-filter="${filter}">
+                <span class="${spanClass}">${label}</span>
+            </div>
+        `;
+    });
+    
+    tabsHTML += `<div class="tab-active-bar"></div>`;
+    tabBar.innerHTML = tabsHTML;
+
     const tabItems = document.querySelectorAll('.tab-item');
     const activeBar = document.querySelector('.tab-active-bar');
-    if (!tabItems.length) return;
-
-    const filters = ['most_ordered', 'signature', 'budget'];
 
     const moveActiveBar = (tab) => {
         if (activeBar) {
             const span = tab.querySelector('span');
             if (span) {
-                const offsetLeft = tab.offsetLeft + span.offsetLeft;
+                const containerRect = tab.parentElement.getBoundingClientRect();
+                const spanRect = span.getBoundingClientRect();
+                // Relative to parent container's visible area, accounting for scroll
+                const offsetLeft = spanRect.left - containerRect.left + tab.parentElement.scrollLeft;
+                
                 activeBar.style.left = `${offsetLeft}px`;
-                activeBar.style.width = `${span.offsetWidth}px`;
+                activeBar.style.width = `${spanRect.width}px`;
             }
         }
     };
@@ -365,9 +417,16 @@ function setupDishTabs() {
                 }
             });
 
-            // Move the active bar
+            // Move the active bar and center the tab
             setTimeout(() => {
                 moveActiveBar(tab);
+
+                // Scroll the tab bar to center the active tab
+                const scrollLeftPos = tab.offsetLeft - (tabBar.clientWidth / 2) + (tab.clientWidth / 2);
+                tabBar.scrollTo({
+                    left: scrollLeftPos,
+                    behavior: 'smooth'
+                });
             }, 10);
 
             // Fetch dishes for this tab
@@ -381,7 +440,7 @@ function setupDishTabs() {
     }, 100);
 
     // Initial fetch
-    fetchTabDishes('most_ordered');
+    fetchTabDishes(filters[0]);
 }
 
 function renderTabDishes(items) {
@@ -436,6 +495,44 @@ function renderTabDishes(items) {
         `;
     });
     container.innerHTML = html;
+
+    // Update pagination
+    const scrollWrap = document.querySelector('.dish-grid-wrap');
+    const thumb = document.querySelector('.carousel-thumb');
+    const paginationContainer = document.querySelector('.carousel-pagination');
+
+    const updatePagination = () => {
+        if (!scrollWrap || !thumb || !paginationContainer) return;
+        
+        const maxScroll = scrollWrap.scrollWidth - scrollWrap.clientWidth;
+        
+        // Hide pagination if not scrollable
+        if (maxScroll <= 0) {
+            paginationContainer.style.display = 'none';
+            return;
+        } else {
+            paginationContainer.style.display = 'flex';
+        }
+        
+        const scrollRatio = scrollWrap.scrollLeft / maxScroll;
+        const trackWidth = 48;
+        const thumbWidth = Math.max(16, (scrollWrap.clientWidth / scrollWrap.scrollWidth) * trackWidth);
+        
+        thumb.style.width = `${thumbWidth}px`;
+        thumb.style.left = `${scrollRatio * (trackWidth - thumbWidth)}px`;
+    };
+
+    if (scrollWrap) {
+        // Remove existing listener to avoid duplicates if renderTabDishes is called multiple times
+        scrollWrap.removeEventListener('scroll', updatePagination);
+        scrollWrap.addEventListener('scroll', updatePagination);
+        
+        // Reset scroll position when loading new tab
+        scrollWrap.scrollLeft = 0;
+        
+        // Initial pagination update
+        setTimeout(updatePagination, 50);
+    }
 }
 
 // ── RENDER: POPULAR CATEGORIES ──

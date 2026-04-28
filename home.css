@@ -4,6 +4,7 @@
      box-sizing: border-box;
      margin: 0;
      padding: 0;
+     -webkit-tap-highlight-color: transparent;
  }
 
  :root {
@@ -611,7 +612,7 @@
      scroll-snap-align: start;
      scroll-margin-top: 94px;
      background: #fff;
-     border-radius: 28px 28px 0 0;
+     border-radius: 20px 20px 0 0;
      transition: border-radius 0.3s linear, box-shadow 0.3s linear;
      box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
  }
@@ -996,12 +997,19 @@
 
  /* Tab bar */
  .tab-bar {
-
      position: relative;
      display: flex;
      align-items: flex-end;
      padding: 0 20px;
-     border-bottom: 2px solid var(--grey-200);
+     border-bottom: 2px solid #F3F3F3;
+     overflow-x: auto;
+     overflow-y: hidden;
+     -webkit-overflow-scrolling: touch;
+     scrollbar-width: none;
+ }
+
+ .tab-bar::-webkit-scrollbar {
+     display: none;
  }
 
  .tab-item {
@@ -1016,12 +1024,13 @@
  }
 
  .tab-label-active {
+
      font-size: 16px;
      font-weight: 700;
      color: #111;
      line-height: 28px;
      white-space: nowrap;
-     padding-bottom: 12px;
+     padding: 16px 16px 12px 16px;
  }
 
  .tab-label-inactive {
@@ -1031,6 +1040,7 @@
      line-height: 28px;
      text-align: center;
      white-space: nowrap;
+     padding: 16px 16px 12px 16px;
  }
 
  .tab-underline {
@@ -1041,7 +1051,7 @@
 
  .tab-active-bar {
      position: absolute;
-     bottom: -2px;
+     bottom: 0px;
      left: 20px;
      width: 130px;
      height: 3px;
@@ -1055,6 +1065,7 @@
          opacity: 0;
          transform: translateY(20px);
      }
+
      100% {
          opacity: 1;
          transform: translateY(0);
@@ -1064,21 +1075,47 @@
  /* Dish card grid */
  .dish-grid-wrap {
      padding-left: 20px;
+     padding-right: 20px;
      overflow-x: auto;
+     overflow-y: hidden;
      -webkit-overflow-scrolling: touch;
      scrollbar-width: none;
-
  }
 
  .dish-grid {
      display: flex;
      gap: 16px;
-     align-items: center;
-
+     align-items: start;
  }
 
  .dish-grid::-webkit-scrollbar {
      display: none;
+ }
+
+ .carousel-pagination {
+     display: flex;
+     justify-content: center;
+     margin-top: 12px;
+     padding: 0 20px;
+ }
+
+ .carousel-track {
+     width: 48px;
+     height: 2px;
+     background: var(--grey-200, #E0E0E0);
+     border-radius: 4px;
+     position: relative;
+ }
+
+ .carousel-thumb {
+     position: absolute;
+     left: 0;
+     top: 0;
+     height: 100%;
+     width: 24px;
+     background: #3d3d3d;
+     border-radius: 4px;
+     transition: left 0.1s ease-out, width 0.3s ease;
  }
 
  .dish-card {
@@ -1088,10 +1125,11 @@
      cursor: pointer;
      isolation: isolate;
      overflow: visible;
+     width: 175px;
  }
 
  .dish-card-img-wrap {
-     width: 198px;
+     width: 175px;
      height: 198px;
      border-radius: 12.298px;
      overflow: hidden;
