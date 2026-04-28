@@ -312,6 +312,7 @@ body {
         opacity: 0;
         transform: translateY(20px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -446,7 +447,8 @@ body {
     width: 100%;
 }
 
-.veg-indicator, .nonveg-indicator {
+.veg-indicator,
+.nonveg-indicator {
     border: 2px solid var(--green-mat, #2E7D32);
     width: 14px;
     height: 14px;
@@ -456,6 +458,7 @@ body {
     padding: 4px;
     flex-shrink: 0;
 }
+
 .nonveg-indicator {
     border-color: var(--red-mat, #EE1E25);
 }
@@ -466,6 +469,7 @@ body {
     width: 6px;
     height: 6px;
 }
+
 .nonveg-indicator .dot {
     background: var(--red-mat, #EE1E25);
     border-radius: 3px;

@@ -5,7 +5,7 @@ let allDishesForCategory = [];
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const categoryId = urlParams.get('categoryId');
-    
+
     if (categoryId) {
         fetchCategoryData(categoryId);
     } else {
@@ -46,7 +46,7 @@ async function fetchCategoryData(categoryId) {
 
         if (dishes && dishes.length > 0) {
             allDishesForCategory = dishes;
-            
+
             // Extract unique cuisines
             let cuisinesSet = new Set();
             dishes.forEach(dish => {
@@ -84,7 +84,7 @@ function renderCuisineTabs(cuisines) {
             </div>
         `;
     });
-    
+
     tabsHTML += `<div class="tab-active-bar"></div>`;
     tabBar.innerHTML = tabsHTML;
 
@@ -98,7 +98,7 @@ function renderCuisineTabs(cuisines) {
                 const containerRect = tab.parentElement.getBoundingClientRect();
                 const spanRect = span.getBoundingClientRect();
                 const offsetLeft = spanRect.left - containerRect.left + tab.parentElement.scrollLeft;
-                
+
                 activeBar.style.left = `${offsetLeft}px`;
                 activeBar.style.width = `${spanRect.width}px`;
             }

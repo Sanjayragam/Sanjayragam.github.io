@@ -340,7 +340,7 @@ async function setupDishTabs() {
 
     // Fetch all featured_in arrays to get unique tabs
     const { data, error } = await supabaseClient.from('dishes').select('featured_in');
-    
+
     let filtersSet = new Set();
     if (!error && data) {
         data.forEach(item => {
@@ -351,7 +351,7 @@ async function setupDishTabs() {
     }
 
     let filters = Array.from(filtersSet);
-    
+
     // Fallback if no data is found
     if (filters.length === 0) {
         filters = ['most_ordered', 'signature', 'budget'];
@@ -382,7 +382,7 @@ async function setupDishTabs() {
             </div>
         `;
     });
-    
+
     tabsHTML += `<div class="tab-active-bar"></div>`;
     tabBar.innerHTML = tabsHTML;
 
@@ -397,7 +397,7 @@ async function setupDishTabs() {
                 const spanRect = span.getBoundingClientRect();
                 // Relative to parent container's visible area, accounting for scroll
                 const offsetLeft = spanRect.left - containerRect.left + tab.parentElement.scrollLeft;
-                
+
                 activeBar.style.left = `${offsetLeft}px`;
                 activeBar.style.width = `${spanRect.width}px`;
             }
@@ -503,9 +503,9 @@ function renderTabDishes(items) {
 
     const updatePagination = () => {
         if (!scrollWrap || !thumb || !paginationContainer) return;
-        
+
         const maxScroll = scrollWrap.scrollWidth - scrollWrap.clientWidth;
-        
+
         // Hide pagination if not scrollable
         if (maxScroll <= 0) {
             paginationContainer.style.display = 'none';
@@ -513,11 +513,11 @@ function renderTabDishes(items) {
         } else {
             paginationContainer.style.display = 'flex';
         }
-        
+
         const scrollRatio = scrollWrap.scrollLeft / maxScroll;
         const trackWidth = 48;
         const thumbWidth = Math.max(16, (scrollWrap.clientWidth / scrollWrap.scrollWidth) * trackWidth);
-        
+
         thumb.style.width = `${thumbWidth}px`;
         thumb.style.left = `${scrollRatio * (trackWidth - thumbWidth)}px`;
     };
@@ -526,10 +526,10 @@ function renderTabDishes(items) {
         // Remove existing listener to avoid duplicates if renderTabDishes is called multiple times
         scrollWrap.removeEventListener('scroll', updatePagination);
         scrollWrap.addEventListener('scroll', updatePagination);
-        
+
         // Reset scroll position when loading new tab
         scrollWrap.scrollLeft = 0;
-        
+
         // Initial pagination update
         setTimeout(updatePagination, 50);
     }
