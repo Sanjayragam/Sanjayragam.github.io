@@ -127,6 +127,38 @@ body {
     width: 255px;
 }
 
+/* ── MAIN CATEGORY CAROUSEL ── */
+.main-cat-carousel {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100vw;
+    padding: 0 20px;
+    margin-top: 24px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.main-cat-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.main-cat-item {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.main-cat-item.active {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+}
+
 /* ── STICKY TOP NAV ── */
 .top-nav {
     position: absolute;
@@ -205,27 +237,27 @@ body {
     /* background-color: #10ac33; */
 }
 
-/* ── CATEGORY TABS ── */
-.category-tabs-wrap {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: #fff;
-    border-radius: 16px 16px 0 0;
+/* ── CATEGORY TABS AND DISHES ── */
+.dish-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
-.category-tabs {
+/* Tab bar */
+.tab-bar {
+    position: relative;
     display: flex;
     align-items: flex-end;
-    gap: 11px;
-    padding: 24px 28px 0;
+    padding: 0 20px;
+    border-bottom: 2px solid #F3F3F3;
     overflow-x: auto;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    border-bottom: 1.5px solid #ebebeb;
 }
 
-.category-tabs::-webkit-scrollbar {
+.tab-bar::-webkit-scrollbar {
     display: none;
 }
 
@@ -233,217 +265,255 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
-    padding: 0 8px 10px;
-    height: 60px;
-    justify-content: flex-end;
-    flex-shrink: 0;
+    padding: 0px 4px 0;
     cursor: pointer;
-    border-bottom: 1.5px solid transparent;
-    margin-bottom: -1.5px;
-    transition: border-color 0.2s;
+    flex-shrink: 0;
+    background: transparent;
 }
 
-.tab-item.active {
-    border-bottom-color: #121213;
-}
-
-.tab-icon {
-    width: 30px;
-    height: auto;
-    background: #fdfdfd;
-    border-radius: 178px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.tab-icon img {
-    width: 20px;
-    height: 20px;
-}
-
-.tab-label {
-    font-size: 12px;
+.tab-label-active {
+    font-size: 16px;
     font-weight: 700;
-    color: #121213;
-    text-align: center;
+    color: #111;
+    line-height: 28px;
+    white-space: nowrap;
+    padding: 16px 16px 12px 16px;
 }
 
 .tab-label-inactive {
-    font-size: 12px;
-    font-weight: 500;
-    color: #808080;
-    text-align: center;
-    letter-spacing: 0.24px;
-}
-
-/* ── FILTER BAR ── */
-.filter-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 24px 20px 0;
-}
-
-.filter-chip {
-    flex: 1;
-    background: #fff;
-    border: 1.5px solid #eef2f2;
-    border-radius: 46px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 600;
-    color: #414449;
-    cursor: pointer;
+    color: #5e5e5e;
+    line-height: 28px;
+    text-align: center;
     white-space: nowrap;
-    padding: 0 18px;
-    transition: background 0.15s;
+    padding: 16px 16px 12px 16px;
 }
 
-.filter-chip:active {
-    background: #f4f4f4;
+.tab-underline {
+    height: 4px;
+    border-radius: 20px 20px 0 0;
+    width: 100%;
 }
 
-.filter-icon-btn {
-    width: 40px;
-    height: 40px;
-    background: #fff;
-    border: 1.5px solid #eef2f2;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    cursor: pointer;
-    transition: background 0.15s;
+.tab-active-bar {
+    position: absolute;
+    bottom: 0px;
+    left: 20px;
+    width: 130px;
+    height: 3px;
+    background: #000;
+    border-radius: 20px 20px 0 0;
+    transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1), width 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.filter-icon-btn.active {
-    background: #f4f4f4;
+@keyframes slideUpFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.filter-icon-btn img,
-.filter-icon-btn svg {
-    width: 17px;
-    height: 17px;
+/* Dish card grid */
+.dish-grid-wrap {
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-.filter-chevron {
-    font-size: 8px;
-    color: #414449;
-}
-
-.section-label {
-    font-size: 18px;
-    font-weight: 500;
-    color: #000;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-    padding: 24px 20px 0;
-}
-
-/* ── DISH GRID ── */
 .dish-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    padding: 24px 20px;
+    gap: 16px;
+    padding-bottom: 24px;
 }
 
-.dish-grid-item {
+.dish-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-pagination {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    cursor: pointer;
+    justify-content: center;
+    margin-top: 12px;
+    padding: 0 20px;
 }
 
-.dish-grid-img {
-    width: 100%;
-    aspect-ratio: 1/1.06;
-    border-radius: 9px;
-    overflow: hidden;
+.carousel-track {
+    width: 48px;
+    height: 2px;
+    background: var(--grey-200, #E0E0E0);
+    border-radius: 4px;
     position: relative;
 }
 
-.dish-grid-img img {
+.carousel-thumb {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 24px;
+    background: #3d3d3d;
+    border-radius: 4px;
+    transition: left 0.1s ease-out, width 0.3s ease;
+}
+
+.dish-card {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    cursor: pointer;
+    isolation: isolate;
+    overflow: visible;
+    width: 100%;
+}
+
+.dish-card-img-wrap {
+    width: 100%;
+    aspect-ratio: 1/1.1;
+    border-radius: 12.298px;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+.dish-card-img-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
-.dish-veg-badge {
+.dish-add-btn {
+    background-color: rgba(255, 255, 255, 0.425);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(3px);
     position: absolute;
-    top: 12px;
-    left: 16px;
+    bottom: 12.3px;
+    right: 12.3px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50px;
+    box-shadow: 0px 4.919px 12.298px 0px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
-    gap: 4px;
-    font-size: 13px;
-    color: var(--green);
+    justify-content: center;
+    z-index: 3;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.15s;
 }
 
-.dish-veg-badge img {
-    width: 14px;
-    height: 14px;
+.dish-add-btn:active {
+    transform: scale(0.92);
 }
 
-.dish-info {
+.dish-add-btn span {
+    font-size: 24.596px;
+    font-weight: 700;
+    color: #fff;
+    line-height: normal;
+    text-align: center;
+    display: block;
+    margin-top: -2px;
+}
+
+.dish-card-meta {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
+    padding: 12px 4px;
+    z-index: 1;
+    width: 100%;
 }
 
-.dish-name {
-    font-size: 16px;
-    font-weight: 700;
-    color: rgba(2, 6, 12, 0.8);
-    line-height: 1.5;
+.dish-card-name {
+    font-size: 15.2px;
+    font-weight: 600;
+    color: #111;
+    line-height: normal;
+    width: 100%;
 }
 
-.dish-meta-row {
+.dish-card-tags {
     display: flex;
     align-items: center;
-    gap: 4px;
-    font-size: 13px;
-    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
 }
 
-.dish-type-veg {
-    color: var(--green);
+.veg-indicator, .nonveg-indicator {
+    border: 2px solid var(--green-mat, #2E7D32);
+    width: 14px;
+    height: 14px;
     display: flex;
     align-items: center;
-    gap: 4px;
+    justify-content: center;
+    padding: 4px;
+    flex-shrink: 0;
+}
+.nonveg-indicator {
+    border-color: var(--red-mat, #EE1E25);
 }
 
-.dish-type-nonveg {
-    color: #ee1e25;
+.veg-indicator .dot {
+    background: var(--green-mat, #2E7D32);
+    border-radius: 3px;
+    width: 6px;
+    height: 6px;
+}
+.nonveg-indicator .dot {
+    background: var(--red-mat, #EE1E25);
+    border-radius: 3px;
+    width: 6px;
+    height: 6px;
 }
 
-.dish-sep {
-    color: #c0b9b9;
+.tag-veg-label {
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: #2E7D32;
 }
 
-.dish-time {
-    color: rgba(2, 6, 12, 0.75);
+.tag-nonveg-label {
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: #EE1E25;
 }
 
-.dish-kitchen {
+.tag-sep {
+    font-size: 12px;
+    font-weight: 300;
+    color: #ddd;
+    white-space: nowrap;
+}
+
+.tag-time {
     font-size: 12px;
     font-weight: 500;
-    color: #b1b1b1;
-    letter-spacing: -0.3px;
-    line-height: 16px;
+    color: #888;
+    white-space: nowrap;
 }
 
-.dish-price-sm {
-    font-size: 14px;
+.dish-price-row {
+    padding-top: 8px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.dish-price {
+    font-size: 15.2px;
     font-weight: 700;
-    color: #444;
+    color: #111;
+    line-height: normal;
+    flex: 1;
 }
 
 /* ── FOOTER ── */
