@@ -1127,6 +1127,7 @@
      isolation: isolate;
      overflow: visible;
      width: 175px;
+
  }
 
  .dish-card-img-wrap {
@@ -1148,7 +1149,7 @@
 
  .dish-add-btn {
 
-     background-color: rgba(255, 255, 255, 0.425);
+     background-color: rgb(0, 0, 0);
      -webkit-backdrop-filter: blur(5px);
      backdrop-filter: blur(3px);
      position: absolute;

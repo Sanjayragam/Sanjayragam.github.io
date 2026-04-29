@@ -471,10 +471,13 @@ function renderTabDishes(items) {
         const imgUrl = item.img_url || item.image_url || 'Images/hero3.jpg';
         const price = item.price ? `₹${item.price}` : '';
 
+        const modelUrl = item.model_3d_url || '';
+
         html += `
-            <div class="dish-card" onclick="location.href='dish-detail.html?id=${linkId}'" style="animation: slideUpFadeIn 0.4s ease forwards; animation-delay: ${index * 0.08}s; opacity: 0;">
+            <div class="dish-card" onclick="location.href='dish-detail.html?id=${linkId}'" style="animation: slideUpFadeIn 0.4s ease forwards; animation-delay: ${index * 0.08}s; opacity: 0;" data-model-url="${modelUrl}">
                 <div class="dish-card-img-wrap">
-                    <img src="${imgUrl}" alt="${item.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" />
+                    <img src="${imgUrl}" alt="${item.name}" class="dish-card-image" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover; transition: opacity 0.8s ease, filter 0.8s ease;" />
+                    <div class="dish-model-container"></div>
                     <button class="dish-add-btn"><span>+</span></button>
                 </div>
                 <div class="dish-card-meta">
@@ -532,7 +535,267 @@ function renderTabDishes(items) {
 
         // Initial pagination update
         setTimeout(updatePagination, 50);
+        
+        // Initialize Progressive 3D Models
+        setTimeout(initProgressive3DModels, 100);
     }
+}
+
+// ── PROGRESSIVE 3D MODEL LOGIC ──
+let dishCarouselObserver = null;
+let dishCardObserver = null;
+
+function initProgressive3DModels() {
+    const scrollWrap = document.querySelector('.dish-grid-wrap');
+    if (!scrollWrap) return;
+
+    if (dishCarouselObserver) dishCarouselObserver.disconnect();
+    if (dishCardObserver) dishCardObserver.disconnect();
+
+    let hasCarouselEntered = false;
+    let initialTimeout = null;
+
+    // Observe when the carousel section enters the viewport
+    dishCarouselObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !hasCarouselEntered) {
+                hasCarouselEntered = true;
+                // Wait 2 seconds, then transform the first visible card
+                initialTimeout = setTimeout(() => {
+                    if (hasCarouselEntered) {
+                        activateVisibleCards();
+                        startCardObserver();
+                    }
+                }, 2000);
+            } else if (!entry.isIntersecting && hasCarouselEntered) {
+                hasCarouselEntered = false;
+                if (initialTimeout) clearTimeout(initialTimeout);
+                resetAllCardsToImage();
+            }
+        });
+    }, { threshold: 0.05 }); // Trigger when at least 5% is visible
+
+    dishCarouselObserver.observe(scrollWrap);
+
+    function startCardObserver() {
+        const cards = document.querySelectorAll('.dish-card');
+        if (dishCardObserver) dishCardObserver.disconnect();
+        
+        dishCardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // Dominant card inside scroll wrap gets transformed
+                if (entry.isIntersecting) {
+                    transformCardTo3D(entry.target);
+                } else {
+                    revertCardToImage(entry.target);
+                }
+            });
+        }, {
+            root: scrollWrap,
+            threshold: 0.6 // Trigger when 60% of the card is visible in the container
+        });
+
+        cards.forEach(card => dishCardObserver.observe(card));
+    }
+
+    function activateVisibleCards() {
+        const cards = document.querySelectorAll('.dish-card');
+        const wrapRect = scrollWrap.getBoundingClientRect();
+
+        for (let card of cards) {
+            const rect = card.getBoundingClientRect();
+            // Transform the first card that is fully or mostly visible
+            if (rect.left >= wrapRect.left && rect.right <= wrapRect.right + 20) {
+                transformCardTo3D(card);
+                break; // Only transform the first one initially
+            }
+        }
+    }
+}
+
+function transformCardTo3D(card) {
+    if (card.dataset.is3dActive === 'true') return;
+
+    const modelUrl = card.getAttribute('data-model-url');
+    if (!modelUrl || modelUrl === 'undefined' || modelUrl === 'null' || modelUrl.trim() === '') return;
+
+    card.dataset.is3dActive = 'true';
+
+    const imgWrap = card.querySelector('.dish-card-img-wrap');
+    const img = card.querySelector('.dish-card-image');
+    let modelContainer = card.querySelector('.dish-model-container');
+
+    if (!modelContainer) {
+        modelContainer = document.createElement('div');
+        modelContainer.className = 'dish-model-container';
+        imgWrap.insertBefore(modelContainer, card.querySelector('.dish-add-btn'));
+    }
+
+    // Initialize model viewer
+    const modelViewer = document.createElement('model-viewer');
+    modelViewer.src = modelUrl;
+    modelViewer.autoRotate = true;
+    modelViewer.rotationPerSecond = '12deg'; // Reduced rotation speed
+    modelViewer.cameraControls = false;
+    modelViewer.interactionPrompt = 'none';
+    modelViewer.setAttribute('shadow-intensity', '1.5');
+    modelViewer.setAttribute('shadow-softness', '1');
+    modelViewer.setAttribute('environment-image', 'neutral');
+    
+    // Style model viewer for cinematic fade-in
+    modelViewer.style.width = '100%';
+    modelViewer.style.height = '100%';
+    modelViewer.style.position = 'absolute';
+    modelViewer.style.inset = '0';
+    modelViewer.style.opacity = '0';
+    modelViewer.style.transform = 'scale(0.85)';
+    modelViewer.style.transition = 'opacity 1.2s ease, transform 1.2s cubic-bezier(0.25, 1, 0.5, 1)';
+    modelViewer.style.background = 'linear-gradient(141deg, #F7F7F6 5.42%, #EDF0F5 93.49%)'; // Added gradient background
+    
+    // Create Tap Gesture Overlay (Glassmorphism Hand)
+    const promptOverlay = document.createElement('div');
+    promptOverlay.style.position = 'absolute';
+    promptOverlay.style.top = '50%';
+    promptOverlay.style.left = '50%';
+    promptOverlay.style.transform = 'translate(-50%, -20%)';
+    promptOverlay.style.pointerEvents = 'none';
+    promptOverlay.style.zIndex = '10';
+    promptOverlay.style.opacity = '0';
+    promptOverlay.style.transition = 'opacity 0.6s ease';
+    promptOverlay.style.filter = 'drop-shadow(0px 8px 12px rgba(0, 150, 255, 0.25))';
+
+    promptOverlay.innerHTML = `
+        <svg width="70" height="90" viewBox="0 0 64 80">
+            <defs>
+                <linearGradient id="glassHand" x1="0%" y1="0%" x2="0%" y2="100%">
+                   <stop offset="0%" stop-color="#40C9FF" stop-opacity="0.95" />
+                   <stop offset="40%" stop-color="#007BFF" stop-opacity="0.5" />
+                   <stop offset="100%" stop-color="#0022FF" stop-opacity="0.0" />
+                </linearGradient>
+                <linearGradient id="glassEdge" x1="0%" y1="0%" x2="0%" y2="100%">
+                   <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+                   <stop offset="50%" stop-color="#40C9FF" stop-opacity="0.6" />
+                   <stop offset="100%" stop-color="#007BFF" stop-opacity="0.0" />
+                </linearGradient>
+            </defs>
+            
+            <g class="ripples">
+                <circle class="rip1" cx="28" cy="20" r="14" fill="none" stroke="#40C9FF" stroke-width="2" opacity="0"/>
+                <circle class="rip2" cx="28" cy="20" r="6" fill="#40C9FF" opacity="0"/>
+            </g>
+
+            <path class="hand-shape" d="M 25 22 
+                     C 25 17, 31 17, 31 22 
+                     L 31 40 
+                     C 34 38, 38 38, 39 41 
+                     C 42 39, 46 40, 47 43 
+                     C 50 42, 54 44, 54 48 
+                     L 54 60 
+                     C 54 72, 46 80, 36 80 
+                     L 28 80 
+                     C 18 80, 14 72, 14 62 
+                     L 14 52 
+                     C 14 48, 20 46, 23 50 
+                     L 25 54 
+                     Z" 
+                  fill="url(#glassHand)" 
+                  stroke="url(#glassEdge)" 
+                  stroke-width="1.5" 
+                  stroke-linejoin="round" />
+        </svg>
+    `;
+
+    modelContainer.appendChild(modelViewer);
+    modelContainer.appendChild(promptOverlay);
+
+    // Crossfade animation when model loads
+    modelViewer.addEventListener('load', () => {
+        // Double check it's still active in case it scrolled out while loading
+        if (card.dataset.is3dActive === 'true') {
+            if (img) {
+                img.style.opacity = '0';
+                img.style.filter = 'blur(8px)';
+                img.style.transform = 'scale(1.05)';
+            }
+            modelViewer.style.opacity = '1';
+            modelViewer.style.transform = 'scale(1)';
+            
+            // Animate hand shape and ripples
+            const handShape = promptOverlay.querySelector('.hand-shape');
+            const rip1 = promptOverlay.querySelector('.rip1');
+            const rip2 = promptOverlay.querySelector('.rip2');
+
+            if (handShape) {
+                handShape.animate([
+                    { transform: 'translate(0px, 15px) scale(1.05)', transformOrigin: '28px 80px' },
+                    { transform: 'translate(0px, 0px) scale(1)', transformOrigin: '28px 80px', offset: 0.2 },
+                    { transform: 'translate(0px, 0px) scale(1)', transformOrigin: '28px 80px', offset: 0.5 },
+                    { transform: 'translate(0px, 15px) scale(1.05)', transformOrigin: '28px 80px', offset: 0.7 },
+                    { transform: 'translate(0px, 15px) scale(1.05)', transformOrigin: '28px 80px' }
+                ], { duration: 2000, iterations: Infinity, easing: 'ease-in-out' });
+            }
+
+            if (rip1) {
+                rip1.animate([
+                    { transform: 'scale(0.5)', opacity: 0, transformOrigin: '28px 20px' },
+                    { transform: 'scale(0.8)', opacity: 0.8, transformOrigin: '28px 20px', offset: 0.2 },
+                    { transform: 'scale(1.5)', opacity: 0, transformOrigin: '28px 20px', offset: 0.5 },
+                    { transform: 'scale(1.5)', opacity: 0, transformOrigin: '28px 20px' }
+                ], { duration: 2000, iterations: Infinity, easing: 'ease-out' });
+            }
+
+            if (rip2) {
+                rip2.animate([
+                    { transform: 'scale(0.5)', opacity: 0, transformOrigin: '28px 20px' },
+                    { transform: 'scale(1)', opacity: 0.5, transformOrigin: '28px 20px', offset: 0.2 },
+                    { transform: 'scale(1.2)', opacity: 0, transformOrigin: '28px 20px', offset: 0.4 },
+                    { transform: 'scale(1.2)', opacity: 0, transformOrigin: '28px 20px' }
+                ], { duration: 2000, iterations: Infinity, easing: 'ease-out' });
+            }
+
+            // Reveal prompt then fade it out
+            setTimeout(() => {
+                if (card.dataset.is3dActive === 'true') {
+                    promptOverlay.style.opacity = '1';
+                    setTimeout(() => {
+                        promptOverlay.style.opacity = '0';
+                    }, 3000);
+                }
+            }, 600);
+        }
+    });
+}
+
+function revertCardToImage(card) {
+    if (card.dataset.is3dActive !== 'true') return;
+    
+    card.dataset.is3dActive = 'false';
+    
+    const img = card.querySelector('.dish-card-image');
+    const modelContainer = card.querySelector('.dish-model-container');
+    
+    if (img) {
+        img.style.opacity = '1';
+        img.style.filter = 'blur(0px)';
+        img.style.transform = 'scale(1)';
+    }
+    
+    if (modelContainer) {
+        const viewer = modelContainer.querySelector('model-viewer');
+        if (viewer) {
+            viewer.style.opacity = '0';
+            setTimeout(() => {
+                if (card.dataset.is3dActive !== 'true' && viewer.parentNode) {
+                    viewer.parentNode.removeChild(viewer);
+                }
+            }, 800); // Wait for fade out to complete before removing from DOM
+        }
+    }
+}
+
+function resetAllCardsToImage() {
+    const cards = document.querySelectorAll('.dish-card');
+    cards.forEach(card => revertCardToImage(card));
 }
 
 // ── RENDER: POPULAR CATEGORIES ──
