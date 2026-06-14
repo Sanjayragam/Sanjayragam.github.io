@@ -1,1194 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-<meta name="theme-color" content="#5e5958"/>
-<meta name="apple-mobile-web-app-capable" content="yes"/>
-<title>Starters – Koi Resto Bar</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Figtree:wght@400;500;600;700&family=Inter:wght@500&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html,body{width:100%;min-height:100%;background:#5e5958;display:flex;justify-content:center;font-family:'Red Hat Display',sans-serif;-webkit-font-smoothing:antialiased;}
-body.ov-lock{overflow:hidden;height:100%;}
-
-.screen{width:390px;min-height:100svh;background:#5e5958;position:relative;overflow-x:hidden;}
-
-/* ══ HERO ══ */
-.hero{
-  width:390px;height:486px;
-  position:sticky;top:0;z-index:10;
-  overflow:hidden;
-  display:flex;flex-direction:column;justify-content:space-between;
-}
-.hero-bg{
-  position:absolute;inset:0;
-  background:
-    linear-gradient(180deg,rgba(0,0,0,0) 44.48%,rgba(0,0,0,.68) 63.93%,#000 91.92%),
-    url('https://www.figma.com/api/mcp/asset/6a525e8a-64c6-45bd-a070-e407a0992749') center/cover no-repeat;
-}
-.hero-bg::before{
-  content:'';position:absolute;inset:0;
-  background:url('https://www.figma.com/api/mcp/asset/ea6c8d4d-75d1-4140-9ac3-97eced0bcfec') center/cover no-repeat;
-  opacity:.55;
-}
-
-.hero-nav{
-  position:relative;z-index:2;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:24px;
-}
-.back-btn{
-  display:flex;align-items:center;gap:8px;
-  background:rgba(0,0,0,.7);backdrop-filter:blur(9.3px);
-  border:none;border-radius:32px;padding:10px 20px 10px 14px;
-  cursor:pointer;color:#fff;
-  font-family:'Red Hat Display',sans-serif;
-  font-size:14px;font-weight:500;
-  transition:opacity .2s;text-decoration:none;
-}
-.back-btn:active{opacity:.75;}
-.back-btn svg{width:16px;height:16px;}
-
-.nav-right{display:flex;align-items:center;gap:12px;}
-.icon-btn{
-  width:36px;height:36px;border-radius:50%;
-  background:#fff;border:none;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;
-}
-.icon-btn svg{width:20px;height:20px;}
-.cart-btn{
-  display:flex;align-items:center;gap:8px;
-  background:#fff;border-radius:500px;padding:10px 12px;
-  border:none;cursor:pointer;
-  font-family:'Red Hat Display',sans-serif;
-  font-weight:500;font-size:12px;color:#000;
-}
-.cart-btn svg{width:16px;height:16px;}
-
-.hero-center{
-  position:relative;z-index:2;
-  height:232px;
-  display:flex;flex-direction:column;align-items:center;justify-content:space-between;
-  padding:0 24px 32px;
-}
-.cat-title-block{
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  padding-top:24px;
-}
-.cat-title{
-  font-family:Georgia,'Times New Roman',serif;
-  font-style:italic;font-size:45.66px;font-weight:600;
-  color:#fff;white-space:nowrap;line-height:1.31;
-}
-.cat-subtitle{
-  font-size:15px;font-weight:400;color:rgba(255,255,255,.35);
-  text-align:center;max-width:258px;line-height:1.47;
-}
-
-.cat-tabs{
-  display:flex;align-items:center;gap:9.8px;
-  overflow-x:auto;scrollbar-width:none;
-  width:100%;padding:0 18px;
-}
-.cat-tabs::-webkit-scrollbar{display:none;}
-.cat-pill{
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:36.6px;padding:3.6px 13.4px;
-  font-size:12.5px;font-weight:600;color:rgba(255,255,255,.36);
-  white-space:nowrap;cursor:pointer;flex-shrink:0;
-  transition:all .25s;
-}
-.cat-pill.active{
-  background:rgba(255,255,255,.05);
-  border:0.89px solid rgba(255,255,255,.71);
-  font-size:16.1px;font-weight:700;color:#fff;
-  padding:7.1px 23px;
-}
-.cat-pill.blur{filter:blur(1px);}
-
-/* ══ CONTENT CARD ══ */
-.content-card{
-  background:#fff;
-  border-radius:12px 12px 0 0;
-  position:relative;z-index:5;
-  margin-top:-12px;
-  overflow:hidden;
-}
-
-.drag-row{
-  display:flex;justify-content:center;
-  padding:9px 20px 22px;
-}
-.drag-handle{width:52px;height:4px;background:#e4e4e4;border-radius:999px;}
-
-.dish-grid{
-  display:flex;flex-direction:column;gap:14px;
-  padding:0 20px;
-}
-.dish-row{display:flex;gap:14px;}
-.dish-card{
-  flex:1;min-width:0;
-  display:flex;flex-direction:column;
-  overflow:hidden;cursor:pointer;
-  text-decoration:none;color:inherit;
-  -webkit-tap-highlight-color:transparent;
-  transition:transform .15s ease;
-}
-.dish-card:active{transform:scale(.97);}
-.dish-img{
-  width:100%;height:178px;border-radius:8px;overflow:hidden;
-  position:relative;background:#f0f0f0;flex-shrink:0;
-}
-.dish-img img{width:100%;height:100%;object-fit:cover;display:block;}
-.dish-meta{padding:12px 4px;}
-.dish-name{font-size:16px;font-weight:700;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.dish-tags{display:flex;align-items:center;gap:8px;margin-top:4px;}
-.veg-badge{display:flex;align-items:center;gap:4px;}
-.veg-badge svg{width:16px;height:16px;}
-.veg-badge span{font-size:12px;font-weight:700;color:#2e7d32;}
-.non-badge span{color:#d32f2f;}
-.divider-dot{width:1px;height:11px;background:#ccc;}
-.dish-time{font-size:12px;font-weight:700;color:#5e5e5e;}
-.dish-price{font-size:15px;font-weight:800;color:#111;margin-top:4px;}
-
-.footer{
-  display:flex;flex-direction:column;align-items:center;gap:14px;
-  padding:34px 20px;
-}
-.footer-powered{font-size:13px;color:rgba(0,0,0,.56);}
-.tapqr-logo-wrap{display:flex;align-items:center;gap:13px;}
-.tapqr-line{width:24px;height:1px;background:rgba(0,0,0,.21);}
-.tapqr-word{font-family:Georgia,serif;font-size:33px;color:#000;letter-spacing:-1px;}
-.tapqr-word strong{font-weight:900;}
-.footer-url{font-size:13px;color:rgba(0,0,0,.56);}
-
-/* ══ TRANSITION OVERLAY ══ */
-.transition-overlay{
-  position:fixed;inset:0;background:#000;z-index:200;
-  opacity:0;pointer-events:none;transition:opacity .35s;
-}
-.transition-overlay.active{opacity:1;pointer-events:all;}
-
-/* ═══════════════════════════════════════════════════════════════
-   PRODUCT PREVIEW / FULL DETAIL OVERLAY
-   ═══════════════════════════════════════════════════════════════ */
-
-/* Backdrop */
-.ov-backdrop{
-  position:fixed;inset:0;z-index:60;
-  background:rgba(0,0,0,0);
-  backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);
-  opacity:0;pointer-events:none;
-  transition:background .32s ease,backdrop-filter .32s ease,
-             -webkit-backdrop-filter .32s ease,opacity .32s ease;
-}
-.ov-backdrop.show{
-  background:rgba(0,0,0,.52);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  opacity:1;pointer-events:auto;
-}
-
-/* Floating/expanding card */
-.ov-card{
-  position:fixed;z-index:61;
-  background:#fff;overflow:hidden;
-  display:flex;flex-direction:column;
-  box-shadow:0 32px 80px rgba(0,0,0,.38);
-  visibility:hidden;
-  will-change:left,top,width,height,border-radius;
-}
-.ov-card.visible{visibility:visible;}
-.ov-card.animate{
-  transition:
-    left .32s cubic-bezier(.22,.61,.36,1),
-    top .32s cubic-bezier(.22,.61,.36,1),
-    width .32s cubic-bezier(.22,.61,.36,1),
-    height .32s cubic-bezier(.22,.61,.36,1),
-    border-radius .32s cubic-bezier(.22,.61,.36,1),
-    box-shadow .32s ease;
-}
-
-/* Top bar */
-.ov-topbar{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:16px;border-bottom:1.5px solid #f3f3f3;
-  background:#fff;flex-shrink:0;position:relative;z-index:3;
-}
-.ov-pill{
-  display:flex;align-items:center;gap:8px;
-  background:#f4f4f4;border:none;border-radius:500px;
-  padding:10px 16px;cursor:pointer;
-  font-family:'Inter',sans-serif;font-weight:500;color:#000;
-}
-.ov-pill.ov-close{font-size:13px;}
-.ov-pill.ov-cart{font-size:12px;}
-.ov-pill svg{flex-shrink:0;}
-
-/* Category tabs (collapse when expanded) */
-.ov-tabs{
-  display:flex;align-items:center;padding:0 18.5px;
-  overflow-x:auto;scrollbar-width:none;
-  border-bottom:1.5px solid #f3f3f3;background:#fff;flex-shrink:0;
-  max-height:52px;overflow:hidden;
-  transition:max-height .3s ease,opacity .25s ease,border-color .3s ease,padding .3s ease;
-}
-.ov-tabs::-webkit-scrollbar{display:none;}
-.ov-tab{
-  padding:0 14.85px;height:49.2px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  font-size:14.85px;font-weight:600;color:#5e5e5e;white-space:nowrap;
-  position:relative;cursor:pointer;
-}
-.ov-tab.active{font-weight:700;color:#111;}
-.ov-tab.active::after{
-  content:'';position:absolute;bottom:0;left:14.85px;right:14.85px;height:3px;
-  background:#000;border-radius:18.5px 18.5px 0 0;
-}
-.ov-card.is-expanded .ov-tabs{max-height:0;opacity:0;border-bottom-color:transparent;padding-top:0;padding-bottom:0;}
-
-/* Image stage — height transitions as card expands */
-.ov-image-stage{
-  position:relative;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  height:191px;overflow:hidden;
-  background:#fff;
-}
-.ov-image-wrap{position:relative;width:73%;max-width:282px;aspect-ratio:282/177;}
-.ov-glow{
-  position:absolute;left:50%;top:60%;width:140%;height:140%;
-  transform:translate(-50%,-50%);
-  background:url('https://www.figma.com/api/mcp/asset/50b163ae-3119-48db-985c-81f6eafed8ad') center/contain no-repeat;
-  opacity:.9;z-index:0;
-}
-.ov-img-blur{
-  position:absolute;inset:0;border-radius:5.2px;overflow:hidden;
-  filter:blur(20px);opacity:.6;z-index:1;
-}
-.ov-img-blur img{width:100%;height:100%;object-fit:cover;}
-.ov-img-sharp{
-  position:absolute;left:50%;top:50%;width:97.5%;height:97.5%;
-  transform:translate(-50%,-50%);border-radius:5.2px;overflow:hidden;z-index:2;
-  box-shadow:0 18px 40px rgba(0,0,0,.25);
-}
-.ov-img-sharp img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .22s ease;}
-
-/* Drag handle hint */
-.ov-drag-hint{
-  display:flex;justify-content:center;padding:8px 0 4px;
-  flex-shrink:0;transition:opacity .2s,max-height .2s,padding .2s;
-  max-height:28px;
-}
-.ov-drag-hint span{width:36px;height:4px;background:#e4e4e4;border-radius:99px;}
-.ov-card.is-expanded .ov-drag-hint{opacity:0;max-height:0;padding:0;overflow:hidden;}
-
-/* Scrollable body */
-.ov-body{
-  flex:1;min-height:0;overflow-y:hidden;-webkit-overflow-scrolling:touch;
-  padding:16px 18px;display:flex;flex-direction:column;gap:18px;
-  touch-action:none;
-}
-.ov-card.is-expanded .ov-body{overflow-y:auto;touch-action:pan-y;}
-.ov-body::-webkit-scrollbar{display:none;}
-
-.ov-cube{width:40px;height:43px;flex-shrink:0;}
-.ov-cube img{width:100%;height:100%;object-fit:contain;display:block;}
-
-.ov-title{font-size:20px;font-weight:700;color:#111;line-height:1.25;}
-
-.ov-desc{
-  font-family:'Figtree',sans-serif;font-size:14px;font-weight:400;color:#676767;line-height:1.5;
-  max-height:0;opacity:0;overflow:hidden;
-  transition:max-height .32s cubic-bezier(.22,.61,.36,1),opacity .28s ease;
-}
-.ov-card.is-expanded .ov-desc{max-height:80px;opacity:1;}
-
-.ov-tags{display:flex;align-items:center;gap:8.7px;}
-.ov-tags .veg-badge{display:flex;align-items:center;gap:4.4px;}
-.ov-tags .veg-badge svg{width:17.5px;height:17.5px;}
-.ov-tags .veg-badge span{font-size:13.1px;font-weight:700;color:#2e7d32;}
-.ov-tags .non-badge span{color:#d32f2f;}
-.ov-tags .ov-sep{width:1px;height:11.6px;background:#ccc;flex-shrink:0;}
-.ov-tags .ov-time{font-size:13.1px;font-weight:700;color:#5e5e5e;}
-
-.ov-price-row{
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-}
-.ov-card.is-expanded .ov-price-row{flex-direction:column;align-items:stretch;gap:16px;}
-.ov-price{font-family:'Figtree',sans-serif;font-weight:700;font-size:27.8px;color:#000;white-space:nowrap;}
-.ov-add-btn{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  background:#000;border:none;border-radius:11px;padding:13px 24px;
-  font-family:'Figtree',sans-serif;font-weight:600;font-size:16px;color:#fff;
-  cursor:pointer;flex-shrink:0;white-space:nowrap;
-  transition:width .28s ease,background .2s ease;
-}
-.ov-card.is-expanded .ov-add-btn{width:100%;}
-.ov-add-btn svg{width:15.9px;height:15.9px;flex-shrink:0;}
-
-/* Expanded-only sections */
-.ov-extra{
-  display:flex;flex-direction:column;gap:20px;
-  max-height:0;opacity:0;overflow:hidden;
-  transition:max-height .38s cubic-bezier(.22,.61,.36,1),opacity .3s ease;
-}
-.ov-card.is-expanded .ov-extra{max-height:3000px;opacity:1;overflow:visible;}
-
-/* Social proof */
-.ov-social{display:flex;align-items:center;gap:12px;}
-.ov-avatars{display:flex;align-items:center;flex-shrink:0;}
-.ov-avatar{width:44px;height:44px;border-radius:50%;border:2.4px solid #fff;overflow:hidden;margin-right:-14.5px;}
-.ov-avatar:last-child{margin-right:0;}
-.ov-avatar img{width:100%;height:100%;object-fit:cover;display:block;}
-.ov-social-text{font-family:'Figtree',sans-serif;font-weight:600;font-size:15px;line-height:1.39;color:#000;max-width:180px;}
-
-/* Prep time */
-.ov-prep{display:flex;align-items:center;gap:10px;}
-.ov-prep-icon{width:50px;height:50px;border-radius:60px;background:#f4f4f4;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.ov-prep-icon img{width:24px;height:24px;object-fit:contain;}
-.ov-prep-label{font-family:'Figtree',sans-serif;font-weight:500;font-size:12.9px;color:#666;line-height:2;}
-.ov-prep-value{font-family:'Figtree',sans-serif;font-weight:600;font-size:16px;color:#1c1c1c;line-height:1.6;}
-
-/* Section headers */
-.ov-section{display:flex;flex-direction:column;gap:12px;}
-.ov-section-title{font-size:18px;font-weight:700;color:#000;line-height:1.35;}
-.ov-section-header{display:flex;align-items:center;justify-content:space-between;}
-.ov-section-arrow{
-  display:flex;align-items:center;justify-content:center;
-  background:#f3f3f3;border:none;border-radius:32px;padding:10px 14px;
-  backdrop-filter:blur(9.3px);cursor:pointer;
-}
-.ov-section-arrow svg{width:20px;height:20px;}
-
-/* Quantities */
-.ov-quantities{
-  background:#fff;border:1.5px solid #dfdfdf;border-radius:10px;
-  display:flex;align-items:center;justify-content:space-between;padding:22px 18px;
-}
-.ov-qty-opt{
-  font-family:'Figtree',sans-serif;font-weight:500;font-size:12.9px;color:#666;
-  white-space:nowrap;cursor:pointer;transition:color .2s,font-weight .2s;
-  padding:4px 8px;border-radius:6px;
-}
-.ov-qty-opt.active{color:#000;font-weight:700;}
-.ov-qty-sep{width:1px;height:7px;background:#dfdfdf;flex-shrink:0;}
-
-/* Allergens */
-.ov-allergens{
-  background:#fff;border:1.5px solid #dfdfdf;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;padding:16px 12px;
-}
-.ov-allergens img{width:100%;max-width:240px;height:auto;object-fit:contain;}
-
-/* More dishes grid */
-.ov-more-grid{display:flex;flex-direction:column;gap:14px;}
-.ov-more-row{display:flex;gap:14px;}
-.ov-more-card{
-  flex:1;min-width:0;display:flex;flex-direction:column;cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-  transition:transform .15s ease;
-}
-.ov-more-card:active{transform:scale(.97);}
-.ov-more-img{width:100%;height:190px;border-radius:16px;overflow:hidden;background:#f0f0f0;}
-.ov-more-img img{width:100%;height:100%;object-fit:cover;display:block;}
-.ov-more-meta{padding:12px 4px;display:flex;flex-direction:column;gap:4px;}
-.ov-more-name{font-size:16px;font-weight:700;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.ov-more-tags{display:flex;align-items:center;gap:8px;}
-.ov-more-tags .veg-badge svg{width:16px;height:16px;}
-.ov-more-tags .veg-badge span{font-size:12px;font-weight:700;color:#2e7d32;}
-.ov-more-tags .non-badge span{color:#d32f2f;}
-.ov-more-tags .divider-dot{width:1px;height:11px;background:#ccc;}
-.ov-more-tags .ov-time{font-size:12px;font-weight:700;color:#5e5e5e;}
-.ov-more-price{font-size:15.2px;font-weight:800;color:#111;}
-
-/* ══ THUMBNAIL CAROUSEL ══ */
-.ov-carousel{
-  position:fixed;left:0;right:0;bottom:28px;z-index:62;
-  display:flex;align-items:center;justify-content:center;gap:14px;
-  transition:opacity .28s ease,transform .28s ease;
-  opacity:0;transform:translateY(20px);pointer-events:none;
-}
-.ov-carousel.show{opacity:1;transform:translateY(0);pointer-events:auto;}
-
-/* Swipe track */
-.ov-carousel-track{
-  display:flex;align-items:center;gap:14px;
-  touch-action:none;user-select:none;
-}
-
-.ov-thumb{
-  border-radius:50%;overflow:hidden;border:3px solid transparent;flex-shrink:0;
-  cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.32);
-  transition:width .26s cubic-bezier(.22,.61,.36,1),
-             height .26s cubic-bezier(.22,.61,.36,1),
-             border-color .26s ease,
-             opacity .26s ease,
-             transform .26s cubic-bezier(.22,.61,.36,1);
-  will-change:transform;
-}
-.ov-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
-.ov-thumb.size-sm{width:42px;height:42px;opacity:.6;}
-.ov-thumb.size-md{width:54px;height:54px;opacity:.82;}
-.ov-thumb.size-lg{width:72px;height:72px;border-color:#fff;opacity:1;}
-
-/* Pull-to-collapse indicator */
-.ov-pull-hint{
-  position:absolute;top:52px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  opacity:0;transition:opacity .2s ease;pointer-events:none;z-index:4;
-}
-.ov-pull-hint span{font-family:'Figtree',sans-serif;font-size:12px;font-weight:500;color:#888;white-space:nowrap;}
-.ov-pull-chevron{width:16px;height:16px;opacity:.5;}
-
-/* Divider for expanded page */
-.ov-divider{height:1px;background:#f0f0f0;margin:0 -18px;}
-
-@media(max-width:390px){
-  .screen,.hero{width:100vw;}
-  .ov-carousel{left:0;right:0;}
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta name="theme-color" content="#5e5958" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Starters – Koi Resto Bar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Figtree:wght@400;500;600;700&family=Inter:wght@500&display=swap"
+    rel="stylesheet" />
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="JS/supabase-client.js"></script>
+  <link rel="stylesheet" href="CSS/index.css">
 </head>
+
 <body>
-<div class="screen">
+  <div class="screen">
 
-  <!-- STICKY HERO -->
-  <div class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-nav">
-      <a class="back-btn" href="home.html" onclick="transition(event,'home.html')">
-        <svg viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        BACK
-      </a>
-      <div class="nav-right">
-        <button class="icon-btn">
-          <svg viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="5.5" stroke="#000" stroke-width="1.6"/><path d="M14 14l2.5 2.5" stroke="#000" stroke-width="1.6" stroke-linecap="round"/></svg>
-        </button>
-        <button class="cart-btn">
-          <svg viewBox="0 0 16 16" fill="none"><circle cx="6" cy="13" r="1.2" fill="#000"/><circle cx="12" cy="13" r="1.2" fill="#000"/><path d="M1 2h2l1.8 7h7L14 5H4.5" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          0
-        </button>
+    <!-- STICKY HERO -->
+    <div class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-nav">
+        <a class="back-btn" href="home.html" onclick="transition(event,'home.html')">
+          <svg viewBox="0 0 16 16" fill="none">
+            <path d="M10 3L5 8l5 5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          BACK
+        </a>
+        <div class="nav-right">
+          <button class="icon-btn">
+            <svg viewBox="0 0 20 20" fill="none">
+              <circle cx="9" cy="9" r="5.5" stroke="#000" stroke-width="1.6" />
+              <path d="M14 14l2.5 2.5" stroke="#000" stroke-width="1.6" stroke-linecap="round" />
+            </svg>
+          </button>
+          <button class="cart-btn">
+            <svg viewBox="0 0 16 16" fill="none">
+              <circle cx="6" cy="13" r="1.2" fill="#000" />
+              <circle cx="12" cy="13" r="1.2" fill="#000" />
+              <path d="M1 2h2l1.8 7h7L14 5H4.5" stroke="#000" stroke-width="1.4" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            0
+          </button>
+        </div>
+      </div>
+      <div class="hero-center">
+        <div class="cat-title-block">
+          <div class="cat-title">Starters</div>
+          <div class="cat-subtitle">Slow-boiled in rich Cajun butter with baby potatoes and herbs.</div>
+        </div>
+        <div class="cat-tabs">
+          <div class="cat-pill blur">Main course</div>
+          <div class="cat-pill">Desserts</div>
+          <div class="cat-pill active">Starters (43)</div>
+          <div class="cat-pill">Desserts</div>
+          <div class="cat-pill blur">Main course</div>
+        </div>
       </div>
     </div>
-    <div class="hero-center">
-      <div class="cat-title-block">
-        <div class="cat-title">Starters</div>
-        <div class="cat-subtitle">Slow-boiled in rich Cajun butter with baby potatoes and herbs.</div>
+
+    <!-- CONTENT CARD -->
+    <div class="content-card">
+      <div class="drag-row">
+        <div class="drag-handle"></div>
       </div>
-      <div class="cat-tabs">
-        <div class="cat-pill blur">Main course</div>
-        <div class="cat-pill">Desserts</div>
-        <div class="cat-pill active">Starters (43)</div>
-        <div class="cat-pill">Desserts</div>
-        <div class="cat-pill blur">Main course</div>
+      <div class="dish-grid" id="dishGrid">
+        <div class="dish-row">
+          <div class="dish-card" data-idx="0" onclick="openPreview(event,this,0)">
+            <div class="dish-img"><img src="Images/bowl_of_nuts.png" alt="Bowl of Nuts" /></div>
+            <div class="dish-meta">
+              <div class="dish-name">Bowl of Nuts</div>
+              <div class="dish-tags">
+                <div class="veg-badge"><svg viewBox="0 0 16 16" fill="none">
+                    <rect x="1" y="1" width="14" height="14" rx="2" stroke="#2e7d32" stroke-width="1.3" />
+                    <circle cx="8" cy="8" r="4" fill="#2e7d32" />
+                  </svg><span>Veg</span></div>
+                <div class="divider-dot"></div>
+                <span class="dish-time">5-10 mins</span>
+              </div>
+              <div class="dish-price">₹350</div>
+            </div>
+          </div>
+          <div class="dish-card" data-idx="1" onclick="openPreview(event,this,1)">
+            <div class="dish-img"><img src="https://www.figma.com/api/mcp/asset/1c8fcc22-4b9e-401b-8ca5-e122a98cd4d2"
+                alt="Tandoori Chooza" /></div>
+            <div class="dish-meta">
+              <div class="dish-name">Tandoori Chooza</div>
+              <div class="dish-tags">
+                <div class="veg-badge non-badge"><svg viewBox="0 0 16 16" fill="none">
+                    <rect x="1" y="1" width="14" height="14" rx="2" stroke="#d32f2f" stroke-width="1.3" />
+                    <circle cx="8" cy="8" r="4" fill="#d32f2f" />
+                  </svg><span>Non</span></div>
+                <div class="divider-dot"></div>
+                <span class="dish-time">20-25 mins</span>
+              </div>
+              <div class="dish-price">₹300</div>
+            </div>
+          </div>
+        </div>
+        <div class="dish-row">
+          <div class="dish-card" data-idx="2" onclick="openPreview(event,this,2)">
+            <div class="dish-img"><img src="https://www.figma.com/api/mcp/asset/463b79b2-ebea-4c98-bfbf-80e3868823bb"
+                alt="Tandoori Broccoli" /></div>
+            <div class="dish-meta">
+              <div class="dish-name">Tandoori Broccoli</div>
+              <div class="dish-tags">
+                <div class="veg-badge"><svg viewBox="0 0 16 16" fill="none">
+                    <rect x="1" y="1" width="14" height="14" rx="2" stroke="#2e7d32" stroke-width="1.3" />
+                    <circle cx="8" cy="8" r="4" fill="#2e7d32" />
+                  </svg><span>Veg</span></div>
+                <div class="divider-dot"></div>
+                <span class="dish-time">20-25 mins</span>
+              </div>
+              <div class="dish-price">₹675</div>
+            </div>
+          </div>
+          <div class="dish-card" data-idx="3" onclick="openPreview(event,this,3)">
+            <div class="dish-img"><img src="https://www.figma.com/api/mcp/asset/35e9e0c2-cc39-460b-968c-55c6c5de6b19"
+                alt="Tandoori Chooza" /></div>
+            <div class="dish-meta">
+              <div class="dish-name">Tandoori Chooza</div>
+              <div class="dish-tags">
+                <div class="veg-badge non-badge"><svg viewBox="0 0 16 16" fill="none">
+                    <rect x="1" y="1" width="14" height="14" rx="2" stroke="#d32f2f" stroke-width="1.3" />
+                    <circle cx="8" cy="8" r="4" fill="#d32f2f" />
+                  </svg><span>Non</span></div>
+                <div class="divider-dot"></div>
+                <span class="dish-time">20-25 mins</span>
+              </div>
+              <div class="dish-price">₹300</div>
+            </div>
+          </div>
+        </div>
+        <div class="dish-row">
+          <div class="dish-card" data-idx="4" onclick="openPreview(event,this,4)">
+            <div class="dish-img"><img src="https://www.figma.com/api/mcp/asset/8e7f8bd5-dd48-461b-9762-0e7a4e4880ad"
+                alt="Tandoori Broccoli" /></div>
+            <div class="dish-meta">
+              <div class="dish-name">Tandoori Broccoli</div>
+              <div class="dish-tags">
+                <div class="veg-badge"><svg viewBox="0 0 16 16" fill="none">
+                    <rect x="1" y="1" width="14" height="14" rx="2" stroke="#2e7d32" stroke-width="1.3" />
+                    <circle cx="8" cy="8" r="4" fill="#2e7d32" />
+                  </svg><span>Veg</span></div>
+                <div class="divider-dot"></div>
+                <span class="dish-time">20-25 mins</span>
+              </div>
+              <div class="dish-price">₹675</div>
+            </div>
+          </div>
+          <div class="dish-card" data-idx="5" onclick="openPreview(event,this,5)">
+            <div class="dish-img"><img src="https://www.figma.com/api/mcp/asset/d1636f6a-b079-42f6-ac29-26461aa0f444"
+                alt="Tandoori Chooza" /></div>
+            <div class="dish-meta">
+              <div class="dish-name">Tandoori Chooza</div>
+              <div class="dish-tags">
+                <div class="veg-badge non-badge"><svg viewBox="0 0 16 16" fill="none">
+                    <rect x="1" y="1" width="14" height="14" rx="2" stroke="#d32f2f" stroke-width="1.3" />
+                    <circle cx="8" cy="8" r="4" fill="#d32f2f" />
+                  </svg><span>Non</span></div>
+                <div class="divider-dot"></div>
+                <span class="dish-time">20-25 mins</span>
+              </div>
+              <div class="dish-price">₹300</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <span class="footer-powered">Powered by</span>
+        <div class="tapqr-logo-wrap">
+          <div class="tapqr-line"></div>
+          <span class="tapqr-word">Tap<strong>QR</strong></span>
+          <div class="tapqr-line"></div>
+        </div>
+        <span class="footer-url">www.tapqr.com</span>
       </div>
     </div>
   </div>
 
-  <!-- CONTENT CARD -->
-  <div class="content-card">
-    <div class="drag-row"><div class="drag-handle"></div></div>
-    <div class="dish-grid" id="dishGrid">
-      <div class="dish-row">
-        <div class="dish-card" data-idx="0" onclick="openPreview(event,this,0)">
-          <div class="dish-img"><img src="https://www.figma.com/api/mcp/asset/8cab74e8-67f6-4ecc-9de9-9545ded71b38" alt="Tandoori Broccoli"/></div>
-          <div class="dish-meta">
-            <div class="dish-name">Tandoori Broccoli</div>
-            <div class="dish-tags">
-              <div class="veg-badge"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="2" stroke="#2e7d32" stroke-width="1.3"/><circle cx="8" cy="8" r="4" fill="#2e7d32"/></svg><span>Veg</span></div>
-              <div class="divider-dot"></div>
-              <span class="dish-time">20-25 mins</span>
-            </div>
-            <div class="dish-price">₹675</div>
-          </div>
-        </div>
-        <div class="dish-card" data-idx="1" onclick="openPreview(event,this,1)">
-          <div class="dish-img"><img src="https://www.figma.com/api/mcp/asset/1c8fcc22-4b9e-401b-8ca5-e122a98cd4d2" alt="Tandoori Chooza"/></div>
-          <div class="dish-meta">
-            <div class="dish-name">Tandoori Chooza</div>
-            <div class="dish-tags">
-              <div class="veg-badge non-badge"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="2" stroke="#d32f2f" stroke-width="1.3"/><circle cx="8" cy="8" r="4" fill="#d32f2f"/></svg><span>Non</span></div>
-              <div class="divider-dot"></div>
-              <span class="dish-time">20-25 mins</span>
-            </div>
-            <div class="dish-price">₹300</div>
-          </div>
-        </div>
-      </div>
-      <div class="dish-row">
-        <div class="dish-card" data-idx="2" onclick="openPreview(event,this,2)">
-          <div class="dish-img"><img src="https://www.figma.com/api/mcp/asset/463b79b2-ebea-4c98-bfbf-80e3868823bb" alt="Tandoori Broccoli"/></div>
-          <div class="dish-meta">
-            <div class="dish-name">Tandoori Broccoli</div>
-            <div class="dish-tags">
-              <div class="veg-badge"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="2" stroke="#2e7d32" stroke-width="1.3"/><circle cx="8" cy="8" r="4" fill="#2e7d32"/></svg><span>Veg</span></div>
-              <div class="divider-dot"></div>
-              <span class="dish-time">20-25 mins</span>
-            </div>
-            <div class="dish-price">₹675</div>
-          </div>
-        </div>
-        <div class="dish-card" data-idx="3" onclick="openPreview(event,this,3)">
-          <div class="dish-img"><img src="https://www.figma.com/api/mcp/asset/35e9e0c2-cc39-460b-968c-55c6c5de6b19" alt="Tandoori Chooza"/></div>
-          <div class="dish-meta">
-            <div class="dish-name">Tandoori Chooza</div>
-            <div class="dish-tags">
-              <div class="veg-badge non-badge"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="2" stroke="#d32f2f" stroke-width="1.3"/><circle cx="8" cy="8" r="4" fill="#d32f2f"/></svg><span>Non</span></div>
-              <div class="divider-dot"></div>
-              <span class="dish-time">20-25 mins</span>
-            </div>
-            <div class="dish-price">₹300</div>
-          </div>
-        </div>
-      </div>
-      <div class="dish-row">
-        <div class="dish-card" data-idx="4" onclick="openPreview(event,this,4)">
-          <div class="dish-img"><img src="https://www.figma.com/api/mcp/asset/8e7f8bd5-dd48-461b-9762-0e7a4e4880ad" alt="Tandoori Broccoli"/></div>
-          <div class="dish-meta">
-            <div class="dish-name">Tandoori Broccoli</div>
-            <div class="dish-tags">
-              <div class="veg-badge"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="2" stroke="#2e7d32" stroke-width="1.3"/><circle cx="8" cy="8" r="4" fill="#2e7d32"/></svg><span>Veg</span></div>
-              <div class="divider-dot"></div>
-              <span class="dish-time">20-25 mins</span>
-            </div>
-            <div class="dish-price">₹675</div>
-          </div>
-        </div>
-        <div class="dish-card" data-idx="5" onclick="openPreview(event,this,5)">
-          <div class="dish-img"><img src="https://www.figma.com/api/mcp/asset/d1636f6a-b079-42f6-ac29-26461aa0f444" alt="Tandoori Chooza"/></div>
-          <div class="dish-meta">
-            <div class="dish-name">Tandoori Chooza</div>
-            <div class="dish-tags">
-              <div class="veg-badge non-badge"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="2" stroke="#d32f2f" stroke-width="1.3"/><circle cx="8" cy="8" r="4" fill="#d32f2f"/></svg><span>Non</span></div>
-              <div class="divider-dot"></div>
-              <span class="dish-time">20-25 mins</span>
-            </div>
-            <div class="dish-price">₹300</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer">
-      <span class="footer-powered">Powered by</span>
-      <div class="tapqr-logo-wrap">
-        <div class="tapqr-line"></div>
-        <span class="tapqr-word">Tap<strong>QR</strong></span>
-        <div class="tapqr-line"></div>
-      </div>
-      <span class="footer-url">www.tapqr.com</span>
-    </div>
-  </div>
-</div>
+  <!-- BACKDROP -->
+  <div class="ov-backdrop" id="ovBackdrop"></div>
 
-<!-- BACKDROP -->
-<div class="ov-backdrop" id="ovBackdrop"></div>
+  <!-- PRODUCT CARD (preview + detail) -->
+  <div class="ov-card" id="ovCard">
 
-<!-- PRODUCT CARD (preview + detail) -->
-<div class="ov-card" id="ovCard">
-
-  <!-- Top bar -->
-  <div class="ov-topbar">
-    <button class="ov-pill ov-close" id="ovCloseBtn">
-      <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1 1l7 7M8 1L1 8" stroke="#000" stroke-width="1.4" stroke-linecap="round"/></svg>
-      Close
-    </button>
-    <button class="ov-pill ov-cart">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6" cy="13" r="1.2" fill="#000"/><circle cx="12" cy="13" r="1.2" fill="#000"/><path d="M1 2h2l1.8 7h7L14 5H4.5" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span id="ovCartCount">0</span>
-    </button>
-  </div>
-
-  <!-- Category tabs -->
-  <div class="ov-tabs" id="ovTabs">
-    <div class="ov-tab active">Starters (43)</div>
-    <div class="ov-tab">Main course</div>
-    <div class="ov-tab">Desserts</div>
-    <div class="ov-tab">Drinks</div>
-    <div class="ov-tab">Specials</div>
-  </div>
-
-  <!-- Image stage -->
-  <div class="ov-image-stage" id="ovImageStage">
-    <div class="ov-image-wrap">
-      <div class="ov-glow"></div>
-      <div class="ov-img-blur"><img id="ovImgBlur" src="" alt=""/></div>
-      <div class="ov-img-sharp"><img id="ovImgSharp" src="" alt=""/></div>
-    </div>
-  </div>
-
-  <!-- Drag hint -->
-  <div class="ov-drag-hint"><span></span></div>
-
-  <!-- Pull hint (visible at top of expanded page) -->
-  <div class="ov-pull-hint" id="ovPullHint">
-    <svg class="ov-pull-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span>Pull down to go back</span>
-  </div>
-
-  <!-- Body content -->
-  <div class="ov-body" id="ovBody">
-
-    <div class="ov-cube">
-      <img src="https://www.figma.com/api/mcp/asset/cf0d1df1-c26d-4938-8852-41e186277cb7" alt=""/>
-    </div>
-
-    <div class="ov-title" id="ovTitle">Tandoori Broccoli</div>
-
-    <p class="ov-desc" id="ovDesc">Slow-boiled in rich Cajun butter with baby potatoes and herbs.</p>
-
-    <div class="ov-tags">
-      <div class="veg-badge" id="ovVegBadge">
-        <svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="2" stroke="#2e7d32" stroke-width="1.3"/><circle cx="8" cy="8" r="4" fill="#2e7d32"/></svg>
-        <span>Veg</span>
-      </div>
-      <div class="ov-sep"></div>
-      <span class="ov-time" id="ovTime">20-25 mins</span>
-    </div>
-
-    <div class="ov-price-row">
-      <p class="ov-price" id="ovPrice">₹675</p>
-      <button class="ov-add-btn" id="ovAddBtn">
-        <svg viewBox="0 0 16 16" fill="none"><path d="M8 1v14M1 8h14" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
-        Add to order
+    <!-- Top bar -->
+    <div class="ov-topbar">
+      <button class="ov-pill ov-close" id="ovCloseBtn">
+        <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
+          <path d="M1 1l7 7M8 1L1 8" stroke="#000" stroke-width="1.4" stroke-linecap="round" />
+        </svg>
+        Close
+      </button>
+      <button class="ov-pill ov-cart">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="6" cy="13" r="1.2" fill="#000" />
+          <circle cx="12" cy="13" r="1.2" fill="#000" />
+          <path d="M1 2h2l1.8 7h7L14 5H4.5" stroke="#000" stroke-width="1.4" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        <span id="ovCartCount">0</span>
       </button>
     </div>
 
-    <!-- Expanded-only sections -->
-    <div class="ov-extra">
-      <div class="ov-divider"></div>
+    <!-- Category tabs -->
+    <div class="ov-tabs" id="ovTabs">
+      <div class="ov-tab active">Starters (43)</div>
+      <div class="ov-tab">Main course</div>
+      <div class="ov-tab">Desserts</div>
+      <div class="ov-tab">Drinks</div>
+      <div class="ov-tab">Specials</div>
+    </div>
 
-      <div class="ov-social">
-        <div class="ov-avatars">
-          <div class="ov-avatar"><img src="https://www.figma.com/api/mcp/asset/320a4c9d-1c00-49ea-9ebb-8705b7bf042e" alt=""/></div>
-          <div class="ov-avatar"><img src="https://www.figma.com/api/mcp/asset/01652dc6-81df-41f3-8da8-c4e0155ed1a5" alt=""/></div>
-          <div class="ov-avatar"><img src="https://www.figma.com/api/mcp/asset/195c314f-18c6-430a-a62c-9289c220d5e2" alt=""/></div>
-        </div>
-        <p class="ov-social-text">35+ People Ordered this item today</p>
-      </div>
+    <!-- Pull hint (visible at top of expanded page) -->
+    <div class="ov-pull-hint" id="ovPullHint">
+      <svg class="ov-pull-chevron" viewBox="0 0 16 16" fill="none">
+        <!-- <path d="M4 6l4 4 4-4" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /> -->
+      </svg>
+      <!-- <span>Pull down to go back</span> -->
+    </div>
 
-      <div class="ov-prep">
-        <div class="ov-prep-icon">
-          <img src="https://www.figma.com/api/mcp/asset/4f48e2be-0185-4112-9cd7-d34e47ae4fef" alt=""/>
-        </div>
-        <div>
-          <div class="ov-prep-label">Preparation Time</div>
-          <div class="ov-prep-value">10 Minutes</div>
-        </div>
-      </div>
+    <!-- Body content -->
+    <div class="ov-body" id="ovBody">
 
-      <div class="ov-divider"></div>
-
-      <div class="ov-section">
-        <div class="ov-section-title">Quantities Available</div>
-        <div class="ov-quantities" id="ovQuantities">
-          <span class="ov-qty-opt active">Half</span>
-          <div class="ov-qty-sep"></div>
-          <span class="ov-qty-opt">Full</span>
-          <div class="ov-qty-sep"></div>
-          <span class="ov-qty-opt">Quarter</span>
-          <div class="ov-qty-sep"></div>
-          <span class="ov-qty-opt">Custom</span>
-        </div>
-      </div>
-
-      <div class="ov-section">
-        <div class="ov-section-title">Allergens</div>
-        <div class="ov-allergens">
-          <img src="https://www.figma.com/api/mcp/asset/fbc98640-559f-4d97-a61c-7ebe22f1eeac" alt="Allergen icons"/>
-        </div>
-      </div>
-
-      <div class="ov-section">
-        <div class="ov-section-header">
-          <div class="ov-section-title">More Dishes</div>
-          <button class="ov-section-arrow">
-            <svg viewBox="0 0 20 20" fill="none"><path d="M5 10h10M10 5l5 5-5 5" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-        <div class="ov-more-grid" id="ovMoreGrid"></div>
-      </div>
-
-    </div><!-- /ov-extra -->
-
-    <div style="height:32px;flex-shrink:0;"></div>
-  </div><!-- /ov-body -->
-</div><!-- /ov-card -->
-
-<!-- Carousel -->
-<div class="ov-carousel" id="ovCarousel">
-  <div class="ov-carousel-track" id="ovCarouselTrack"></div>
-</div>
-
-<div class="transition-overlay" id="overlay"></div>
-
-<script>
-/* ═══════════════════════════════════════
-   PAGE NAVIGATION
-═══════════════════════════════════════ */
-function transition(e, url){
-  e.preventDefault();
-  const o = document.getElementById('overlay');
-  o.classList.add('active');
-  setTimeout(()=>{ window.location.href = url; }, 380);
-}
-
-/* Category pills */
-document.querySelectorAll('.cat-pill').forEach(pill => {
-  pill.addEventListener('click', function(){
-    document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active','blur'));
-    this.classList.add('active');
-    const pills = [...document.querySelectorAll('.cat-pill')];
-    const idx = pills.indexOf(this);
-    if(idx > 0) pills[idx-1].classList.add('blur');
-    if(idx < pills.length-1) pills[idx+1].classList.add('blur');
-  });
-});
-
-/* ═══════════════════════════════════════
-   DATA + ELEMENTS
-═══════════════════════════════════════ */
-const ASSET = id => `https://www.figma.com/api/mcp/asset/${id}`;
-
-const DISHES = [
-  { name:'Tandoori Broccoli', veg:true,  time:'20-25 mins', price:675, img:'8cab74e8-67f6-4ecc-9de9-9545ded71b38', desc:'Slow-boiled in rich Cajun butter with baby potatoes and herbs, finished on the tandoor for a smoky char.' },
-  { name:'Tandoori Chooza',   veg:false, time:'20-25 mins', price:300, img:'1c8fcc22-4b9e-401b-8ca5-e122a98cd4d2', desc:'Tender chicken marinated overnight in yogurt and warm spices, char-grilled to smoky perfection.' },
-  { name:'Tandoori Broccoli', veg:true,  time:'20-25 mins', price:675, img:'463b79b2-ebea-4c98-bfbf-80e3868823bb', desc:'Slow-boiled in rich Cajun butter with baby potatoes and herbs, finished on the tandoor for a smoky char.' },
-  { name:'Tandoori Chooza',   veg:false, time:'20-25 mins', price:300, img:'35e9e0c2-cc39-460b-968c-55c6c5de6b19', desc:'Tender chicken marinated overnight in yogurt and warm spices, char-grilled to smoky perfection.' },
-  { name:'Tandoori Broccoli', veg:true,  time:'20-25 mins', price:675, img:'8e7f8bd5-dd48-461b-9762-0e7a4e4880ad', desc:'Slow-boiled in rich Cajun butter with baby potatoes and herbs, finished on the tandoor for a smoky char.' },
-  { name:'Tandoori Chooza',   veg:false, time:'20-25 mins', price:300, img:'d1636f6a-b079-42f6-ac29-26461aa0f444', desc:'Tender chicken marinated overnight in yogurt and warm spices, char-grilled to smoky perfection.' },
-];
-
-const VEG_SVG = `<svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="2" stroke="#2e7d32" stroke-width="1.3"/><circle cx="8" cy="8" r="4" fill="#2e7d32"/></svg><span>Veg</span>`;
-const NON_SVG = `<svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="2" stroke="#d32f2f" stroke-width="1.3"/><circle cx="8" cy="8" r="4" fill="#d32f2f"/></svg><span>Non</span>`;
-
-const card      = document.getElementById('ovCard');
-const backdrop  = document.getElementById('ovBackdrop');
-const stage     = document.getElementById('ovImageStage');
-const body      = document.getElementById('ovBody');
-const carousel  = document.getElementById('ovCarousel');
-const track     = document.getElementById('ovCarouselTrack');
-const closeBtn  = document.getElementById('ovCloseBtn');
-const addBtn    = document.getElementById('ovAddBtn');
-const pullHint  = document.getElementById('ovPullHint');
-
-const IMG_PREVIEW_H  = 191;
-const IMG_EXPANDED_H = 340;
-
-let currentIndex = 0;
-let cardState    = 'closed';  // closed | preview | expanded
-let progress     = 0;
-let cartCount    = 0;
-
-/* ═══════════════════════════════════════
-   GEOMETRY
-═══════════════════════════════════════ */
-function getPreviewRect(){
-  const vw = window.innerWidth, vh = window.innerHeight;
-  const width  = Math.min(362, vw - 28);
-  const height = Math.min(vh * 0.79, 666);
-  const left = (vw - width) / 2;
-  const top  = vh * 0.053;
-  return { left, top, width, height, radius: 18 };
-}
-function getExpandedRect(){
-  return { left:0, top:0, width:window.innerWidth, height:window.innerHeight, radius:0 };
-}
-
-/* ═══════════════════════════════════════
-   RENDER CONTENT
-═══════════════════════════════════════ */
-function renderDish(idx, animateImg){
-  const d = DISHES[idx];
-  const url = ASSET(d.img);
-  const sharp = document.getElementById('ovImgSharp');
-  const blur  = document.getElementById('ovImgBlur');
-
-  if(animateImg){
-    sharp.style.opacity = '0';
-    setTimeout(()=>{
-      sharp.src = url; blur.src = url;
-      sharp.style.opacity = '1';
-    }, 140);
-  } else {
-    sharp.src = url; blur.src = url;
-  }
-
-  document.getElementById('ovTitle').textContent = d.name;
-  document.getElementById('ovDesc').textContent  = d.desc;
-  document.getElementById('ovPrice').textContent = '₹' + d.price;
-  document.getElementById('ovTime').textContent  = d.time;
-
-  const vegBadge = document.getElementById('ovVegBadge');
-  vegBadge.innerHTML = d.veg ? VEG_SVG : NON_SVG;
-  vegBadge.className = 'veg-badge' + (d.veg ? '' : ' non-badge');
-
-  renderMoreDishes(idx);
-}
-
-function renderMoreDishes(idx){
-  const grid = document.getElementById('ovMoreGrid');
-  grid.innerHTML = '';
-  const n = DISHES.length;
-  const others = [1,2,3,4].map(i => (idx + i) % n);
-
-  for(let r = 0; r < 2; r++){
-    const row = document.createElement('div');
-    row.className = 'ov-more-row';
-    for(let c = 0; c < 2; c++){
-      const dIdx = others[r*2+c];
-      const d = DISHES[dIdx];
-      const el = document.createElement('div');
-      el.className = 'ov-more-card';
-      el.onclick = () => switchDish(dIdx, true);
-      el.innerHTML = `
-        <div class="ov-more-img"><img src="${ASSET(d.img)}" alt="${d.name}"/></div>
-        <div class="ov-more-meta">
-          <div class="ov-more-name">${d.name}</div>
-          <div class="ov-more-tags">
-            <div class="veg-badge${d.veg?'':' non-badge'}">${d.veg?VEG_SVG:NON_SVG}</div>
-            <div class="divider-dot"></div>
-            <span class="ov-time">${d.time}</span>
+      <!-- Image stage -->
+      <div class="ov-image-stage" id="ovImageStage">
+        <div class="ov-image-wrap">
+          <div class="ov-glow"></div>
+          <div class="ov-img-blur"><img id="ovImgBlur" src="" alt="" /></div>
+          <div class="ov-img-sharp">
+            <img id="ovImgSharp" src="" alt="" />
+            <model-viewer id="ovModelViewer"
+              camera-controls
+              auto-rotate
+              auto-rotate-delay="1500"
+              interaction-prompt="none"
+              shadow-intensity="1"
+              min-camera-orbit="auto 50deg auto"
+              max-camera-orbit="auto 82deg auto"
+              touch-action="pan-y"
+              style="width:100%; height:100%; display:none; --poster-color:transparent; --auto-rotate-speed:12deg;"></model-viewer>
           </div>
-          <div class="ov-more-price">₹${d.price}</div>
-        </div>`;
-      row.appendChild(el);
-    }
-    grid.appendChild(row);
-  }
-}
+        </div>
+      </div>
 
-/* ═══════════════════════════════════════
-   CAROUSEL — 5 thumbnails, swipe + tap
-═══════════════════════════════════════ */
-function renderCarousel(){
-  track.innerHTML = '';
-  const n = DISHES.length;
-  const LAYOUT = [
-    { off:-2, size:'size-sm' },
-    { off:-1, size:'size-md' },
-    { off: 0, size:'size-lg' },
-    { off: 1, size:'size-md' },
-    { off: 2, size:'size-sm' },
-  ];
-  LAYOUT.forEach(item => {
-    const idx = ((currentIndex + item.off) % n + n) % n;
-    const thumb = document.createElement('div');
-    thumb.className = 'ov-thumb ' + item.size;
-    thumb.dataset.idx = idx;
-    thumb.innerHTML = `<img src="${ASSET(DISHES[idx].img)}" alt="${DISHES[idx].name}" draggable="false"/>`;
-    thumb.addEventListener('click', () => switchDish(idx, false));
-    track.appendChild(thumb);
-  });
-}
 
-/* Swipe-carousel */
-let carSwipeStartX = 0, carSwiping = false, carSwipeThreshold = 42;
+      <div class="ov-title" id="ovTitle">Tandoori Broccoli</div>
 
-track.addEventListener('touchstart', e => {
-  carSwipeStartX = e.touches[0].clientX;
-  carSwiping = true;
-}, { passive:true });
-track.addEventListener('touchend', e => {
-  if(!carSwiping) return;
-  carSwiping = false;
-  const dx = e.changedTouches[0].clientX - carSwipeStartX;
-  if(Math.abs(dx) < carSwipeThreshold) return;
-  const n = DISHES.length;
-  const next = dx < 0
-    ? (currentIndex + 1) % n
-    : (currentIndex - 1 + n) % n;
-  switchDish(next, false);
-}, { passive:true });
+      <p class="ov-desc" id="ovDesc">Slow-boiled in rich Cajun butter with baby potatoes and herbs.</p>
 
-function switchDish(idx, forceExpanded){
-  if(idx === currentIndex && !forceExpanded) return;
-  currentIndex = idx;
-  renderDish(idx, true);
-  renderCarousel();
-  if(forceExpanded && cardState !== 'expanded') snapTo('expanded');
-}
+      <div class="ov-tags">
+        <div class="veg-badge" id="ovVegBadge">
+          <svg viewBox="0 0 16 16" fill="none">
+            <rect x="1" y="1" width="14" height="14" rx="2" stroke="#2e7d32" stroke-width="1.3" />
+            <circle cx="8" cy="8" r="4" fill="#2e7d32" />
+          </svg>
+          <span>Veg</span>
+        </div>
+        <div class="ov-sep"></div>
+        <span class="ov-time" id="ovTime">20-25 mins</span>
+      </div>
 
-/* ═══════════════════════════════════════
-   OPEN — FLIP from grid card → preview
-═══════════════════════════════════════ */
-function openPreview(e, cardEl, idx){
-  e.preventDefault();
-  if(cardState !== 'closed') return;
-  currentIndex = idx;
-  renderDish(idx, false);
-  renderCarousel();
+      <div class="ov-price-row">
+        <p class="ov-price" id="ovPrice">₹675</p>
+        <button class="ov-add-btn" id="ovAddBtn">
+          <svg viewBox="0 0 16 16" fill="none">
+            <path d="M8 1v14M1 8h14" stroke="white" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          Add
+        </button>
+      </div>
 
-  const imgEl = cardEl.querySelector('.dish-img');
-  const r = imgEl.getBoundingClientRect();
+      <!-- Expanded-only sections -->
+      <div class="ov-extra">
+        <div class="ov-divider"></div>
 
-  document.body.classList.add('ov-lock');
+        <div class="ov-social">
+          <div class="ov-avatars">
+            <div class="ov-avatar"><img src="https://www.figma.com/api/mcp/asset/320a4c9d-1c00-49ea-9ebb-8705b7bf042e"
+                alt="" /></div>
+            <div class="ov-avatar"><img src="https://www.figma.com/api/mcp/asset/01652dc6-81df-41f3-8da8-c4e0155ed1a5"
+                alt="" /></div>
+            <div class="ov-avatar"><img src="https://www.figma.com/api/mcp/asset/195c314f-18c6-430a-a62c-9289c220d5e2"
+                alt="" /></div>
+          </div>
+          <p class="ov-social-text">35+ People Ordered this item today</p>
+        </div>
 
-  /* Instant-place the card at the tapped image position */
-  card.classList.remove('animate','is-expanded');
-  card.classList.add('visible');
-  card.style.left         = r.left   + 'px';
-  card.style.top          = r.top    + 'px';
-  card.style.width        = r.width  + 'px';
-  card.style.height       = r.height + 'px';
-  card.style.borderRadius = '8px';
-  card.style.boxShadow    = '0 4px 16px rgba(0,0,0,.18)';
-  stage.style.height      = r.height + 'px';
+        <div class="ov-prep">
+          <div class="ov-prep-icon">
+            <img src="https://www.figma.com/api/mcp/asset/4f48e2be-0185-4112-9cd7-d34e47ae4fef" alt="" />
+          </div>
+          <div>
+            <div class="ov-prep-label">Preparation Time</div>
+            <div class="ov-prep-value">10 Minutes</div>
+          </div>
+        </div>
 
-  /* Hide card internals until card grows */
-  body.style.opacity = '0';
-  document.getElementById('ovTabs').style.opacity = '0';
-  backdrop.classList.remove('show');
+        <div class="ov-divider"></div>
 
-  /* Double-rAF ensures browser paints initial position first */
-  requestAnimationFrame(()=>{
-    requestAnimationFrame(()=>{
-      card.classList.add('animate');
-      const target = getPreviewRect();
-      card.style.left         = target.left   + 'px';
-      card.style.top          = target.top    + 'px';
-      card.style.width        = target.width  + 'px';
-      card.style.height       = target.height + 'px';
-      card.style.borderRadius = target.radius + 'px';
-      card.style.boxShadow    = '0 32px 80px rgba(0,0,0,.38)';
-      stage.style.height      = IMG_PREVIEW_H + 'px';
+        <div class="ov-section">
+          <div class="ov-section-title">Quantities Available</div>
+          <div class="ov-quantities" id="ovQuantities">
+            <span class="ov-qty-opt active">Half</span>
+            <div class="ov-qty-sep"></div>
+            <span class="ov-qty-opt">Full</span>
+            <div class="ov-qty-sep"></div>
+            <span class="ov-qty-opt">Quarter</span>
+            <div class="ov-qty-sep"></div>
+            <span class="ov-qty-opt">Custom</span>
+          </div>
+        </div>
 
-      backdrop.classList.add('show');
-      carousel.classList.add('show');
+        <div class="ov-section">
+          <div class="ov-section-title">Allergens</div>
+          <div class="ov-allergens">
+            <img src="https://www.figma.com/api/mcp/asset/fbc98640-559f-4d97-a61c-7ebe22f1eeac" alt="Allergen icons" />
+          </div>
+        </div>
 
-      body.style.transition   = 'opacity .22s ease .15s';
-      document.getElementById('ovTabs').style.transition = 'opacity .22s ease .15s';
-      body.style.opacity      = '1';
-      document.getElementById('ovTabs').style.opacity = '1';
+        <div class="ov-section">
+          <div class="ov-section-header">
+            <div class="ov-section-title">More Dishes</div>
+            <button class="ov-section-arrow">
+              <svg viewBox="0 0 20 20" fill="none">
+                <path d="M5 10h10M10 5l5 5-5 5" stroke="#000" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+          <div class="ov-more-grid" id="ovMoreGrid"></div>
+        </div>
 
-      cardState = 'preview';
-      progress  = 0;
-    });
-  });
-}
+      </div><!-- /ov-extra -->
 
-/* ═══════════════════════════════════════
-   CLOSE — FLIP back to grid card
-═══════════════════════════════════════ */
-function closePreview(){
-  if(cardState === 'closed') return;
+      <div class="ov-bottom-spacer" style="height:32px;flex-shrink:0;"></div>
+    </div><!-- /ov-body -->
+  </div><!-- /ov-card -->
 
-  const targetCardEl = document.querySelector(`.dish-card[data-idx="${currentIndex}"]`);
-  const imgEl = targetCardEl ? targetCardEl.querySelector('.dish-img') : null;
-  if(!imgEl){ hardClose(); return; }
-  const r = imgEl.getBoundingClientRect();
+  <!-- Carousel -->
+  <div class="ov-carousel" id="ovCarousel">
+    <div class="ov-carousel-track" id="ovCarouselTrack"></div>
+  </div>
 
-  card.classList.add('animate');
-  card.classList.remove('is-expanded');
-
-  /* Collapse content immediately */
-  body.style.transition = 'opacity .18s ease';
-  body.style.opacity = '0';
-  document.getElementById('ovTabs').style.transition = 'opacity .18s ease';
-  document.getElementById('ovTabs').style.opacity = '0';
-  backdrop.classList.remove('show');
-  carousel.classList.remove('show');
-
-  /* Animate card back to its origin */
-  card.style.left         = r.left   + 'px';
-  card.style.top          = r.top    + 'px';
-  card.style.width        = r.width  + 'px';
-  card.style.height       = r.height + 'px';
-  card.style.borderRadius = '8px';
-  card.style.boxShadow    = '0 4px 8px rgba(0,0,0,.12)';
-  stage.style.height      = r.height + 'px';
-
-  document.body.classList.remove('ov-lock');
-
-  setTimeout(()=>{ hardClose(); }, 340);
-}
-
-function hardClose(){
-  card.classList.remove('visible','animate','is-expanded');
-  body.style.overflowY = 'hidden';
-  body.style.opacity = '';
-  body.style.transition = '';
-  body.scrollTop = 0;
-  pullHint.style.opacity = '0';
-  cardState = 'closed';
-  progress  = 0;
-}
-
-closeBtn.addEventListener('click', closePreview);
-backdrop.addEventListener('click', ()=>{ if(cardState === 'preview') closePreview(); });
-
-/* ═══════════════════════════════════════
-   QUANTITIES
-═══════════════════════════════════════ */
-document.getElementById('ovQuantities').addEventListener('click', e => {
-  const opt = e.target.closest('.ov-qty-opt');
-  if(!opt) return;
-  document.querySelectorAll('.ov-qty-opt').forEach(o => o.classList.remove('active'));
-  opt.classList.add('active');
-});
-
-/* ═══════════════════════════════════════
-   ADD TO ORDER
-═══════════════════════════════════════ */
-addBtn.addEventListener('click', ()=>{
-  cartCount++;
-  document.getElementById('ovCartCount').textContent = cartCount;
-  document.querySelectorAll('.cart-btn').forEach(b => {
-    const t = b.childNodes[b.childNodes.length - 1];
-    if(t.nodeType === 3) t.textContent = ' ' + cartCount;
-  });
-  const prev = addBtn.innerHTML;
-  addBtn.style.background = '#2e7d32';
-  addBtn.innerHTML = `<svg viewBox="0 0 16 16" fill="none"><path d="M2 8l4 4 8-9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Added`;
-  setTimeout(()=>{ addBtn.style.background = '#000'; addBtn.innerHTML = prev; }, 1400);
-});
-
-/* ═══════════════════════════════════════
-   SCROLL-DRIVEN EXPAND / COLLAPSE
-   ─ preview: drag up in body → expand
-   ─ expanded: scroll at top + drag down → collapse
-═══════════════════════════════════════ */
-
-function applyProgress(t){
-  progress = Math.max(0, Math.min(1, t));
-  const pr = getPreviewRect();
-  const er = getExpandedRect();
-
-  const left   = pr.left   + (er.left   - pr.left)   * progress;
-  const top    = pr.top    + (er.top    - pr.top)    * progress;
-  const width  = pr.width  + (er.width  - pr.width)  * progress;
-  const height = pr.height + (er.height - pr.height) * progress;
-  const radius = pr.radius * (1 - progress);
-
-  card.style.left         = left   + 'px';
-  card.style.top          = top    + 'px';
-  card.style.width        = width  + 'px';
-  card.style.height       = height + 'px';
-  card.style.borderRadius = radius + 'px';
-
-  const imgH = IMG_PREVIEW_H + (IMG_EXPANDED_H - IMG_PREVIEW_H) * progress;
-  stage.style.height = imgH + 'px';
-
-  const bgOpacity = 0.52 * (1 - progress);
-  const blurPx    = 8    * (1 - progress);
-  backdrop.style.background            = `rgba(0,0,0,${bgOpacity})`;
-  backdrop.style.backdropFilter        = `blur(${blurPx}px)`;
-  backdrop.style.webkitBackdropFilter  = `blur(${blurPx}px)`;
-
-  carousel.style.opacity   = '' + (1 - progress);
-  carousel.style.transform = `translateY(${18 * progress}px)`;
-
-  if(progress > 0.5) card.classList.add('is-expanded');
-  else               card.classList.remove('is-expanded');
-}
-
-function snapTo(state){
-  card.classList.add('animate');
-  cardState = state;
-
-  if(state === 'expanded'){
-    const er = getExpandedRect();
-    card.style.left         = '0px';
-    card.style.top          = '0px';
-    card.style.width        = er.width  + 'px';
-    card.style.height       = er.height + 'px';
-    card.style.borderRadius = '0px';
-    stage.style.height      = IMG_EXPANDED_H + 'px';
-    backdrop.style.background           = 'rgba(0,0,0,0)';
-    backdrop.style.backdropFilter       = 'blur(0px)';
-    backdrop.style.webkitBackdropFilter = 'blur(0px)';
-    backdrop.classList.remove('show');
-    carousel.classList.remove('show');
-    card.classList.add('is-expanded');
-    body.style.overflowY = 'auto';
-    progress = 1;
-  } else {
-    const pr = getPreviewRect();
-    card.style.left         = pr.left   + 'px';
-    card.style.top          = pr.top    + 'px';
-    card.style.width        = pr.width  + 'px';
-    card.style.height       = pr.height + 'px';
-    card.style.borderRadius = pr.radius + 'px';
-    stage.style.height      = IMG_PREVIEW_H + 'px';
-    backdrop.style.background           = '';
-    backdrop.style.backdropFilter       = '';
-    backdrop.style.webkitBackdropFilter = '';
-    backdrop.classList.add('show');
-    carousel.classList.add('show');
-    card.classList.remove('is-expanded');
-    body.style.overflowY = 'hidden';
-    body.scrollTop = 0;
-    pullHint.style.opacity = '0';
-    progress = 0;
-  }
-  card.classList.add('animate');
-}
-
-/* Pointer tracking — only body content, not image or carousel */
-let dragging = false, startY = 0;
-const EXPAND_DISTANCE = 220; // px to fully expand/collapse
-const PULL_THRESHOLD  = 70;  // px past top to show hint
-
-body.addEventListener('touchstart', onDragStart, { passive:true });
-body.addEventListener('touchmove',  onDragMove,  { passive:false });
-body.addEventListener('touchend',   onDragEnd,   { passive:true });
-body.addEventListener('mousedown',  onDragStart);
-window.addEventListener('mousemove', onDragMove);
-window.addEventListener('mouseup',   onDragEnd);
-
-function getY(e){
-  if(e.touches && e.touches.length)          return e.touches[0].clientY;
-  if(e.changedTouches && e.changedTouches.length) return e.changedTouches[0].clientY;
-  return e.clientY;
-}
-
-function onDragStart(e){
-  if(cardState === 'closed') return;
-  /* Ignore drags on interactive items */
-  if(e.target.closest('.ov-add-btn,.ov-qty-opt,.ov-more-card,.ov-section-arrow,.ov-thumb,.ov-carousel-track')) return;
-  /* In expanded state, only start drag when at top of scroll */
-  if(cardState === 'expanded' && body.scrollTop > 0) return;
-
-  dragging = true;
-  startY = getY(e);
-  card.classList.remove('animate');
-}
-
-function onDragMove(e){
-  if(!dragging) return;
-  const y = getY(e);
-  const deltaY = startY - y; // positive = finger moved up
-
-  if(cardState === 'preview'){
-    if(deltaY <= 0) return; // only expand upward
-    e.preventDefault();
-    applyProgress(deltaY / EXPAND_DISTANCE);
-  } else if(cardState === 'expanded'){
-    if(body.scrollTop > 0) return;
-    if(deltaY >= 0) return; // only collapse downward
-    e.preventDefault();
-    const collapseProgress = 1 + deltaY / EXPAND_DISTANCE;
-    applyProgress(collapseProgress);
-    /* Show pull hint */
-    const pullRatio = Math.min(1, -deltaY / PULL_THRESHOLD);
-    pullHint.style.opacity = '' + pullRatio;
-  }
-}
-
-function onDragEnd(){
-  if(!dragging) return;
-  dragging = false;
-  pullHint.style.opacity = '0';
-
-  if(progress <= 0 || progress >= 1){
-    if(progress <= 0) snapTo('preview');
-    else              snapTo('expanded');
-    return;
-  }
-  if(progress > 0.38) snapTo('expanded');
-  else                snapTo('preview');
-}
-</script>
+  <div class="transition-overlay" id="overlay"></div>
+  <script src="JS/index.js"></script>
 </body>
+
 </html>
